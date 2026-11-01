@@ -67,7 +67,7 @@ html {
   }
 }
 
-@keyframes spin-12s {
+@keyframes spin-16s {
   from {
     transform: rotate(0deg);
   }
@@ -79,19 +79,19 @@ html {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: kinetic-marquee 24s linear infinite;
+  animation: kinetic-marquee 45s linear infinite;
   will-change: transform;
 }
 
 .animate-marquee-reverse {
   display: flex;
   width: max-content;
-  animation: kinetic-marquee-reverse 24s linear infinite;
+  animation: kinetic-marquee-reverse 45s linear infinite;
   will-change: transform;
 }
 
 .animate-spin-slow {
-  animation: spin-12s 12s linear infinite;
+  animation: spin-16s 16s linear infinite;
   will-change: transform;
 }
 
