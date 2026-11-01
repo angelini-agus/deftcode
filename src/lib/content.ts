@@ -19,14 +19,14 @@ import type {
 // ==========================================
 
 const esSiteMeta: SiteMeta = {
-  title: "DEFTCODE // HIGH-VELOCITY SOFTWARE & DIGITAL ENGINEERING",
+  title: "DEFTCODE // SOFTWARE DE ALTA VELOCIDAD & INGENIERÍA DIGITAL",
   description:
     "Desarrollo de software ágil, moderno y de alto rendimiento. Creamos plataformas web, sistemas a medida y experiencias digitales con velocidad implacable y máxima precisión técnica.",
   siteUrl: "https://deftcode.dev",
   ogImage: "/og-deftcode.png",
   author: "Deftcode Studio",
-  location: "ROSARIO, ARGENTINA // WORLDWIDE",
-  tagline: "SOFTWARE AT VELOCITY",
+  location: "ROSARIO, ARGENTINA // REMOTO GLOBAL",
+  tagline: "SOFTWARE A GRAN VELOCIDAD",
   foundedYear: 2026,
 };
 
@@ -77,31 +77,31 @@ const esPages: Record<string, PageContent> = {
 
 const esHeroContent: HeroContent = {
   headlineMain: "DEFTCODE",
-  headlineSub: "SOFTWARE AT VELOCITY",
-  badge: "SYSTEMS / WEB / SAAS",
-  locationText: "BASED IN ROSARIO, AR // WORLDWIDE REMOTE",
-  roleText: "AGILE DIGITAL ENGINEERING // MODERN ARCHITECTURES // HIGH-PERFORMANCE WEB",
+  headlineSub: "SOFTWARE A GRAN VELOCIDAD",
+  badge: "SISTEMAS // WEB // SAAS",
+  locationText: "DESDE ROSARIO, ARGENTINA // REMOTO GLOBAL",
+  roleText: "INGENIERÍA DIGITAL ÁGIL // ARQUITECTURAS MODERNAS // WEB DE ALTO RENDIMIENTO",
   ctaLabel: "INICIAR PROYECTO",
   ctaHref: "/contacto/",
-  scrollText: "SCROLL DOWN • EXPLORE DEFT • ",
+  scrollText: "DESLIZAR HACIA ABAJO • EXPLORAR DEFTCODE • ",
 };
 
 const esMarqueeItems = {
   row1: [
-    "HIGH-VELOCITY DEV",
-    "MODERN ARCHITECTURES",
-    "ZERO-JANK MOTION",
-    "DEFT & PRECISE",
-    "BUILT FOR SCALE",
-    "HIGH-VELOCITY DEV",
+    "DESARROLLO DE ALTA VELOCIDAD",
+    "ARQUITECTURAS MODERNAS",
+    "ANIMACIONES FLUIDAS SIN BLOQUEOS",
+    "ÁGIL Y PRECISO",
+    "DISEÑADO PARA ESCALAR",
+    "INGENIERÍA WEB MODERNA",
   ],
   row2: [
     "ASTRO SSG",
     "TYPESCRIPT",
     "TAILWIND CSS V4",
-    "EDGE RUNTIME",
-    "CORE WEB VITALS 100",
-    "FULL-STACK SAAS",
+    "EDGE COMPUTING",
+    "100/100 CORE WEB VITALS",
+    "SISTEMAS & SAAS A MEDIDA",
   ],
 };
 
@@ -109,18 +109,18 @@ const esServices: ServiceItem[] = [
   {
     id: "web-apps",
     index: "01",
-    title: "FULL-STACK APPS & SAAS",
+    title: "APLICACIONES WEB & SAAS",
     description:
       "Arquitecturas modernas de software con rendimiento implacable. Aplicaciones web reactivas, paneles de control en tiempo real y APIs escalables diseñadas sin código espagueti.",
-    tags: ["TYPESCRIPT", "EDGE ARCHITECTURE", "DATABASE DESIGN", "REALTIME"],
+    tags: ["TYPESCRIPT", "ARQUITECTURA EDGE", "BASES DE DATOS", "TIEMPO REAL"],
   },
   {
     id: "landing-performance",
     index: "02",
-    title: "HIGH-VELOCITY LANDINGS",
+    title: "LANDING PAGES DE ALTA VELOCIDAD",
     description:
       "Sitios institucionales y landings de ultra alto impacto. Cero tiempo de bloqueo (TBT 0ms), 100 en Lighthouse y posicionamiento SEO agresivo para maximizar conversiones.",
-    tags: ["ASTRO SSG", "100/100 LIGHTHOUSE", "SEO AGRESIVO", "CONVERSION RATE"],
+    tags: ["ASTRO SSG", "100/100 LIGHTHOUSE", "SEO AGRESIVO", "CONVERSIÓN"],
   },
   {
     id: "bespoke-systems",
@@ -128,15 +128,15 @@ const esServices: ServiceItem[] = [
     title: "SISTEMAS & ERP A MEDIDA",
     description:
       "Digitalización de procesos críticos de negocio. Software corporativo a medida que reemplaza hojas de cálculo caóticas por flujos automatizados, seguros y trazables.",
-    tags: ["AUTOMATIZACIÓN", "INTEGRACIONES", "WORKFLOWS", "SEGURIDAD"],
+    tags: ["AUTOMATIZACIÓN", "INTEGRACIONES", "FLUJOS DE TRABAJO", "SEGURIDAD"],
   },
   {
     id: "performance-optimization",
     index: "04",
-    title: "PERFORMANCE & REFACTORING",
+    title: "OPTIMIZACIÓN & REFACTORIZACIÓN",
     description:
       "Auditoría técnica, optimización extrema de Core Web Vitals y reestructuración de código legado para equipos que necesitan velocidad inmediata y código mantenible.",
-    tags: ["CORE WEB VITALS", "AUDITORÍA", "REFACTORING", "A11Y"],
+    tags: ["CORE WEB VITALS", "AUDITORÍA", "REFACTORIZACIÓN", "ACCESIBILIDAD"],
   },
 ];
 
@@ -314,7 +314,7 @@ const esHowWeWork: WorkStep[] = [
 const esTeam: TeamMember[] = [
   {
     name: "AGUSTÍN ANGELINI",
-    role: "FOUNDER & TECH LEAD",
+    role: "FUNDADOR & LÍDER TÉCNICO",
     bio: "Especialista en arquitecturas web modernas, diseño de sistemas de alta disponibilidad y optimización de rendimiento.",
     tags: ["ASTRO", "TYPESCRIPT", "REACT", "TAILWIND", "SISTEMAS DISTRIBUIDOS"],
     github: "https://github.com/angelini-agus",

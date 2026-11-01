@@ -11,7 +11,7 @@ const { heroContent } = getContent(lang);
 
 const servicesHref = lang === "en" ? "#services" : "#servicios";
 const scrollAriaLabel = lang === "en" ? "Scroll to services" : "Desplazarse a servicios";
-const originLabel = "ORIGIN // COVERAGE";
+const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA";
 const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES // CORE";
 ---
 
@@ -26,7 +26,7 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
       {heroContent.badge}
     </div>
     <div class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black">
-      EST. 2026 // AGILE DEV
+      {lang === "en" ? "EST. 2026 // AGILE DEV" : "EST. 2026 // DESARROLLO ÁGIL"}
     </div>
   </div>
 

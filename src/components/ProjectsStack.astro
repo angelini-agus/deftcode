@@ -119,10 +119,10 @@ const viewCaseLabel = lang === "en" ? "VIEW CASE BREAKDOWN" : "VER DETALLE DEL C
                   <!-- Visual Graphic Frame with Real Screenshot -->
                   <div class="lg:col-span-5 bg-black border-2 border-white/20 overflow-hidden flex flex-col shadow-2xl">
                     <div class="flex justify-between items-center text-xs font-mono-meta text-white/70 px-4 py-2 bg-neutral-900 border-b border-white/20">
-                      <span class="font-bold tracking-wider text-[#FF4D00]">SCREENSHOT // PROD</span>
+                      <span class="font-bold tracking-wider text-[#FF4D00]">{lang === "en" ? "SCREENSHOT // PROD" : "CAPTURA // PRODUCCIÓN"}</span>
                       <span class="flex items-center gap-1.5 text-[10px]">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        LIVE
+                        {lang === "en" ? "LIVE" : "EN VIVO"}
                       </span>
                     </div>
 
@@ -140,8 +140,8 @@ const viewCaseLabel = lang === "en" ? "VIEW CASE BREAKDOWN" : "VER DETALLE DEL C
                     )}
 
                     <div class="flex items-center justify-between border-t border-white/10 px-4 py-2.5 text-[11px] font-mono-meta text-white/60 bg-black">
-                      <span class="truncate max-w-[200px]">{item.client || "ENTERPRISE CLIENT"}</span>
-                      <span class="text-[#FF4D00] font-bold">100% OPERATIONAL</span>
+                      <span class="truncate max-w-[200px]">{item.client || (lang === "en" ? "ENTERPRISE CLIENT" : "CLIENTE CORPORATIVO")}</span>
+                      <span class="text-[#FF4D00] font-bold">{lang === "en" ? "100% OPERATIONAL" : "100% OPERATIVO"}</span>
                     </div>
                   </div>
                 </div>
