@@ -10,9 +10,9 @@ const { lang = "es" } = Astro.props;
 const { marqueeItems } = getContent(lang);
 ---
 
-<section class="relative w-full overflow-hidden bg-[#FF4D00] select-none z-10 -mt-6 sm:-mt-8 md:-mt-10">
+<section class="relative w-full overflow-hidden bg-[#FF4D00] select-none z-10 pt-16 sm:pt-20 md:pt-24 -mt-16 sm:-mt-20 md:-mt-24">
   <!-- Tilted Black Strip (-2deg) matching reference -->
-  <div class="relative w-[125vw] -left-[12.5vw] bg-black border-t-2 border-black transform -rotate-2 origin-center pt-8 sm:pt-10 md:pt-14 pb-14 sm:pb-18 md:pb-24 shadow-2xl">
+  <div class="relative w-[125vw] -left-[12.5vw] bg-black border-t-2 border-black transform -rotate-2 origin-center pt-8 sm:pt-10 md:pt-14 pb-16 sm:pb-20 md:pb-28 shadow-2xl">
     <div class="flex flex-col gap-4 sm:gap-6 marquee-container">
       
       <!-- Row 1: Orange (#FF4D00) Archivo Black text, scrolling left -->
@@ -51,5 +51,5 @@ const { marqueeItems } = getContent(lang);
   </div>
 
   <!-- Bottom seamless transition to black services section -->
-  <div class="w-full h-16 bg-black -mt-8"></div>
+  <div class="w-full h-24 bg-black -mt-12"></div>
 </section>
