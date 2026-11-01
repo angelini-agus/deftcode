@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import ContactFormSection from "../../components/ContactFormSection.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import { getContent } from "../../lib/content";
+
+const content = getContent("en");
+const page = content.pages.contacto;
+---
+
+<BaseLayout
+  lang="en"
+  title={page.title}
+  description={page.description}
+>
+  <PageBanner
+    eyebrow={page.eyebrow}
+    title={page.h1}
+    intro={page.intro}
+  />
+  <ContactFormSection lang="en" />
+  <FaqSection lang="en" />
+</BaseLayout>

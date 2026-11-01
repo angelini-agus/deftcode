@@ -1,0 +1,61 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { ctaContent } = getContent(lang);
+const writeUsLabel = lang === "en" ? "OR EMAIL US:" : "O ESCRÍBENOS:";
+const sectionId = lang === "en" ? "contact-cta" : "contacto";
+---
+
+<section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 border-b-2 border-black overflow-hidden text-center flex flex-col items-center justify-center">
+  <div class="max-w-6xl mx-auto flex flex-col items-center">
+    <!-- Kicker Tag -->
+    <div class="inline-flex items-center gap-2 border-2 border-black bg-black text-[#FF4D00] px-4 py-1.5 font-mono-meta text-xs uppercase font-bold tracking-widest mb-6">
+      <span class="w-2 h-2 rounded-full bg-[#FF4D00] animate-ping"></span>
+      {ctaContent.kicker}
+    </div>
+
+    <!-- 14vw Heading in Archivo Black -->
+    <h2 class="font-display text-[12vw] sm:text-[13vw] md:text-[14vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 select-none">
+      {ctaContent.heading}
+    </h2>
+
+    <p class="font-sans text-base sm:text-xl md:text-2xl font-bold max-w-2xl text-black/90 mt-8 mb-12">
+      {ctaContent.subheading}
+    </p>
+
+    <!-- Large Rounded-Full Black Button (Scales on hover) -->
+    <a
+      href={ctaContent.buttonHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-110 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+    >
+      <span>{ctaContent.buttonLabel}</span>
+      <svg
+        class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+
+    <!-- Email Direct Link -->
+    <div class="mt-8">
+      <a
+        href={`mailto:${ctaContent.emailLabel}`}
+        class="font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider text-black underline underline-offset-4 decoration-2 hover:bg-black hover:text-[#FF4D00] px-2 py-1 transition-colors"
+      >
+        {writeUsLabel} {ctaContent.emailLabel}
+      </a>
+    </div>
+  </div>
+</section>

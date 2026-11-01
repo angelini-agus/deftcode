@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import ManifestoSection from "../components/ManifestoSection.astro";
+import HowWeWorkSection from "../components/HowWeWorkSection.astro";
+import TeamSection from "../components/TeamSection.astro";
+import CtaSection from "../components/CtaSection.astro";
+import { pages } from "../lib/content";
+---
+
+<BaseLayout
+  lang="es"
+  title={pages.nosotros.title}
+  description={pages.nosotros.description}
+>
+  <PageBanner
+    eyebrow={pages.nosotros.eyebrow}
+    title={pages.nosotros.h1}
+    intro={pages.nosotros.intro}
+  />
+  <ManifestoSection lang="es" />
+  <HowWeWorkSection lang="es" />
+  <TeamSection lang="es" />
+  <CtaSection lang="es" />
+</BaseLayout>

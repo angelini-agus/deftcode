@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageBanner from "../components/PageBanner.astro";
+import { pages, siteMeta } from "../lib/content";
+---
+
+<BaseLayout
+  lang="es"
+  title={pages.privacidad.title}
+  description={pages.privacidad.description}
+>
+  <PageBanner
+    eyebrow={pages.privacidad.eyebrow}
+    title={pages.privacidad.h1}
+    intro="En Deftcode respetamos tu privacidad por diseño. No usamos cookies de terceros ni rastreadores invasivos."
+    dark
+  />
+
+  <section class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-4xl mx-auto space-y-12 font-sans">
+      
+      <div class="border-2 border-white/20 p-8 bg-white/[0.02]">
+        <h2 class="font-display text-2xl text-[#FF4D00] uppercase tracking-tight mb-4">
+          1. RECOPILACIÓN Y TRATAMIENTO DE DATOS
+        </h2>
+        <p class="text-white/80 leading-relaxed text-sm sm:text-base">
+          Este sitio web no utiliza cookies de seguimiento publicitario ni tecnologías invasivas de huella digital (*fingerprinting*). La información enviada a través del formulario de contacto (nombre, correo electrónico y mensaje) se utiliza exclusivamente para responder consultas comerciales y presupuestos solicitados por el usuario.
+        </p>
+      </div>
+
+      <div class="border-2 border-white/20 p-8 bg-white/[0.02]">
+        <h2 class="font-display text-2xl text-[#FF4D00] uppercase tracking-tight mb-4">
+          2. ANALÍTICA WEB ANÓNIMA
+        </h2>
+        <p class="text-white/80 leading-relaxed text-sm sm:text-base">
+          Utilizamos <strong>Vercel Web Analytics</strong>, una solución de medición agregada que no almacena cookies en tu navegador ni guarda datos personales identificables (PII). Las métricas nos permiten conocer el volumen de visitas y rendimiento técnico del servidor sin comprometer tu privacidad.
+        </p>
+      </div>
+
+      <div class="border-2 border-white/20 p-8 bg-white/[0.02]">
+        <h2 class="font-display text-2xl text-[#FF4D00] uppercase tracking-tight mb-4">
+          3. DERECHOS DEL TITULAR DE LOS DATOS
+        </h2>
+        <p class="text-white/80 leading-relaxed text-sm sm:text-base">
+          En cumplimiento con la normativa aplicable (Ley N° 25.326 de Protección de los Datos Personales de la República Argentina y estándares internacionales), puedes solicitar en cualquier momento la actualización, rectificación o supresión de tus datos de contacto enviando un correo a <a href="mailto:contacto@deftcode.dev" class="text-[#FF4D00] underline">contacto@deftcode.dev</a>.
+        </p>
+      </div>
+
+      <div class="border-t border-white/20 pt-8 flex items-center justify-between font-mono-meta text-xs text-white/60">
+        <span>ÚLTIMA ACTUALIZACIÓN: NOVIEMBRE 2026</span>
+        <span>{siteMeta.location}</span>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

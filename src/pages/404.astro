@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 // RUTA NO ENCONTRADA - DEFTCODE">
+  <section class="min-h-[80vh] bg-[#FF4D00] text-black flex flex-col items-center justify-center px-4 py-24 text-center">
+    <div class="inline-flex items-center gap-2 border-2 border-black bg-black text-[#FF4D00] px-4 py-1.5 font-mono-meta text-xs uppercase font-bold tracking-widest mb-6">
+      ERROR_STATUS: 404
+    </div>
+
+    <h1 class="font-display text-[15vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 select-none">
+      404
+    </h1>
+
+    <p class="font-mono-meta text-base sm:text-xl font-bold uppercase tracking-wider text-black max-w-md mt-6 mb-10">
+      LA RUTA SOLICITADA NO EXISTE O FUE MOVIDA A OTRA VELOCIDAD.
+    </p>
+
+    <a
+      href="/"
+      class="inline-flex items-center gap-3 bg-black text-white font-mono-meta text-sm font-bold uppercase px-8 py-4 rounded-full border-2 border-black hover:bg-white hover:text-black transition-all duration-200 hover:scale-105"
+    >
+      <span>VOLVER AL INICIO</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+        <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </section>
+</BaseLayout>

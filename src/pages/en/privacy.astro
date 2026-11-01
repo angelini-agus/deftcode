@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import { getContent } from "../../lib/content";
+
+const content = getContent("en");
+const page = content.pages.privacidad;
+---
+
+<BaseLayout
+  lang="en"
+  title={page.title}
+  description={page.description}
+>
+  <PageBanner
+    eyebrow={page.eyebrow}
+    title={page.h1}
+    intro="At Deftcode, we respect your privacy by design. We do not use third-party tracking cookies or invasive fingerprinting."
+    dark
+  />
+
+  <section class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-4xl mx-auto space-y-12 font-sans">
+      
+      <div class="border-2 border-white/20 p-8 bg-white/[0.02]">
+        <h2 class="font-display text-2xl text-[#FF4D00] uppercase tracking-tight mb-4">
+          1. DATA COLLECTION & PROCESSING
+        </h2>
+        <p class="text-white/80 leading-relaxed text-sm sm:text-base">
+          This website does not utilize advertising cookies or cross-site tracking technologies. Any information provided via the contact form (name, email address, and project requirements) is utilized exclusively to provide technical proposals and respond to business requests.
+        </p>
+      </div>
+
+      <div class="border-2 border-white/20 p-8 bg-white/[0.02]">
+        <h2 class="font-display text-2xl text-[#FF4D00] uppercase tracking-tight mb-4">
+          2. ANONYMOUS WEB ANALYTICS
+        </h2>
+        <p class="text-white/80 leading-relaxed text-sm sm:text-base">
+          We use <strong>Vercel Web Analytics</strong>, an aggregated measurement platform that stores no client cookies and captures no Personally Identifiable Information (PII). Analytics allow us to audit traffic volume and edge server health without compromising user privacy.
+        </p>
+      </div>
+
+      <div class="border-2 border-white/20 p-8 bg-white/[0.02]">
+        <h2 class="font-display text-2xl text-[#FF4D00] uppercase tracking-tight mb-4">
+          3. YOUR DATA RIGHTS
+        </h2>
+        <p class="text-white/80 leading-relaxed text-sm sm:text-base">
+          Under applicable data protection frameworks, you have the right to request the inspection, update, or deletion of your contact data at any time by emailing <a href="mailto:contacto@deftcode.dev" class="text-[#FF4D00] underline">contacto@deftcode.dev</a>.
+        </p>
+      </div>
+
+      <div class="border-t border-white/20 pt-8 flex items-center justify-between font-mono-meta text-xs text-white/60">
+        <span>LAST UPDATED: NOVEMBER 2026</span>
+        <span>{content.siteMeta.location}</span>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,161 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const content = getContent(lang);
+const { navLinks } = content;
+
+// Target URLs for language switcher based on current page
+const pathname = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+// Map pages across locales
+let cleanPath = pathname.replace(/^\/en(\/|$)/, "/");
+if (cleanPath.startsWith("/about/")) cleanPath = "/nosotros/";
+if (cleanPath.startsWith("/projects/")) cleanPath = "/proyectos/";
+if (cleanPath.startsWith("/contact/")) cleanPath = "/contacto/";
+if (cleanPath.startsWith("/privacy/")) cleanPath = "/privacidad/";
+
+const esTargetHref = cleanPath;
+
+let enTargetPath = cleanPath;
+if (cleanPath === "/nosotros/") enTargetPath = "/about/";
+if (cleanPath === "/proyectos/") enTargetPath = "/projects/";
+if (cleanPath === "/contacto/") enTargetPath = "/contact/";
+if (cleanPath === "/privacidad/") enTargetPath = "/privacy/";
+
+const enTargetHref = enTargetPath === "/" ? "/en/" : `/en${enTargetPath}`;
+
+const ctaLabel = lang === "en" ? "LET'S TALK" : "HABLEMOS";
+const ctaHref = lang === "en" ? "/en/contact/" : "/contacto/";
+const homeHref = lang === "en" ? "/en/" : "/";
+---
+
+<header class="fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-8 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a
+      href={homeHref}
+      class="pointer-events-auto inline-flex items-center gap-2 bg-black text-[#FF4D00] px-4 py-2 border-2 border-black font-display text-lg tracking-tight hover:bg-[#FF4D00] hover:text-black transition-colors"
+      aria-label="Deftcode Home"
+    >
+      <span>DEFTCODE</span>
+      <span class="inline-block w-2 h-2 bg-[#FF4D00] group-hover:bg-black"></span>
+    </a>
+
+    <!-- Center Floating Pill Navigation -->
+    <nav
+      class="pointer-events-auto hidden md:flex items-center gap-1 bg-black rounded-full px-3 py-1.5 border-2 border-black shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+      aria-label="Main Navigation"
+    >
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="font-mono-meta text-[12px] uppercase font-bold text-white px-3.5 py-1 rounded-full transition-all duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Right Controls: Language Switcher & CTA -->
+    <div class="pointer-events-auto flex items-center gap-2 sm:gap-3">
+      <!-- Language Switcher Pill -->
+      <div class="flex items-center bg-black rounded-full border-2 border-black p-0.5 font-mono-meta text-[11px] font-bold shadow-md">
+        <a
+          href={esTargetHref}
+          class={`px-2.5 py-1 rounded-full transition-all ${
+            lang === "es"
+              ? "bg-[#FF4D00] text-black"
+              : "text-white/70 hover:text-white"
+          }`}
+          aria-label="Versión en Español"
+        >
+          ES
+        </a>
+        <a
+          href={enTargetHref}
+          class={`px-2.5 py-1 rounded-full transition-all ${
+            lang === "en"
+              ? "bg-[#FF4D00] text-black"
+              : "text-white/70 hover:text-white"
+          }`}
+          aria-label="English version"
+        >
+          EN
+        </a>
+      </div>
+
+      <a
+        href={ctaHref}
+        class="font-mono-meta text-[12px] uppercase font-bold bg-black text-white px-4 py-2 rounded-full border-2 border-black hover:bg-white hover:text-black transition-all duration-200 hover:scale-105 shadow-md hidden sm:inline-block"
+      >
+        {ctaLabel}
+      </a>
+
+      <!-- Mobile Menu Trigger -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden bg-black text-white p-2 rounded-full border-2 border-black hover:bg-[#FF4D00] hover:text-black transition-colors"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Dropdown -->
+  <div
+    id="mobile-drawer"
+    class="pointer-events-auto hidden md:hidden mt-3 bg-black border-2 border-black p-4 flex-col gap-3 shadow-2xl"
+  >
+    {
+      navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="font-mono-meta text-sm font-bold text-white uppercase py-2 px-3 hover:bg-[#FF4D00] hover:text-black transition-colors"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+    <div class="border-t border-white/20 pt-3 flex justify-between items-center">
+      <a
+        href={ctaHref}
+        class="font-mono-meta text-xs uppercase font-bold bg-[#FF4D00] text-black px-4 py-2 rounded-full"
+      >
+        {ctaLabel}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById("mobile-menu-toggle");
+  const drawer = document.getElementById("mobile-drawer");
+
+  if (toggleBtn && drawer) {
+    toggleBtn.addEventListener("click", () => {
+      const isHidden = drawer.classList.contains("hidden");
+      drawer.classList.toggle("hidden", !isHidden);
+      drawer.classList.toggle("flex", isHidden);
+      toggleBtn.setAttribute("aria-expanded", String(isHidden));
+    });
+
+    drawer.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        drawer.classList.add("hidden");
+        drawer.classList.remove("flex");
+        toggleBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+</script>

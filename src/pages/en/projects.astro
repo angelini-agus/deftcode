@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageBanner from "../../components/PageBanner.astro";
+import ProjectsStack from "../../components/ProjectsStack.astro";
+import CtaSection from "../../components/CtaSection.astro";
+import { getContent } from "../../lib/content";
+import { Image } from "astro:assets";
+import { projectAssets } from "../../lib/project-images";
+
+const content = getContent("en");
+const page = content.pages.proyectos;
+const { projects } = content;
+---
+
+<BaseLayout
+  lang="en"
+  title={page.title}
+  description={page.description}
+>
+  <PageBanner
+    eyebrow={page.eyebrow}
+    title={page.h1}
+    intro={page.intro}
+  />
+
+  <!-- Interactive Runway Deck -->
+  <ProjectsStack lang="en" />
+
+  <!-- Detailed Case Studies Breakdown -->
+  <section class="bg-black text-white py-24 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-7xl mx-auto">
+      <div class="border-b border-white/20 pb-8 mb-16 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+        <div>
+          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+            // DETAILED ARCHITECTURE
+          </span>
+          <h2 class="font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+            PRODUCTION CASES
+          </h2>
+        </div>
+        <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
+          SOLVED CHALLENGES AND MEASURABLE TECHNICAL IMPACT.
+        </p>
+      </div>
+
+      <div class="space-y-16">
+        {
+          projects.map((item, index) => (
+            <article
+              id={item.slug}
+              class="border-2 border-white/20 p-6 sm:p-10 lg:p-12 bg-white/[0.02] hover:border-[#FF4D00] transition-colors scroll-mt-24"
+            >
+              <!-- Top header -->
+              <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-6 border-b border-white/10 pb-8 mb-8">
+                <div>
+                  <div class="flex flex-wrap items-center gap-3 mb-2">
+                    <span class="font-mono-meta text-sm font-bold text-[#FF4D00]">
+                      [{String(index + 1).padStart(2, "0")}]
+                    </span>
+                    <span class="font-mono-meta text-xs uppercase text-white/60">
+                      {item.year} // {item.category}
+                    </span>
+                    {item.client && (
+                      <span class="font-mono-meta text-xs text-white/40 border-l border-white/20 pl-3">
+                        {item.client}
+                      </span>
+                    )}
+                  </div>
+                  <h3 class="font-display text-2xl sm:text-4xl lg:text-5xl text-white uppercase tracking-tight m-0">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  {item.metrics.map((metric) => (
+                    <span class="bg-[#FF4D00] text-black font-mono-meta text-xs font-bold px-3 py-1 uppercase">
+                      {metric}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Main Content: Screenshot + Challenge / Solution -->
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 items-start">
+                {item.imageKey && projectAssets[item.imageKey] && (
+                  <div class="lg:col-span-5 border-2 border-white/20 bg-black overflow-hidden group">
+                    <div class="flex justify-between items-center text-[11px] font-mono-meta text-white/70 px-3 py-1.5 bg-neutral-900 border-b border-white/20">
+                      <span class="font-bold text-[#FF4D00]">SCREENSHOT</span>
+                      <span>PRODUCTION UI</span>
+                    </div>
+                    <Image
+                      src={projectAssets[item.imageKey].main}
+                      alt={projectAssets[item.imageKey].altEn}
+                      width={900}
+                      height={560}
+                      class="w-full h-auto object-cover filter contrast-[1.02] group-hover:scale-[1.02] transition-transform duration-300"
+                    />
+                  </div>
+                )}
+
+                <div class={item.imageKey && projectAssets[item.imageKey] ? "lg:col-span-7 flex flex-col gap-6" : "lg:col-span-12 flex flex-col gap-6"}>
+                  <div class="bg-black/40 border border-white/10 p-6">
+                    <h4 class="font-mono-meta text-xs text-[#FF4D00] uppercase font-bold tracking-wider mb-2">
+                      // THE CHALLENGE
+                    </h4>
+                    <p class="font-sans text-sm sm:text-base text-white/80 leading-relaxed">
+                      {item.challenge}
+                    </p>
+                  </div>
+                  <div class="bg-black/40 border border-white/10 p-6">
+                    <h4 class="font-mono-meta text-xs text-[#FF4D00] uppercase font-bold tracking-wider mb-2">
+                      // THE TECHNICAL SOLUTION
+                    </h4>
+                    <p class="font-sans text-sm sm:text-base text-white/80 leading-relaxed">
+                      {item.solution}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tech Stack Footer -->
+              <div class="border-t border-white/10 pt-6 flex flex-wrap gap-2 items-center">
+                <span class="font-mono-meta text-xs text-[#FF4D00] uppercase font-bold mr-2">// TECH STACK:</span>
+                {item.tags.map((tag) => (
+                  <span class="font-mono-meta text-xs text-white/90 bg-white/5 border border-white/20 px-3 py-1">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaSection lang="en" />
+</BaseLayout>

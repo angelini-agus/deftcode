@@ -1,0 +1,59 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { manifesto } = getContent(lang);
+
+const eyebrow = lang === "en" ? "// NON-NEGOTIABLE PRINCIPLES" : "// PRINCIPIOS NO NEGOCIABLES";
+const title = lang === "en" ? "THE DEFT MANIFESTO" : "EL MANIFIESTO DEFT";
+const intro = lang === "en" ? "OUR TECHNICAL AND ETHICAL ENGINEERING STANDARD." : "NUESTRO ESTÁNDAR TÉCNICO Y ÉTICO DE DESARROLLO.";
+---
+
+<section class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+      <div>
+        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          {eyebrow}
+        </span>
+        <h2 class="font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+          {title}
+        </h2>
+      </div>
+      <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
+        {intro}
+      </p>
+    </div>
+
+    <!-- Grid of Manifesto Principles -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {
+        manifesto.map((item) => (
+          <article class="border-2 border-white/20 p-8 flex flex-col justify-between hover:border-[#FF4D00] transition-colors duration-200 bg-white/[0.02]">
+            <div>
+              <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <span class="font-mono-meta text-2xl font-bold text-[#FF4D00]">
+                  [{item.number}]
+                </span>
+                <span class="font-mono-meta text-[11px] uppercase tracking-wider text-white/40">
+                  STANDARD // RULE
+                </span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl text-white uppercase tracking-[-0.03em] leading-tight mb-4">
+                {item.title}
+              </h3>
+            </div>
+            <p class="font-sans text-sm sm:text-base text-white/70 leading-relaxed">
+              {item.description}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

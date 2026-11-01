@@ -1,0 +1,75 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { faqList } = getContent(lang);
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqList.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
+const eyebrow = lang === "en" ? "// DIRECT ANSWERS" : "// RESPUESTAS DIRECTAS";
+const title = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECUENTES";
+const intro = lang === "en" ? "CLARITY ON TIMELINES, ARCHITECTURE, AND SCOPE." : "CLARIDAD SOBRE TIEMPOS, ARQUITECTURA Y PROCESOS.";
+---
+
+<section id="faq" class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+  <!-- Schema.org FAQPage Structured Data -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+
+  <div class="max-w-7xl mx-auto">
+    <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+      <div>
+        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          {eyebrow}
+        </span>
+        <h2 class="font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+          {title}
+        </h2>
+      </div>
+      <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
+        {intro}
+      </p>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="divide-y divide-white/20 max-w-4xl mx-auto">
+      {
+        faqList.map((item, index) => (
+          <details class="group py-6 cursor-pointer select-none">
+            <summary class="list-none flex items-center justify-between gap-4 font-display text-xl sm:text-2xl text-white uppercase tracking-tight hover:text-[#FF4D00] transition-colors focus-visible:outline-none">
+              <span class="flex items-center gap-4">
+                <span class="font-mono-meta text-sm text-[#FF4D00] font-bold">
+                  [{String(index + 1).padStart(2, "0")}]
+                </span>
+                {item.question}
+              </span>
+              <span class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[#FF4D00] group-open:rotate-45 group-open:bg-[#FF4D00] group-open:text-black transition-all duration-200 shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M12 4v16m8-8H4"></path>
+                </svg>
+              </span>
+            </summary>
+            <div class="pt-4 pb-2 pl-12 pr-4 text-white/80 font-sans text-sm sm:text-base leading-relaxed">
+              <p>{item.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

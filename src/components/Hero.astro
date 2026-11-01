@@ -1,0 +1,111 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { heroContent } = getContent(lang);
+
+const servicesHref = lang === "en" ? "#services" : "#servicios";
+const scrollAriaLabel = lang === "en" ? "Scroll to services" : "Desplazarse a servicios";
+const originLabel = "ORIGIN // COVERAGE";
+const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES // CORE";
+---
+
+<section
+  id="top"
+  class="relative min-h-screen bg-[#FF4D00] text-black flex flex-col justify-between pt-24 md:pt-32 pb-8 px-4 md:px-12 border-b-2 border-black overflow-hidden"
+>
+  <!-- Top Utility Tag -->
+  <div class="flex items-center justify-between pb-4">
+    <div class="inline-flex items-center gap-2 border-2 border-black bg-black text-white px-3 py-1 font-mono-meta text-xs uppercase font-bold tracking-wider">
+      <span class="w-2 h-2 rounded-full bg-[#FF4D00] animate-pulse"></span>
+      {heroContent.badge}
+    </div>
+    <div class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black">
+      EST. 2026 // AGILE DEV
+    </div>
+  </div>
+
+  <!-- Giant Typographic Headline (16vw) -->
+  <div class="my-auto py-8 flex flex-col items-center justify-center select-none text-center">
+    <h1
+      class="font-display text-[15vw] sm:text-[16vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 text-balance w-full"
+    >
+      {heroContent.headlineMain}
+    </h1>
+    <p
+      class="font-display text-[5vw] sm:text-[5.5vw] leading-[0.9] tracking-[-0.03em] text-black uppercase mt-2 opacity-90"
+    >
+      {heroContent.headlineSub}
+    </p>
+  </div>
+
+  <!-- 2px Black Divider & Metadata Row -->
+  <div class="w-full">
+    <!-- Horizontal Border Divider (2px solid #000000) -->
+    <div class="w-full h-[2px] bg-black mb-6"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-4">
+      <!-- Left: Location -->
+      <div class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black">
+        <span class="block text-[11px] opacity-75 font-normal">{originLabel}</span>
+        {heroContent.locationText}
+      </div>
+
+      <!-- Center: 144px Rotating Circular 'Scroll Down' Text Indicator -->
+      <div class="flex justify-center items-center py-2">
+        <a
+          href={servicesHref}
+          class="relative w-[144px] h-[144px] flex items-center justify-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+          aria-label={scrollAriaLabel}
+        >
+          <!-- Rotating SVG Text Container (360deg over 12s) -->
+          <svg
+            class="absolute inset-0 w-full h-full animate-spin-slow select-none pointer-events-none"
+            viewBox="0 0 144 144"
+          >
+            <defs>
+              <path
+                id="circlePath"
+                d="M 72, 72 m -54, 0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"
+              />
+            </defs>
+            <text
+              class="font-mono-meta text-[9px] font-bold fill-black uppercase"
+              letter-spacing="0.18em"
+            >
+              <textPath href="#circlePath" startOffset="0%">
+                {heroContent.scrollText} {heroContent.scrollText}
+              </textPath>
+            </text>
+          </svg>
+
+          <!-- Static Center Circle & Arrow Down Icon -->
+          <div
+            class="w-12 h-12 rounded-full bg-black text-[#FF4D00] flex items-center justify-center border-2 border-black transition-transform duration-300 group-hover:scale-110 shadow-md"
+          >
+            <svg
+              class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+            >
+              <path stroke-linecap="square" stroke-linejoin="miter" d="M12 4v16m0 0l-6-6m6 6l6-6"></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- Right: Role / Title description -->
+      <div class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black md:text-right">
+        <span class="block text-[11px] opacity-75 font-normal">{capabilitiesLabel}</span>
+        {heroContent.roleText}
+      </div>
+    </div>
+  </div>
+</section>

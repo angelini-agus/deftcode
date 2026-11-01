@@ -1,0 +1,104 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Analytics from "@vercel/analytics/astro";
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  lang?: Lang;
+}
+
+const {
+  lang = "es",
+  title: titleProp,
+  description: descProp,
+  ogImage: ogImageProp,
+  canonical: canonicalProp,
+} = Astro.props;
+
+const content = getContent(lang);
+const title = titleProp ?? content.siteMeta.title;
+const description = descProp ?? content.siteMeta.description;
+const ogImage = ogImageProp ?? content.siteMeta.ogImage;
+
+const siteOrigin = Astro.site ?? new URL(content.siteMeta.siteUrl);
+const pathname = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = canonicalProp ?? new URL(pathname, siteOrigin).href;
+const ogImageUrl = new URL(ogImage, siteOrigin).href;
+
+// Hreflang alternates computation
+const cleanPath = pathname.replace(/^\/en(\/|$)/, "/");
+const esUrl = new URL(cleanPath, siteOrigin).href;
+const enUrl = new URL(`/en${cleanPath === "/" ? "/" : cleanPath}`, siteOrigin).href;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Deftcode",
+  url: content.siteMeta.siteUrl,
+  description: content.siteMeta.description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Rosario",
+    addressRegion: "Santa Fe",
+    addressCountry: "AR",
+  },
+  sameAs: [
+    "https://github.com/angelini-agus",
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth bg-[#FF4D00]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Hreflang Alternates (Google Multi-language SEO) -->
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
+
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={lang === "en" ? "en_US" : "es_AR"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
+
+    <!-- Analytics -->
+    <Analytics />
+  </head>
+  <body class="bg-[#FF4D00] text-black min-h-screen flex flex-col font-sans selection:bg-black selection:text-[#FF4D00]">
+    <Navbar lang={lang} />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>
