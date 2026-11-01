@@ -29,12 +29,12 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
       {ctaContent.subheading}
     </p>
 
-    <!-- Large Rounded-Full Black Button (Scales on hover) -->
+    <!-- Large Rounded-Full Black Button (Scales on hover, stays solid black) -->
     <a
       href={ctaContent.buttonHref}
       target="_blank"
       rel="noopener noreferrer"
-      class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-110 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+      class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-105 hover:bg-black hover:text-[#FF4D00] hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
     >
       <span>{ctaContent.buttonLabel}</span>
       <svg
