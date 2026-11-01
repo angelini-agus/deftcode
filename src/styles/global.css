@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import "@fontsource/archivo-black";
+@import "@fontsource-variable/archivo";
 @import "@fontsource/space-mono";
 @import "@fontsource-variable/inter";
 
@@ -10,8 +11,15 @@
   --color-brand-white: #FFFFFF;
 
   --font-display: "Archivo Black", sans-serif;
+  --font-archivo: "Archivo Variable", sans-serif;
   --font-mono: "Space Mono", monospace;
   --font-sans: "Inter Variable", "Inter", sans-serif;
+}
+
+.font-logo {
+  font-family: var(--font-archivo);
+  font-weight: 800;
+  letter-spacing: -0.035em;
 }
 
 /* Custom selection */

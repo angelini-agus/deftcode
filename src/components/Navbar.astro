@@ -36,14 +36,18 @@ const homeHref = lang === "en" ? "/en/" : "/";
 
 <header class="fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-8 py-4">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <!-- Brand Logo -->
+    <!-- Brand Logo (Pure text, no black box, weight 800 Archivo Variable) -->
     <a
       href={homeHref}
-      class="pointer-events-auto inline-flex items-center gap-2 bg-black text-[#FF4D00] px-4 py-2 border-2 border-black font-display text-lg tracking-tight hover:bg-[#FF4D00] hover:text-black transition-colors"
+      class="navbar-brand-logo pointer-events-auto inline-flex items-center gap-0.5 text-black hover:opacity-75 transition-colors duration-200 select-none py-1"
       aria-label="Deftcode Home"
     >
-      <span>DEFTCODE</span>
-      <span class="inline-block w-2 h-2 bg-[#FF4D00] group-hover:bg-black"></span>
+      <span class="font-logo text-xl sm:text-2xl uppercase leading-none tracking-[-0.035em]">
+        DEFTCODE
+      </span>
+      <span class="font-logo text-[11px] sm:text-[12px] uppercase leading-none relative -top-1 font-bold">
+        ®
+      </span>
     </a>
 
     <!-- Center Floating Pill Navigation -->
@@ -157,5 +161,34 @@ const homeHref = lang === "en" ? "/en/" : "/";
         toggleBtn.setAttribute("aria-expanded", "false");
       });
     });
+  }
+
+  const logo = document.querySelector<HTMLElement>(".navbar-brand-logo");
+  if (logo) {
+    const updateLogoContrast = () => {
+      const rect = logo.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      logo.style.pointerEvents = "none";
+      const el = document.elementFromPoint(x, y);
+      logo.style.pointerEvents = "auto";
+
+      if (el) {
+        const darkSection = el.closest(".bg-black, [data-theme='dark']");
+        const orangeSection = el.closest(".bg-\\[\\#FF4D00\\], .bg-brand-orange, #top");
+        if (darkSection && !orangeSection) {
+          logo.classList.remove("text-black");
+          logo.classList.add("text-white");
+        } else {
+          logo.classList.remove("text-white");
+          logo.classList.add("text-black");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", updateLogoContrast, { passive: true });
+    window.addEventListener("resize", updateLogoContrast, { passive: true });
+    updateLogoContrast();
   }
 </script>
