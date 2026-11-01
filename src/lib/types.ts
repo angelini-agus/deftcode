@@ -24,21 +24,48 @@ export interface ServiceItem {
   tags: string[];
 }
 
+export interface CaseStudyContrastRow {
+  before: string;
+  after: string;
+}
+
+export interface CaseStudyFeature {
+  title: string;
+  description: string;
+}
+
+export interface CaseStudyMetric {
+  value: string;
+  unit: string;
+  label: string;
+}
+
 export interface ProjectItem {
   id: string;
   imageKey: string;
-  slug?: string;
+  slug: string;
   title: string;
   client?: string;
+  location?: string;
   category: string;
   year: string;
   description: string;
   metrics: string[];
   tags: string[];
   link?: string;
+  liveUrl?: {
+    href: string;
+    label: string;
+  };
   fullOverview?: string;
-  challenge?: string;
-  solution?: string;
+  challengeTitle?: string;
+  challenge: string;
+  contrastRows?: CaseStudyContrastRow[];
+  solutionTitle?: string;
+  solution: string;
+  solutionFeatures?: CaseStudyFeature[];
+  resultsTitle?: string;
+  resultsMetrics?: CaseStudyMetric[];
 }
 
 export interface TeamMember {

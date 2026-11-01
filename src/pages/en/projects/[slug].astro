@@ -1,0 +1,399 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CtaSection from "../../../components/CtaSection.astro";
+import { getContent } from "../../../lib/content";
+import type { ProjectItem } from "../../../lib/types";
+import { Image } from "astro:assets";
+import { projectAssets } from "../../../lib/project-images";
+
+export function getStaticPaths() {
+  const content = getContent("en");
+  const projectsList = content.projects;
+  const total = projectsList.length;
+
+  return projectsList.map((project, index) => {
+    const prev = index > 0 ? projectsList[index - 1] : projectsList[total - 1];
+    const next = index < total - 1 ? projectsList[index + 1] : projectsList[0];
+    return {
+      params: { slug: project.slug },
+      props: {
+        project,
+        prev,
+        next,
+        currentIndex: index + 1,
+        total,
+      },
+    };
+  });
+}
+
+interface Props {
+  project: ProjectItem;
+  prev: ProjectItem;
+  next: ProjectItem;
+  currentIndex: number;
+  total: number;
+}
+
+const { project, prev, next, currentIndex, total } = Astro.props;
+const assets = projectAssets[project.imageKey];
+const seoTitle = `${project.title} // CASE STUDY - DEFTCODE`;
+const seoDescription = project.description;
+---
+
+<BaseLayout
+  lang="en"
+  title={seoTitle}
+  description={seoDescription}
+>
+  <!-- Breadcrumb & Back Link Header -->
+  <header class="bg-[#FF4D00] text-black pt-28 pb-8 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-7xl mx-auto flex flex-col gap-6">
+      
+      <!-- Back Link -->
+      <div class="flex items-center justify-between">
+        <a
+          href="/en/projects/"
+          class="inline-flex items-center gap-2 font-mono-meta text-xs uppercase font-bold text-black hover:opacity-75 transition-opacity py-1 border-b border-black"
+        >
+          <span>&larr;</span>
+          <span>ALL CASE STUDIES</span>
+        </a>
+
+        <div class="inline-flex items-center gap-2 border-2 border-black bg-black text-white px-3 py-1 font-mono-meta text-xs uppercase font-bold tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-[#FF4D00] animate-pulse"></span>
+          CASE [{String(currentIndex).padStart(2, "0")}/{String(total).padStart(2, "0")}]
+        </div>
+      </div>
+
+      <!-- Project Main Title in Archivo Black -->
+      <div class="space-y-4 max-w-5xl">
+        <span class="font-mono-meta text-xs uppercase tracking-widest text-black/80 font-bold block">
+          // {project.client} {project.location ? `· ${project.location}` : ""}
+        </span>
+        <h1 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-[-0.04em] leading-[0.88] m-0 text-balance">
+          {project.title}
+        </h1>
+        <p class="font-sans text-base sm:text-xl font-medium text-black/90 max-w-3xl leading-relaxed">
+          {project.description}
+        </p>
+      </div>
+
+      <!-- Metadata Strip: Category, Year, Tech Stack, Live URL -->
+      <div class="border-t-2 border-black pt-6 flex flex-wrap items-center justify-between gap-4 font-mono-meta text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="bg-black text-[#FF4D00] px-3 py-1 font-bold uppercase tracking-wider">
+            {project.category}
+          </span>
+          <span class="bg-black/10 border border-black px-3 py-1 font-bold text-black uppercase">
+            {project.year}
+          </span>
+          {project.tags.map((tag) => (
+            <span class="bg-white/80 border border-black/30 text-black px-2.5 py-1 uppercase">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 bg-black text-[#FF4D00] px-4 py-2 font-bold uppercase hover:bg-neutral-900 transition-colors shadow-md"
+          >
+            <span>LIVE DEPLOYMENT: {project.liveUrl.label}</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="square" stroke-linejoin="miter" d="M7 17L17 7M17 7H7M17 7V17"></path>
+            </svg>
+          </a>
+        )}
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Hero Visual Frame (Production Screenshot) -->
+  <section class="bg-black py-16 md:py-24 px-4 md:px-12 border-b-2 border-black text-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="border-2 border-white/20 bg-black overflow-hidden shadow-2xl">
+        <!-- Console Window Bar -->
+        <div class="flex justify-between items-center text-xs font-mono-meta text-white/70 px-4 py-2.5 bg-neutral-900 border-b border-white/20">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            <span class="font-bold tracking-wider text-[#FF4D00] ml-2">SCREENSHOT // PRODUCTION</span>
+          </div>
+          <span class="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            LIVE SYSTEM
+          </span>
+        </div>
+
+        {assets && (
+          <div class="relative bg-neutral-950 overflow-hidden">
+            <Image
+              src={assets.main}
+              alt={assets.altEn}
+              width={1600}
+              height={1000}
+              class="w-full h-auto object-cover filter contrast-[1.02]"
+              loading="eager"
+            />
+          </div>
+        )}
+
+        <div class="flex items-center justify-between border-t border-white/10 px-6 py-3 text-xs font-mono-meta text-white/60 bg-black">
+          <span>{project.client} · LIVE DEPLOYMENT</span>
+          <span class="text-[#FF4D00] font-bold">100% OPERATIONAL IN PRODUCTION</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem / Challenge & Before-After Contrast Section -->
+  <section class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-7xl mx-auto space-y-12">
+      
+      <!-- Section Header -->
+      <div class="border-b border-white/20 pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
+        <div>
+          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+            // THE CHALLENGE
+          </span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
+            {project.challengeTitle || "MANUAL OVERSIGHT HIT A BREAKING POINT"}
+          </h2>
+        </div>
+        <p class="font-mono-meta text-xs text-white/60 max-w-xs md:text-right">
+          TECHNICAL DIAGNOSIS AND OPERATIONAL BOTTLENECKS.
+        </p>
+      </div>
+
+      <!-- Challenge Narrative -->
+      <div class="max-w-4xl">
+        <p class="font-sans text-base sm:text-lg text-white/80 leading-relaxed">
+          {project.challenge}
+        </p>
+      </div>
+
+      <!-- Before / After Contrast Table (Brutalist Rows) -->
+      {project.contrastRows && project.contrastRows.length > 0 && (
+        <div class="border-2 border-white/20 bg-white/[0.01] overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 text-xs font-mono-meta uppercase font-bold tracking-wider border-b border-white/20">
+            <div class="bg-neutral-900/80 text-white/70 px-6 py-3 border-b md:border-b-0 md:border-r border-white/20 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-neutral-500"></span>
+              LEGACY PROCESS (MANUAL)
+            </div>
+            <div class="bg-black text-[#FF4D00] px-6 py-3 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#FF4D00]"></span>
+              AFTER (DEFTCODE SYSTEM)
+            </div>
+          </div>
+
+          <div class="divide-y divide-white/10">
+            {project.contrastRows.map((row) => (
+              <div class="grid grid-cols-1 md:grid-cols-2 text-sm">
+                <!-- Before Col -->
+                <div class="px-6 py-4 text-white/50 bg-neutral-950/40 md:border-r border-white/10 flex items-start gap-3">
+                  <span class="text-neutral-500 font-mono-meta font-bold">✕</span>
+                  <span>{row.before}</span>
+                </div>
+                <!-- After Col -->
+                <div class="px-6 py-4 text-white/95 font-medium bg-black flex items-start gap-3">
+                  <span class="text-[#FF4D00] font-mono-meta font-bold">✓</span>
+                  <span>{row.after}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <!-- Technical Solution & Architectural Features -->
+  <section class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-7xl mx-auto space-y-12">
+      
+      <!-- Section Header -->
+      <div class="border-b border-white/20 pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
+        <div>
+          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+            // TECHNICAL SOLUTION
+          </span>
+          <h2 class="font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
+            {project.solutionTitle || "HOW WE ENGINEERED IT"}
+          </h2>
+        </div>
+        <p class="font-mono-meta text-xs text-white/60 max-w-xs md:text-right">
+          SOFTWARE ARCHITECTURE, APIS, AND DATA MODELS.
+        </p>
+      </div>
+
+      <div class="max-w-4xl">
+        <p class="font-sans text-base sm:text-lg text-white/80 leading-relaxed">
+          {project.solution}
+        </p>
+      </div>
+
+      <!-- 4 Solution Feature Cards -->
+      {project.solutionFeatures && project.solutionFeatures.length > 0 && (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {project.solutionFeatures.map((feature, idx) => (
+            <article class="border-2 border-white/20 p-8 bg-white/[0.02] flex flex-col justify-between hover:border-[#FF4D00] transition-colors">
+              <div>
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                  <span class="font-mono-meta text-2xl font-bold text-[#FF4D00]">
+                    [{String(idx + 1).padStart(2, "0")}]
+                  </span>
+                  <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
+                </div>
+                <h3 class="font-display text-2xl text-white uppercase tracking-tight mb-3">
+                  {feature.title}
+                </h3>
+              </div>
+              <p class="font-sans text-sm sm:text-base text-white/70 leading-relaxed mt-2">
+                {feature.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <!-- Complete Multi-Screenshot Gallery -->
+  {assets && assets.gallery && assets.gallery.length > 1 && (
+    <section class="bg-black text-white py-20 px-4 md:px-12 border-b-2 border-black">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="border-b border-white/20 pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
+          <div>
+            <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+              // PRODUCTION GALLERY
+            </span>
+            <h2 class="font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
+              INTERFACES IN PRODUCTION
+            </h2>
+          </div>
+          <p class="font-mono-meta text-xs text-white/60 max-w-xs md:text-right">
+            ACTUAL VIEWS OF THE DEPLOYED SYSTEM.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {assets.gallery.map((imgItem, idx) => (
+            <div class="border-2 border-white/20 bg-black overflow-hidden flex flex-col group">
+              <div class="flex justify-between items-center text-[11px] font-mono-meta text-white/70 px-4 py-2 bg-neutral-900 border-b border-white/20">
+                <span class="font-bold text-[#FF4D00]">VIEW [{String(idx + 1).padStart(2, "0")}]</span>
+                <span>{imgItem.captionEn || "LIVE DEPLOYMENT"}</span>
+              </div>
+              <div class="relative bg-neutral-950 overflow-hidden">
+                <Image
+                  src={imgItem.src}
+                  alt={imgItem.altEn}
+                  width={900}
+                  height={560}
+                  class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              {imgItem.captionEn && (
+                <div class="p-4 bg-neutral-950 border-t border-white/10 text-xs font-mono-meta text-white/60">
+                  {imgItem.captionEn}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Results & Key Metrics Section -->
+  {project.resultsMetrics && project.resultsMetrics.length > 0 && (
+    <section class="bg-[#FF4D00] text-black py-20 px-4 md:px-12 border-b-2 border-black">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="border-b-2 border-black pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
+          <div>
+            <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+              // PROVEN RESULTS
+            </span>
+            <h2 class="font-display text-3xl sm:text-5xl text-black uppercase tracking-tight">
+              {project.resultsTitle || "REAL METRICS, ZERO ESTIMATES"}
+            </h2>
+          </div>
+          <p class="font-mono-meta text-xs text-black/80 max-w-xs md:text-right font-medium">
+            METRICS AUDITED DIRECTLY IN PRODUCTION.
+          </p>
+        </div>
+
+        <!-- 4 Metric Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {project.resultsMetrics.map((metric) => (
+            <div class="bg-black text-white p-6 sm:p-8 border-2 border-black flex flex-col justify-between shadow-[8px_8px_0_#000000]">
+              <div>
+                <div class="flex items-baseline gap-2 mb-3">
+                  <span class="font-display text-4xl sm:text-5xl font-bold text-[#FF4D00] tracking-tight">
+                    {metric.value}
+                  </span>
+                  <span class="font-mono-meta text-xs uppercase text-white/60 font-bold">
+                    {metric.unit}
+                  </span>
+                </div>
+              </div>
+              <p class="font-sans text-xs sm:text-sm text-white/75 leading-relaxed mt-4">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Next / Previous Project Navigator Strip -->
+  <section class="bg-black text-white py-12 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 border-2 border-white/20 p-6 md:p-8">
+      
+      <!-- Prev -->
+      <a
+        href={`/en/projects/${prev.slug}/`}
+        class="group flex flex-col items-start gap-1 font-mono-meta text-xs text-white/70 hover:text-[#FF4D00] transition-colors"
+      >
+        <span class="flex items-center gap-1 uppercase font-bold text-[#FF4D00]">
+          <span>&larr;</span> PREVIOUS CASE
+        </span>
+        <span class="font-display text-base sm:text-lg text-white group-hover:text-[#FF4D00] uppercase tracking-tight">
+          {prev.title}
+        </span>
+      </a>
+
+      <!-- Center Hub -->
+      <a
+        href="/en/projects/"
+        class="border border-white/20 px-4 py-2 font-mono-meta text-xs uppercase font-bold text-white/80 hover:bg-white/10 hover:text-[#FF4D00] hover:border-[#FF4D00] transition-all"
+      >
+        ALL CASE STUDIES
+      </a>
+
+      <!-- Next -->
+      <a
+        href={`/en/projects/${next.slug}/`}
+        class="group flex flex-col items-end gap-1 font-mono-meta text-xs text-white/70 hover:text-[#FF4D00] transition-colors text-right"
+      >
+        <span class="flex items-center gap-1 uppercase font-bold text-[#FF4D00]">
+          NEXT CASE <span>&rarr;</span>
+        </span>
+        <span class="font-display text-base sm:text-lg text-white group-hover:text-[#FF4D00] uppercase tracking-tight">
+          {next.title}
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <CtaSection lang="en" />
+</BaseLayout>

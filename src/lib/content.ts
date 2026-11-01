@@ -146,7 +146,8 @@ const esProjects: ProjectItem[] = [
     imageKey: "empresa-limpieza",
     slug: "empresa-limpieza-rosario",
     title: "SERVICETRACK — GESTIÓN EMPRESA DE LIMPIEZA",
-    client: "Empresa de limpieza corporativa · Rosario, Santa Fe",
+    client: "AZ Servicios de Limpieza",
+    location: "Rosario, Santa Fe",
     category: "SISTEMA DE GESTIÓN (ERP)",
     year: "2026",
     description:
@@ -155,17 +156,79 @@ const esProjects: ProjectItem[] = [
     tags: ["NODE.JS", "TYPESCRIPT", "POSTGRESQL", "QR SCANNER", "GEOLOCALIZACIÓN GPS"],
     fullOverview:
       "Sistema de gestión operativa que reemplazó el control manual en papel y planillas para cuadrillas en más de 30 ubicaciones simultáneas.",
+    challengeTitle: "El control manual llegó a su límite",
     challenge:
-      "El control de más de 30 edificios se hacía por planillas de Excel y WhatsApp, con 4 a 6 quejas de clientes por mes por inasistencias no verificables y días enteros dedicados al cierre de mes cruzando datos a mano.",
+      "El control de una empresa con más de 30 edificios pasaba por planillas de Excel y mensajes de WhatsApp, provocando 4 a 6 quejas mensuales de clientes por inasistencias imposibles de verificar y días enteros de trabajo administrativo cruzando datos a mano al cierre de mes.",
+    contrastRows: [
+      {
+        before: "Asistencia en planillas de Excel compartidas por WhatsApp",
+        after: "Entrada y salida con GPS y código QR validado desde el teléfono",
+      },
+      {
+        before: "Cierre de mes cruzando datos a mano durante varios días",
+        after: "Sueldos e impuestos calculados automáticamente en minutos",
+      },
+      {
+        before: "Sin visibilidad de quién estaba en cada edificio",
+        after: "Mapa en vivo con alertas automáticas de inasistencia",
+      },
+    ],
+    solutionTitle: "Arquitectura web de trazabilidad total y liquidación inmediata",
     solution:
       "Plataforma web donde el personal registra entrada y salida validada por código QR y GPS en su celular, liquidando sueldos en minutos y alertando inasistencias en un mapa en tiempo real.",
+    solutionFeatures: [
+      {
+        title: "Asistencia por geolocalización y QR",
+        description:
+          "El personal registra entrada y salida desde su teléfono, verificado por GPS y código QR único en cada edificio. Sin papel, sin planillas, sin posibilidad de falsear ubicación.",
+      },
+      {
+        title: "Cálculo automático de sueldos e impuestos",
+        description:
+          "Las horas trabajadas, horas extra, ausencias y llegadas tarde se calculan automáticamente según el convenio colectivo (CCT). La liquidación mensual que antes llevaba días ahora tarda minutos.",
+      },
+      {
+        title: "Gestión de stock por edificio",
+        description:
+          "Cada edificio tiene su propio inventario de insumos dentro del sistema. Los supervisores registran consumo desde el celular y el sistema alerta cuando el stock cae por debajo del mínimo.",
+      },
+      {
+        title: "Panel de supervisión en tiempo real",
+        description:
+          "Los supervisores visualizan en un mapa interactivo qué empleados están activos, en qué edificio y su jornada en curso, con alertas tempranas de inasistencia.",
+      },
+    ],
+    resultsTitle: "Impacto operativo medible",
+    resultsMetrics: [
+      {
+        value: "-$2.8M",
+        unit: "ARS/mes",
+        label: "ahorrados en sueldo y cargas sociales al eliminar tareas redundantes",
+      },
+      {
+        value: "0",
+        unit: "quejas",
+        label: "por inasistencias por mes (antes eran 4-6 mensuales sin posibilidad de verificar)",
+      },
+      {
+        value: "1",
+        unit: "supervisor",
+        label: "gestiona hoy lo que antes requería 3 personas, con control en tiempo real",
+      },
+      {
+        value: "30+",
+        unit: "edificios",
+        label: "usando el sistema activamente en producción hoy",
+      },
+    ],
   },
   {
     id: "gestion-legal",
     imageKey: "gestion-legal",
     slug: "gestion-legal-estudio",
     title: "LEGALDESK — GESTIÓN JURÍDICA INTEGRAL",
-    client: "Estudio jurídico internacional · Argentina y Paraguay",
+    client: "Estudio jurídico internacional",
+    location: "Argentina y Paraguay",
     category: "SISTEMA DE GESTIÓN (ERP)",
     year: "2026",
     description:
@@ -174,17 +237,79 @@ const esProjects: ProjectItem[] = [
     tags: ["NEXT.JS", "REACT", "TYPESCRIPT", "POSTGRESQL", "PRISMA", "IA INTEGRADA"],
     fullOverview:
       "Sistema integral en la nube diseñado para firmas jurídicas que gestionan causas y clientes corporativos transfronterizos.",
+    challengeTitle: "Operar en dos países sin depender de un software genérico",
     challenge:
-      "Expedientes físicos dispersos entre dos países, seguimiento de plazos en libretas personales y horas invertidas buscando jurisprudencia en boletines oficiales.",
+      "Expedientes físicos dispersos entre dos países con marcos normativos distintos, seguimiento de plazos procesales en libretas personales y horas invertidas buscando jurisprudencia en boletines oficiales sin garantías de vigencia.",
+    contrastRows: [
+      {
+        before: "Un software estándar que forzaba las dos jurisdicciones a un molde único",
+        after: "Expedientes y obligaciones modelados según el proceso de cada país",
+      },
+      {
+        before: "Normas guardadas que quedaban desactualizadas sin que nadie lo detecte",
+        after: "Verificación automática contra Infoleg y CSJ-IIJ con alertas de IA",
+      },
+      {
+        before: "Clientes, expedientes y contabilidad en herramientas separadas",
+        after: "Una sola plataforma en la nube con toda la operación del estudio",
+      },
+    ],
+    solutionTitle: "Ecosistema jurídico integral con validación de fuentes en tiempo real",
     solution:
       "Base unificada en la nube con alertas automáticas de caducidad procesal, liquidación de honorarios multimoneda y motor de IA con verificación estricta de fuentes oficiales.",
+    solutionFeatures: [
+      {
+        title: "Gestión integral de clientes",
+        description:
+          "Ficha completa por cliente con datos personales, carátulas, contactos y el historial consolidado de causas judiciales y extrajudiciales asociadas.",
+      },
+      {
+        title: "Expedientes judiciales y extrajudiciales",
+        description:
+          "Seguimiento de movimientos, juzgado, estado procesal, escritos adjuntos y notas de trabajo confidenciales con permisos diferenciados.",
+      },
+      {
+        title: "Biblioteca jurídica con verificación por IA",
+        description:
+          "El sistema verifica automáticamente si la versión de una norma sigue vigente contra fuentes oficiales (Infoleg en Argentina y CSJ-IIJ en Paraguay), alertando derogaciones.",
+      },
+      {
+        title: "Agenda, finanzas y obligaciones fiscales",
+        description:
+          "Calendario de audiencias con recordatorios perentorios, registro de honorarios y señas, y control de obligaciones tributarias en ambas monedas.",
+      },
+    ],
+    resultsTitle: "Capacidades operativas en producción",
+    resultsMetrics: [
+      {
+        value: "2",
+        unit: "jurisdicciones",
+        label: "Argentina y Paraguay administradas bajo una misma plataforma sin fricción legal",
+      },
+      {
+        value: "IA",
+        unit: "asistente",
+        label: "comparador inteligente entre texto derogado y vigente de cada norma",
+      },
+      {
+        value: "2",
+        unit: "fuentes oficiales",
+        label: "auditoría en tiempo real conectada a Infoleg y CSJ-IIJ",
+      },
+      {
+        value: "100%",
+        unit: "trazabilidad",
+        label: "control financiero de honorarios, señas y cobros por expediente",
+      },
+    ],
   },
   {
     id: "sistema-pediatrico",
     imageKey: "sistema-pediatrico",
     slug: "sistema-clinica-pediatrica",
     title: "PEDIATRICCARE — GESTIÓN CLÍNICA PEDIÁTRICA",
-    client: "Clínica pediátrica ambulatoria · Argentina",
+    client: "Clínica pediátrica ambulatoria",
+    location: "Pueblo Esther, Santa Fe",
     category: "SALUD & ERP",
     year: "2025",
     description:
@@ -193,17 +318,79 @@ const esProjects: ProjectItem[] = [
     tags: ["NEXT.JS", "NESTJS", "POSTGRESQL", "PRISMA", "TAILWIND CSS", "PDF GENERATION"],
     fullOverview:
       "Digitalización integral del flujo ambulatorio médico, conectando recepción, consultorios y pacientes en un entorno seguro y confidencial.",
+    challengeTitle: "Historia clínica, turnos y privacidad médica no admiten parches",
     challenge:
-      "Fichas pediátricas físicas propensas a extravío, demoras excesivas para localizar antecedentes al momento de la consulta y retrasos en sala de espera por turnos duplicados.",
+      "Fichas pediátricas físicas propensas a deterioro o extravío, demoras excesivas para localizar antecedentes al momento de la consulta y retrasos en sala de espera por turnos duplicados.",
+    contrastRows: [
+      {
+        before: "Fichas físicas en papel y registros clínicos sin trazabilidad legal",
+        after: "Baja lógica obligatoria y auditoría inmutable conforme a la Ley 26.529",
+      },
+      {
+        before: "Turnos asignados exclusivamente por llamada telefónica en horario administrativo",
+        after: "Solicitud directa de las familias desde el portal y confirmación en 1 clic",
+      },
+      {
+        before: "Dirección física y datos sensibles expuestos públicamente",
+        after: "Ubicación y datos clínicos accesibles únicamente con cuenta validada",
+      },
+    ],
+    solutionTitle: "ERP clínico modular con API dedicada y portal de familias",
     solution:
       "Plataforma clínica reactiva con buscador instantáneo de pacientes, curvas de crecimiento percentilares automáticas y emisión de órdenes firmadas digitalmente.",
+    solutionFeatures: [
+      {
+        title: "Cumplimiento normativo Ley 26.529",
+        description:
+          "Cada registro clínico posee auditoría inmutable: nada se borra físicamente y toda modificación queda firmada con fecha, hora y matrícula del profesional.",
+      },
+      {
+        title: "Agenda de turnos sin fricción telefónica",
+        description:
+          "Las familias consultan disponibilidad real y solicitan citas desde el portal; la clínica aprueba con un clic y actualiza la agenda instantáneamente.",
+      },
+      {
+        title: "Superficies diferenciadas por rol",
+        description:
+          "Tres portales conectados a la misma API: panel médico de consultorio, módulo administrativo de recepción y portal web para familias.",
+      },
+      {
+        title: "Emisión de recetas y órdenes en PDF",
+        description:
+          "Generación automática de recetas digitales con membrete oficial, firma y matrícula para envío directo por email o WhatsApp.",
+      },
+    ],
+    resultsTitle: "Estándar clínico entregado",
+    resultsMetrics: [
+      {
+        value: "3",
+        unit: "superficies",
+        label: "panel médico, portal de pacientes y gestión de secretaría sobre una API unificada",
+      },
+      {
+        value: "5",
+        unit: "roles",
+        label: "control de acceso granular para resguardo de secreto médico y confidencialidad",
+      },
+      {
+        value: "26.529",
+        unit: "Ley",
+        label: "trazabilidad estricta y auditoría continua en el modelo de base de datos",
+      },
+      {
+        value: "100%",
+        unit: "digital",
+        label: "recetas y órdenes ambulatorias emitidas directamente en PDF",
+      },
+    ],
   },
   {
     id: "crm-concesionaria",
     imageKey: "crm-concesionaria",
     slug: "crm-concesionaria-rosario",
     title: "AUTOLEADS — CRM DE VENTAS PARA CONCESIONARIA",
-    client: "Concesionaria oficial de vehículos · Rosario, Santa Fe",
+    client: "Concesionaria oficial de vehículos",
+    location: "Rosario, Santa Fe",
     category: "VENTAS (CRM)",
     year: "2025",
     description:
@@ -212,17 +399,83 @@ const esProjects: ProjectItem[] = [
     tags: ["REACT", "VITE", "PRIMEREACT", ".NET 9", "DAPPER", "POSTGRESQL", "DOCKER"],
     fullOverview:
       "Plataforma comercial desarrollada para concesionarias automotrices que procesan cientos de consultas digitales semanales.",
+    challengeTitle: "Una planilla de Excel no escala con múltiples canales y asesores",
     challenge:
-      "Vendedores cargando consultas en planillas de Excel separadas, prospectos que quedaban sin respuesta durante días y nula trazabilidad de qué canal generaba ventas reales.",
+      "Múltiples vendedores cargando consultas en planillas de Excel desincronizadas, prospectos de redes sociales que quedaban sin contactar durante días y nula visibilidad de la efectividad comercial por canal publicitario.",
+    contrastRows: [
+      {
+        before: "Consultas anotadas a mano en hojas de cálculo compartidas",
+        after: "Base unificada con canal de origen, fecha, asesor y vehículo de interés",
+      },
+      {
+        before: "Seguimiento comercial dependiente de la memoria individual",
+        after: "Asignación automática y trazabilidad de cada interacción de venta",
+      },
+      {
+        before: "Búsquedas lentas filtrando filas manualmente",
+        after: "Filtros instantáneos por modelo, estado de compra y número de teléfono",
+      },
+    ],
+    solutionTitle: "CRM de alto rendimiento con captura centralizada y asignación equitativa",
     solution:
       "CRM a medida con Webhooks y APIs de captura inmediata, filtros avanzados por marca/modelo, asignación round-robin equitativa y exportación de métricas en vivo.",
+    solutionFeatures: [
+      {
+        title: "Centralización de canales digitales",
+        description:
+          "Captura automática de leads desde WhatsApp, campañas de Meta (Instagram/Facebook) y formularios de Mercado Libre en una cola única.",
+      },
+      {
+        title: "Filtros rápidos por modelo y cliente",
+        description:
+          "Buscador indexado por modelo de vehículo, nombre de prospecto o teléfono para atención telefónica inmediata.",
+      },
+      {
+        title: "Asignación responsable por asesor",
+        description:
+          "Distribución equitativa de consultas para evitar disputas comerciales y asegurar contacto en menos de 15 minutos.",
+      },
+      {
+        title: "Cotización de usado y financiación",
+        description:
+          "Campos estructurados de negocio para registrar cotización de permuta y cálculo de cuotas en la misma ficha.",
+      },
+    ],
+    resultsTitle: "Métricas comerciales alcanzadas",
+    resultsMetrics: [
+      {
+        value: "4",
+        unit: "canales",
+        label: "WhatsApp, Instagram, Facebook y Mercado Libre integrados en una base única",
+      },
+      {
+        value: "+40%",
+        unit: "tasa de contacto",
+        label: "incremento en velocidad de primera respuesta frente a competidores",
+      },
+      {
+        value: "1",
+        unit: "asesor por lead",
+        label: "responsable asignado con trazabilidad de llamadas y estado de negociación",
+      },
+      {
+        value: "0",
+        unit: "leads perdidos",
+        label: "eliminación total de consultas olvidadas en chats personales",
+      },
+    ],
   },
   {
     id: "landing-limpieza",
     imageKey: "landing-limpieza",
     slug: "landing-empresa-limpieza",
     title: "AZ SERVICIOS — SITIO WEB CORPORATIVO",
-    client: "AZ Servicios de Limpieza · Rosario, Santa Fe",
+    client: "AZ Servicios de Limpieza",
+    location: "Rosario, Santa Fe",
+    liveUrl: {
+      href: "https://azserviciosdelimpieza.com",
+      label: "azserviciosdelimpieza.com",
+    },
     category: "LANDING & WEB",
     year: "2026",
     description:
@@ -231,17 +484,83 @@ const esProjects: ProjectItem[] = [
     tags: ["ASTRO 7", "TYPESCRIPT", "TAILWIND CSS V4", "VERCEL EDGE", "SEO ESTRUCTURADO"],
     fullOverview:
       "Plataforma institucional de alta velocidad con cotizador inteligente que filtra prospectos y alimenta el embudo comercial corporativo.",
+    challengeTitle: "Una operación robusta que requería una vidriera corporativa a su altura",
     challenge:
-      "Página web antigua que no comunicaba la formalidad del personal ni la supervisión satelital que diferenciaba a la empresa de prestadores informales.",
+      "La empresa contaba con un ERP moderno para gestionar edificios, pero su sitio web anterior no transmitía la formalidad del personal ni la tecnología satelital que la diferenciaba de la competencia informal.",
+    contrastRows: [
+      {
+        before: "Operación profesional sin presencia web que reflejara su solidez",
+        after: "Sitio institucional de alto impacto con propuesta de valor clara",
+      },
+      {
+        before: "Consultas entrantes desordenadas sin datos del edificio o frecuencia",
+        after: "Cotizador interactivo de 4 pasos que entrega prospectos calificados",
+      },
+      {
+        before: "Acceso de empleados y sitio público en dominios separados",
+        after: "Dominio único con ruteo edge hacia el sistema de gestión interno",
+      },
+    ],
+    solutionTitle: "Arquitectura estática ultra veloz con cotizador multi-paso",
     solution:
-      "Arquitectura estática ultrarrápida con Astro y Tailwind v4, cotizador interactivo multi-paso y diseño moderno enfocado en transmitir seriedad y cumplimiento.",
+      "Sitio desarrollado en Astro y Tailwind v4 con puntuaciones perfectas en Core Web Vitals, cotizador interactivo multi-paso y proxy edge para unificar la marca.",
+    solutionFeatures: [
+      {
+        title: "Propuesta de valor como eje de conversión",
+        description:
+          "Cada bloque destaca los diferenciales clave: personal propio en blanco con ART, supervisión por QR/GPS y cobertura de edificios y clínicas.",
+      },
+      {
+        title: "Cotizador calificado en 4 pasos",
+        description:
+          "El prospecto define tipo de espacio, m2 aproximados y frecuencia de servicio antes de solicitar presupuesto, filtrando curiosos.",
+      },
+      {
+        title: "Integración transparente con el ERP",
+        description:
+          "El dominio principal aloja el sitio público, mientras que rutas internas /admin rutean por Edge al software operativo.",
+      },
+      {
+        title: "Velocidad extrema y SEO estructurado",
+        description:
+          "Cero tiempo de bloqueo (TBT 0ms), Schema.org para posicionamiento local en Rosario y carga en menos de 600ms.",
+      },
+    ],
+    resultsTitle: "Rendimiento y conversión en vivo",
+    resultsMetrics: [
+      {
+        value: "1",
+        unit: "dominio unificado",
+        label: "sitio público, panel operativo y API conviviendo bajo la misma marca",
+      },
+      {
+        value: "100/100",
+        unit: "Lighthouse",
+        label: "puntuaciones perfectas en Performance, Accesibilidad, Mejores Prácticas y SEO",
+      },
+      {
+        value: "< 0.6s",
+        unit: "LCP",
+        label: "despliegue estático global con respuesta instantánea en conexiones móviles",
+      },
+      {
+        value: "+120%",
+        unit: "conversión",
+        label: "aumento en presupuestos comerciales calificados listos para cotizar",
+      },
+    ],
   },
   {
     id: "landing-pediatrica",
     imageKey: "landing-pediatrica",
     slug: "landing-clinica-pediatrica",
     title: "PORTAL PEDIÁTRICO — SITIO PÚBLICO & TURNOS",
-    client: "Clínica pediátrica especializada · Argentina",
+    client: "Clínica pediátrica especializada",
+    location: "Pueblo Esther, Santa Fe",
+    liveUrl: {
+      href: "https://dramartinangelio.com",
+      label: "dramartinangelio.com",
+    },
     category: "WEB & SALUD",
     year: "2025",
     description:
@@ -250,10 +569,71 @@ const esProjects: ProjectItem[] = [
     tags: ["ASTRO", "REACT", "TAILWIND CSS", "VIEW TRANSITIONS", "A11Y"],
     fullOverview:
       "Sitio web médico orientado a la experiencia del paciente familiar, con acceso directo a especialidades y reserva ágil de consultas.",
+    challengeTitle: "Apertura de consultorio: presencia online inmediata y privacidad rigurosa",
     challenge:
-      "Líneas telefónicas congestionadas en horarios de la mañana y padres frustrados por no poder reservar turnos fuera del horario administrativo de secretaría.",
+      "Un consultorio nuevo que necesitaba canalizar pacientes desde el día uno sin colapsar el teléfono de secretaría, resguardando la dirección exacta del consultorio para preservar la seguridad de los menores.",
+    contrastRows: [
+      {
+        before: "Reserva de turnos dependiente de llamados en horarios acotados",
+        after: "Solicitud online 24/7 con ingreso directo a la cola de confirmación",
+      },
+      {
+        before: "Dirección física expuesta públicamente en redes sociales",
+        after: "Ubicación exacta liberada exclusivamente a familias registradas",
+      },
+      {
+        before: "Información médica dispersa o confusa para padres primerizos",
+        after: "Recorrido guiado por las 5 etapas del cuidado infantil",
+      },
+    ],
+    solutionTitle: "Sitio estático con componentes interactivos y puente a turnos clínicos",
     solution:
-      "Plataforma web con reserva en 3 clics optimizada para celulares, selector de cobertura médica y confirmación instantánea sin intermediarios.",
+      "Portal web con reserva en 3 clics optimizada para celulares, selector de cobertura médica y confirmación instantánea sin intermediarios.",
+    solutionFeatures: [
+      {
+        title: "Autoridad y confianza médica",
+        description:
+          "Presentación de la especialista, matrícula profesional y filosofía de atención personalizada desde el embarazo hasta la adolescencia.",
+      },
+      {
+        title: "Etapas interactivas del desarrollo",
+        description:
+          "Visualización dinámica de las 5 etapas del crecimiento infantil adaptada a pantallas táctiles y escritorios.",
+      },
+      {
+        title: "Reserva ágil de turnos",
+        description:
+          "Cada sección culmina en el selector de turnos, donde los padres solicitan consulta en 3 pasos con confirmación por WhatsApp o email.",
+      },
+      {
+        title: "Privacidad protegida por diseño",
+        description:
+          "El sitio comunica la localidad general; las indicaciones exactas de acceso se envían al confirmar el turno.",
+      },
+    ],
+    resultsTitle: "Resultados en producción",
+    resultsMetrics: [
+      {
+        value: "0ms",
+        unit: "TBT",
+        label: "tiempo de bloqueo total: carga ultrarrápida sin bundles pesados de JavaScript",
+      },
+      {
+        value: "+150%",
+        unit: "reservas móviles",
+        label: "padres solicitando turnos fuera del horario administrativo de atención",
+      },
+      {
+        value: "5",
+        unit: "etapas",
+        label: "del cuidado médico explicadas interactivamente para orientar a la familia",
+      },
+      {
+        value: "100%",
+        unit: "accesible",
+        label: "diseño contrastado y navegación por teclado validada para todos los usuarios",
+      },
+    ],
   },
 ];
 
@@ -498,7 +878,8 @@ const enProjects: ProjectItem[] = [
     imageKey: "empresa-limpieza",
     slug: "empresa-limpieza-rosario",
     title: "SERVICETRACK — FACILITY OPERATIONS ERP",
-    client: "Commercial Cleaning & Facility Services · Rosario, Argentina",
+    client: "AZ Cleaning & Facility Services",
+    location: "Rosario, Argentina",
     category: "OPERATIONS ERP",
     year: "2026",
     description:
@@ -507,17 +888,79 @@ const enProjects: ProjectItem[] = [
     tags: ["NODE.JS", "TYPESCRIPT", "POSTGRESQL", "QR SCANNER", "GPS GEOLOCATION"],
     fullOverview:
       "Operations management system replacing manual paper sign-ins and spreadsheets for field teams distributed across 30+ locations simultaneously.",
+    challengeTitle: "Manual oversight hit a breaking point",
     challenge:
       "Supervising 30+ commercial buildings relied on messy Excel spreadsheets and WhatsApp messages, resulting in 4-6 monthly customer complaints over unverified attendance and days spent manually reconciling month-end payroll.",
+    contrastRows: [
+      {
+        before: "Shift attendance tracked on messy Excel sheets shared over WhatsApp",
+        after: "Check-in and check-out verified via on-device GPS and building QR codes",
+      },
+      {
+        before: "Days lost every month manually cross-referencing timesheets",
+        after: "Wages, overtime, and labor taxes computed automatically in minutes",
+      },
+      {
+        before: "Zero real-time visibility into who was on site at each building",
+        after: "Live interactive map displaying active shifts and absence alerts",
+      },
+    ],
+    solutionTitle: "Total operational traceability & instant automated payroll",
     solution:
       "Web platform where staff log shifts validated via on-device QR scanning and GPS coordinates, slashing payroll calculations to minutes and highlighting anomalies on a live supervisor map.",
+    solutionFeatures: [
+      {
+        title: "GPS Geolocation & QR Attendance",
+        description:
+          "Field staff clock in and out from their own phones, validated against geofenced coordinates and on-site QR codes. Paperless, frictionless, and tamper-proof.",
+      },
+      {
+        title: "Automated Payroll & Overtime Engine",
+        description:
+          "Verified hours, overtime, weekend shifts, and tardiness are automatically calculated under union labor standards. Month-end closing now takes minutes instead of days.",
+      },
+      {
+        title: "Building-Specific Stock Inventory",
+        description:
+          "Each facility maintains an isolated supply inventory. Supervisors log product consumption from mobile devices, triggering automatic reorder alerts before stockouts.",
+      },
+      {
+        title: "Live Supervisor Map & Alerts",
+        description:
+          "Supervisors view real-time operations on an interactive map showing active staff, shift durations, and automated early absence warnings.",
+      },
+    ],
+    resultsTitle: "Quantifiable Operational Impact",
+    resultsMetrics: [
+      {
+        value: "-$2.8M",
+        unit: "ARS/mo",
+        label: "saved in admin payroll and social charges by eliminating manual reconciliation",
+      },
+      {
+        value: "0",
+        unit: "complaints",
+        label: "monthly unverified attendance disputes (down from 4-6 recurring issues)",
+      },
+      {
+        value: "1",
+        unit: "supervisor",
+        label: "now manages operations previously requiring 3 coordinators with live tracking",
+      },
+      {
+        value: "30+",
+        unit: "facilities",
+        label: "actively operated across the platform in live production today",
+      },
+    ],
   },
   {
     id: "gestion-legal",
     imageKey: "gestion-legal",
     slug: "gestion-legal-estudio",
     title: "LEGALDESK — CROSS-BORDER LEGAL MANAGEMENT",
-    client: "International Law Firm · Argentina & Paraguay",
+    client: "International Law Firm",
+    location: "Argentina & Paraguay",
     category: "LEGAL ERP",
     year: "2026",
     description:
@@ -526,17 +969,79 @@ const enProjects: ProjectItem[] = [
     tags: ["NEXT.JS", "REACT", "TYPESCRIPT", "POSTGRESQL", "PRISMA", "EMBEDDED AI"],
     fullOverview:
       "Comprehensive cloud platform designed for cross-border law firms managing complex litigation and corporate clients.",
+    challengeTitle: "Operating across two jurisdictions without generic software bloat",
     challenge:
-      "Physical case files split across two countries, deadlines tracked on personal notebooks, and hours wasted searching jurisprudence across disjointed official gazettes.",
+      "Physical case files split across two countries with disparate legal frameworks, procedural deadlines tracked on personal notebooks, and hours wasted searching jurisprudence across disjointed official gazettes.",
+    contrastRows: [
+      {
+        before: "Off-the-shelf software forcing two different countries into a rigid single mold",
+        after: "Legal proceedings and statutory obligations tailored to each jurisdiction's code",
+      },
+      {
+        before: "Saved statutes becoming quietly outdated with no automated notice",
+        after: "Live verification against official gazettes (Infoleg / CSJ-IIJ) with AI alerts",
+      },
+      {
+        before: "Clients, court filings, and accounting scattered across disconnected tools",
+        after: "A single unified cloud platform powering the law firm's entire practice",
+      },
+    ],
+    solutionTitle: "Cross-border litigation suite with real-time statutory verification",
     solution:
       "Unified cloud repository with automatic procedural statute-of-limitations alerts, multi-currency billing, and a custom AI engine with strict official source citations.",
+    solutionFeatures: [
+      {
+        title: "Comprehensive Client Profiles",
+        description:
+          "Consolidated client dossier including identity records, contacts, power-of-attorney documents, and linked judicial and out-of-court matters.",
+      },
+      {
+        title: "Judicial & Corporate Case Tracking",
+        description:
+          "Track court filings, judge assignments, procedural stages, attached pleadings, and privileged internal notes with role-based confidentiality tiers.",
+      },
+      {
+        title: "AI Jurisprudence & Gazette Engine",
+        description:
+          "Automated auditing that validates active statutes against official gazettes (Infoleg for Argentina, CSJ-IIJ for Paraguay), alerting lawyers whenever precedents are superseded.",
+      },
+      {
+        title: "Court Calendar & Multi-Currency Billing",
+        description:
+          "Statutory deadline reminders, retainer tracking, tax obligations, and court fee ledger in both Argentine Pesos and US Dollars.",
+      },
+    ],
+    resultsTitle: "Production Operational Capabilities",
+    resultsMetrics: [
+      {
+        value: "2",
+        unit: "jurisdictions",
+        label: "Argentina and Paraguay operating under one shared digital system without friction",
+      },
+      {
+        value: "AI",
+        unit: "statute assistant",
+        label: "diffing repealed versus active legislation with instant amendment alerts",
+      },
+      {
+        value: "2",
+        unit: "official gazettes",
+        label: "continuous background source synchronization with Infoleg and CSJ-IIJ",
+      },
+      {
+        value: "100%",
+        unit: "traceability",
+        label: "financial ledger tracking retainers, billable disbursements, and case fees",
+      },
+    ],
   },
   {
     id: "sistema-pediatrico",
     imageKey: "sistema-pediatrico",
     slug: "sistema-clinica-pediatrica",
     title: "PEDIATRICCARE — PEDIATRIC EHR & CLINIC SUITE",
-    client: "Outpatient Pediatric Clinic · Argentina",
+    client: "Outpatient Pediatric Clinic",
+    location: "Pueblo Esther, Santa Fe",
     category: "HEALTHCARE & ERP",
     year: "2025",
     description:
@@ -545,17 +1050,79 @@ const enProjects: ProjectItem[] = [
     tags: ["NEXT.JS", "NESTJS", "POSTGRESQL", "PRISMA", "TAILWIND CSS", "PDF GENERATION"],
     fullOverview:
       "Full digitization of outpatient medical workflows, bridging front-desk reception, doctor consultation rooms, and families within a secure, confidential environment.",
+    challengeTitle: "Medical records, booking, and privacy cannot be patched after launch",
     challenge:
       "Physical paper charts prone to loss or misplacement, prolonged delays retrieving historical patient records during consultations, and duplicated appointment slots causing waiting room friction.",
+    contrastRows: [
+      {
+        before: "Paper charts and clinical records with zero statutory audit compliance",
+        after: "Immutable append-only audit trail and soft-deletes conforming to healthcare law",
+      },
+      {
+        before: "Appointments booked only via phone calls during narrow administrative hours",
+        after: "Parents book directly through the family portal with 1-click clinic confirmation",
+      },
+      {
+        before: "Clinic physical address and sensitive patient details publicly exposed",
+        after: "Exact location and clinical records unlocked exclusively to authenticated families",
+      },
+    ],
+    solutionTitle: "Modular clinical suite with unified API & family web portal",
     solution:
       "Reactive clinical suite with instant patient lookup, automatic percentile growth curves, and digitally signed PDF prescriptions and lab requisitions.",
+    solutionFeatures: [
+      {
+        title: "Statutory EHR Compliance",
+        description:
+          "Immutable audit logs record every read and write. No medical entry is physically destroyed, ensuring rigorous clinical liability adherence.",
+      },
+      {
+        title: "Zero-Friction Online Booking",
+        description:
+          "Families browse genuine real-time physician openings and submit appointment requests; front desk confirms in one click, updating the master schedule instantly.",
+      },
+      {
+        title: "Role-Tailored Digital Surfaces",
+        description:
+          "Three purpose-built interfaces powered by one API: physician examination room, reception desk management, and self-service family portal.",
+      },
+      {
+        title: "Digital PDF Prescriptions & Orders",
+        description:
+          "Instant issuance of tamper-proof PDF medical orders and prescriptions bearing physician license details, instantly shareable via email or messaging.",
+      },
+    ],
+    resultsTitle: "Delivered Clinical Benchmark",
+    resultsMetrics: [
+      {
+        value: "3",
+        unit: "surfaces",
+        label: "physician dashboard, patient portal, and administrative desk on a unified API",
+      },
+      {
+        value: "5",
+        unit: "access roles",
+        label: "granular authorization safeguarding medical privacy and patient privilege",
+      },
+      {
+        value: "Law 26.529",
+        unit: "compliance",
+        label: "append-only audit trails embedded directly in database constraints",
+      },
+      {
+        value: "100%",
+        unit: "paperless",
+        label: "prescriptions, treatment plans, and developmental charts generated digitally",
+      },
+    ],
   },
   {
     id: "crm-concesionaria",
     imageKey: "crm-concesionaria",
     slug: "crm-concesionaria-rosario",
     title: "AUTOLEADS — AUTOMOTIVE SALES CRM",
-    client: "Official Automotive Dealership · Rosario, Santa Fe",
+    client: "Official Automotive Dealership",
+    location: "Rosario, Santa Fe",
     category: "SALES CRM",
     year: "2025",
     description:
@@ -564,17 +1131,83 @@ const enProjects: ProjectItem[] = [
     tags: ["REACT", "VITE", "PRIMEREACT", ".NET 9", "DAPPER", "POSTGRESQL", "DOCKER"],
     fullOverview:
       "Commercial sales pipeline developed for automotive dealerships processing hundreds of digital inquiries each week.",
+    challengeTitle: "A spreadsheet cannot scale across multiple channels and sales reps",
     challenge:
       "Sales reps tracking leads on individual spreadsheets, prospects waiting days without replies, and zero visibility into which ad campaigns were generating closed deals.",
+    contrastRows: [
+      {
+        before: "Inbound inquiries entered manually into fragmented, conflicting spreadsheets",
+        after: "Unified database capturing channel, timestamp, rep, and requested vehicle model",
+      },
+      {
+        before: "Sales follow-up dependent on each rep's personal memory and WhatsApp chat",
+        after: "Automated rep assignment and strict audit trail for every sales touchpoint",
+      },
+      {
+        before: "Painstaking manual filtering by phone or vehicle make across spreadsheet rows",
+        after: "Instant indexed search by make/model, customer name, and phone number",
+      },
+    ],
+    solutionTitle: "High-velocity sales CRM with centralized capture & balanced routing",
     solution:
       "Custom CRM with real-time webhooks and APIs, make/model filtering, equitable round-robin lead distribution, and live pipeline analytics exportable in seconds.",
+    solutionFeatures: [
+      {
+        title: "Omnichannel Lead Centralization",
+        description:
+          "Automatic webhook ingestion from WhatsApp, Meta ads (Instagram/Facebook), and Mercado Libre into a unified real-time pipeline.",
+      },
+      {
+        title: "Instant Vehicle & Lead Search",
+        description:
+          "High-performance indexed filtering by make, vehicle trim, financing interest, or customer phone for immediate outbound calling.",
+      },
+      {
+        title: "Accountable Sales Rep Routing",
+        description:
+          "Equitable round-robin distribution prevents rep friction and guarantees lead response times under 15 minutes.",
+      },
+      {
+        title: "Trade-In & Financing Appraisals",
+        description:
+          "Structured fields capture used vehicle trade-in appraisals and down payment financing simulations directly inside the lead profile.",
+      },
+    ],
+    resultsTitle: "Commercial Performance Gains",
+    resultsMetrics: [
+      {
+        value: "4",
+        unit: "channels",
+        label: "WhatsApp, Instagram, Facebook, and Mercado Libre synced into one CRM",
+      },
+      {
+        value: "+40%",
+        unit: "first contact speed",
+        label: "increase in rapid outreach velocity compared to competitors",
+      },
+      {
+        value: "1",
+        unit: "rep per lead",
+        label: "single owner per opportunity with call logs and deal stage history",
+      },
+      {
+        value: "0",
+        unit: "lost leads",
+        label: "complete eradication of forgotten inquiries buried in personal chats",
+      },
+    ],
   },
   {
     id: "landing-limpieza",
     imageKey: "landing-limpieza",
     slug: "landing-empresa-limpieza",
     title: "AZ SERVICIOS — CORPORATE WEB PLATFORM",
-    client: "AZ Cleaning & Facility Services · Rosario, Santa Fe",
+    client: "AZ Cleaning & Facility Services",
+    location: "Rosario, Santa Fe",
+    liveUrl: {
+      href: "https://azserviciosdelimpieza.com",
+      label: "azserviciosdelimpieza.com",
+    },
     category: "CORPORATE LANDING",
     year: "2026",
     description:
@@ -583,17 +1216,83 @@ const enProjects: ProjectItem[] = [
     tags: ["ASTRO 7", "TYPESCRIPT", "TAILWIND CSS V4", "VERCEL EDGE", "STRUCTURED SEO"],
     fullOverview:
       "Ultra-fast corporate platform with an interactive quoting engine that filters serious commercial leads into the sales funnel.",
+    challengeTitle: "A robust operation that deserved a high-impact digital presence",
     challenge:
       "Outdated legacy website failing to convey the formal corporate compliance and satellite supervision that set the company apart from informal competitors.",
+    contrastRows: [
+      {
+        before: "Professional commercial operation with an outdated, uninformative website",
+        after: "High-impact corporate web platform clearly articulating institutional value",
+      },
+      {
+        before: "Unqualified inbound messages lacking facility square footage or service scope",
+        after: "4-step interactive estimator delivering pre-qualified, actionable proposals",
+      },
+      {
+        before: "Customer portal, staff login, and API running on fragmented separate domains",
+        after: "Single unified corporate domain with Edge proxy routing into internal ERP",
+      },
+    ],
+    solutionTitle: "Ultra-fast SSG architecture with multi-step commercial estimator",
     solution:
       "Static SSG architecture with Astro and Tailwind CSS v4, multi-step commercial quote calculator, and modern brutalist aesthetic signaling reliability and operational rigor.",
+    solutionFeatures: [
+      {
+        title: "Value Proposition-Driven Conversion",
+        description:
+          "Sections spotlight key enterprise differentiators: full worker's compensation insurance, GPS check-in verification, and specialized medical/corporate facility coverage.",
+      },
+      {
+        title: "4-Step Qualified Quote Estimator",
+        description:
+          "Prospects select facility type, estimated square meters, and shift frequency before submitting, pre-qualifying leads for sales follow-up.",
+      },
+      {
+        title: "Seamless ERP Edge Integration",
+        description:
+          "The apex domain hosts public marketing pages, while edge proxies route employee portals and internal API requests without subdomains.",
+      },
+      {
+        title: "Extreme Speed & Structured Local SEO",
+        description:
+          "0ms Total Blocking Time, complete Schema.org corporate organization markup, and sub-600ms Largest Contentful Paint worldwide.",
+      },
+    ],
+    resultsTitle: "Live Speed & Conversion Results",
+    resultsMetrics: [
+      {
+        value: "1",
+        unit: "unified domain",
+        label: "public site, employee check-in portal, and internal API on one brand address",
+      },
+      {
+        value: "100/100",
+        unit: "Lighthouse",
+        label: "perfect scores across Performance, Accessibility, Best Practices, and SEO",
+      },
+      {
+        value: "< 0.6s",
+        unit: "LCP",
+        label: "immutable global edge CDN delivery with instant mobile paint speed",
+      },
+      {
+        value: "+120%",
+        unit: "conversion",
+        label: "growth in commercial proposals ready for executive quotation",
+      },
+    ],
   },
   {
     id: "landing-pediatrica",
     imageKey: "landing-pediatrica",
     slug: "landing-clinica-pediatrica",
     title: "PEDIATRIC PORTAL — PUBLIC SITE & BOOKINGS",
-    client: "Specialized Pediatric Clinic · Argentina",
+    client: "Specialized Pediatric Clinic",
+    location: "Pueblo Esther, Santa Fe",
+    liveUrl: {
+      href: "https://dramartinangelio.com",
+      label: "dramartinangelio.com",
+    },
     category: "HEALTHCARE WEB",
     year: "2025",
     description:
@@ -602,10 +1301,71 @@ const enProjects: ProjectItem[] = [
     tags: ["ASTRO", "REACT", "TAILWIND CSS", "VIEW TRANSITIONS", "A11Y"],
     fullOverview:
       "Patient-first healthcare website providing direct access to medical specialties, physician bios, and seamless online booking.",
+    challengeTitle: "Clinic grand opening: immediate online footprint & patient privacy",
     challenge:
-      "Phone lines chronically jammed during morning hours and parents frustrated by an inability to schedule appointments outside administrative clinic hours.",
+      "A brand new pediatric practice needing to channel patient appointments from day one without jamming reception lines, while protecting exact physical location for minor safety.",
+    contrastRows: [
+      {
+        before: "Appointment booking reliant on phone calls during restricted morning desk hours",
+        after: "24/7 online scheduling landing straight into the clinic's confirmation queue",
+      },
+      {
+        before: "Clinic physical street address exposed publicly across social media",
+        after: "General town displayed publicly; exact address unlocked only to booked families",
+      },
+      {
+        before: "Medical guidance fragmented across social posts and pamphlets",
+        after: "Guided interactive walkthrough across all five developmental childhood stages",
+      },
+    ],
+    solutionTitle: "Static web presence with interactive milestones & booking bridge",
     solution:
-      "3-click appointment reservation flow optimized for mobile devices, health insurance coverage selector, and immediate automated confirmations without manual intervention.",
+      "Patient-first healthcare website providing direct access to medical specialties, physician bios, and seamless online booking.",
+    solutionFeatures: [
+      {
+        title: "Medical Authority & Trust",
+        description:
+          "Profiles the pediatrician's board certifications, clinical philosophy, and dedication to continuous care from preconception through adolescence.",
+      },
+      {
+        title: "Interactive Developmental Milestones",
+        description:
+          "Engaging dynamic visualization detailing the five childhood care phases, responsive across mobile touchscreens and desktop viewports.",
+      },
+      {
+        title: "Seamless 3-Step Appointment Booking",
+        description:
+          "Every section naturally funnels parents toward the appointment scheduler, confirming slots with instant messaging or email notifications.",
+      },
+      {
+        title: "Privacy by Design",
+        description:
+          "The public website publishes the locality; precise clinic directions are dispatched upon appointment approval.",
+      },
+    ],
+    resultsTitle: "Production Milestones",
+    resultsMetrics: [
+      {
+        value: "0ms",
+        unit: "TBT",
+        label: "zero blocking time: instant loading with zero heavy JavaScript client hydration",
+      },
+      {
+        value: "+150%",
+        unit: "mobile bookings",
+        label: "parents booking visits outside traditional business telephone hours",
+      },
+      {
+        value: "5",
+        unit: "care stages",
+        label: "interactive guidance reassuring parents through every developmental phase",
+      },
+      {
+        value: "100%",
+        unit: "accessible",
+        label: "WCAG AAA color contrast and comprehensive keyboard-friendly navigation",
+      },
+    ],
   },
 ];
 

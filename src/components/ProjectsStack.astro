@@ -20,7 +20,7 @@ const intro =
     ? "REAL DEPLOYMENTS. ROBUST ARCHITECTURES AND SUB-MILLISECOND RESPONSE TIMES."
     : "DESPLIEGUES REALES. ARQUITECTURAS ROBUSTAS Y TIEMPOS DE RESPUESTA MEDIDOS AL MILISEGUNDO.";
 const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
-const viewCaseLabel = lang === "en" ? "VIEW CASE BREAKDOWN" : "VER DETALLE DEL CASO";
+const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMPLETO";
 ---
 
 <section
@@ -107,7 +107,7 @@ const viewCaseLabel = lang === "en" ? "VIEW CASE BREAKDOWN" : "VER DETALLE DEL C
                     <!-- Direct link to full case breakdown -->
                     <div class="pt-2">
                       <a
-                        href={lang === "en" ? `/en/projects/#${item.slug}` : `/proyectos/#${item.slug}`}
+                        href={lang === "en" ? `/en/projects/${item.slug}/` : `/proyectos/${item.slug}/`}
                         class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5"
                       >
                         <span>{viewCaseLabel}</span>

@@ -14,18 +14,18 @@ const { navLinks } = content;
 const pathname = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
 // Map pages across locales
 let cleanPath = pathname.replace(/^\/en(\/|$)/, "/");
-if (cleanPath.startsWith("/about/")) cleanPath = "/nosotros/";
-if (cleanPath.startsWith("/projects/")) cleanPath = "/proyectos/";
-if (cleanPath.startsWith("/contact/")) cleanPath = "/contacto/";
-if (cleanPath.startsWith("/privacy/")) cleanPath = "/privacidad/";
+if (cleanPath.startsWith("/about/")) cleanPath = cleanPath.replace("/about/", "/nosotros/");
+if (cleanPath.startsWith("/projects/")) cleanPath = cleanPath.replace("/projects/", "/proyectos/");
+if (cleanPath.startsWith("/contact/")) cleanPath = cleanPath.replace("/contact/", "/contacto/");
+if (cleanPath.startsWith("/privacy/")) cleanPath = cleanPath.replace("/privacy/", "/privacidad/");
 
 const esTargetHref = cleanPath;
 
 let enTargetPath = cleanPath;
-if (cleanPath === "/nosotros/") enTargetPath = "/about/";
-if (cleanPath === "/proyectos/") enTargetPath = "/projects/";
-if (cleanPath === "/contacto/") enTargetPath = "/contact/";
-if (cleanPath === "/privacidad/") enTargetPath = "/privacy/";
+if (enTargetPath.startsWith("/nosotros/")) enTargetPath = enTargetPath.replace("/nosotros/", "/about/");
+if (enTargetPath.startsWith("/proyectos/")) enTargetPath = enTargetPath.replace("/proyectos/", "/projects/");
+if (enTargetPath.startsWith("/contacto/")) enTargetPath = enTargetPath.replace("/contacto/", "/contact/");
+if (enTargetPath.startsWith("/privacidad/")) enTargetPath = enTargetPath.replace("/privacidad/", "/privacy/");
 
 const enTargetHref = enTargetPath === "/" ? "/en/" : `/en${enTargetPath}`;
 

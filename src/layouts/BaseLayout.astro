@@ -33,9 +33,21 @@ const canonical = canonicalProp ?? new URL(pathname, siteOrigin).href;
 const ogImageUrl = new URL(ogImage, siteOrigin).href;
 
 // Hreflang alternates computation
-const cleanPath = pathname.replace(/^\/en(\/|$)/, "/");
-const esUrl = new URL(cleanPath, siteOrigin).href;
-const enUrl = new URL(`/en${cleanPath === "/" ? "/" : cleanPath}`, siteOrigin).href;
+let cleanPath = pathname.replace(/^\/en(\/|$)/, "/");
+let esPath = cleanPath;
+if (esPath.startsWith("/about/")) esPath = esPath.replace("/about/", "/nosotros/");
+if (esPath.startsWith("/projects/")) esPath = esPath.replace("/projects/", "/proyectos/");
+if (esPath.startsWith("/contact/")) esPath = esPath.replace("/contact/", "/contacto/");
+if (esPath.startsWith("/privacy/")) esPath = esPath.replace("/privacy/", "/privacidad/");
+
+let enPath = esPath;
+if (enPath.startsWith("/nosotros/")) enPath = enPath.replace("/nosotros/", "/about/");
+if (enPath.startsWith("/proyectos/")) enPath = enPath.replace("/proyectos/", "/projects/");
+if (enPath.startsWith("/contacto/")) enPath = enPath.replace("/contacto/", "/contact/");
+if (enPath.startsWith("/privacidad/")) enPath = enPath.replace("/privacidad/", "/privacy/");
+
+const esUrl = new URL(esPath, siteOrigin).href;
+const enUrl = new URL(`/en${enPath === "/" ? "/" : enPath}`, siteOrigin).href;
 
 const organizationSchema = {
   "@context": "https://schema.org",
