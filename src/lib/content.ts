@@ -107,36 +107,153 @@ const esMarqueeItems = {
 
 const esServices: ServiceItem[] = [
   {
-    id: "web-apps",
+    id: "erp-ops",
+    slug: "sistemas-gestion-erp",
     index: "01",
-    title: "APLICACIONES WEB & SAAS",
+    title: "SISTEMAS DE GESTIÓN ERP",
     description:
-      "Arquitecturas modernas de software con rendimiento implacable. Aplicaciones web reactivas, paneles de control en tiempo real y APIs escalables diseñadas sin código espagueti.",
-    tags: ["TYPESCRIPT", "ARQUITECTURA EDGE", "BASES DE DATOS", "TIEMPO REAL"],
+      "Sistemas de gestión a medida: operación en campo con GPS y QR, stock, facturación y cuentas corrientes en un solo panel. ERP de nicho sin configuraciones eternas.",
+    kicker: "OPERACIÓN → FACTURACIÓN, EN UNA PANTALLA",
+    intro:
+      "Los sistemas genéricos no copian tu operación. Armamos el liviano y moderno que sigue tu circuito real: personal en la calle, stock, facturación y cuentas corrientes.",
+    modules: [
+      {
+        heading: "OPERACIÓN EN CAMPO",
+        items: [
+          "Fichada y asistencia con validación por GPS o QR en locación.",
+          "Asignación de turnos, guardias, reemplazos y novedades del día.",
+          "Solicitud y remito digital de insumos y herramientas por cliente u obra.",
+        ],
+      },
+      {
+        heading: "GESTIÓN ADMINISTRATIVA",
+        items: [
+          "Control de stock con alertas de reposición y listas de precios dinámicas.",
+          "Facturación y presupuestos con exportación rápida a PDF.",
+          "Cuentas corrientes: quién te debe, a quién le debés y plazos.",
+        ],
+      },
+    ],
+    clients:
+      "Empresas de limpieza y mantenimiento, constructoras, seguridad, logística, distribuidores, talleres, metalúrgicas e instaladores.",
+    value: [
+      "El circuito completo deja de vivir en planillas y chats cruzados.",
+      "Ausentismo, reemplazos y remitos bajo control trazable.",
+      "Panel configurado al circuito de tu negocio, no al revés.",
+    ],
+    tags: ["FIELD OPS", "STOCK", "FACTURACIÓN", "REMITOS", "CUENTAS CORRIENTES"],
   },
   {
-    id: "landing-performance",
+    id: "ventas-citas",
+    slug: "sistemas-gestion-ventas",
     index: "02",
-    title: "LANDING PAGES DE ALTA VELOCIDAD",
+    title: "SISTEMAS DE GESTIÓN DE VENTAS",
     description:
-      "Sitios institucionales y landings de ultra alto impacto. Cero tiempo de bloqueo (TBT 0ms), 100 en Lighthouse y posicionamiento SEO agresivo para maximizar conversiones.",
-    tags: ["ASTRO SSG", "100/100 LIGHTHOUSE", "SEO AGRESIVO", "CONVERSIÓN"],
+      "Turnos, agendas, cotizadores y portales B2B: la cadena comercial completa, de la primera consulta al pedido directo, sin trabajo manual de por medio.",
+    kicker: "AGENDA Y COTIZACIÓN SIN BACHES",
+    intro:
+      "Tu equipo comercial gana tiempo: agenda sin baches, cotizaciones que salen al toque y clientes que entran a su portal y piden directo.",
+    modules: [
+      {
+        heading: "TURNOS Y AGENDAS",
+        items: [
+          "Calendario semanal y mensual con asignación por profesional o sala.",
+          "Ficha digital del cliente o paciente con historial y documentos.",
+          "Recordatorios automáticos por WhatsApp o email para reducir ausencias.",
+          "Cobros o liquidación por sesión o profesional.",
+        ],
+      },
+      {
+        heading: "COTIZADORES Y PORTAL B2B",
+        items: [
+          "Cotizador con medidas, materiales, costos y márgenes.",
+          "Propuestas formales en PDF listas para enviar.",
+          "Portal privado para clientes recurrentes: su catálogo, su precio y pedidos directos.",
+        ],
+      },
+    ],
+    clients:
+      "Clínicas y consultorios, veterinarias, estéticas, estudios contables y jurídicos, imprentas, carpinterías y proveedores industriales.",
+    value: [
+      "Cotizar en minutos, no en días.",
+      "Menos ausencias de clientes con recordatorios automáticos.",
+      "El equipo comercial deja de pasar datos a mano entre sistemas.",
+    ],
+    tags: ["TURNOS", "AGENDAS", "COTIZADORES", "PORTAL B2B"],
   },
   {
-    id: "bespoke-systems",
+    id: "landing-velocidad",
+    slug: "landing-pages",
     index: "03",
-    title: "SISTEMAS & ERP A MEDIDA",
+    title: "LANDING PAGES",
     description:
-      "Digitalización de procesos críticos de negocio. Software corporativo a medida que reemplaza hojas de cálculo caóticas por flujos automatizados, seguros y trazables.",
-    tags: ["AUTOMATIZACIÓN", "INTEGRACIONES", "FLUJOS DE TRABAJO", "SEGURIDAD"],
+      "Landing pages de alta velocidad en HTML y CSS estático: cero tiempo de bloqueo, Lighthouse en verde y SEO técnico de serie.",
+    kicker: "TU PRIMER PUNTO DE VENTA DIGITAL",
+    intro:
+      "Tu primer punto de venta digital: una página que carga al instante, se posiciona orgánicamente y convierte la visita.",
+    modules: [
+      {
+        heading: "VELOCIDAD",
+        items: [
+          "HTML y CSS estático: carga instantánea, cero tiempo de bloqueo.",
+          "Lighthouse en verde, que además suma para el ranking SEO.",
+          "Diseño a medida editorial-brutalista.",
+        ],
+      },
+      {
+        heading: "SEO TÉCNICO",
+        items: [
+          "Schema.org JSON-LD completo, sitemap dinámico y Open Graph.",
+          "Meta tags completos y tipografías precargadas.",
+          "Estructura íntegra en móviles.",
+        ],
+      },
+    ],
+    clients:
+      "Estudios, pymes, emprendimientos y profesionales que venden servicios o quieren reforzar su presencia comercial.",
+    value: [
+      "Consultas que llegan de la búsqueda orgánica.",
+      "Una página que carga antes de que el cliente piense en volver atrás.",
+      "Código propio en tu GitHub, sin WordPress detrás.",
+    ],
+    tags: ["ASTRO SSG", "SEO TÉCNICO", "100 LIGHTHOUSE", "CONVERSIÓN"],
   },
   {
-    id: "performance-optimization",
+    id: "automatizacion-ia",
+    slug: "automatizacion-ia",
     index: "04",
-    title: "OPTIMIZACIÓN & REFACTORIZACIÓN",
+    title: "AUTOMATIZACIÓN CON IA",
     description:
-      "Auditoría técnica, optimización extrema de Core Web Vitals y reestructuración de código legado para equipos que necesitan velocidad inmediata y código mantenible.",
-    tags: ["CORE WEB VITALS", "AUDITORÍA", "REFACTORIZACIÓN", "ACCESIBILIDAD"],
+      "Integraciones a medida y automatizaciones con IA: que tu eCommerce, el ERP, el CRM y WhatsApp hablen entre sí, solos.",
+    kicker: "SISTEMAS QUE HABLAN ENTRE SÍ",
+    intro:
+      "Tu operación ya vive en tus herramientas, pero no se hablan entre sí. Las conectamos y la IA absorbe lo repetitivo.",
+    modules: [
+      {
+        heading: "INTEGRACIONES A MEDIDA",
+        items: [
+          "Sincronización de stock y precios entre la tienda y el depósito.",
+          "Facturación electrónica vía web services de AFIP/ARCA.",
+          "WhatsApp Business API para estados de pedidos y cobranzas.",
+        ],
+      },
+      {
+        heading: "IA APLICADA",
+        items: [
+          "Clasificación y respuestas automáticas con IA.",
+          "Flujos sin pasos manuales entre sistemas.",
+          "Alertas y resúmenes diarios generados por tu proceso.",
+        ],
+      },
+    ],
+    clients:
+      "Comercios y pymes con herramientas que no se comunican: eCommerce con ERP, CRM con WhatsApp, cotizador con facturación.",
+    value: [
+      "El trabajo manual de pasar datos de un sistema a otro desaparece.",
+      "Respuestas más rápidas al cliente, todos los días.",
+      "Desarrollo puntual de alto impacto, sin levantar un sistema nuevo.",
+    ],
+    tags: ["INTEGRACIONES", "WHATSAPP", "AFIP / ARCA", "IA"],
   },
 ];
 
@@ -839,36 +956,153 @@ const enMarqueeItems = {
 
 const enServices: ServiceItem[] = [
   {
-    id: "web-apps",
+    id: "erp-ops",
+    slug: "erp-systems",
     index: "01",
-    title: "FULL-STACK APPS & SAAS",
+    title: "ERP SYSTEMS",
     description:
-      "Cutting-edge software architectures engineered for relentless speed. Reactive web applications, real-time control panels, and scalable APIs built without spaghetti code.",
-    tags: ["TYPESCRIPT", "EDGE ARCHITECTURE", "DATABASE DESIGN", "REALTIME"],
+      "Custom management systems: field operation with GPS and QR check-ins, stock, invoicing and receivables in one lean panel. Niche ERP without the setup marathon.",
+    kicker: "OPERATION → INVOICING, ONE SCREEN",
+    intro:
+      "Generic systems never match how you operate. We build the lean, modern panel that follows your real circuit: crews on the street, stock, invoicing and receivables.",
+    modules: [
+      {
+        heading: "FIELD OPERATIONS",
+        items: [
+          "Clock-in and attendance validated by GPS or QR on location.",
+          "Shift assignment, on-call crews, last-minute replacements and daily updates.",
+          "Supply requests and digital delivery notes per client or job site.",
+        ],
+      },
+      {
+        heading: "ADMINISTRATIVE MANAGEMENT",
+        items: [
+          "Stock control with reorder alerts and dynamic price lists.",
+          "Invoicing and quotes with fast PDF export.",
+          "Receivables and payables: who owes you, whom you owe and terms.",
+        ],
+      },
+    ],
+    clients:
+      "Cleaning and maintenance companies, construction firms, security, logistics, distributors, workshops, small factories and installers.",
+    value: [
+      "The whole circuit stops living in spreadsheets and cross chats.",
+      "Absenteeism, replacements and delivery notes under traceable control.",
+      "A lean panel configured to your circuit, not the other way around.",
+    ],
+    tags: ["FIELD OPS", "STOCK", "INVOICING", "DELIVERY NOTES", "RECEIVABLES"],
   },
   {
-    id: "landing-performance",
+    id: "ventas-citas",
+    slug: "sales-management-systems",
     index: "02",
-    title: "HIGH-VELOCITY LANDINGS",
+    title: "SALES MANAGEMENT SYSTEMS",
     description:
-      "High-impact corporate websites and landing pages. Zero Total Blocking Time (TBT 0ms), 100 on Lighthouse, and aggressive SEO to maximize inbound conversion.",
-    tags: ["ASTRO SSG", "100/100 LIGHTHOUSE", "AGGRESSIVE SEO", "CONVERSION RATE"],
+      "Bookings, scheduling, quote engines and B2B portals: the full commercial chain from the first inquiry to direct ordering, with no manual work in between.",
+    kicker: "AGENDA AND QUOTES WITH NO DEAD TIME",
+    intro:
+      "Your sales team wins time: schedules without gaps, quotes that go out on the spot and clients entering their own portal to order directly.",
+    modules: [
+      {
+        heading: "BOOKINGS AND AGENDAS",
+        items: [
+          "Weekly and monthly calendar assigned per professional or room.",
+          "Digital client or patient record with history and attachments.",
+          "Automatic WhatsApp or email reminders to cut no-shows.",
+          "Charges or payout per session or professional.",
+        ],
+      },
+      {
+        heading: "QUOTE ENGINES AND B2B PORTAL",
+        items: [
+          "Quoting with dimensions, materials, costs and margins.",
+          "Formal proposals in PDF ready to send.",
+          "Private portal for recurring clients: their catalog, their pricing, direct orders.",
+        ],
+      },
+    ],
+    clients:
+      "Clinics and practices, veterinary offices, beauty studios, accounting and law firms, print shops, custom carpentry shops and industrial suppliers.",
+    value: [
+      "Quote in minutes, not days.",
+      "Fewer missed appointments with automatic reminders.",
+      "The sales team stops passing data between systems by hand.",
+    ],
+    tags: ["BOOKINGS", "AGENDAS", "QUOTE ENGINES", "B2B PORTAL"],
   },
   {
-    id: "bespoke-systems",
+    id: "landing-velocidad",
+    slug: "landing-pages",
     index: "03",
-    title: "BESPOKE SYSTEMS & ERP",
+    title: "LANDING PAGES",
     description:
-      "Digital transformation of mission-critical business workflows. Custom internal tooling replacing messy spreadsheets with automated, auditable software.",
-    tags: ["AUTOMATION", "INTEGRATIONS", "WORKFLOWS", "SECURITY"],
+      "High-velocity landing pages in static HTML and CSS: zero blocking time, Lighthouse in the green and technical SEO as standard.",
+    kicker: "YOUR FIRST DIGITAL POINT OF SALE",
+    intro:
+      "Your first digital point of sale: a page that loads instantly, ranks organically and turns visits into inquiries.",
+    modules: [
+      {
+        heading: "VELOCITY",
+        items: [
+          "Static HTML and CSS: instant load, zero blocking time.",
+          "Lighthouse in the green, which also feeds SEO rankings.",
+          "Custom editorial-brutalist design.",
+        ],
+      },
+      {
+        heading: "TECHNICAL SEO",
+        items: [
+          "Complete Schema.org JSON-LD, dynamic sitemap and Open Graph.",
+          "Complete meta tags and preloaded typography.",
+          "Mobile-safe structure.",
+        ],
+      },
+    ],
+    clients:
+      "Studios, SMBs, ventures and professionals who sell services or want to strengthen their commercial presence.",
+    value: [
+      "Inquiries coming from organic search.",
+      "A page that loads before visitors think about going back.",
+      "Your own code on your GitHub, no WordPress behind it.",
+    ],
+    tags: ["ASTRO SSG", "TECHNICAL SEO", "100 LIGHTHOUSE", "CONVERSION"],
   },
   {
-    id: "performance-optimization",
+    id: "automatizacion-ia",
+    slug: "ai-automation",
     index: "04",
-    title: "PERFORMANCE & REFACTORING",
+    title: "AI AUTOMATION",
     description:
-      "In-depth technical audits, extreme Core Web Vitals optimization, and legacy refactoring for teams needing instant speed and clean codebases.",
-    tags: ["CORE WEB VITALS", "AUDIT", "REFACTORING", "A11Y"],
+      "Custom integrations and AI automation: your storefront, ERP, CRM and WhatsApp talking to each other on their own.",
+    kicker: "SYSTEMS THAT TALK TO EACH OTHER",
+    intro:
+      "Your operation already lives in your tools, they just don't talk to each other. We wire them together and AI absorbs the repetitive work.",
+    modules: [
+      {
+        heading: "CUSTOM INTEGRATIONS",
+        items: [
+          "Stock and price sync between the online store and the warehouse.",
+          "Electronic invoicing over AFIP/ARCA web services.",
+          "WhatsApp Business API for order-status and collections notices.",
+        ],
+      },
+      {
+        heading: "APPLIED AI",
+        items: [
+          "Automatic classification and replies with AI.",
+          "Flows with no manual steps between systems.",
+          "Alerts and daily digests generated by your process.",
+        ],
+      },
+    ],
+    clients:
+      "Retailers and SMBs whose tools don't talk to each other: eCommerce with ERP, CRM with WhatsApp, quoting with invoicing.",
+    value: [
+      "The manual work of moving data between systems disappears.",
+      "Faster replies to clients, every day.",
+      "A sharp high-impact build, without lifting a new system.",
+    ],
+    tags: ["INTEGRATIONS", "WHATSAPP", "AFIP / ARCA", "AI"],
   },
 ];
 

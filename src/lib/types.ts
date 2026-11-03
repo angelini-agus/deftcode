@@ -16,11 +16,22 @@ export interface NavLink {
   href: string;
 }
 
+export interface ServiceModuleGroup {
+  heading: string;
+  items: string[];
+}
+
 export interface ServiceItem {
   id: string;
+  slug: string;
   index: string;
   title: string;
   description: string;
+  kicker: string;
+  intro: string;
+  modules: ServiceModuleGroup[];
+  clients: string;
+  value: string[];
   tags: string[];
 }
 
