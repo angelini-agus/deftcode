@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaSection from "../../components/CtaSection.astro";
+import ServicesList from "../../components/ServicesList.astro";
+
+const lang = "es";
+---
+
+<BaseLayout lang={lang} canonical="/servicios/">
+  <main>
+    <ServicesList lang={lang} />
+    <CtaSection lang={lang} />
+  </main>
+</BaseLayout>

@@ -39,12 +39,14 @@ if (esPath.startsWith("/about/")) esPath = esPath.replace("/about/", "/nosotros/
 if (esPath.startsWith("/projects/")) esPath = esPath.replace("/projects/", "/proyectos/");
 if (esPath.startsWith("/contact/")) esPath = esPath.replace("/contact/", "/contacto/");
 if (esPath.startsWith("/privacy/")) esPath = esPath.replace("/privacy/", "/privacidad/");
+if (esPath.startsWith("/services/")) esPath = esPath.replace("/services/", "/servicios/");
 
 let enPath = esPath;
 if (enPath.startsWith("/nosotros/")) enPath = enPath.replace("/nosotros/", "/about/");
 if (enPath.startsWith("/proyectos/")) enPath = enPath.replace("/proyectos/", "/projects/");
 if (enPath.startsWith("/contacto/")) enPath = enPath.replace("/contacto/", "/contact/");
 if (enPath.startsWith("/privacidad/")) enPath = enPath.replace("/privacidad/", "/privacy/");
+if (enPath.startsWith("/servicios/")) enPath = enPath.replace("/servicios/", "/services/");
 
 const esUrl = new URL(esPath, siteOrigin).href;
 const enUrl = new URL(`/en${enPath === "/" ? "/" : enPath}`, siteOrigin).href;

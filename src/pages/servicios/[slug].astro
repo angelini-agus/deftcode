@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaSection from "../../components/CtaSection.astro";
+import { getContent } from "../../lib/content";
+import type { ServiceItem } from "../../lib/types";
+
+export function getStaticPaths() {
+  const content = getContent("es");
+  const servicesList = content.services;
+  return servicesList.map((service) => ({
+    params: { slug: service.slug },
+    props: {
+      service,
+      others: servicesList.filter((item) => item.id !== service.id),
+    },
+  }));
+}
+
+interface Props {
+  service: ServiceItem;
+  others: ServiceItem[];
+}
+
+const { service, others } = Astro.props;
+const lang = "es";
+const seoTitle = `${service.title} // SERVICIO - DEFTCODE`;
+const basePath = "/servicios/";
+---
+
+<BaseLayout lang={lang} title={seoTitle} description={service.description}>
+  <main>
+    <!-- Detail hero -->
+    <section class="bg-black text-white py-16 md:py-24 px-4 md:px-12 border-b-2 border-black">
+      <div class="max-w-6xl mx-auto">
+        <p class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0">
+          {service.kicker}
+        </p>
+        <h1 class="font-display text-4xl sm:text-6xl md:text-[6.5vw] uppercase tracking-[-0.04em] leading-[0.9] text-white mt-4 md:mt-6 m-0">
+          {service.title}
+        </h1>
+        <div class="flex flex-wrap gap-2 pt-6 md:pt-8">
+          {
+            service.tags.map((tag) => (
+              <span class="font-mono-meta text-[10px] md:text-[11px] uppercase text-white/75 border border-white/25 rounded-full px-2.5 py-1">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+        <p class="font-sans text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl mt-8 md:mt-10 m-0">
+          {service.intro}
+        </p>
+      </div>
+    </section>
+
+    <!-- Modules -->
+    <section class="bg-[#FF4D00] text-black py-20 md:py-24 px-4 md:px-12 border-b-2 border-black">
+      <div class="max-w-6xl mx-auto grid gap-6 md:gap-8 md:grid-cols-2 items-start">
+        {
+          service.modules.map((module) => (
+            <div class="border-2 border-black p-6 md:p-10 h-full">
+              <h2 class="font-display text-2xl sm:text-3xl md:text-4xl uppercase tracking-[-0.03em] leading-[0.9] m-0">
+                {module.heading}
+              </h2>
+              <ul class="mt-6 md:mt-8 m-0 p-0 list-none">
+                {module.items.map((item) => (
+                  <li class="font-sans text-base md:text-lg font-medium leading-relaxed border-t border-black/20 pt-4 pb-4 first:border-t-0 first:pt-0">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Who buys it / why it pays off -->
+    <section class="bg-black text-white py-20 md:py-24 px-4 md:px-12 border-b-2 border-black">
+      <div class="max-w-6xl mx-auto grid gap-12 md:gap-10 md:grid-cols-2">
+        <div>
+          <h2 class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0">
+            PARA QUIÉN
+          </h2>
+          <p class="font-sans text-base md:text-lg text-white/80 leading-relaxed mt-4 m-0">
+            {service.clients}
+          </p>
+        </div>
+        <div>
+          <h2 class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0">
+            POR QUÉ RENTA
+          </h2>
+          <ul class="mt-4 m-0 p-0 list-none">
+            {
+              service.value.map((item, i) => (
+                <li class="flex items-start gap-3 border-t border-white/20 py-4 first:border-t-0">
+                  <span class="font-mono-meta text-sm font-bold text-[#FF4D00] shrink-0">( 0{i + 1} )</span>
+                  <span class="font-sans text-base md:text-lg text-white/80 leading-relaxed">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other services -->
+    <section class="bg-black text-white py-14 md:py-16 px-4 md:px-12">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0 mb-6">
+          MÁS SERVICIOS
+        </h2>
+        <div class="border-t border-white/20">
+          {
+            others.map((item) => (
+              <a
+                href={`${basePath}${item.slug}/`}
+                class="group flex items-center justify-between gap-4 py-5 border-b border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+              >
+                <span class="font-display text-xl md:text-3xl uppercase tracking-[-0.03em] text-white group-hover:text-[#FF4D00] transition-colors duration-200">
+                  {item.title}
+                </span>
+                <svg
+                  class="w-5 h-5 md:w-6 md:h-6 text-[#FF4D00] transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M5 12h14m0 0l-7-7m7 7l-7 7"></path>
+                </svg>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <CtaSection lang={lang} />
+  </main>
+</BaseLayout>
