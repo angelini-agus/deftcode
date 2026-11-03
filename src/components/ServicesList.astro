@@ -8,84 +8,63 @@ interface Props {
 
 const { lang = "es" } = Astro.props;
 const { services } = getContent(lang);
-
-const eyebrow = lang === "en" ? "// TECHNICAL CAPABILITIES" : "// CAPACIDADES TÉCNICAS";
-const heading = lang === "en" ? "SERVICES & ENGINEERING" : "SERVICIOS & INGENIERÍA";
-const intro =
-  lang === "en"
-    ? "MODERN SOFTWARE ENGINEERING. RELENTLESS VELOCITY WITHOUT ARCHITECTURAL COMPROMISE."
-    : "DESARROLLO DE SOFTWARE MODERNO. VELOCIDAD DE ENTREGA SIN CONCESIONES EN ARQUITECTURA.";
+const heading = lang === "en" ? "SERVICES" : "SERVICIOS";
 const sectionId = lang === "en" ? "services" : "servicios";
+const basePath = lang === "en" ? "/en/services/" : "/servicios/";
 ---
 
-<section id={sectionId} class="relative bg-black text-white py-24 px-4 md:px-12 border-b-2 border-black">
-  <div class="max-w-7xl mx-auto">
-    <!-- Section Kicker Header -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-12 border-b border-white/20">
-      <div>
-        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-          {eyebrow}
-        </span>
-        <h2 class="font-display text-4xl sm:text-5xl md:text-6xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
-          {heading}
-        </h2>
-      </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-white/60 max-w-sm sm:text-right">
-        {intro}
-      </p>
+<section id={sectionId} class="relative bg-black text-white py-20 md:py-24 px-4 md:px-12 border-b-2 border-black">
+  <div class="max-w-6xl mx-auto">
+    <!-- Giant editorial heading with house star -->
+    <div class="flex items-end justify-between gap-6 pb-10 md:pb-14">
+      <h2 class="font-display text-[15vw] sm:text-[13vw] md:text-[9.5vw] leading-[0.85] tracking-[-0.04em] text-white uppercase m-0">
+        {heading}
+      </h2>
+      <svg
+        class="hidden sm:block w-14 md:w-24 h-auto self-end shrink-0"
+        viewBox="0 0 24 24"
+        fill="#FF4D00"
+        aria-hidden="true"
+      >
+        <path d="M12 1.7l3.1 7.1 7.7.7-5.8 5.1 1.7 7.5-6.7-4-6.7 4 1.7-7.5-5.8-5.1 7.7-.7z"></path>
+      </svg>
     </div>
 
-    <!-- Vertical Service List -->
-    <div class="divide-y divide-white/20">
+    <!-- Editorial service rows: index + title + pills, whole row is a link -->
+    <div class="border-b border-white/20">
       {
         services.map((item) => (
-          <article class="group relative w-full py-10 md:py-14 transition-colors duration-200 hover:bg-white/[0.05] px-2 sm:px-6 cursor-pointer">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start md:items-center">
-              
-              <!-- Leading Index (Orange, Mono) -->
-              <div class="md:col-span-2">
-                <span class="font-mono-meta text-2xl md:text-3xl font-bold text-[#FF4D00] tracking-tight">
-                  [{item.index}]
-                </span>
-              </div>
+          <a
+            href={`${basePath}${item.slug}/`}
+            class="group relative block py-9 sm:py-10 md:py-12 border-t border-white/20 transition-colors duration-200 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00] focus-visible:bg-white/[0.04]"
+          >
+            <div class="grid grid-cols-[2.75rem_minmax(0,1fr)_auto] md:grid-cols-[5.5rem_minmax(0,1fr)_auto] items-start gap-x-3 md:gap-x-6">
+              <span class="font-mono-meta text-sm md:text-xl font-bold text-[#FF4D00] pt-2 md:pt-4 tracking-tight">
+                ( {item.index} )
+              </span>
 
-              <!-- Title & Tags & Description -->
-              <div class="md:col-span-8 flex flex-col gap-4 transition-transform duration-300 ease-out group-hover:translate-x-4">
-                <h3 class="font-display text-3xl sm:text-5xl lg:text-[5.5vw] text-white uppercase tracking-[-0.04em] leading-[0.9] m-0">
+              <div class="min-w-0 transition-transform duration-300 ease-out group-hover:translate-x-2 md:group-hover:translate-x-3">
+                <h3 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.5vw] uppercase tracking-[-0.04em] leading-[0.85] text-white m-0">
                   {item.title}
                 </h3>
-                
-                <p class="text-white/70 text-sm md:text-base max-w-2xl font-sans leading-relaxed">
-                  {item.description}
-                </p>
-
-                <!-- Pill-shaped tags -->
-                <div class="flex flex-wrap gap-2 pt-2">
+                <div class="flex flex-wrap gap-2 pt-3 md:pt-4">
                   {item.tags.map((tag) => (
-                    <span class="font-mono-meta text-[11px] uppercase text-white/80 border border-white/30 rounded-full px-3 py-1">
+                    <span class="font-mono-meta text-[10px] md:text-[11px] uppercase text-white/75 border border-white/25 rounded-full px-2.5 py-1">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <!-- Arrow Icon (Reveals and rotates 45deg on hover) -->
-              <div class="md:col-span-2 flex justify-start md:justify-end items-center">
-                <div class="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center text-[#FF4D00] opacity-30 group-hover:opacity-100 group-hover:border-[#FF4D00] group-hover:bg-[#FF4D00] group-hover:text-black transition-all duration-300 transform group-hover:rotate-45">
-                  <svg
-                    class="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    stroke-width="2.5"
-                  >
+              <div class="pt-1 md:pt-2">
+                <div class="w-11 h-11 md:w-14 md:h-14 rounded-full border-2 border-white/20 flex items-center justify-center text-[#FF4D00] opacity-40 group-hover:opacity-100 group-hover:border-[#FF4D00] group-hover:bg-[#FF4D00] group-hover:text-black transition-all duration-300 transform group-hover:rotate-45">
+                  <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
                     <path stroke-linecap="square" stroke-linejoin="miter" d="M7 17L17 7M17 7H7M17 7V17"></path>
                   </svg>
                 </div>
               </div>
-
             </div>
-          </article>
+          </a>
         ))
       }
     </div>
