@@ -18,6 +18,8 @@ export interface NavLink {
 
 export interface ServiceModuleGroup {
   heading: string;
+  /** Pre-split heading lines for the fit-to-width CTA heading. */
+  headingLines?: [string, string];
   items: string[];
 }
 
@@ -116,6 +118,8 @@ export interface PageContent {
 export interface CtaContent {
   kicker: string;
   heading: string;
+  /** Pre-split heading lines for the fit-to-width CTA heading. */
+  headingLines?: [string, string];
   subheading: string;
   buttonLabel: string;
   buttonHref: string;

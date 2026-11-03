@@ -39,3 +39,19 @@ treatment and restored the original single-line composition at
 edges; line 1 clips again by design). headingLines, ratios and the
 fit/parity CSS for the CTA block removed; button min-width and row/detail
 min-heights elsewhere untouched.
+
+## Revision 3 (2026-11-03): shared scale across languages
+
+After the 14vw revert trial, the user asked for both languages at the
+same font size, fitting without clipping. The heading now uses ONE
+shared scale for every line in both languages: fs = (100cqw - 4px) /
+9.673125, where 9.673125 is the widest measured line across es and en
+(EN "SOMETHING DEFT.", Archivo Black 100px, -0.04em tracking, incl.
+trailing letter-spacing advance). Equal font size in both languages by
+construction, identical block height, zero clipping; EN line 2 sits
+edge-to-edge and ES lines carry natural side air. HEADING_RATIOS,
+explain: per-line ratios dropped entirely; the fallback for browsers
+without container queries is 10vw (9.673em x 10vw = 96.7vw, fits).
+Verified 360/768/1280/1920, both languages: no horizontal cut, fs
+equal cross-language at every width. Ratio refresh rule unchanged:
+remeasure if heading copy or tracking changes.

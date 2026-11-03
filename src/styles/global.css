@@ -128,6 +128,46 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* CTA fit-to-width heading: every line shares ONE scale so both
+   languages render at the identical font size (scale set by the widest
+   measured line across es/en, Archivo Black 100px with -0.04em tracking,
+   incl. the trailing letter-spacing advance). The wrapper is the query
+   container so cqw equals the real available width (scrollbar-safe);
+   negative margins cancel the section padding. */
+.cta-heading-wrap {
+  container-type: inline-size;
+  /* Escape the section's flex shrink-to-fit alignment so cqw sees the */
+  /* real section content width. */
+  align-self: stretch;
+  width: 100%;
+}
+
+.cta-heading {
+  text-align: center;
+  margin-inline: -1rem;
+}
+
+@media (min-width: 768px) {
+  .cta-heading {
+    margin-inline: -3rem;
+  }
+}
+
+.cta-heading__line {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  line-height: inherit;
+  /* Fallback for browsers without container queries */
+  font-size: 10vw;
+}
+
+@supports (container-type: inline-size) {
+  .cta-heading__line {
+    font-size: calc((100cqw - 4px) / 9.673125);
+  }
+}
+
 /* Page width system: every structural container holds to one width
    (max-w-7xl = 72rem) and the separator rules span exactly the content
    box of that container, never touching the html edges. */

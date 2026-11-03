@@ -9,15 +9,25 @@ interface Props {
 const { lang = "es" } = Astro.props;
 const { ctaContent } = getContent(lang);
 
+// Heading lines fall back to the whole heading string when no split is
+// authored, keeping the component resilient without the fit layout.
+const headingLines = ctaContent.headingLines ?? [ctaContent.heading];
+
 const writeUsLabel = lang === "en" ? "OR EMAIL US:" : "O ESCRÍBENOS:";
 const sectionId = lang === "en" ? "contact-cta" : "contacto";
 ---
 
 <section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 rule-page-bottom overflow-hidden text-center flex flex-col items-center justify-center">
-  <!-- Giant 14vw Heading in Archivo Black -->
-  <h2 class="font-display text-[12vw] sm:text-[13vw] md:text-[14vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0">
-    {ctaContent.heading}
-  </h2>
+  <!-- Fit-to-width heading in Archivo Black. One shared scale for both -->
+  <!-- languages (set by the widest measured line, EN "SOMETHING DEFT.") -->
+  <!-- so ES and EN render at the identical font size with zero clipping, -->
+  <!-- and both headings occupy the same block height. -->
+  <div class="cta-heading-wrap">
+    <h2 class="cta-heading font-display leading-[0.85] tracking-[-0.04em] text-black uppercase m-0">
+      <span class="cta-heading__line">{headingLines[0]}</span>
+      <span class="cta-heading__line">{headingLines[1]}</span>
+    </h2>
+  </div>
 
   <div class="max-w-7xl mx-auto flex flex-col items-center">
 
