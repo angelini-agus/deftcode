@@ -30,8 +30,8 @@ const basePath = "/servicios/";
 <BaseLayout lang={lang} title={seoTitle} description={service.description}>
   <main>
     <!-- Detail hero -->
-    <section class="bg-black text-white py-16 md:py-24 px-4 md:px-12 border-b-2 border-black">
-      <div class="max-w-6xl mx-auto">
+    <section class="relative bg-black text-white py-16 md:py-24 px-4 md:px-12 rule-page-bottom">
+      <div class="max-w-7xl mx-auto">
         <p class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0">
           {service.kicker}
         </p>
@@ -54,8 +54,8 @@ const basePath = "/servicios/";
     </section>
 
     <!-- Modules -->
-    <section class="bg-[#FF4D00] text-black py-20 md:py-24 px-4 md:px-12 border-b-2 border-black">
-      <div class="max-w-6xl mx-auto grid gap-6 md:gap-8 md:grid-cols-2 items-start">
+    <section class="relative bg-[#FF4D00] text-black py-20 md:py-24 px-4 md:px-12 rule-page-bottom">
+      <div class="max-w-7xl mx-auto grid gap-6 md:gap-8 md:grid-cols-2 items-start">
         {
           service.modules.map((module) => (
             <div class="border-2 border-black p-6 md:p-10 h-full">
@@ -76,8 +76,8 @@ const basePath = "/servicios/";
     </section>
 
     <!-- Who buys it / why it pays off -->
-    <section class="bg-black text-white py-20 md:py-24 px-4 md:px-12 border-b-2 border-black">
-      <div class="max-w-6xl mx-auto grid gap-12 md:gap-10 md:grid-cols-2">
+    <section class="relative bg-black text-white py-20 md:py-24 px-4 md:px-12 rule-page-bottom">
+      <div class="max-w-7xl mx-auto grid gap-12 md:gap-10 md:grid-cols-2">
         <div>
           <h2 class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0">
             PARA QUIÉN
@@ -106,7 +106,7 @@ const basePath = "/servicios/";
 
     <!-- Other services -->
     <section class="bg-black text-white py-14 md:py-16 px-4 md:px-12">
-      <div class="max-w-6xl mx-auto">
+      <div class="max-w-7xl mx-auto">
         <h2 class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0 mb-6">
           MÁS SERVICIOS
         </h2>

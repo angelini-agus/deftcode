@@ -161,3 +161,30 @@ body::-webkit-scrollbar {
     font-size: calc((100cqw - 4px) / var(--r2, 6.1));
   }
 }
+/* Page width system: every structural container holds to one width
+   (max-w-7xl = 72rem) and the separator rules span exactly the content
+   box of that container, never touching the html edges. */
+:root {
+  --page-max: 80rem;
+}
+
+.rule-page-bottom {
+  position: relative;
+}
+
+.rule-page-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #000;
+  left: max(1rem, calc((100% - var(--page-max)) / 2));
+  right: max(1rem, calc((100% - var(--page-max)) / 2));
+}
+
+@media (min-width: 768px) {
+  .rule-page-bottom::after {
+    left: max(3rem, calc((100% - var(--page-max)) / 2));
+    right: max(3rem, calc((100% - var(--page-max)) / 2));
+  }
+}

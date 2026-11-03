@@ -24,7 +24,7 @@ const writeUsLabel = lang === "en" ? "OR EMAIL US:" : "O ESCRÍBENOS:";
 const sectionId = lang === "en" ? "contact-cta" : "contacto";
 ---
 
-<section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 border-b-2 border-black overflow-hidden text-center flex flex-col items-center justify-center">
+<section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 rule-page-bottom overflow-hidden text-center flex flex-col items-center justify-center">
   <!-- Giant Typographic Heading: both lines span the full page width -->
   <h2
     class="cta-heading font-display leading-[0.85] tracking-[-0.04em] text-black uppercase"
@@ -34,7 +34,7 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
     <span class="cta-heading__line cta-heading__line--l2">{headingLine2}</span>
   </h2>
 
-  <div class="max-w-6xl mx-auto flex flex-col items-center">
+  <div class="max-w-7xl mx-auto flex flex-col items-center">
 
     <p class="font-sans text-base sm:text-xl md:text-2xl font-bold max-w-2xl text-black/90 mt-8 mb-12">
       {ctaContent.subheading}

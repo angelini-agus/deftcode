@@ -34,7 +34,7 @@ const ctaHref = lang === "en" ? "/en/contact/" : "/contacto/";
 const homeHref = lang === "en" ? "/en/" : "/";
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-8 py-4">
+<header class="fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-12 py-4">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <!-- Brand Logo (Pure text, no black box, weight 800 Archivo Variable) -->
     <a
@@ -52,7 +52,7 @@ const homeHref = lang === "en" ? "/en/" : "/";
 
     <!-- Center Floating Pill Navigation -->
     <nav
-      class="pointer-events-auto hidden md:flex items-center gap-1 bg-black rounded-full px-3 py-1.5 border-2 border-black shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+      class="pointer-events-auto hidden lg:flex items-center gap-1 bg-black rounded-full px-3 py-1.5 border-2 border-black shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
       aria-label="Main Navigation"
     >
       {
@@ -105,7 +105,7 @@ const homeHref = lang === "en" ? "/en/" : "/";
       <!-- Mobile Menu Trigger -->
       <button
         id="mobile-menu-toggle"
-        class="md:hidden bg-black text-white p-2 rounded-full border-2 border-black hover:bg-[#FF4D00] hover:text-black transition-colors"
+        class="lg:hidden bg-black text-white p-2 rounded-full border-2 border-black hover:bg-[#FF4D00] hover:text-black transition-colors"
         aria-label="Open menu"
         aria-expanded="false"
       >
@@ -119,7 +119,7 @@ const homeHref = lang === "en" ? "/en/" : "/";
   <!-- Mobile Drawer Dropdown -->
   <div
     id="mobile-drawer"
-    class="pointer-events-auto hidden md:hidden mt-3 bg-black border-2 border-black p-4 flex-col gap-3 shadow-2xl"
+    class="pointer-events-auto hidden lg:hidden mt-3 bg-black border-2 border-black p-4 flex-col gap-3 shadow-2xl"
   >
     {
       navLinks.map((link) => (
