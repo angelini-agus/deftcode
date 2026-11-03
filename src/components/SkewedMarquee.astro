@@ -53,3 +53,75 @@ const { marqueeItems } = getContent(lang);
   <!-- Bottom seamless transition to black services section -->
   <div class="w-full h-24 bg-black -mt-12"></div>
 </section>
+<script>
+  // Marquee: hover slows the belt to 25% of its speed instead of freezing it.
+  // Driven by JS for the lerp; the CSS keyframes remain the no-JS fallback.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function initMarquee(container: HTMLElement) {
+    if (container.dataset.marqueeJs === "1") return;
+    container.dataset.marqueeJs = "1";
+
+    type Track = { el: HTMLElement; dir: 1 | -1; period: number; x: number };
+    const items: Track[] = Array.from(
+      container.querySelectorAll<HTMLElement>(".animate-marquee, .animate-marquee-reverse"),
+    ).map((el: HTMLElement): Track => {
+      const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+      // Markup repeats each row 4 times, so one pattern = 1/4 of the strip.
+      const period = el.scrollWidth / 4 || 1;
+      const dir: 1 | -1 = el.classList.contains("animate-marquee-reverse") ? 1 : -1;
+      el.style.animation = "none";
+      return { el, dir, period, x: matrix.e };
+    });
+
+    const remeasure = () => {
+      for (const t of items) t.period = t.el.scrollWidth / 4 || 1;
+    };
+
+    let factor = 1;
+    let target = 1;
+    let raf = 0;
+    let last = 0;
+
+    const tick = (now: number) => {
+      const dt = Math.min(100, now - last) / 1000;
+      last = now;
+      factor += (target - factor) * (1 - Math.exp(-dt * 6));
+      for (const t of items) {
+        // Same base speed as the 45s CSS loop: half a strip per 45s.
+        t.x += t.dir * ((t.period * 2) / 45) * factor * dt;
+        let n = ((t.x % t.period) + t.period) % t.period;
+        if (n > 0) n -= t.period;
+        t.el.style.transform = `translate3d(${n}px, 0, 0)`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    const start = () => (last = performance.now(), (raf = requestAnimationFrame(tick)));
+    const stop = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    container.addEventListener("pointerenter", () => (target = 0.25));
+    container.addEventListener("pointerleave", () => (target = 1));
+
+    document.fonts?.ready.then(remeasure);
+    window.addEventListener("resize", remeasure, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      const inside = entries.some((e) => e.isIntersecting);
+      if (inside && !raf && !reduceMotion.matches) start();
+      if (!inside && raf) stop();
+    });
+    observer.observe(container);
+    if (!reduceMotion.matches) start();
+
+    reduceMotion.addEventListener("change", () => {
+      if (reduceMotion.matches && raf) stop();
+      if (!reduceMotion.matches && !raf) start();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>(".marquee-container").forEach(initMarquee);
+</script>

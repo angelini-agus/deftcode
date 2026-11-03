@@ -103,10 +103,12 @@ html {
   will-change: transform;
 }
 
-/* Hover pause for accessibility */
-.marquee-container:hover .animate-marquee,
-.marquee-container:hover .animate-marquee-reverse {
-  animation-play-state: paused;
+/* Reduced motion: freeze the belts entirely */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation-play-state: paused;
+  }
 }
 
 /* Sharp borders utility */
