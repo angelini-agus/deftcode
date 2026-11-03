@@ -980,7 +980,7 @@ const enServices: ServiceItem[] = [
         items: [
           "Stock control with reorder alerts and dynamic price lists.",
           "Invoicing and quotes with fast PDF export.",
-          "Receivables and payables: who owes you, whom you owe and terms.",
+          "Receivables and payables with owed amounts and terms.",
         ],
       },
     ],

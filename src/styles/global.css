@@ -188,3 +188,59 @@ body::-webkit-scrollbar {
     right: max(3rem, calc((100% - var(--page-max)) / 2));
   }
 }
+/* Language parity (es is the larger base): reserve the same line counts
+   so switching es/en keeps every box the same height. Values measured
+   against the rendered builds; min-heights reserve the Spanish line
+   partition (visible copy never changes). */
+.cta-heading-wrap {
+  container-type: inline-size;
+}
+
+.cta-heading {
+  min-height: 23.45vw;
+}
+
+.svc-row-title {
+  min-height: 61.2px;
+}
+
+@media (min-width: 640px) {
+  .svc-row-title {
+    min-height: 102px;
+  }
+}
+
+@media (min-width: 768px) {
+  .svc-row-title {
+    min-height: 122.4px;
+  }
+
+  .cta-heading {
+    min-height: 23.45vw;
+  }
+
+  .svc-hero-title {
+    min-height: 108px;
+  }
+
+  .svc-module-title {
+    /* two lines of md:text-4xl so the EN two-line heading reserves the ES box */
+    min-height: 64.8px;
+  }
+}
+
+@supports (container-type: inline-size) {
+  .cta-heading {
+    min-height: 23.45cqw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .svc-row-title {
+    min-height: 9.35vw;
+  }
+
+  .svc-hero-title {
+    min-height: 11.7vw;
+  }
+}

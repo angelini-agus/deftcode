@@ -37,3 +37,14 @@ to a per-service detail page. Product decision (user, 2026-11-03):
   cross-links present. Screenshots: detail-es.png, home-servicios.png.
 - Harness note: package delegation unusable this session (worktree
   registry identity mismatch); multi-file writes via shell documented per commit.
+
+## Language parity evidence (unit C, 2026-11-03)
+
+Compared es/en section heights at 1440 (compare-lang.mjs):
+- CTA section 526/525 (cta-heading equal block height via cqw min-height).
+- Buttons: CTA md:min-w-22.75rem -> 364/364. Email link stays copy-driven.
+- Services index: rows equalized (svc-row-title min-heights); 4px rounding.
+- Detail pages: hero 598/598 (svc-hero-title), modules 601/601
+  (svc-module-title 64.8px), more services 375/375.
+- Residual: clients/why-renta section 414 vs 443 (one extra wrapped line
+  in EN bullet copy); grid linage in project cards is equal by stretch.

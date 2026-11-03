@@ -35,7 +35,7 @@ const basePath = "/servicios/";
         <p class="font-mono-meta text-xs md:text-sm font-bold uppercase text-[#FF4D00] tracking-widest m-0">
           {service.kicker}
         </p>
-        <h1 class="font-display text-4xl sm:text-6xl md:text-[6.5vw] uppercase tracking-[-0.04em] leading-[0.9] text-white mt-4 md:mt-6 m-0">
+        <h1 class="svc-hero-title font-display text-4xl sm:text-6xl md:text-[6.5vw] uppercase tracking-[-0.04em] leading-[0.9] text-white mt-4 md:mt-6 m-0">
           {service.title}
         </h1>
         <div class="flex flex-wrap gap-2 pt-6 md:pt-8">
@@ -59,7 +59,7 @@ const basePath = "/servicios/";
         {
           service.modules.map((module) => (
             <div class="border-2 border-black p-6 md:p-10 h-full">
-              <h2 class="font-display text-2xl sm:text-3xl md:text-4xl uppercase tracking-[-0.03em] leading-[0.9] m-0">
+              <h2 class="svc-module-title font-display text-2xl sm:text-3xl md:text-4xl uppercase tracking-[-0.03em] leading-[0.9] m-0">
                 {module.heading}
               </h2>
               <ul class="mt-6 md:mt-8 m-0 p-0 list-none">

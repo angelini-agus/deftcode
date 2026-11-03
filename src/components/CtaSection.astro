@@ -25,14 +25,18 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
 ---
 
 <section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 rule-page-bottom overflow-hidden text-center flex flex-col items-center justify-center">
-  <!-- Giant Typographic Heading: both lines span the full page width -->
-  <h2
+  <!-- Giant Typographic Heading: lines span the full page width. -->
+  <!-- The wrapper is the query container; equal cross-language block -->
+  <!-- height scales with the real available width below. -->
+  <div class="cta-heading-wrap">
+<h2
     class="cta-heading font-display leading-[0.85] tracking-[-0.04em] text-black uppercase"
     style={`--r1:${r1}; --r2:${r2};`}
   >
     <span class="cta-heading__line cta-heading__line--l1">{headingLine1}</span>
     <span class="cta-heading__line cta-heading__line--l2">{headingLine2}</span>
-  </h2>
+    </h2>
+  </div>
 
   <div class="max-w-7xl mx-auto flex flex-col items-center">
 
@@ -45,7 +49,7 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
       href={ctaContent.buttonHref}
       target="_blank"
       rel="noopener noreferrer"
-      class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-105 hover:bg-black hover:text-[#FF4D00] hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+      class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-105 hover:bg-black hover:text-[#FF4D00] hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black md:min-w-[22.75rem]"
     >
       <span>{ctaContent.buttonLabel}</span>
       <svg
