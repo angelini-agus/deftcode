@@ -30,3 +30,12 @@ zero glyph clipping (user-approved option 1, 2026-11-03).
 - Pre-existing horizontal overflow on home at small widths (~58px) comes
   from the fixed navbar row, not this feature: tracked for the margins
   normalization work.
+
+## Follow-up (2026-11-03)
+
+User asked to bring the giant heading back: reverted the fit-to-width
+treatment and restored the original single-line composition at
+12/13/14vw (centred inside max-w-7xl, bleeding past the section
+edges; line 1 clips again by design). headingLines, ratios and the
+fit/parity CSS for the CTA block removed; button min-width and row/detail
+min-heights elsewhere untouched.

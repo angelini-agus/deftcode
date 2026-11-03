@@ -114,7 +114,6 @@ export interface PageContent {
 }
 
 export interface CtaContent {
-  headingLines?: [string, string];
   kicker: string;
   heading: string;
   subheading: string;

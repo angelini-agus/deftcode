@@ -9,34 +9,15 @@ interface Props {
 const { lang = "es" } = Astro.props;
 const { ctaContent } = getContent(lang);
 
-// Display lines are measured so each one spans the full page width with
-// zero glyph clipping. Ratios are inline-box em-widths of Archivo Black at
-// 100px with letter-spacing -0.04em: canvas width plus the trailing
-// letter-spacing advance (0.04em). Measured in-browser; refresh if copy
-// or tracking changes.
-const HEADING_RATIOS: Record<Lang, [number, number]> = {
-  es: [9.003125, 6.06703125],
-  en: [6.463125, 9.673125],
-};
-const [r1, r2] = HEADING_RATIOS[lang];
-const [headingLine1, headingLine2] = ctaContent.headingLines ?? ctaContent.heading.split(/\s+(?=.)/);
 const writeUsLabel = lang === "en" ? "OR EMAIL US:" : "O ESCRÍBENOS:";
 const sectionId = lang === "en" ? "contact-cta" : "contacto";
 ---
 
 <section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 rule-page-bottom overflow-hidden text-center flex flex-col items-center justify-center">
-  <!-- Giant Typographic Heading: lines span the full page width. -->
-  <!-- The wrapper is the query container; equal cross-language block -->
-  <!-- height scales with the real available width below. -->
-  <div class="cta-heading-wrap">
-<h2
-    class="cta-heading font-display leading-[0.85] tracking-[-0.04em] text-black uppercase"
-    style={`--r1:${r1}; --r2:${r2};`}
-  >
-    <span class="cta-heading__line cta-heading__line--l1">{headingLine1}</span>
-    <span class="cta-heading__line cta-heading__line--l2">{headingLine2}</span>
-    </h2>
-  </div>
+  <!-- Giant 14vw Heading in Archivo Black -->
+  <h2 class="font-display text-[12vw] sm:text-[13vw] md:text-[14vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0">
+    {ctaContent.heading}
+  </h2>
 
   <div class="max-w-7xl mx-auto flex flex-col items-center">
 

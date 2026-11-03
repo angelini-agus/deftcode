@@ -127,40 +127,7 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
-/* CTA display heading: fit-to-width lines (edge to edge, no glyph clipping).
-   The wrapper is a query container so cqw equals the real available width
-   (scrollbar-safe); negative margins cancel the section padding. */
-.cta-heading {
-  container-type: inline-size;
-  align-self: stretch;
-  margin-inline: -1rem;
-  text-align: center;
-}
 
-@media (min-width: 768px) {
-  .cta-heading {
-    margin-inline: -3rem;
-  }
-}
-
-.cta-heading__line {
-  display: block;
-  text-align: center;
-  white-space: nowrap;
-  line-height: inherit;
-  /* Fallback for browsers without container queries */
-  font-size: 11vw;
-}
-
-@supports (container-type: inline-size) {
-  .cta-heading__line--l1 {
-    font-size: calc((100cqw - 4px) / var(--r1, 9.1));
-  }
-
-  .cta-heading__line--l2 {
-    font-size: calc((100cqw - 4px) / var(--r2, 6.1));
-  }
-}
 /* Page width system: every structural container holds to one width
    (max-w-7xl = 72rem) and the separator rules span exactly the content
    box of that container, never touching the html edges. */
@@ -192,13 +159,9 @@ body::-webkit-scrollbar {
    so switching es/en keeps every box the same height. Values measured
    against the rendered builds; min-heights reserve the Spanish line
    partition (visible copy never changes). */
-.cta-heading-wrap {
-  container-type: inline-size;
-}
 
-.cta-heading {
-  min-height: 23.45vw;
-}
+
+
 
 .svc-row-title {
   min-height: 61.2px;
@@ -215,10 +178,6 @@ body::-webkit-scrollbar {
     min-height: 122.4px;
   }
 
-  .cta-heading {
-    min-height: 23.45vw;
-  }
-
   .svc-hero-title {
     min-height: 108px;
   }
@@ -226,12 +185,6 @@ body::-webkit-scrollbar {
   .svc-module-title {
     /* two lines of md:text-4xl so the EN two-line heading reserves the ES box */
     min-height: 64.8px;
-  }
-}
-
-@supports (container-type: inline-size) {
-  .cta-heading {
-    min-height: 23.45cqw;
   }
 }
 
