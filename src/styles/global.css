@@ -111,6 +111,34 @@ html {
   }
 }
 
+/* Scroll entrance (Misure motion rules): ONLY section display headings
+   reveal, once, when they enter the viewport — a heading announces a new
+   chapter, so it is the one element whose entrance communicates something.
+   Short settle: translateY(16px) + fade, 400ms brand ease-out, opacity and
+   transform only (CLS-safe). Hidden state is gated behind html.js so no-JS
+   visitors always see every heading. Nothing above the fold is animated:
+   the hero paints dry, LCP never waits on motion. */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 400ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html.js .reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Sharp borders utility */
 .border-sharp {
   border-radius: 0 !important;

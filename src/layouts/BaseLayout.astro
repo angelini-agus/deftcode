@@ -72,6 +72,7 @@ const organizationSchema = {
 <!doctype html>
 <html lang={lang} class="scroll-smooth bg-[#FF4D00]">
   <head>
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
@@ -114,5 +115,28 @@ const organizationSchema = {
       <slot />
     </main>
     <Footer lang={lang} />
+
+    <script>
+      // Scroll entrance: reveal each .reveal element once when it enters
+      // the viewport (Misure motion rules). No-JS fallback: without this
+      // script the html.js gate never applies and everything is visible.
+      const revealables = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) {
+        revealables.forEach((el) => el.classList.add("is-revealed"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
+        );
+        revealables.forEach((el) => io.observe(el));
+      }
+    </script>
   </body>
 </html>
