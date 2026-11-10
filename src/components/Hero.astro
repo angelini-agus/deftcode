@@ -17,7 +17,7 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
 
 <section
   id="top"
-  class="relative bg-[#FF4D00] text-black flex flex-col justify-between pt-20 md:pt-24 pb-8 sm:pb-12 px-4 md:px-12"
+  class="relative bg-[#FF4D00] text-black flex flex-col justify-between min-h-[90vh] pt-20 md:pt-24 pb-8 sm:pb-12 px-4 md:px-12"
 >
   <!-- Top Utility Tag -->
   <div class="flex items-center justify-between pb-4">
@@ -27,7 +27,7 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
   </div>
 
   <!-- Giant Typographic Headline (16vw) -->
-  <div class="my-auto py-8 flex flex-col items-center justify-center text-center">
+  <div class="my-auto py-8 flex flex-col items-center justify-center text-center hero-middle">
     <h1
       class="font-display text-[15vw] sm:text-[16vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 text-balance w-full"
     >
@@ -43,7 +43,7 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
   <!-- 2px Black Divider & Metadata Row -->
   <div class="w-full max-w-7xl mx-auto">
     <!-- Horizontal Border Divider (2px solid #000000) -->
-    <div class="w-full h-[2px] bg-black mb-6"></div>
+    <div class="w-full h-[2px] bg-black mb-6 hero-divider"></div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-4">
       <!-- Left: Location -->
@@ -107,6 +107,35 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
     </div>
   </div>
 </section>
+
+<style>
+  /* Compact levels by window height: cut air only (paddings/margins),
+     never the copy or the 144px scroll control. Thresholds measured
+     from content: the hero holds exactly 90vh down to ~600px windows. */
+  @media (max-height: 776px) {
+    #top {
+      padding-top: 3.5rem;
+      padding-bottom: 1.5rem;
+    }
+    #top .hero-middle {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    #top .hero-divider {
+      margin-bottom: 1rem;
+    }
+  }
+  @media (max-height: 600px) {
+    #top {
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+    }
+    #top .hero-middle {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+</style>
 
 <script>
   const initHeroArrowRotation = () => {
