@@ -17,7 +17,7 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
 
 <section
   id="top"
-  class="relative bg-[#FF4D00] text-black flex flex-col justify-between min-h-[90vh] pt-20 md:pt-24 pb-8 sm:pb-12 px-4 md:px-12"
+  class="relative bg-[#FF4D00] text-black flex flex-col justify-between min-h-screen pt-20 md:pt-24 pb-8 sm:pb-12 px-4 md:px-12"
 >
   <!-- Top Utility Tag -->
   <div class="flex items-center justify-between pb-4">
@@ -109,6 +109,14 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
 </section>
 
 <style>
+  /* Full first screen: the fold must sit below the tilted strip's highest
+     corner, which rises tan(2deg) x 62.5vw (~2.2vw) above the marquee top.
+     100svh keeps mobile browser chrome from letting the marquee peek;
+     100vh fallback for older browsers. */
+  #top {
+    min-height: calc(100vh + 2.5vw);
+    min-height: calc(100svh + 2.5vw);
+  }
   /* Compact levels by window height: cut air only (paddings/margins),
      never the copy or the 144px scroll control. Thresholds measured
      from content: the hero holds exactly 90vh down to ~600px windows. */
