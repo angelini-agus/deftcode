@@ -5,6 +5,8 @@ import Analytics from "@vercel/analytics/astro";
 import { getContent } from "../lib/content";
 import type { Lang } from "../lib/types";
 import "../styles/global.css";
+import archivoVariableWoff2 from "@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url";
+import archivoBlackWoff2 from "@fontsource/archivo-black/files/archivo-black-latin-400-normal.woff2?url";
 
 interface Props {
   title?: string;
@@ -78,6 +80,11 @@ const organizationSchema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Font preloads: logo + hero display fonts gate first paint (latin subset covers Spanish) -->
+    <link rel="preload" as="font" type="font/woff2" href={archivoVariableWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={archivoBlackWoff2} crossorigin />
+
     <link rel="canonical" href={canonical} />
 
     <!-- Hreflang Alternates (Google Multi-language SEO) -->

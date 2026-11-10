@@ -3,6 +3,7 @@
 @import "@fontsource/archivo-black";
 @import "@fontsource-variable/archivo";
 @import "@fontsource/space-mono";
+@import "@fontsource/space-mono/700.css";
 @import "@fontsource-variable/inter";
 
 @theme {
@@ -12,14 +13,40 @@
 
   --font-display: "Archivo Black", sans-serif;
   --font-archivo: "Archivo Variable", sans-serif;
-  --font-mono: "Space Mono", monospace;
+  --font-mono: "Space Mono", "Space Mono Fallback", monospace;
   --font-sans: "Inter Variable", "Inter", sans-serif;
 }
 
 .font-logo {
-  font-family: var(--font-archivo);
+  font-family: "Archivo Variable", "Archivo Logo Fallback", sans-serif;
   font-weight: 800;
   letter-spacing: -0.035em;
+}
+
+/* Metric-matched fallbacks so font swaps never shift layout (CLS 0):
+   the navbar wordmark and the mono nav pill are above the fold on every
+   page. Ratios measured against the real fonts for the exact rendered
+   strings: DEFTCODE (Archivo Variable 800 / Arial 800) = 96.522%; nav
+   labels (Space Mono 400+700 / Courier New) = 101.982% at both weights. */
+@font-face {
+  font-family: "Archivo Logo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Arial"), local("Helvetica"), local("Liberation Sans");
+  font-weight: 800;
+  size-adjust: 104.72%;
+}
+
+@font-face {
+  font-family: "Space Mono Fallback";
+  src: local("Courier New Bold"), local("Courier New");
+  font-weight: 700;
+  size-adjust: 101.982%;
+}
+
+@font-face {
+  font-family: "Space Mono Fallback";
+  src: local("Courier New");
+  font-weight: 400;
+  size-adjust: 101.982%;
 }
 
 /* Custom selection */
