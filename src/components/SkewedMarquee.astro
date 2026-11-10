@@ -88,8 +88,8 @@ const { marqueeItems } = getContent(lang);
       last = now;
       factor += (target - factor) * (1 - Math.exp(-dt * 6));
       for (const t of items) {
-        // Same base speed as the 45s CSS loop: half a strip per 45s.
-        t.x += t.dir * ((t.period * 2) / 45) * factor * dt;
+        // Same base speed as the 60s CSS loop: half a strip per 60s.
+        t.x += t.dir * ((t.period * 2) / 60) * factor * dt;
         let n = ((t.x % t.period) + t.period) % t.period;
         if (n > 0) n -= t.period;
         t.el.style.transform = `translate3d(${n}px, 0, 0)`;
