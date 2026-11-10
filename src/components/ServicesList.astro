@@ -15,19 +15,11 @@ const basePath = lang === "en" ? "/en/services/" : "/servicios/";
 
 <section id={sectionId} class="relative bg-black text-white py-20 md:py-24 px-4 md:px-12 rule-page-bottom">
   <div class="max-w-7xl mx-auto">
-    <!-- Giant editorial heading with house star -->
+    <!-- Giant editorial heading -->
     <div class="flex items-end justify-between gap-6 pb-10 md:pb-14">
       <h2 class="font-display text-[15vw] sm:text-[13vw] md:text-[9.5vw] leading-[0.85] tracking-[-0.04em] text-white uppercase m-0">
         {heading}
       </h2>
-      <svg
-        class="hidden sm:block w-14 md:w-24 h-auto self-end shrink-0"
-        viewBox="0 0 24 24"
-        fill="#FF4D00"
-        aria-hidden="true"
-      >
-        <path d="M12 1.7l3.1 7.1 7.7.7-5.8 5.1 1.7 7.5-6.7-4-6.7 4 1.7-7.5-5.8-5.1 7.7-.7z"></path>
-      </svg>
     </div>
 
     <!-- Editorial service rows: index + title + pills, whole row is a link -->
