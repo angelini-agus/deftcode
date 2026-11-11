@@ -54,4 +54,10 @@ preceded by contacto's form+FAQ black pairing).
   this file's scope committed there); FeaturedCase dedup (single title,
   single metrics presentation); tech-name sweep applied on top
   (odd/tasks/content-tech-sweep.md).
+- User iterations after first delivery: ProblemSection removed entirely
+  (component + esProblem/enProblem content); ProjectsHook unified INTO
+  FeaturedCase (one CASOS & ENTREGABLES section: header -> ServiceTrack
+  card -> VER TODOS LOS PROYECTOS orange band; id="proyectos"); TeamTeaser
+  now shows the real two-person team (Franco Cuscianna added from misure
+  master data; DEFTCODE LABS placeholder dropped).
 - Commit: see git log (components + wiring + this doc).

@@ -815,14 +815,15 @@ const esTeam: TeamMember[] = [
     bio: "Especialista en arquitecturas web modernas, diseño de sistemas de alta disponibilidad y optimización de rendimiento.",
     tags: ["ASTRO", "TYPESCRIPT", "REACT", "TAILWIND", "SISTEMAS DISTRIBUIDOS"],
     github: "https://github.com/angelini-agus",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/agustin-angelini/",
   },
   {
-    name: "DEFTCODE LABS",
-    role: "INGENIERÍA & PRODUCTO",
-    bio: "Equipo multidisciplinario enfocado en desarrollo ágil, automatizaciones críticas y diseño visual de alto impacto.",
-    tags: ["FULL-STACK", "UI/UX BRUTALISTA", "SEO TÉCNICO", "CLOUD EDGE"],
-    github: "https://github.com/angelini-agus/deftcode",
+    name: "FRANCO CUSCIANNA",
+    role: "DESARROLLADOR FULL STACK",
+    bio: "Orientación en Backend y Arquitectura de Sistemas: software sólido, seguro y escalable.",
+    tags: ["BACKEND", "ARQUITECTURA DE SISTEMAS", "SEGURIDAD", "ESCALABILIDAD"],
+    github: "https://github.com/francocus",
+    linkedin: "https://www.linkedin.com/in/francocus/",
   },
 ];
 
@@ -867,19 +868,6 @@ const esCtaContent: CtaContent = {
   buttonLabel: "AGENDÁ 20 MIN. CON NOSOTROS",
   buttonHref: "https://wa.me/?text=Hola%20Deftcode,%20quiero%20agendar%20una%20reuni%C3%B3n%20de%2020%20minutos",
   emailLabel: "contacto@deftcode.dev",
-};
-
-const esProblem = {
-  eyebrow: "// EL PROBLEMA",
-  title: "TU OPERACIÓN NO ESCALA EN PLANILLAS.",
-  intro: "LO QUE HAY DETRÁS DE CADA PROCESO MANUAL.",
-  bullets: [
-    "Procesos corriendo en planillas de Excel y WhatsApp: datos duplicados, errores a mano y cero trazabilidad.",
-    "Tareas administrativas que se comen horas por semana: cierres de mes a mano, reclamos que nadie puede verificar, stock que no cierra.",
-    "Decisiones a ciegas: sin datos en vivo nadie sabe qué canal convierte, dónde se pierde el tiempo y cuánto cuesta cada error.",
-  ],
-  closingLabel: "MIRÁ CÓMO LO RESOLVEMOS",
-  closingHref: "/#servicios",
 };
 
 const esForWho = {
@@ -1700,14 +1688,15 @@ const enTeam: TeamMember[] = [
     bio: "Specialist in modern web architectures, distributed high-availability systems, and extreme performance optimization.",
     tags: ["ASTRO", "TYPESCRIPT", "REACT", "TAILWIND", "DISTRIBUTED SYSTEMS"],
     github: "https://github.com/angelini-agus",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/agustin-angelini/",
   },
   {
-    name: "DEFTCODE LABS",
-    role: "ENGINEERING & PRODUCT",
-    bio: "Multidisciplinary squad focused on rapid development, mission-critical automation, and high-impact visual design.",
-    tags: ["FULL-STACK", "BRUTALIST UI/UX", "TECHNICAL SEO", "EDGE CLOUD"],
-    github: "https://github.com/angelini-agus/deftcode",
+    name: "FRANCO CUSCIANNA",
+    role: "FULL-STACK DEVELOPER",
+    bio: "Backend and systems architecture focus: solid, secure, scalable software.",
+    tags: ["BACKEND", "SYSTEMS ARCHITECTURE", "SECURITY", "SCALABILITY"],
+    github: "https://github.com/francocus",
+    linkedin: "https://www.linkedin.com/in/francocus/",
   },
 ];
 
@@ -1754,19 +1743,6 @@ const enCtaContent: CtaContent = {
   emailLabel: "contacto@deftcode.dev",
 };
 
-const enProblem = {
-  eyebrow: "// THE PROBLEM",
-  title: "YOUR OPERATION DOESN'T SCALE IN SPREADSHEETS.",
-  intro: "WHAT'S BEHIND EVERY MANUAL PROCESS.",
-  bullets: [
-    "Processes living in Excel sheets and WhatsApp: duplicated data, manual errors and zero traceability.",
-    "Admin tasks that eat hours every week: month-end closings by hand, claims nobody can verify, stock that never reconciles.",
-    "Decisions made blind: without live data nobody knows which channel converts, where time is lost and what each error costs.",
-  ],
-  closingLabel: "SEE HOW WE SOLVE IT",
-  closingHref: "/en/#services",
-};
-
 const enForWho = {
   eyebrow: "// WHO IT'S FOR",
   title: "WE DON'T WORK WITH JUST ANYONE.",
@@ -1802,7 +1778,6 @@ export const getContent = (lang: Lang = "es") => {
     howWeWork: isEn ? enHowWeWork : esHowWeWork,
     team: isEn ? enTeam : esTeam,
     faqList: isEn ? enFaqList : esFaqList,
-    problem: isEn ? enProblem : esProblem,
     forWho: isEn ? enForWho : esForWho,
     socialLinks: esSocialLinks,
     ctaContent: isEn ? enCtaContent : esCtaContent,
@@ -1828,7 +1803,6 @@ export const manifesto = esManifesto;
 export const howWeWork = esHowWeWork;
 export const team = esTeam;
 export const faqList = esFaqList;
-export const problem = esProblem;
 export const forWho = esForWho;
 export const socialLinks = esSocialLinks;
 export const ctaContent = esCtaContent;
