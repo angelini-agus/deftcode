@@ -1737,10 +1737,10 @@ export const getContent = (lang: Lang = "es") => {
   };
 };
 
+// Footer socials: only the two live profiles. GITHUB moves to the team
+// section (nosotros) once per-member URLs exist; X was retired.
 const esSocialLinks: SocialLink[] = [
-  { platform: "github", label: "GITHUB", href: "https://github.com/angelini-agus" },
   { platform: "linkedin", label: "LINKEDIN", href: "https://www.linkedin.com/company/deftcode-ar/" },
-  { platform: "x", label: "X / TWITTER", href: "https://x.com" },
   { platform: "instagram", label: "INSTAGRAM", href: "https://www.instagram.com/deftcode.ar/" },
 ];
 
