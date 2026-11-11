@@ -1739,9 +1739,9 @@ export const getContent = (lang: Lang = "es") => {
 
 const esSocialLinks: SocialLink[] = [
   { platform: "github", label: "GITHUB", href: "https://github.com/angelini-agus" },
-  { platform: "linkedin", label: "LINKEDIN", href: "https://linkedin.com" },
+  { platform: "linkedin", label: "LINKEDIN", href: "https://www.linkedin.com/company/deftcode-ar/" },
   { platform: "x", label: "X / TWITTER", href: "https://x.com" },
-  { platform: "instagram", label: "INSTAGRAM", href: "https://instagram.com" },
+  { platform: "instagram", label: "INSTAGRAM", href: "https://www.instagram.com/deftcode.ar/" },
 ];
 
 // Backwards-compatible default exports (Spanish default)
