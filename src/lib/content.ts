@@ -833,14 +833,19 @@ const esFaqList: FaqItem[] = [
       "Nuestra arquitectura modular nos permite entregar landing pages institucionales en 1 a 2 semanas, y sistemas o aplicaciones web a medida en sprints de 3 a 6 semanas, con despliegues funcionales visibles desde los primeros días.",
   },
   {
-    question: "¿Por qué eligen Astro y no un framework como WordPress o React puro?",
+    question: "¿Cómo sé que van a cumplir el plazo si son una empresa nueva?",
     answer:
-      "Astro compila a HTML y CSS estático puro (SSG), lo que garantiza 0ms de tiempo de bloqueo (TBT), 100/100 en Google Lighthouse y carga instantánea en móviles. WordPress es lento, inseguro y requiere mantenimiento constante; React puro carga bundles pesados que perjudican el SEO.",
+      "No dependés de nuestra palabra: la fecha de lanzamiento y el cronograma de entregas semanales quedan en el contrato antes de arrancar. Cada semana ves el avance real, no un resumen armado para la ocasión.",
   },
   {
     question: "¿El sitio incluye posicionamiento SEO?",
     answer:
       "Absolutamente. Todo proyecto de Deftcode incluye arquitectura técnica SEO de primer nivel: metaetiquetas Open Graph y Twitter Cards completas, esquema semántico Schema.org JSON-LD, sitemap dinámico, precarga de tipografías y Core Web Vitals en rango verde.",
+  },
+  {
+    question: "¿Qué pasa después del lanzamiento?",
+    answer:
+      "Seguimos disponibles para soporte y mejoras. Si encontramos un error, te avisamos antes de que lo notes; si lo encontrás vos, nos escribís y lo resolvemos sin cargo.",
   },
   {
     question: "¿Cómo se gestiona el mantenimiento y las actualizaciones?",
@@ -859,9 +864,39 @@ const esCtaContent: CtaContent = {
   heading: "CONSTRUYAMOS ALGO ÁGIL.",
   headingLines: ["CONSTRUYAMOS", "ALGO ÁGIL."],
   subheading: "Llevamos tu infraestructura digital a la velocidad que tu empresa necesita.",
-  buttonLabel: "AGENDÁ UNA REUNIÓN DE 20 MIN",
+  buttonLabel: "AGENDÁ 20 MIN. CON NOSOTROS",
   buttonHref: "https://wa.me/?text=Hola%20Deftcode,%20quiero%20agendar%20una%20reuni%C3%B3n%20de%2020%20minutos",
   emailLabel: "contacto@deftcode.dev",
+};
+
+const esProblem = {
+  eyebrow: "// EL PROBLEMA",
+  title: "TU OPERACIÓN NO ESCALA EN PLANILLAS.",
+  intro: "LO QUE HAY DETRÁS DE CADA PROCESO MANUAL.",
+  bullets: [
+    "Procesos corriendo en planillas de Excel y WhatsApp: datos duplicados, errores a mano y cero trazabilidad.",
+    "Tareas administrativas que se comen horas por semana: cierres de mes a mano, reclamos que nadie puede verificar, stock que no cierra.",
+    "Decisiones a ciegas: sin datos en vivo nadie sabe qué canal convierte, dónde se pierde el tiempo y cuánto cuesta cada error.",
+  ],
+  closingLabel: "MIRÁ CÓMO LO RESOLVEMOS",
+  closingHref: "/#servicios",
+};
+
+const esForWho = {
+  eyebrow: "// PARA QUIÉN",
+  title: "NO TRABAJAMOS CON CUALQUIERA.",
+  yesLabel: "ES PARA VOS SI",
+  yesItems: [
+    "Tu operación tiene procesos claros que necesitan dejar de vivir en planillas.",
+    "Buscás un sistema a medida o una landing que convierta, no una plantilla genérica.",
+    "Valorás velocidad: presupuesto cerrado y entrega en semanas, no en trimestres.",
+  ],
+  noLabel: "NO ES PARA VOS SI",
+  noItems: [
+    "Estás buscando el precio más bajo sin importar el resultado.",
+    "Querés solo algo lindo, sin métricas ni objetivos de negocio.",
+    "Preferís entregar el proyecto y olvidarte: sin tu input, ningún sistema refleja el proceso real.",
+  ],
 };
 
 // ==========================================
@@ -1683,14 +1718,19 @@ const enFaqList: FaqItem[] = [
       "Our modular architecture allows us to deliver high-converting institutional landing pages in 1-2 weeks, and custom web applications or ERP modules in 3-6 week sprints, with testable staging builds live from the first week.",
   },
   {
-    question: "Why do you use Astro instead of WordPress or standard React?",
+    question: "How do I know you'll meet the deadline if you're a new company?",
     answer:
-      "Astro compiles to zero-overhead static HTML and CSS (SSG), ensuring 0ms Total Blocking Time (TBT), 100/100 Lighthouse scores, and instant mobile rendering. WordPress is bloated, vulnerable, and slow; raw React forces heavy client bundles that harm Google rankings.",
+      "You don't depend on our word: the launch date and the weekly delivery schedule are in the contract before we start. Every week you see real progress, not a summary put together for the occasion.",
   },
   {
     question: "Is technical SEO optimization included?",
     answer:
       "Absolutely. Every Deftcode deployment includes enterprise-tier SEO: complete Open Graph and Twitter Card tags, Schema.org JSON-LD semantic data, dynamic XML sitemaps, localized preloads, and verified green Core Web Vitals.",
+  },
+  {
+    question: "What happens after launch?",
+    answer:
+      "We stay available for support and improvements. If we find a bug, we tell you before you notice it; if you find it, you write to us and we fix it at no charge.",
   },
   {
     question: "How are maintenance and future updates handled?",
@@ -1714,6 +1754,36 @@ const enCtaContent: CtaContent = {
   emailLabel: "contacto@deftcode.dev",
 };
 
+const enProblem = {
+  eyebrow: "// THE PROBLEM",
+  title: "YOUR OPERATION DOESN'T SCALE IN SPREADSHEETS.",
+  intro: "WHAT'S BEHIND EVERY MANUAL PROCESS.",
+  bullets: [
+    "Processes living in Excel sheets and WhatsApp: duplicated data, manual errors and zero traceability.",
+    "Admin tasks that eat hours every week: month-end closings by hand, claims nobody can verify, stock that never reconciles.",
+    "Decisions made blind: without live data nobody knows which channel converts, where time is lost and what each error costs.",
+  ],
+  closingLabel: "SEE HOW WE SOLVE IT",
+  closingHref: "/en/#services",
+};
+
+const enForWho = {
+  eyebrow: "// WHO IT'S FOR",
+  title: "WE DON'T WORK WITH JUST ANYONE.",
+  yesLabel: "IT'S FOR YOU IF",
+  yesItems: [
+    "Your operation has clear processes that need to stop living in spreadsheets.",
+    "You want a custom system or a landing page that converts, not a generic template.",
+    "You value speed: closed budget and delivery in weeks, not quarters.",
+  ],
+  noLabel: "IT'S NOT FOR YOU IF",
+  noItems: [
+    "You are hunting for the lowest price regardless of the outcome.",
+    "You want something just pretty, with no metrics or business goals.",
+    "You would rather hand it off and disappear: without your input, no system reflects the real process.",
+  ],
+};
+
 // ==========================================
 // BILINGUAL HELPER
 // ==========================================
@@ -1732,6 +1802,8 @@ export const getContent = (lang: Lang = "es") => {
     howWeWork: isEn ? enHowWeWork : esHowWeWork,
     team: isEn ? enTeam : esTeam,
     faqList: isEn ? enFaqList : esFaqList,
+    problem: isEn ? enProblem : esProblem,
+    forWho: isEn ? enForWho : esForWho,
     socialLinks: esSocialLinks,
     ctaContent: isEn ? enCtaContent : esCtaContent,
   };
@@ -1756,5 +1828,7 @@ export const manifesto = esManifesto;
 export const howWeWork = esHowWeWork;
 export const team = esTeam;
 export const faqList = esFaqList;
+export const problem = esProblem;
+export const forWho = esForWho;
 export const socialLinks = esSocialLinks;
 export const ctaContent = esCtaContent;
