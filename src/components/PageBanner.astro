@@ -15,13 +15,13 @@ const { eyebrow, title, intro, dark = false } = Astro.props;
   }`}
 >
   <div class="max-w-7xl mx-auto">
-    <!-- Eyebrow Tag -->
+    <!-- Eyebrow: plain text, no chip box. Matches the bare section
+         eyebrows used across the site (no border, no dot). -->
     <div
-      class={`inline-flex items-center gap-2 border-2 px-3 py-1 font-mono-meta text-xs uppercase font-bold tracking-widest mb-6 ${
-        dark ? "bg-transparent text-white border-white" : "bg-transparent text-black border-black"
+      class={`font-mono-meta text-xs uppercase font-bold tracking-widest mb-6 ${
+        dark ? "text-white" : "text-black"
       }`}
     >
-      <span class={`w-2 h-2 ${dark ? "bg-[#FF4D00]" : "bg-black"}`}></span>
       // {eyebrow}
     </div>
 
