@@ -29,19 +29,21 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
   style={`--flip-count: ${projectCount}`}
 >
   <!-- Section Title -->
-  <div class="max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-10">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
-      <div>
-        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-          {eyebrow}
-        </span>
-        <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-black uppercase tracking-[-0.04em] leading-[0.88]">
-          {title}
-        </h2>
+  <div class="px-4 md:px-12">
+    <div class="max-w-7xl mx-auto pt-20 pb-10">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
+        <div>
+          <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+            {eyebrow}
+          </span>
+          <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-black uppercase tracking-[-0.04em] leading-[0.88]">
+            {title}
+          </h2>
+        </div>
+        <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
+          {intro}
+        </p>
       </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
-        {intro}
-      </p>
     </div>
   </div>
 
