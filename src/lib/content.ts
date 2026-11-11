@@ -51,7 +51,7 @@ const esPages: Record<string, PageContent> = {
   proyectos: {
     title: "PROYECTOS // PORTFOLIO & CASOS DE ESTUDIO - DEFTCODE",
     description:
-      "Explora nuestros sistemas en producción: plataformas ERP corporativas, aplicaciones web y arquitecturas SSG con puntuaciones perfectas en Core Web Vitals.",
+      "Explora nuestros sistemas en producción: plataformas ERP corporativas, aplicaciones web y landings de alta velocidad, medidos al milisegundo.",
     eyebrow: "CASOS EN PRODUCCIÓN",
     h1: "SOFTWARE REAL PARA PROBLEMAS REALES.",
     intro:
@@ -96,12 +96,12 @@ const esMarqueeItems = {
     "INGENIERÍA WEB MODERNA",
   ],
   row2: [
-    "ASTRO SSG",
-    "TYPESCRIPT",
-    "TAILWIND CSS V4",
-    "EDGE COMPUTING",
-    "100/100 CORE WEB VITALS",
+    "SOFTWARE EN PRODUCCIÓN",
     "SISTEMAS & SAAS A MEDIDA",
+    "AUTOMATIZACIÓN CON IA",
+    "ENTREGA EN SEMANAS",
+    "MÉTRICAS EN VERDE",
+    "DISEÑO A MEDIDA",
   ],
 };
 
@@ -187,7 +187,7 @@ const esServices: ServiceItem[] = [
     index: "03",
     title: "LANDING PAGES",
     description:
-      "Landing pages de alta velocidad en HTML y CSS estático: cero tiempo de bloqueo, Lighthouse en verde y SEO técnico de serie.",
+      "Landing pages de carga instantánea: cero tiempo de bloqueo, métricas en verde y SEO técnico de serie.",
     kicker: "TU PRIMER PUNTO DE VENTA DIGITAL",
     intro:
       "Tu primer punto de venta digital: una página que carga al instante, se posiciona orgánicamente y convierte la visita.",
@@ -195,15 +195,15 @@ const esServices: ServiceItem[] = [
       {
         heading: "VELOCIDAD",
         items: [
-          "HTML y CSS estático: carga instantánea, cero tiempo de bloqueo.",
-          "Lighthouse en verde, que además suma para el ranking SEO.",
+          "Páginas estáticas: carga instantánea, cero tiempo de bloqueo.",
+          "Rendimiento en verde, que además suma para el ranking SEO.",
           "Diseño a medida editorial-brutalista.",
         ],
       },
       {
         heading: "SEO TÉCNICO",
         items: [
-          "Schema.org JSON-LD completo, sitemap dinámico y Open Graph.",
+          "Datos estructurados para Google, sitemap dinámico y etiquetas sociales completas.",
           "Meta tags completos y tipografías precargadas.",
           "Estructura íntegra en móviles.",
         ],
@@ -214,9 +214,9 @@ const esServices: ServiceItem[] = [
     value: [
       "Consultas que llegan de la búsqueda orgánica.",
       "Una página que carga antes de que el cliente piense en volver atrás.",
-      "Código propio en tu GitHub, sin WordPress detrás.",
+      "Código 100% propio, sin plataformas genéricas detrás.",
     ],
-    tags: ["ASTRO SSG", "SEO TÉCNICO", "100 LIGHTHOUSE", "CONVERSIÓN"],
+    tags: ["CARGA INSTANTÁNEA", "SEO TÉCNICO", "MÉTRICAS EN VERDE", "CONVERSIÓN"],
   },
   {
     id: "automatizacion-ia",
@@ -233,8 +233,8 @@ const esServices: ServiceItem[] = [
         heading: "INTEGRACIONES A MEDIDA",
         items: [
           "Sincronización de stock y precios entre la tienda y el depósito.",
-          "Facturación electrónica vía web services de AFIP/ARCA.",
-          "WhatsApp Business API para estados de pedidos y cobranzas.",
+          "Facturación electrónica con AFIP/ARCA.",
+          "WhatsApp Business para estados de pedidos y cobranzas.",
         ],
       },
       {
@@ -759,13 +759,13 @@ const esManifesto: ManifestoItem[] = [
     number: "01",
     title: "VELOCIDAD NO SIGNIFICA DESPROLIJIDAD",
     description:
-      "Trabajar rápido no es tirar código sucio. La verdadera agilidad proviene de usar las herramientas correctas (Astro, TypeScript, Tailwind v4, Edge Computing) y tener claridad arquitectónica desde el día cero.",
+      "Trabajar rápido no es tirar código sucio. La verdadera agilidad proviene de elegir bien las herramientas y tener claridad arquitectónica desde el día cero.",
   },
   {
     number: "02",
     title: "CERO BUNDLES PESADOS INNECESARIOS",
     description:
-      "No cargamos 300KB de JavaScript en el navegador de tu cliente para mostrar texto y fotos. Si algo puede resolverse en el servidor con HTML y CSS estático, se resuelve ahí.",
+      "No cargamos scripts pesados en el navegador de tu cliente para mostrar texto y fotos. Si algo puede resolverse en el servidor con páginas estáticas, se resuelve ahí.",
   },
   {
     number: "03",
@@ -798,13 +798,13 @@ const esHowWeWork: WorkStep[] = [
     step: "03",
     title: "DESARROLLO EN SPRINTS INTENSOS",
     description:
-      "Construcción modular en TypeScript con commits diarios, entornos de staging visibles en tiempo real y pruebas automáticas de rendimiento.",
+      "Construcción modular con commits diarios, entornos de staging visibles en tiempo real y pruebas automáticas de rendimiento.",
   },
   {
     step: "04",
-    title: "DESPLIEGUE A PRODUCCIÓN & CI/CD",
+    title: "DESPLIEGUE A PRODUCCIÓN",
     description:
-      "Lanzamiento en infraestructura global edge con CDN inmutable, verificación de Core Web Vitals al 100% y documentación viva.",
+      "Lanzamiento en infraestructura global, verificación de rendimiento al 100% y documentación viva.",
   },
 ];
 
@@ -840,7 +840,7 @@ const esFaqList: FaqItem[] = [
   {
     question: "¿El sitio incluye posicionamiento SEO?",
     answer:
-      "Absolutamente. Todo proyecto de Deftcode incluye arquitectura técnica SEO de primer nivel: metaetiquetas Open Graph y Twitter Cards completas, esquema semántico Schema.org JSON-LD, sitemap dinámico, precarga de tipografías y Core Web Vitals en rango verde.",
+      "Absolutamente. Todo proyecto de Deftcode incluye SEO técnico de primer nivel: etiquetas sociales completas, datos estructurados para Google, sitemap dinámico, carga instantánea en móviles y rendimiento medido en verde.",
   },
   {
     question: "¿Qué pasa después del lanzamiento?",
@@ -850,7 +850,7 @@ const esFaqList: FaqItem[] = [
   {
     question: "¿Cómo se gestiona el mantenimiento y las actualizaciones?",
     answer:
-      "El código fuente te pertenece al 100% en GitHub. Ofrecemos planes de soporte continuo para nuevas funcionalidades, optimización de infraestructura y monitoreo, o capacitamos a tu equipo para que sea totalmente autónomo.",
+      "El código fuente te pertenece al 100%. Ofrecemos planes de soporte continuo para nuevas funcionalidades, optimización de infraestructura y monitoreo, o capacitamos a tu equipo para que sea totalmente autónomo.",
   },
   {
     question: "¿Cómo es el flujo de contratación y pago?",
@@ -936,7 +936,7 @@ const enPages: Record<string, PageContent> = {
   proyectos: {
     title: "PROJECTS // PORTFOLIO & CASE STUDIES - DEFTCODE",
     description:
-      "Explore our production deployments: enterprise ERP platforms, reactive web applications, and SSG architectures with flawless Core Web Vitals.",
+      "Explore our production deployments: enterprise ERP platforms, web applications and high-velocity landing pages, measured to the millisecond.",
     eyebrow: "PRODUCTION DEPLOYMENTS",
     h1: "REAL SOFTWARE FOR REAL BUSINESS PROBLEMS.",
     intro:
@@ -981,12 +981,12 @@ const enMarqueeItems = {
     "HIGH-VELOCITY DEV",
   ],
   row2: [
-    "ASTRO SSG",
-    "TYPESCRIPT",
-    "TAILWIND CSS V4",
-    "EDGE RUNTIME",
-    "CORE WEB VITALS 100",
-    "FULL-STACK SAAS",
+    "SOFTWARE IN PRODUCTION",
+    "CUSTOM SYSTEMS & SAAS",
+    "AI AUTOMATION",
+    "DELIVERY IN WEEKS",
+    "METRICS IN THE GREEN",
+    "BESPOKE DESIGN",
   ],
 };
 
@@ -1072,7 +1072,7 @@ const enServices: ServiceItem[] = [
     index: "03",
     title: "LANDING PAGES",
     description:
-      "High-velocity landing pages in static HTML and CSS: zero blocking time, Lighthouse in the green and technical SEO as standard.",
+      "High-velocity landing pages with instant load: zero blocking time, green performance scores and technical SEO as standard.",
     kicker: "YOUR FIRST DIGITAL POINT OF SALE",
     intro:
       "Your first digital point of sale: a page that loads instantly, ranks organically and turns visits into inquiries.",
@@ -1080,15 +1080,15 @@ const enServices: ServiceItem[] = [
       {
         heading: "VELOCITY",
         items: [
-          "Static HTML and CSS: instant load, zero blocking time.",
-          "Lighthouse in the green, which also feeds SEO rankings.",
+          "Pre-rendered pages: instant load, zero blocking time.",
+          "Green performance scores, which also feed SEO rankings.",
           "Custom editorial-brutalist design.",
         ],
       },
       {
         heading: "TECHNICAL SEO",
         items: [
-          "Complete Schema.org JSON-LD, dynamic sitemap and Open Graph.",
+          "Structured data for Google, dynamic sitemap and complete social tags.",
           "Complete meta tags and preloaded typography.",
           "Mobile-safe structure.",
         ],
@@ -1099,9 +1099,9 @@ const enServices: ServiceItem[] = [
     value: [
       "Inquiries coming from organic search.",
       "A page that loads before visitors think about going back.",
-      "Your own code on your GitHub, no WordPress behind it.",
+      "100% your own code, no generic platforms behind it.",
     ],
-    tags: ["ASTRO SSG", "TECHNICAL SEO", "100 LIGHTHOUSE", "CONVERSION"],
+    tags: ["INSTANT LOAD", "TECHNICAL SEO", "GREEN SCORES", "CONVERSION"],
   },
   {
     id: "automatizacion-ia",
@@ -1118,8 +1118,8 @@ const enServices: ServiceItem[] = [
         heading: "CUSTOM INTEGRATIONS",
         items: [
           "Stock and price sync between the online store and the warehouse.",
-          "Electronic invoicing over AFIP/ARCA web services.",
-          "WhatsApp Business API for order-status and collections notices.",
+          "Electronic invoicing with AFIP/ARCA.",
+          "WhatsApp Business for order-status and collections notices.",
         ],
       },
       {
@@ -1644,13 +1644,13 @@ const enManifesto: ManifestoItem[] = [
     number: "01",
     title: "VELOCITY DOES NOT MEAN SLOPPINESS",
     description:
-      "Moving fast is not about slapping dirty code together. Real agility comes from choosing the right modern tools (Astro, TypeScript, Tailwind v4, Edge Computing) and having architectural clarity on day zero.",
+      "Moving fast is not about slapping dirty code together. Real agility comes from choosing the right tools and having architectural clarity on day zero.",
   },
   {
     number: "02",
     title: "ZERO UNNECESSARY HEAVY BUNDLES",
     description:
-      "We never ship 300KB of client JavaScript just to display text and imagery. If a section can be pre-rendered as clean static HTML and CSS on the server, it stays there.",
+      "We never ship heavy client scripts just to display text and imagery. If a section can be pre-rendered as clean static pages on the server, it stays there.",
   },
   {
     number: "03",
@@ -1683,13 +1683,13 @@ const enHowWeWork: WorkStep[] = [
     step: "03",
     title: "INTENSE SPRINT CYCLES",
     description:
-      "Modular TypeScript implementation with daily commits, real-time preview staging environments, and automated performance suites.",
+      "Modular implementation with daily commits, real-time preview staging environments, and automated performance suites.",
   },
   {
     step: "04",
-    title: "GLOBAL PRODUCTION SHIP & CI/CD",
+    title: "GLOBAL PRODUCTION SHIP",
     description:
-      "Deployment to worldwide edge infrastructure with immutable caching, 100/100 Core Web Vitals verification, and living documentation.",
+      "Deployment to worldwide infrastructure with edge caching, 100/100 performance verification, and living documentation.",
   },
 ];
 
@@ -1725,7 +1725,7 @@ const enFaqList: FaqItem[] = [
   {
     question: "Is technical SEO optimization included?",
     answer:
-      "Absolutely. Every Deftcode deployment includes enterprise-tier SEO: complete Open Graph and Twitter Card tags, Schema.org JSON-LD semantic data, dynamic XML sitemaps, localized preloads, and verified green Core Web Vitals.",
+      "Absolutely. Every Deftcode deployment includes enterprise-tier SEO: complete social tags, structured data for Google, dynamic XML sitemaps, instant mobile loading, and verified green performance scores.",
   },
   {
     question: "What happens after launch?",
@@ -1735,7 +1735,7 @@ const enFaqList: FaqItem[] = [
   {
     question: "How are maintenance and future updates handled?",
     answer:
-      "You own 100% of the GitHub repository and intellectual property. We offer monthly ongoing support retainers for new features and infrastructure monitoring, or we train your in-house team for total autonomy.",
+      "You own 100% of the source code and intellectual property. We offer monthly ongoing support retainers for new features and infrastructure monitoring, or we train your in-house team for total autonomy.",
   },
   {
     question: "What is your engagement and payment structure?",
