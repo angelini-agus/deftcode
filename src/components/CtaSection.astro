@@ -13,7 +13,6 @@ const { ctaContent } = getContent(lang);
 // authored, keeping the component resilient without the fit layout.
 const headingLines = ctaContent.headingLines ?? [ctaContent.heading];
 
-const writeUsLabel = lang === "en" ? "OR EMAIL US:" : "O ESCRÍBENOS:";
 const sectionId = lang === "en" ? "contact-cta" : "contacto";
 ---
 
@@ -53,15 +52,5 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
         <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
       </svg>
     </a>
-
-    <!-- Email Direct Link -->
-    <div class="mt-8">
-      <a
-        href={`mailto:${ctaContent.emailLabel}`}
-        class="font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider text-black underline underline-offset-4 decoration-2 hover:bg-black hover:text-[#FF4D00] px-2 py-1 transition-colors"
-      >
-        {writeUsLabel} {ctaContent.emailLabel}
-      </a>
-    </div>
   </div>
 </section>
