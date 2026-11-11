@@ -1,0 +1,71 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { team } = getContent(lang);
+
+const eyebrow = lang === "en" ? "// WHO BUILDS" : "// QUIÉN CONSTRUYE";
+const title = lang === "en" ? "NO MIDDLEMEN." : "CERO INTERMEDIARIOS.";
+const intro =
+  lang === "en"
+    ? "YOU TALK DIRECTLY TO WHOEVER WRITES THE CODE."
+    : "HABLÁS DIRECTO CON QUIEN ESCRIBE EL CÓDIGO.";
+const teamLabel = lang === "en" ? "MEET THE TEAM" : "CONOCÉ AL EQUIPO";
+const teamHref = lang === "en" ? "/en/about/" : "/nosotros/";
+---
+
+<section id="equipo-teaser" class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12 rule-page-bottom">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/20 pb-8">
+      <div>
+        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          {eyebrow}
+        </span>
+        <h2 class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+          {title}
+        </h2>
+      </div>
+      <p class="font-mono-meta text-xs sm:text-sm text-white/60 max-w-sm sm:text-right font-medium">
+        {intro}
+      </p>
+    </div>
+
+    <!-- Member cards -->
+    <div class="grid gap-4 sm:grid-cols-2 mt-10 md:mt-12">
+      {
+        team.map((member) => (
+          <div class="border-2 border-white/20 p-6 bg-white/[0.02]">
+            <h3 class="font-display text-xl text-white uppercase tracking-tight m-0">{member.name}</h3>
+            <p class="font-mono-meta text-xs text-[#FF4D00] font-bold uppercase mt-1 m-0">{member.role}</p>
+            <p class="text-white/75 font-sans text-sm leading-relaxed mt-3 m-0">{member.bio}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Closing band to the team page -->
+    <a
+      href={teamHref}
+      class="mt-8 flex items-center justify-between gap-4 bg-[#FF4D00] text-black px-6 py-5 group transition-colors focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
+    >
+      <span class="font-mono-meta text-sm md:text-base font-bold uppercase tracking-wider group-hover:text-white">
+        {teamLabel}
+      </span>
+      <svg
+        class="w-5 h-5 shrink-0 transition-transform duration-300 group-hover:translate-x-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="square" stroke-linejoin="miter" d="M4 12h16m-6-6l6 6-6 6"></path>
+      </svg>
+    </a>
+  </div>
+</section>

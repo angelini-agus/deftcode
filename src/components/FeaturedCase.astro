@@ -1,0 +1,95 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { projects } = getContent(lang);
+
+// Featured case: shared id across both dictionaries, first project as fallback.
+const featured = projects.find((p) => p.id === "empresa-limpieza") ?? projects[0];
+
+const eyebrow = lang === "en" ? "// FEATURED CASE" : "// CASO DESTACADO";
+const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
+const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE" : "VER CASO COMPLETO";
+---
+
+<section id="caso-destacado" class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12 rule-page-bottom">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/20 pb-8">
+      <div>
+        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          {eyebrow}
+        </span>
+        <h2 class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+          {featured.title}
+        </h2>
+      </div>
+      <p class="font-mono-meta text-xs sm:text-sm text-white/60 max-w-sm sm:text-right font-medium">
+        {featured.category} &middot; {featured.year}
+      </p>
+    </div>
+
+    <!-- One folder card (ProjectsStack card structure, inverted for the black bg) -->
+    <article class="w-full bg-black text-white border-2 border-white/20 mt-10 md:mt-12">
+      <!-- Folder Tab Header -->
+      <div class="flex items-center justify-between border-b-2 border-white/20 bg-black px-6 py-3">
+        <div class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
+          <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-wider">
+            {cardLabel} [01]
+          </span>
+        </div>
+        <span class="font-mono-meta text-xs uppercase text-white/60">
+          {featured.year} // {featured.category}
+        </span>
+      </div>
+
+      <!-- Folder Body -->
+      <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <div class="lg:col-span-7 flex flex-col gap-4">
+          {
+            featured.client && (
+              <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-semibold tracking-wide">
+                // {featured.client}
+              </span>
+            )
+          }
+          <p class="text-white/80 font-sans text-sm sm:text-base leading-relaxed">
+            {featured.description}
+          </p>
+
+          <!-- Direct link to the full case breakdown -->
+          <div class="pt-2">
+            <a
+              href={lang === "en" ? `/en/projects/${featured.slug}/` : `/proyectos/${featured.slug}/`}
+              class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+            >
+              <span>{viewCaseLabel}</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Metrics panel (replaces the screenshot frame) -->
+        <div class="lg:col-span-5 bg-black border-2 border-white/20 p-6">
+          <p class="font-display text-3xl sm:text-4xl text-[#FF4D00] uppercase tracking-tight leading-tight m-0">
+            {featured.metrics[0]}
+          </p>
+          <div class="mt-4">
+            {
+              featured.metrics.slice(1).map((metric) => (
+                <p class="font-mono-meta text-xs text-white/80 uppercase tracking-wide border-b border-white/10 py-2 m-0">
+                  {metric}
+                </p>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
