@@ -5,7 +5,8 @@ import ProjectsStack from "../components/ProjectsStack.astro";
 import CtaSection from "../components/CtaSection.astro";
 import { pages, projects } from "../lib/content";
 import { Image } from "astro:assets";
-import { projectAssets } from "../lib/project-images";
+import { buildLightboxGalleries, projectAssets } from "../lib/project-images";
+import ScreenLightbox from "../components/ScreenLightbox.astro";
 ---
 
 <BaseLayout
@@ -21,6 +22,8 @@ import { projectAssets } from "../lib/project-images";
 
   <!-- Interactive Runway Deck -->
   <ProjectsStack lang="es" />
+
+  <ScreenLightbox lang="es" galleries={buildLightboxGalleries(projects, "es")} />
 
   <!-- Directory of Project Cases (Links directly to each dedicated route) -->
   <section class="relative bg-black text-white py-20 px-4 md:px-12">
@@ -61,7 +64,7 @@ import { projectAssets } from "../lib/project-images";
                       alt={projectAssets[item.imageKey].altEs}
                       width={600}
                       height={375}
-                      class="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-500"
+                      class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 )}

@@ -4,7 +4,8 @@ import CtaSection from "../../components/CtaSection.astro";
 import { getContent } from "../../lib/content";
 import type { ProjectItem } from "../../lib/types";
 import { Image } from "astro:assets";
-import { projectAssets } from "../../lib/project-images";
+import { buildLightboxGalleries, projectAssets } from "../../lib/project-images";
+import ScreenLightbox from "../../components/ScreenLightbox.astro";
 
 export function getStaticPaths() {
   const content = getContent("es");
@@ -37,6 +38,7 @@ interface Props {
 
 const { project, prev, next, currentIndex, total } = Astro.props;
 const assets = projectAssets[project.imageKey];
+const lightboxGalleries = buildLightboxGalleries([project], "es");
 const seoTitle = `${project.title} // CASO DE ESTUDIO - DEFTCODE`;
 const seoDescription = project.description;
 ---
@@ -288,7 +290,13 @@ const seoDescription = project.description;
                 <span class="font-bold text-[#FF4D00]">VISTA [{String(idx + 1).padStart(2, "0")}]</span>
                 <span>{imgItem.captionEs || "SISTEMA ACTIVO"}</span>
               </div>
-              <div class="relative bg-neutral-950 overflow-hidden">
+              <button
+                type="button"
+                data-lightbox-open={project.imageKey}
+                data-lightbox-index={idx}
+                aria-label="Abrir galería de pantallas a pantalla completa"
+                class="relative block w-full text-left bg-neutral-950 overflow-hidden group cursor-zoom-in"
+              >
                 <Image
                   src={imgItem.src}
                   alt={imgItem.altEs}
@@ -297,7 +305,16 @@ const seoDescription = project.description;
                   quality={90}
                   class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-              </div>
+                <span
+                  class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/70 border border-white/30 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                  aria-hidden="true"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path stroke-linecap="square" d="M21 21l-4.35-4.35M8 11h6M11 8v6"></path>
+                  </svg>
+                </span>
+              </button>
               {imgItem.captionEs && (
                 <div class="p-4 bg-neutral-950 border-t border-white/10 text-xs font-mono-meta text-white/60">
                   {imgItem.captionEs}
@@ -394,4 +411,5 @@ const seoDescription = project.description;
   </section>
 
   <CtaSection lang="es" />
+  <ScreenLightbox lang="es" galleries={lightboxGalleries} />
 </BaseLayout>

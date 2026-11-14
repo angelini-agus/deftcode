@@ -5,7 +5,8 @@ import ProjectsStack from "../../components/ProjectsStack.astro";
 import CtaSection from "../../components/CtaSection.astro";
 import { getContent } from "../../lib/content";
 import { Image } from "astro:assets";
-import { projectAssets } from "../../lib/project-images";
+import { buildLightboxGalleries, projectAssets } from "../../lib/project-images";
+import ScreenLightbox from "../../components/ScreenLightbox.astro";
 
 const content = getContent("en");
 const page = content.pages.proyectos;
@@ -65,7 +66,7 @@ const { projects } = content;
                       alt={projectAssets[item.imageKey].altEn}
                       width={600}
                       height={375}
-                      class="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-500"
+                      class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 )}
@@ -105,6 +106,8 @@ const { projects } = content;
       </div>
     </div>
   </section>
+
+  <ScreenLightbox lang="en" galleries={buildLightboxGalleries(projects, "en")} />
 
   <CtaSection lang="en" />
 </BaseLayout>

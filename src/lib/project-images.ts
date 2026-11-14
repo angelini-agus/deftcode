@@ -1,4 +1,5 @@
 import type { ImageMetadata } from "astro";
+import type { ProjectItem } from "./types";
 
 // Limpieza
 import limpiezaAdmin1 from "../assets/proyectos/limpieza/admin1.png";
@@ -10,9 +11,15 @@ import limpiezaLogin from "../assets/proyectos/limpieza/login.png";
 import legalDashboard from "../assets/proyectos/legal/dashboard.png";
 import legalClientes from "../assets/proyectos/legal/clientes.png";
 import legalExpediente from "../assets/proyectos/legal/expediente.png";
+import legalExpedienteEdit from "../assets/proyectos/legal/expediente-edit.png";
 import legalAgenda from "../assets/proyectos/legal/agenda.png";
+import legalObligaciones from "../assets/proyectos/legal/obligaciones.png";
+import legalBiblioteca from "../assets/proyectos/legal/biblioteca.png";
 import legalBibliotecaIa from "../assets/proyectos/legal/biblioteca-ia.png";
 import legalContabilidad from "../assets/proyectos/legal/contabilidad.png";
+import legalTeam from "../assets/proyectos/legal/team.png";
+import legalSwitchUser from "../assets/proyectos/legal/switch-user.png";
+import legalLogin from "../assets/proyectos/legal/login.png";
 
 // Pediatric ERP & Landing
 import pediatricErpDashboard from "../assets/proyectos/pediatric/erp-dashboard.png";
@@ -21,6 +28,8 @@ import pediatricErpAppointments from "../assets/proyectos/pediatric/erp-appointm
 import pediatricErpAppointmentDialog from "../assets/proyectos/pediatric/erp-appointment-dialog.png";
 import pediatricErpConsultations from "../assets/proyectos/pediatric/erp-consultations.png";
 import pediatricErpPatientRecord from "../assets/proyectos/pediatric/erp-patient-record.png";
+import pediatricPortalAppointments from "../assets/proyectos/pediatric/portal-appointments.png";
+import pediatricPortalContact from "../assets/proyectos/pediatric/portal-contact.png";
 import pediatricLandingHero from "../assets/proyectos/pediatric/landing-hero.png";
 import pediatricLandingJourney from "../assets/proyectos/pediatric/landing-journey.png";
 import pediatricLandingContacto from "../assets/proyectos/pediatric/landing-contacto.png";
@@ -53,6 +62,45 @@ export interface ProjectAsset {
   altEn: string;
   gallery: GalleryItem[];
 }
+
+export interface LightboxGalleryPayload {
+  title: string;
+  items: {
+    src: string;
+    w: number;
+    h: number;
+    caption: string;
+  }[];
+}
+
+// Serializable galleries for the fullscreen lightbox. Items carry the
+// untouched original PNG URLs (1920px) — best possible quality — and the
+// caption already resolved per locale (the client script has no server
+// variables available).
+export const buildLightboxGalleries = (
+  projects: Pick<ProjectItem, "title" | "imageKey">[],
+  lang: "es" | "en" = "es",
+): Record<string, LightboxGalleryPayload> => {
+  const payload: Record<string, LightboxGalleryPayload> = {};
+  for (const project of projects) {
+    const asset = project.imageKey ? projectAssets[project.imageKey] : undefined;
+    if (!asset || !project.imageKey) continue;
+    payload[project.imageKey] = {
+      title: project.title,
+      items: asset.gallery.map((item) => ({
+        src: item.src.src,
+        w: item.src.width,
+        h: item.src.height,
+        caption:
+          (lang === "en" ? item.captionEn : item.captionEs) ??
+          item.captionEs ??
+          item.captionEn ??
+          project.title,
+      })),
+    };
+  }
+  return payload;
+};
 
 export const projectAssets: Record<string, ProjectAsset> = {
   "empresa-limpieza": {
@@ -117,11 +165,25 @@ export const projectAssets: Record<string, ProjectAsset> = {
         captionEn: "Procedural tracking with attached writs and filings",
       },
       {
+        src: legalExpedienteEdit,
+        altEs: "Edición de expediente judicial con los datos del caso",
+        altEn: "Judicial case file editor with matter details",
+        captionEs: "Alta y edición de expedientes con datos procesales",
+        captionEn: "Case intake and editing with procedural data",
+      },
+      {
         src: legalAgenda,
         altEs: "Agenda jurídica con audiencias y plazos perentorios",
         altEn: "Court calendar with hearing dates and statutory deadlines",
         captionEs: "Agenda sincronizada con alertas de caducidad",
         captionEn: "Synchronized calendar with procedural expiration alerts",
+      },
+      {
+        src: legalObligaciones,
+        altEs: "Control de obligaciones fiscales con vencimientos y estados",
+        altEn: "Tax and administrative obligations with deadlines and statuses",
+        captionEs: "Seguimiento impositivo y administrativo con vencimientos y pagos",
+        captionEn: "Tax and administrative tracking with deadlines and payments",
       },
       {
         src: legalBibliotecaIa,
@@ -131,11 +193,39 @@ export const projectAssets: Record<string, ProjectAsset> = {
         captionEn: "Real-time compliance engine hooked into official gazettes",
       },
       {
+        src: legalBiblioteca,
+        altEs: "Biblioteca jurídica con fuentes oficiales de Argentina y Paraguay",
+        altEn: "Legal library with official sources from Argentina and Paraguay",
+        captionEs: "Base de fuentes oficiales por materia, tipo y jurisdicción",
+        captionEn: "Official sources organized by subject, type, and jurisdiction",
+      },
+      {
         src: legalContabilidad,
         altEs: "Resumen contable y seguimiento de honorarios multimoneda",
         altEn: "Accounting balance and multicurrency legal fees tracker",
         captionEs: "Control contable de honorarios, señas y cobros",
         captionEn: "Accounting control of retainers, fees, and collections",
+      },
+      {
+        src: legalTeam,
+        altEs: "Gestión de equipo con usuarios, roles y auditoría",
+        altEn: "Team management with users, roles, and audit trail",
+        captionEs: "Usuarios, roles y auditoría de accesos del estudio",
+        captionEn: "Studio users, roles, and access audit trail",
+      },
+      {
+        src: legalSwitchUser,
+        altEs: "Selector de cuentas por rol para iniciar sesión",
+        altEn: "Role-based account picker for sign-in",
+        captionEs: "Ingreso por cuenta y rol, con opción de otra cuenta",
+        captionEn: "Sign-in by account and role, with alternate account option",
+      },
+      {
+        src: legalLogin,
+        altEs: "Pantalla de inicio de sesión del sistema del estudio",
+        altEn: "Legal system sign-in screen",
+        captionEs: "Acceso con credenciales del estudio",
+        captionEn: "Studio credential sign-in",
       },
     ],
   },
@@ -185,6 +275,20 @@ export const projectAssets: Record<string, ProjectAsset> = {
         altEn: "Daily consultations with clinical history and medical prescription",
         captionEs: "Evolución médica con emisión digital de recetas en PDF",
         captionEn: "Clinical consultation notes and PDF prescription generation",
+      },
+      {
+        src: pediatricPortalAppointments,
+        altEs: "Portal de familias con próximos turnos, solicitud e historial",
+        altEn: "Family portal with upcoming appointments, requests, and history",
+        captionEs: "Solicitud de turnos e historial desde el portal de familias",
+        captionEn: "Appointment requests and history from the family portal",
+      },
+      {
+        src: pediatricPortalContact,
+        altEs: "Contacto y ubicación del consultorio en el portal de familias",
+        altEn: "Clinic contact and location in the family portal",
+        captionEs: "Datos del consultorio y matrícula para pacientes registrados",
+        captionEn: "Clinic details and credentials for registered patients",
       },
     ],
   },

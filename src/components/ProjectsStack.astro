@@ -129,7 +129,15 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                     </div>
 
                     {item.imageKey && projectAssets[item.imageKey] && (
-                      <div class="relative bg-neutral-950 overflow-hidden group">
+                      <button
+                        type="button"
+                        data-lightbox-open={item.imageKey}
+                        data-lightbox-index="0"
+                        aria-label={
+                          lang === "en" ? "Open fullscreen screen gallery" : "Abrir galería de pantallas a pantalla completa"
+                        }
+                        class="relative block w-full text-left bg-neutral-950 overflow-hidden group cursor-zoom-in"
+                      >
                         <Image
                           src={projectAssets[item.imageKey].main}
                           alt={lang === "en" ? projectAssets[item.imageKey].altEn : projectAssets[item.imageKey].altEs}
@@ -139,7 +147,16 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                           class="w-full h-44 sm:h-52 md:h-60 object-cover object-top group-hover:brightness-105 group-hover:scale-[1.02] transition-transform duration-300"
                           loading="lazy"
                         />
-                      </div>
+                        <span
+                          class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/70 border border-white/30 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                          aria-hidden="true"
+                        >
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path stroke-linecap="square" d="M21 21l-4.35-4.35M8 11h6M11 8v6"></path>
+                          </svg>
+                        </span>
+                      </button>
                     )}
 
                     <div class="flex items-center justify-between border-t border-white/10 px-4 py-2.5 text-[11px] font-mono-meta text-white/60 bg-black">

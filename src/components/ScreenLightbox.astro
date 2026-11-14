@@ -1,0 +1,248 @@
+---
+import type { Lang } from "../lib/types";
+
+interface LightboxItem {
+  src: string;
+  w: number;
+  h: number;
+  caption: string;
+}
+
+interface LightboxGallery {
+  title: string;
+  items: LightboxItem[];
+}
+
+interface Props {
+  lang?: Lang;
+  galleries: Record<string, LightboxGallery>;
+}
+
+const { lang = "es", galleries } = Astro.props;
+
+const closeLabel = lang === "en" ? "Close gallery" : "Cerrar galería";
+const prevLabel = lang === "en" ? "Previous screen" : "Pantalla anterior";
+const nextLabel = lang === "en" ? "Next screen" : "Pantalla siguiente";
+const dialogLabel = lang === "en" ? "Fullscreen screen gallery" : "Galería de pantallas a pantalla completa";
+---
+
+<div
+  id="screen-lightbox"
+  class="fixed inset-0 z-[100] hidden bg-black text-white"
+  role="dialog"
+  aria-modal="true"
+  aria-label={dialogLabel}
+>
+  <!-- Top bar: counter + project + close -->
+  <div class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between gap-4 px-4 md:px-10 py-4 bg-gradient-to-b from-black via-black/80 to-transparent">
+    <span data-lb-counter class="font-mono-meta text-xs font-bold uppercase tracking-widest text-[#FF4D00]">01 / 01</span>
+    <span data-lb-title class="font-mono-meta text-xs uppercase tracking-widest text-white/70 truncate max-w-[50%]"></span>
+    <button
+      type="button"
+      data-lb-close
+      aria-label={closeLabel}
+      class="w-10 h-10 shrink-0 rounded-full border-2 border-white/20 flex items-center justify-center text-white hover:border-[#FF4D00] hover:text-[#FF4D00] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+        <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Horizontal snap track (Wispr-style: full screen, scroll sideways) -->
+  <div
+    data-lb-track
+    class="absolute inset-0 flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory"
+  >
+    <!-- slides injected by the script -->
+  </div>
+
+  <!-- Prev / Next -->
+  <button
+    type="button"
+    data-lb-prev
+    aria-label={prevLabel}
+    class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/70 border-2 border-white/20 flex items-center justify-center text-white hover:border-[#FF4D00] hover:text-[#FF4D00] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+      <path stroke-linecap="square" stroke-linejoin="miter" d="M15 5l-7 7 7 7"></path>
+    </svg>
+  </button>
+  <button
+    type="button"
+    data-lb-next
+    aria-label={nextLabel}
+    class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/70 border-2 border-white/20 flex items-center justify-center text-white hover:border-[#FF4D00] hover:text-[#FF4D00] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+      <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+</div>
+
+<script
+  type="application/json"
+  id="screen-lightbox-data"
+  set:html={JSON.stringify(galleries)}
+/>
+
+<script>
+  // Fullscreen horizontal gallery (Wispr-style): click a screenshot, the
+  // lightbox takes the whole screen and you scroll the screens sideways.
+  // Images use the untouched original PNGs (1920px) for maximum quality.
+  const lightboxDataEl = document.getElementById("screen-lightbox-data");
+  const root = document.getElementById("screen-lightbox");
+
+  if (lightboxDataEl && root) {
+    const galleries = JSON.parse(lightboxDataEl.textContent ?? "{}") as Record<
+      string,
+      { title: string; items: { src: string; w: number; h: number; caption: string }[] }
+    >;
+    const track = root.querySelector<HTMLDivElement>("[data-lb-track]");
+    const counter = root.querySelector<HTMLElement>("[data-lb-counter]");
+    const titleEl = root.querySelector<HTMLElement>("[data-lb-title]");
+    const closeBtn = root.querySelector<HTMLButtonElement>("[data-lb-close]");
+    const prevBtn = root.querySelector<HTMLButtonElement>("[data-lb-prev]");
+    const nextBtn = root.querySelector<HTMLButtonElement>("[data-lb-next]");
+
+    if (track && counter && titleEl && closeBtn && prevBtn && nextBtn) {
+      let isOpen = false;
+      let currentKey = "";
+      let currentIndex = 0;
+      let lastTrigger: HTMLElement | null = null;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const slideCount = () => track.children.length;
+      const pad = (n: number) => String(n).padStart(2, "0");
+
+      const updateCounter = () => {
+        const first = track.firstElementChild as HTMLElement | null;
+        const slideW = first ? first.getBoundingClientRect().width : 1;
+        const idx = slideW > 0 ? Math.round(track.scrollLeft / slideW) : 0;
+        currentIndex = Math.min(Math.max(idx, 0), Math.max(slideCount() - 1, 0));
+        counter.textContent = `${pad(currentIndex + 1)} / ${pad(slideCount())}`;
+      };
+
+      const goTo = (index: number) => {
+        const clamped = Math.min(Math.max(index, 0), slideCount() - 1);
+        const target = track.children[clamped] as HTMLElement | undefined;
+        if (!target) return;
+        track.scrollTo({
+          left: target.offsetLeft,
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+      };
+
+      const open = (key: string, index: number, trigger: HTMLElement) => {
+        const gallery = galleries[key];
+        if (!gallery || gallery.items.length === 0) return;
+
+        // Build slides once per gallery (rebuild when a different key opens).
+        if (track.dataset.builtKey !== key) {
+          track.innerHTML = "";
+          gallery.items.forEach((item, i) => {
+            const figure = document.createElement("figure");
+            figure.className =
+              "snap-center shrink-0 w-full h-full flex flex-col items-center justify-center gap-4 p-4 pt-16 md:p-16 md:pt-20 m-0";
+            const img = document.createElement("img");
+            img.src = item.src;
+            img.width = item.w;
+            img.height = item.h;
+            img.alt = item.caption;
+            img.loading = "lazy";
+            img.className = "max-h-[74vh] w-auto max-w-full object-contain";
+            const caption = document.createElement("figcaption");
+            caption.className =
+              "font-mono-meta text-[11px] md:text-xs uppercase tracking-wider text-white/70 text-center max-w-2xl";
+            caption.textContent = `${pad(i + 1)} — ${item.caption}`;
+            figure.append(img, caption);
+            track.append(figure);
+          });
+          track.dataset.builtKey = key;
+          currentKey = key;
+        }
+
+        lastTrigger = trigger;
+        titleEl.textContent = gallery.title;
+        root.classList.remove("hidden");
+        root.classList.add("flex");
+        document.documentElement.style.overflow = "hidden";
+        isOpen = true;
+
+        // Jump straight to the requested screen (no smooth flight on open).
+        requestAnimationFrame(() => {
+          const target = track.children[Math.min(index, slideCount() - 1)] as HTMLElement | undefined;
+          if (target) track.scrollTo({ left: target.offsetLeft, behavior: "auto" });
+          updateCounter();
+          closeBtn.focus();
+        });
+      };
+
+      const close = () => {
+        isOpen = false;
+        root.classList.add("hidden");
+        root.classList.remove("flex");
+        document.documentElement.style.overflow = "";
+        if (lastTrigger) lastTrigger.focus();
+      };
+
+      // Triggers anywhere on the page (deck cards, detail gallery figures).
+      document.addEventListener("click", (event) => {
+        const trigger = (event.target as HTMLElement).closest<HTMLElement>("[data-lightbox-open]");
+        if (trigger instanceof HTMLElement) {
+          const key = trigger.dataset.lightboxOpen ?? "";
+          open(key, parseInt(trigger.dataset.lightboxIndex ?? "0", 10) || 0, trigger);
+        }
+      });
+
+      closeBtn.addEventListener("click", close);
+      prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
+      nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
+
+      track.addEventListener("scroll", updateCounter, { passive: true });
+
+      // Vertical wheel scrolls the gallery sideways (Wispr behavior).
+      track.addEventListener(
+        "wheel",
+        (event) => {
+          if (!isOpen) return;
+          if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+            event.preventDefault();
+            track.scrollLeft += event.deltaY;
+          }
+        },
+        { passive: false },
+      );
+
+      document.addEventListener("keydown", (event) => {
+        if (!isOpen) return;
+        if (event.key === "Escape") {
+          event.preventDefault();
+          close();
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goTo(currentIndex + 1);
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goTo(currentIndex - 1);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          goTo(0);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          goTo(slideCount() - 1);
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  /* Slides are JS-built, so the track's scrollbar hides via plain CSS. */
+  #screen-lightbox [data-lb-track] {
+    scrollbar-width: none;
+  }
+  #screen-lightbox [data-lb-track]::-webkit-scrollbar {
+    display: none;
+  }
+</style>
