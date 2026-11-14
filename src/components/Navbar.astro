@@ -46,7 +46,7 @@ const socialAria: Record<string, string> =
     : { instagram: "Instagram de Deftcode", linkedin: "LinkedIn de Deftcode" };
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-12 py-4">
+<header class="site-nav fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-12 py-4">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <!-- Brand Logo (Pure text, no black box, weight 800 Archivo Variable) -->
     <a
@@ -188,6 +188,19 @@ const socialAria: Record<string, string> =
   </div>
 </header>
 
+<style>
+  /* Scrolled state: solid black bar so page content never renders
+     "through" the transparent navbar (user report: form/cards visibly
+     colliding with the header mid-scroll). Above the fold the bar stays
+     transparent over the orange hero/banner. */
+  .site-nav {
+    transition: background-color 250ms ease;
+  }
+  .site-nav.navbar-scrolled {
+    background-color: #000;
+  }
+</style>
+
 <script>
   const toggleBtn = document.getElementById("mobile-menu-toggle");
   const drawer = document.getElementById("mobile-drawer");
@@ -209,30 +222,52 @@ const socialAria: Record<string, string> =
     });
   }
 
+  const nav = document.querySelector<HTMLElement>(".site-nav");
   const logo = document.querySelector<HTMLElement>(".navbar-brand-logo");
-  if (logo) {
-    const updateLogoContrast = () => {
-      const rect = logo.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
 
-      logo.style.pointerEvents = "none";
-      const el = document.elementFromPoint(x, y);
-      logo.style.pointerEvents = "auto";
+  const updateLogoContrast = () => {
+    if (!logo) return;
+    const rect = logo.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
 
-      if (el) {
-        const darkSection = el.closest(".bg-black, [data-theme='dark']");
-        const orangeSection = el.closest(".bg-\\[\\#FF4D00\\], .bg-brand-orange, #top");
-        if (darkSection && !orangeSection) {
+    logo.style.pointerEvents = "none";
+    const el = document.elementFromPoint(x, y);
+    logo.style.pointerEvents = "auto";
+
+    if (el) {
+      const darkSection = el.closest(".bg-black, [data-theme='dark']");
+      const orangeSection = el.closest(".bg-\\[\\#FF4D00\\], .bg-brand-orange, #top");
+      if (darkSection && !orangeSection) {
+        logo.classList.remove("text-black");
+        logo.classList.add("text-white");
+      } else {
+        logo.classList.remove("text-white");
+        logo.classList.add("text-black");
+      }
+    }
+  };
+
+  if (nav) {
+    const updateNavState = () => {
+      const scrolled = window.scrollY > 80;
+      const wasScrolled = nav.classList.contains("navbar-scrolled");
+      nav.classList.toggle("navbar-scrolled", scrolled);
+      if (logo) {
+        if (scrolled) {
+          // The bar is solid black: brand always reads white on it.
           logo.classList.remove("text-black");
           logo.classList.add("text-white");
         } else {
-          logo.classList.remove("text-white");
-          logo.classList.add("text-black");
+          if (wasScrolled) updateLogoContrast();
         }
       }
     };
 
+    window.addEventListener("scroll", updateNavState, { passive: true });
+    window.addEventListener("resize", updateNavState, { passive: true });
+    updateNavState();
+  } else if (logo) {
     window.addEventListener("scroll", updateLogoContrast, { passive: true });
     window.addEventListener("resize", updateLogoContrast, { passive: true });
     updateLogoContrast();

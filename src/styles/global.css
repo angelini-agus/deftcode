@@ -224,32 +224,11 @@ body::-webkit-scrollbar {
 }
 
 /* Page width system: every structural container holds to one width
-   (max-w-7xl = 72rem) and the separator rules span exactly the content
-   box of that container, never touching the html edges. */
-:root {
-  --page-max: 80rem;
-}
+   (max-w-7xl = 72rem). The old page-bottom separator rules were removed:
+   their 2px black strip rendered at the bottom edge of orange sections
+   and read as "the next black section overlapping a few pixels" at every
+   orange/black boundary. */
 
-.rule-page-bottom {
-  position: relative;
-}
-
-.rule-page-bottom::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background-color: #000;
-  left: max(1rem, calc((100% - var(--page-max)) / 2));
-  right: max(1rem, calc((100% - var(--page-max)) / 2));
-}
-
-@media (min-width: 768px) {
-  .rule-page-bottom::after {
-    left: max(3rem, calc((100% - var(--page-max)) / 2));
-    right: max(3rem, calc((100% - var(--page-max)) / 2));
-  }
-}
 /* Language parity (es is the larger base): reserve the same line counts
    so switching es/en keeps every box the same height. Values measured
    against the rendered builds; min-heights reserve the Spanish line
