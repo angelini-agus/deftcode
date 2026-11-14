@@ -136,7 +136,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                           width={1280}
                           height={800}
                           quality={90}
-                          class="w-full h-44 sm:h-52 md:h-60 object-cover object-top filter contrast-[1.02] brightness-95 group-hover:brightness-105 group-hover:scale-[1.02] transition-transform duration-300"
+                          class="w-full h-44 sm:h-52 md:h-60 object-cover object-top group-hover:brightness-105 group-hover:scale-[1.02] transition-transform duration-300"
                           loading="lazy"
                         />
                       </div>
@@ -159,8 +159,10 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
 
 <style>
   .projects-stack__runway {
-    /* Height creates the scroll runway: 100vh base + 75vh per card */
-    min-height: calc(100vh + (var(--flip-count, 6) * 75vh));
+    /* Height creates the scroll runway: 100vh base + 90vh per card
+       (raised from 75vh: each card now holds fully visible for the
+       first half of its segment before the next one rises over it) */
+    min-height: calc(100vh + (var(--flip-count, 6) * 90vh));
   }
 
   .folder {
@@ -200,7 +202,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
     const total = folders.length;
     let step = 32;
     let entryOffset = window.innerHeight * 0.7;
-    let geometry = flipGeometry(total, step, entryOffset);
+    let geometry = flipGeometry(total, step, entryOffset, 0.5);
 
     const springConfig = defaultSpringConfig();
     let springValue = 0;
@@ -214,8 +216,8 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
       const firstCard = folders[0];
       const cardHeight = firstCard ? firstCard.getBoundingClientRect().height : 400;
       step = Math.max(28, Math.min(48, window.innerHeight * 0.05));
-      entryOffset = Math.max(300, cardHeight * 0.9);
-      geometry = flipGeometry(total, step, entryOffset);
+      entryOffset = Math.max(300, cardHeight + 48);
+      geometry = flipGeometry(total, step, entryOffset, 0.5);
     };
 
     const syncDom = (progress: number) => {

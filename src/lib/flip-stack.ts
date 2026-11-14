@@ -6,6 +6,13 @@ export type FlipGeometry = {
   readonly segment: number;
   readonly step: number;
   readonly entryOffset: number;
+  /** Fraction of each segment the front card stays fully visible
+   *  before the next card starts rising over it (user request: there
+   *  must be a scroll moment where the whole card reads uncovered). */
+  readonly hold: number;
+  /** Vertical stagger between waiting cards so only the next card
+   *  peeks under the front one during the hold phase. */
+  readonly stackGap: number;
 };
 
 export type FlipCardState = {
@@ -23,6 +30,8 @@ export const flipGeometry = (
   total: number,
   step: number,
   entryOffset: number,
+  hold = 0.5,
+  stackGap = 64,
 ): FlipGeometry => {
   const safeTotal = Math.max(0, Math.floor(total));
   const m = Math.max(safeTotal, 1);
@@ -31,6 +40,8 @@ export const flipGeometry = (
     segment: 1 / m,
     step: Math.max(0, step),
     entryOffset: Math.max(0, entryOffset),
+    hold: clamp01(hold),
+    stackGap: Math.max(0, stackGap),
   };
 };
 
@@ -41,7 +52,7 @@ export const flipCardState = (
   reduceMotion: boolean,
 ): FlipCardState => {
   const p = clamp01(progress);
-  const { total, segment, step, entryOffset } = geometry;
+  const { total, segment } = geometry;
 
   if (total === 0 || index < 0 || index >= total) {
     return { y: 0, scale: 1, opacity: 1 };
@@ -52,16 +63,27 @@ export const flipCardState = (
     return { y: 0, scale: 1, opacity };
   }
 
-  const q = index - p / segment;
+  const { hold, entryOffset: rise, step } = geometry;
+  const u = p / segment;
+  // Card i rises from below during the last `hold` portion of card
+  // (i - 1)'s segment: u ∈ [i - hold, i]. Card 0 is always in place.
+  // Once landed it stays put; fully covered cards drift up by `step`
+  // per extra segment so the deck keeps its stacked peek.
+  const riseStart = index - hold;
   let y: number;
 
-  if (q >= 0) {
-    y = entryOffset * q;
+  if (u > index + 1) {
+    y = step * (index + 1 - u);
+  } else if (u >= index) {
+    y = 0;
+  } else if (u <= riseStart) {
+    y = rise + (riseStart - u) * geometry.stackGap;
   } else {
-    y = q >= -1 ? 0 : step * (q + 1);
+    const t = (u - riseStart) / Math.max(hold, 1e-6);
+    y = rise * (1 - t);
   }
 
-  const scaleT = clamp01(Math.abs(y) / Math.max(step, 1e-6));
+  const scaleT = clamp01(Math.abs(y) / Math.max(rise, 1e-6));
   const scale = lerp(1, 0.98, scaleT);
 
   return { y, scale, opacity: 1 };
