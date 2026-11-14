@@ -133,8 +133,9 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                         <Image
                           src={projectAssets[item.imageKey].main}
                           alt={lang === "en" ? projectAssets[item.imageKey].altEn : projectAssets[item.imageKey].altEs}
-                          width={800}
-                          height={500}
+                          width={1280}
+                          height={800}
+                          quality={90}
                           class="w-full h-44 sm:h-52 md:h-60 object-cover object-top filter contrast-[1.02] brightness-95 group-hover:brightness-105 group-hover:scale-[1.02] transition-transform duration-300"
                           loading="lazy"
                         />
