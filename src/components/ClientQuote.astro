@@ -1,0 +1,53 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { clientQuote } = getContent(lang);
+
+const caseHref = lang === "en" ? "/en/projects/empresa-limpieza-rosario/" : "/proyectos/empresa-limpieza-rosario/";
+const caseLabel = lang === "en" ? "EXPLORE FULL CASE" : "VER CASO COMPLETO";
+
+// The real client quote highlights one phrase: split once for the mark.
+const [quoteBefore, quoteAfter] = clientQuote.text.split(clientQuote.highlight);
+---
+
+<!-- Real client testimonial (Paola Zorila, AZ Servicios de Limpieza),
+     ported from misura-web: the vertical 2px rule acts as the quotation
+     mark, the signature rides in the site's mono, and the highlighted
+     phrase is the only orange mark on the black background. -->
+<section class="relative bg-black text-white py-16 md:py-24 px-4 md:px-12">
+  <div class="max-w-6xl mx-auto">
+    <figure class="reveal max-w-3xl border-l-2 border-[#FF4D00] pl-6 md:pl-10">
+      <p class="font-mono-meta text-xs uppercase font-bold tracking-widest text-[#FF4D00] mb-4 m-0">
+        {clientQuote.eyebrow}
+      </p>
+      <blockquote class="font-sans text-xl sm:text-2xl md:text-[1.7rem] font-bold text-white leading-snug m-0">
+        {quoteBefore}
+        <mark class="bg-[#FF4D00] text-black px-1">{clientQuote.highlight}</mark>
+        {quoteAfter}
+      </blockquote>
+      <figcaption class="mt-6">
+        <p class="font-mono-meta text-xs uppercase font-bold tracking-widest text-[#FF4D00] m-0">
+          {clientQuote.author}
+        </p>
+        <p class="font-mono-meta text-xs uppercase tracking-widest text-white/60 mt-1 m-0">
+          {clientQuote.source}
+        </p>
+        <p class="mt-5 mb-0">
+          <a
+            href={caseHref}
+            class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+          >
+            <span>{caseLabel}</span>
+            <span>&rarr;</span>
+          </a>
+        </p>
+      </figcaption>
+    </figure>
+  </div>
+</section>

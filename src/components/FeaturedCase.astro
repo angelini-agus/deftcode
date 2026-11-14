@@ -7,10 +7,7 @@ interface Props {
 }
 
 const { lang = "es" } = Astro.props;
-const { projects, clientQuote } = getContent(lang);
-
-// The real client quote highlights one phrase: split once for the mark.
-const [quoteBefore, quoteAfter] = clientQuote.text.split(clientQuote.highlight);
+const { projects } = getContent(lang);
 
 // Featured case: shared id across both dictionaries, first project as fallback.
 const featured = projects.find((p) => p.id === "empresa-limpieza") ?? projects[0];
@@ -107,29 +104,6 @@ const allProjectsHref = lang === "en" ? "/en/projects/" : "/proyectos/";
         </div>
       </div>
     </article>
-
-    <!-- Client quote (real testimonial, copied from misura-web): the
-         vertical 2px rule acts as the quotation mark, signature in the
-         site's mono. Lives inside the orange section so the last thing
-         read before the projects band is a client's voice. -->
-    <figure class="reveal max-w-3xl border-l-2 border-black pl-6 md:pl-8 mt-12 md:mt-16">
-      <p class="font-mono-meta text-xs uppercase font-bold tracking-widest text-black mb-3 m-0">
-        {clientQuote.eyebrow}
-      </p>
-      <blockquote class="font-sans text-xl sm:text-2xl md:text-[1.7rem] font-bold text-black leading-snug m-0">
-        {quoteBefore}
-        <mark class="bg-black text-[#FF4D00] px-1">{clientQuote.highlight}</mark>
-        {quoteAfter}
-      </blockquote>
-      <figcaption class="mt-5">
-        <p class="font-mono-meta text-xs uppercase font-bold tracking-widest text-black m-0">
-          {clientQuote.author}
-        </p>
-        <p class="font-mono-meta text-xs uppercase tracking-widest text-black/70 mt-1 m-0">
-          {clientQuote.source}
-        </p>
-      </figcaption>
-    </figure>
 
     <!-- Closing band to the full projects page (internal route) -->
     <a

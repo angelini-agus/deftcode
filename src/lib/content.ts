@@ -811,8 +811,8 @@ const esHowWeWork: WorkStep[] = [
 const esTeam: TeamMember[] = [
   {
     name: "AGUSTÍN ANGELINI",
-    role: "FUNDADOR & LÍDER TÉCNICO",
-    bio: "Especialista en arquitecturas web modernas, diseño de sistemas de alta disponibilidad y optimización de rendimiento.",
+    role: "DESARROLLADOR FULL STACK",
+    bio: "Orientación en Frontend e integraciones con IA. Me gusta que el software sea rápido, simple y fácil de usar.",
     tags: ["ASTRO", "TYPESCRIPT", "REACT", "TAILWIND", "SISTEMAS DISTRIBUIDOS"],
     github: "https://github.com/angelini-agus",
     linkedin: "https://www.linkedin.com/in/agustin-angelini/",
@@ -820,7 +820,7 @@ const esTeam: TeamMember[] = [
   {
     name: "FRANCO CUSCIANNA",
     role: "DESARROLLADOR FULL STACK",
-    bio: "Orientación en Backend y Arquitectura de Sistemas: software sólido, seguro y escalable.",
+    bio: "Orientación en Backend y Arquitectura de Sistemas. Me gusta que el software sea sólido, seguro y escalable.",
     tags: ["BACKEND", "ARQUITECTURA DE SISTEMAS", "SEGURIDAD", "ESCALABILIDAD"],
     github: "https://github.com/francocus",
     linkedin: "https://www.linkedin.com/in/francocus/",
@@ -1695,8 +1695,8 @@ const enHowWeWork: WorkStep[] = [
 const enTeam: TeamMember[] = [
   {
     name: "AGUSTÍN ANGELINI",
-    role: "FOUNDER & TECH LEAD",
-    bio: "Specialist in modern web architectures, distributed high-availability systems, and extreme performance optimization.",
+    role: "FULL-STACK DEVELOPER",
+    bio: "Frontend and AI integrations focus. I like software that is fast, simple, and easy to use.",
     tags: ["ASTRO", "TYPESCRIPT", "REACT", "TAILWIND", "DISTRIBUTED SYSTEMS"],
     github: "https://github.com/angelini-agus",
     linkedin: "https://www.linkedin.com/in/agustin-angelini/",
@@ -1704,7 +1704,7 @@ const enTeam: TeamMember[] = [
   {
     name: "FRANCO CUSCIANNA",
     role: "FULL-STACK DEVELOPER",
-    bio: "Backend and systems architecture focus: solid, secure, scalable software.",
+    bio: "Backend and systems architecture focus. I like software that is solid, secure, and scalable.",
     tags: ["BACKEND", "SYSTEMS ARCHITECTURE", "SECURITY", "SCALABILITY"],
     github: "https://github.com/francocus",
     linkedin: "https://www.linkedin.com/in/francocus/",
