@@ -866,7 +866,7 @@ const esCtaContent: CtaContent = {
   headingLines: ["CONSTRUYAMOS", "ALGO ÁGIL."],
   subheading: "Llevamos tu infraestructura digital a la velocidad que tu empresa necesita.",
   buttonLabel: "AGENDÁ 20 MIN. CON NOSOTROS",
-  buttonHref: "https://wa.me/?text=Hola%20Deftcode,%20quiero%20agendar%20una%20reuni%C3%B3n%20de%2020%20minutos",
+  buttonHref: "/contacto/",
   emailLabel: "contacto@deftcode.dev",
 };
 
@@ -1739,7 +1739,7 @@ const enCtaContent: CtaContent = {
   headingLines: ["LET'S BUILD", "SOMETHING DEFT."],
   subheading: "We accelerate your digital infrastructure to the velocity your business demands.",
   buttonLabel: "BOOK A 20-MINUTE CALL",
-  buttonHref: "https://wa.me/?text=Hi%20Deftcode,%20I'd%20like%20to%20book%20a%2020-minute%20call",
+  buttonHref: "/en/contact/",
   emailLabel: "contacto@deftcode.dev",
 };
 
