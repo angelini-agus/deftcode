@@ -860,6 +860,17 @@ const esFaqList: FaqItem[] = [
   },
 ];
 
+// Testimonio real de Paola Zorila (AZ Servicios de Limpieza), tomado de
+// misura-web. La cita se mantiene en su idioma original en ambas locales:
+// traducir la voz de una clienta seria inventarla.
+const esClientQuote = {
+  eyebrow: "TESTIMONIO",
+  text: "Antes perdíamos horas llenando planillas a mano para saber quién había trabajado qué día en cada edificio, y encima las quejas por inasistencias eran un dolor de cabeza semana a semana. Con deftcode ahora todo se carga solo, y una tarea que antes le consumía gran parte de su jornada a un empleado, hoy se resuelve de forma automática. Para mí fue de las mejores decisiones que tomé en la empresa, ya que dejé de lidiar con problemas cotidianos y puse mi foco en hacer crecer el negocio.",
+  author: "PAOLA ZORILA",
+  source: "AZ SERVICIOS DE LIMPIEZA, ROSARIO",
+  highlight: "se resuelve de forma automática",
+};
+
 const esCtaContent: CtaContent = {
   kicker: "TIEMPO DE MOVERSE RÁPIDO",
   heading: "CONSTRUYAMOS ALGO ÁGIL.",
@@ -1733,6 +1744,15 @@ const enFaqList: FaqItem[] = [
   },
 ];
 
+// Same real quote for both locales (see note above).
+const enClientQuote = {
+  eyebrow: "TESTIMONIAL",
+  text: "Antes perdíamos horas llenando planillas a mano para saber quién había trabajado qué día en cada edificio, y encima las quejas por inasistencias eran un dolor de cabeza semana a semana. Con deftcode ahora todo se carga solo, y una tarea que antes le consumía gran parte de su jornada a un empleado, hoy se resuelve de forma automática. Para mí fue de las mejores decisiones que tomé en la empresa, ya que dejé de lidiar con problemas cotidianos y puse mi foco en hacer crecer el negocio.",
+  author: "PAOLA ZORILA",
+  source: "AZ SERVICIOS DE LIMPIEZA, ROSARIO",
+  highlight: "se resuelve de forma automática",
+};
+
 const enCtaContent: CtaContent = {
   kicker: "TIME TO MOVE FAST",
   heading: "LET'S BUILD SOMETHING DEFT.",
@@ -1780,6 +1800,7 @@ export const getContent = (lang: Lang = "es") => {
     faqList: isEn ? enFaqList : esFaqList,
     forWho: isEn ? enForWho : esForWho,
     socialLinks: esSocialLinks,
+    clientQuote: isEn ? enClientQuote : esClientQuote,
     ctaContent: isEn ? enCtaContent : esCtaContent,
   };
 };
@@ -1806,3 +1827,4 @@ export const faqList = esFaqList;
 export const forWho = esForWho;
 export const socialLinks = esSocialLinks;
 export const ctaContent = esCtaContent;
+export const clientQuote = esClientQuote;

@@ -21,16 +21,19 @@ const { forWho } = getContent(lang);
       </h2>
     </div>
 
-    <!-- Check / cross two columns -->
+    <!-- Cross / check two columns. The NO card leads: the section's
+         message is "NO TRABAJAMOS CON CUALQUIERA", so the orange card
+         carries the exclusions first and the ghost card answers with
+         who the work IS for. -->
     <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12">
-      <!-- YES card -->
+      <!-- NO card (first, orange) -->
       <div class="bg-[#FF4D00] text-black border-2 border-black p-8">
         <span class="font-mono-meta text-xs uppercase font-bold text-black tracking-widest">
-          {forWho.yesLabel}
+          {forWho.noLabel}
         </span>
         <ul class="m-0 p-0 list-none">
           {
-            forWho.yesItems.map((item) => (
+            forWho.noItems.map((item) => (
               <li class="flex items-start gap-3 mt-5">
                 <svg
                   class="w-5 h-5 shrink-0 text-black mt-0.5"
@@ -40,7 +43,7 @@ const { forWho } = getContent(lang);
                   stroke-width="2.5"
                   aria-hidden="true"
                 >
-                  <path stroke-linecap="square" stroke-linejoin="miter" d="M5 13l4 4L19 7"></path>
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
                 </svg>
                 <span class="text-black/85 font-sans text-sm leading-relaxed">{item}</span>
               </li>
@@ -49,26 +52,26 @@ const { forWho } = getContent(lang);
         </ul>
       </div>
 
-      <!-- NO card -->
+      <!-- YES card (ghost) -->
       <div class="border-2 border-white/20 p-8 bg-white/[0.02] text-white">
-        <span class="font-mono-meta text-xs uppercase font-bold text-white tracking-widest">
-          {forWho.noLabel}
+        <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
+          {forWho.yesLabel}
         </span>
         <ul class="m-0 p-0 list-none">
           {
-            forWho.noItems.map((item) => (
+            forWho.yesItems.map((item) => (
               <li class="flex items-start gap-3 mt-5">
                 <svg
-                  class="w-5 h-5 shrink-0 text-white mt-0.5"
+                  class="w-5 h-5 shrink-0 text-[#FF4D00] mt-0.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   stroke-width="2.5"
                   aria-hidden="true"
                 >
-                  <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span class="text-white/80 font-sans text-sm leading-relaxed">{item}</span>
+                <span class="text-white/85 font-sans text-sm leading-relaxed">{item}</span>
               </li>
             ))
           }
