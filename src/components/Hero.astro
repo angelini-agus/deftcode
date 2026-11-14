@@ -12,7 +12,6 @@ const { heroContent } = getContent(lang);
 const servicesHref = lang === "en" ? "#services" : "#servicios";
 const scrollAriaLabel = lang === "en" ? "Scroll to services" : "Desplazarse a servicios";
 const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA";
-const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES // CORE";
 ---
 
 <section
@@ -21,7 +20,10 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
 >
   <!-- Top Utility Tag -->
   <div class="flex items-center justify-between pb-4">
-    <div class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black">
+    <div
+      data-hero-label
+      class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black ml-[var(--hero-indent,0px)]"
+    >
       {lang === "en" ? "EST. 2026 // AGILE DEV" : "EST. 2026 // DESARROLLO ÁGIL"}
     </div>
   </div>
@@ -101,7 +103,6 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
 
       <!-- Right: Role / Title description -->
       <div class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black md:text-right">
-        <span class="block text-[11px] opacity-75 font-normal">{capabilitiesLabel}</span>
         {heroContent.roleText}
       </div>
     </div>
@@ -208,4 +209,27 @@ const capabilitiesLabel = lang === "en" ? "CAPABILITIES // CORE" : "CAPACIDADES 
 
   document.addEventListener("DOMContentLoaded", initHeroArrowRotation);
   initHeroArrowRotation();
+
+  // Align the EST. 2026 label with the h1's left text edge: the giant
+  // centered headline starts well inside the section padding, and the
+  // label must carry the same visual margin at any viewport width.
+  const heroSection = document.getElementById("top");
+  const heroLabel = document.querySelector("[data-hero-label]");
+  const heroH1 = heroSection?.querySelector("h1");
+
+  if (heroSection && heroLabel && heroH1) {
+    const alignHeroLabel = () => {
+      const range = document.createRange();
+      range.selectNodeContents(heroH1);
+      const rects = Array.from(range.getClientRects());
+      const textLeft = rects.length ? Math.min(...rects.map((r) => r.left)) : heroH1.getBoundingClientRect().left;
+      const padding = parseFloat(getComputedStyle(heroSection).paddingLeft) || 0;
+      const indent = Math.max(0, Math.round(textLeft - heroSection.getBoundingClientRect().left - padding));
+      heroSection.style.setProperty("--hero-indent", `${indent}px`);
+    };
+
+    document.fonts.ready.then(alignHeroLabel);
+    window.addEventListener("resize", alignHeroLabel, { passive: true });
+    alignHeroLabel();
+  }
 </script>
