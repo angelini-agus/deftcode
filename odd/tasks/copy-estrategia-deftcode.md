@@ -28,9 +28,11 @@ pendientes antes de publicar). Toda tarea futura de copy/UI debe salir de este d
 
 1. [x] Explorar deftcode y verificar estado del copy actual (grep content.ts).
 2. [x] Crear este feature doc + espejo Engram.
-3. [ ] Escribir `ESTRATEGIA-COPY.md` (raíz, español, con mapeo a componentes y páginas reales).
-4. [ ] Commit de los archivos nuevos (solo paths explícitos).
+3. [x] Escribir `ESTRATEGIA-COPY.md` (raíz, español, 595 líneas, con mapeo a componentes y páginas reales).
+4. [x] Commit de los archivos nuevos (solo paths explícitos).
 
 ## Evidence
 
-- Commit: (pendiente)
+- Commit: `00aaee4` en `main` (docs: add sales & copy strategy source of truth), 2 archivos, 631 insertiones.
+- Sin pushear: el push lo decide el usuario.
+- Próximo paso natural: implementar la oferta en `src/lib/content.ts` siguiendo el gap map de §0 del doc.
