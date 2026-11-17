@@ -2,16 +2,27 @@ import type {
   Lang,
   SiteMeta,
   NavLink,
+  NavCtaContent,
+  FooterContent,
+  WhatsAppContact,
   ServiceItem,
+  ServicesHomeContent,
   ProjectItem,
   TeamMember,
   WorkStep,
+  ProcessContent,
+  PricingContent,
   FaqItem,
   SocialLink,
   PageContent,
   CtaContent,
   HeroContent,
   ManifestoItem,
+  ProblemsContent,
+  FeaturedCaseContent,
+  MoreSoftwareContent,
+  ContactFormContent,
+  DiagnosticoLandingContent,
 } from "./types";
 
 // ==========================================
@@ -19,14 +30,14 @@ import type {
 // ==========================================
 
 const esSiteMeta: SiteMeta = {
-  title: "DEFTCODE // SOFTWARE DE ALTA VELOCIDAD & INGENIERÍA DIGITAL",
+  title: "Software a medida en Rosario | Diagnóstico gratis | Deftcode",
   description:
-    "Desarrollo de software ágil, moderno y de alto rendimiento. Creamos plataformas web, sistemas a medida y experiencias digitales con velocidad implacable y máxima precisión técnica.",
+    "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
   siteUrl: "https://deftcode.dev",
   ogImage: "/og-deftcode.png",
   author: "Deftcode Studio",
-  location: "ROSARIO, ARGENTINA // REMOTO GLOBAL",
-  tagline: "SOFTWARE A GRAN VELOCIDAD",
+  location: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
+  tagline: "Software a gran velocidad.",
   foundedYear: 2026,
 };
 
@@ -39,32 +50,57 @@ const esNavLinks: NavLink[] = [
 ];
 
 const esPages: Record<string, PageContent> = {
-  nosotros: {
-    title: "NOSOTROS // MANIFIESTO & EQUIPO - DEFTCODE",
+  home: {
+    title: "Software a medida en Rosario | Diagnóstico gratis | Deftcode",
     description:
-      "Conoce la filosofía de Deftcode: velocidad de desarrollo, ingeniería moderna sin burocracia y foco obsesivo en rendimiento y valor de negocio.",
-    eyebrow: "FILOSOFÍA & INGENIERÍA",
-    h1: "VELOCIDAD, PRECISIÓN Y CERO CÓDIGO BASURA.",
+      "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
+    eyebrow: "ROSARIO, ARGENTINA",
+    h1: "TU SISTEMA A MEDIDA",
+  },
+  nosotros: {
+    title: "Quiénes somos: desarrolladores que entienden de negocios | Deftcode",
+    description:
+      "Conocé a Agustín y Franco, el método de diagnóstico gratis y las garantías por escrito con las que trabajamos.",
+    eyebrow: "NOSOTROS",
+    h1: "SOMOS LOS QUE ESCRIBEN EL CÓDIGO. Y LOS QUE FIRMAMOS LA FECHA DE ENTREGA.",
     intro:
-      "Cambiamos el paradigma de las agencias tradicionales lentas. En Deftcode construimos software con stacks de última generación, arquitectura limpia y entregas continuas en semanas, no en semestres.",
+      "Somos gente de sistemas que entiende de negocios. Primero entendemos cómo trabajás, después te mostramos un prototipo y recién ahí firmás. Entregamos en semanas, no en semestres.",
   },
   proyectos: {
-    title: "PROYECTOS // PORTFOLIO & CASOS DE ESTUDIO - DEFTCODE",
+    title: "Casos reales: sistemas, CRM y landings en producción | Deftcode",
     description:
-      "Explora nuestros sistemas en producción: plataformas ERP corporativas, aplicaciones web y landings de alta velocidad, medidos al milisegundo.",
-    eyebrow: "CASOS EN PRODUCCIÓN",
-    h1: "SOFTWARE REAL PARA PROBLEMAS REALES.",
+      "Mirá qué ahorró, ordenó y vendió cada sistema que construimos: ERP, CRM, landings y portales en producción.",
+    eyebrow: "CASOS REALES",
+    h1: "SOFTWARE REAL QUE AHORRA PLATA Y TIEMPO, CON NÚMEROS.",
     intro:
-      "Cada desarrollo está optimizado para maximizar conversión, reducir costos de infraestructura y escalar sin fricción operativa.",
+      "Cada caso muestra qué problema tenía el cliente, cuánto tardamos y qué cambió. Los tuyos pueden empezar con un diagnóstico gratis.",
+  },
+  servicios: {
+    title: "Sistemas, CRM, ERP y landings a medida | Deftcode",
+    description:
+      "Siempre empezamos con un diagnóstico gratis. Después elegís qué construir, con precio cerrado y fecha en el contrato.",
+    eyebrow: "SERVICIOS",
+    h1: "SISTEMAS A MEDIDA QUE REEMPLAZAN TUS PLANILLAS EN 3 A 6 SEMANAS.",
+    intro:
+      "Siempre empezamos con un diagnóstico gratis. Después elegís qué construir, con precio cerrado y fecha en el contrato.",
   },
   contacto: {
-    title: "CONTACTO // INICIA TU PROYECTO - DEFTCODE",
+    title: "Diagnóstico gratis para tu empresa | Deftcode",
     description:
-      "Hablemos sobre tu próximo producto digital. Presupuestos transparentes, análisis de arquitectura sin costo y respuesta en menos de 24 horas.",
-    eyebrow: "CANAL DIRECTO",
-    h1: "CONSTRUYAMOS ALGO POTENTE.",
+      "Entrevista de 2 horas, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
+    eyebrow: "DIAGNÓSTICO GRATIS",
+    h1: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS. DIAGNÓSTICO GRATIS EN 48 HORAS.",
     intro:
-      "Respondemos de inmediato. Sin reuniones inútiles: definimos objetivos técnicos, estimamos tiempos y comenzamos a construir.",
+      "Una entrevista de 2 horas sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
+  },
+  diagnostico: {
+    title: "Diagnóstico gratis para tu empresa | Deftcode",
+    description:
+      "Entrevista de 2 horas, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
+    eyebrow: "DIAGNÓSTICO GRATIS",
+    h1: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS. DIAGNÓSTICO GRATIS EN 48 HORAS.",
+    intro:
+      "Una entrevista de 2 horas sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   privacidad: {
     title: "POLÍTICA DE PRIVACIDAD - DEFTCODE",
@@ -76,32 +112,44 @@ const esPages: Record<string, PageContent> = {
 };
 
 const esHeroContent: HeroContent = {
-  headlineMain: "DEFTCODE",
-  headlineSub: "SOFTWARE A GRAN VELOCIDAD",
-  badge: "SISTEMAS // WEB // SAAS",
-  locationText: "DESDE ROSARIO, ARGENTINA // REMOTO GLOBAL",
-  roleText: "INGENIERÍA DIGITAL ÁGIL // ARQUITECTURAS MODERNAS // WEB DE ALTO RENDIMIENTO",
-  ctaLabel: "INICIAR PROYECTO",
+  headlineMain: "TU SISTEMA",
+  headlineSub: "A MEDIDA. EN 3 A 6 SEMANAS Y A PRECIO CERRADO.",
+  subtitle:
+    "Hacemos un diagnóstico gratis de tu empresa y te mostramos un prototipo antes de firmar. Así una empresa de limpieza de Rosario ahorra $2.8M ARS por mes en sueldos.",
+  kicker: "PRIMERO LO VES, DESPUÉS FIRMÁS.",
+  badge: "ROSARIO, ARGENTINA // PARA PYMES DE TODO EL PAÍS",
+  locationText: "ROSARIO, ARGENTINA // PARA PYMES DE TODO EL PAÍS",
+  roleText: "SISTEMAS A MEDIDA // CRM // ERP // LANDINGS QUE TRAEN CLIENTES",
+  stats: [
+    "-$2.8M ARS/MES EN SUELDOS",
+    "0 QUEJAS POR INASISTENCIA",
+    "30+ EDIFICIOS EN VIVO",
+    "0 PLAZOS INCUMPLIDOS",
+  ],
+  ctaLabel: "Quiero mi diagnóstico gratis",
   ctaHref: "/contacto/",
-  scrollText: "DESLIZAR HACIA ABAJO • EXPLORAR DEFTCODE • ",
+  ctaSecondaryLabel: "Ver cómo lo hicimos en AZ",
+  ctaSecondaryHref: "/proyectos/empresa-limpieza-rosario/",
+  microcopy: "Entrevista de 2 horas. Informe en 48 h. Es tuyo aunque no trabajemos juntos.",
+  scrollText: "DESLIZAR HACIA ABAJO • VER EL CASO REAL • ",
 };
 
 const esMarqueeItems = {
   row1: [
-    "DESARROLLO DE ALTA VELOCIDAD",
-    "ARQUITECTURAS MODERNAS",
-    "ANIMACIONES FLUIDAS SIN BLOQUEOS",
-    "ÁGIL Y PRECISO",
-    "DISEÑADO PARA ESCALAR",
-    "INGENIERÍA WEB MODERNA",
+    "DIAGNÓSTICO GRATIS",
+    "PROTOTIPO GRATIS",
+    "PRECIO CERRADO",
+    "FECHA EN CONTRATO",
+    "CÓDIGO 100% TUYO",
+    "ENTREGAS SEMANALES",
   ],
   row2: [
-    "SOFTWARE EN PRODUCCIÓN",
-    "SISTEMAS & SAAS A MEDIDA",
-    "AUTOMATIZACIÓN CON IA",
-    "ENTREGA EN SEMANAS",
-    "MÉTRICAS EN VERDE",
-    "DISEÑO A MEDIDA",
+    "SIN PLANILLAS",
+    "SIN WHATSAPP SUELTO",
+    "SIN SISTEMAS ENLATADOS",
+    "UN SOLO SISTEMA A TU MEDIDA",
+    "SOPORTE DESPUÉS DEL LANZAMIENTO",
+    "-$2.8M ARS/MES EN SUELDOS",
   ],
 };
 
@@ -262,8 +310,9 @@ const esProjects: ProjectItem[] = [
     id: "empresa-limpieza",
     imageKey: "empresa-limpieza",
     slug: "empresa-limpieza-rosario",
-    title: "SERVICETRACK — GESTIÓN EMPRESA DE LIMPIEZA",
-    client: "AZ Servicios de Limpieza",
+    title: "DE PLANILLAS A UN SISTEMA QUE AHORRA $2.8M ARS POR MES",
+    client: "SERVICETRACK // AZ SERVICIOS DE LIMPIEZA",
+    plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Santa Fe",
     category: "SISTEMA DE GESTIÓN (ERP)",
     year: "2026",
@@ -343,14 +392,15 @@ const esProjects: ProjectItem[] = [
     id: "gestion-legal",
     imageKey: "gestion-legal",
     slug: "gestion-legal-estudio",
-    title: "LEGALDESK — GESTIÓN JURÍDICA INTEGRAL",
-    client: "Estudio jurídico internacional",
+    title: "DOS PAÍSES, UN SOLO SISTEMA, CERO PLAZOS VENCIDOS",
+    client: "LEGALDESK // ESTUDIO JURÍDICO INTERNACIONAL",
+    plazo: "[COMPLETAR: semanas]",
     location: "Argentina y Paraguay",
     category: "SISTEMA DE GESTIÓN (ERP)",
     year: "2026",
     description:
       "Plataforma para administrar expedientes judiciales y extrajudiciales en dos países, agenda de vencimientos, control financiero y biblioteca jurídica con IA.",
-    metrics: ["2 JURISDICCIONES EN VIVO", "100% TRAZABILIDAD", "-60% TIEMPO DE BÚSQUEDA", "CERO PLAZOS VENCIDOS"],
+    metrics: ["2 JURISDICCIONES EN VIVO", "-60% TIEMPO DE BÚSQUEDA", "CERO PLAZOS VENCIDOS"],
     tags: ["NEXT.JS", "REACT", "TYPESCRIPT", "POSTGRESQL", "PRISMA", "IA INTEGRADA"],
     fullOverview:
       "Sistema integral en la nube diseñado para firmas jurídicas que gestionan causas y clientes corporativos transfronterizos.",
@@ -424,14 +474,15 @@ const esProjects: ProjectItem[] = [
     id: "sistema-pediatrico",
     imageKey: "sistema-pediatrico",
     slug: "sistema-clinica-pediatrica",
-    title: "PEDIATRICCARE — GESTIÓN CLÍNICA PEDIÁTRICA",
-    client: "Clínica pediátrica ambulatoria",
+    title: "HISTORIA CLÍNICA Y TURNOS SIN PAPELES, CONFORME A LA LEY 26.529",
+    client: "PEDIATRICCARE // CLÍNICA PEDIÁTRICA",
+    plazo: "[COMPLETAR: semanas]",
     location: "Pueblo Esther, Santa Fe",
     category: "SALUD & ERP",
     year: "2025",
     description:
       "Historia clínica electrónica conforme a la Ley 26.529, agenda de turnos inteligente, panel clínico en tiempo real y emisión digital de recetas médicas en PDF.",
-    metrics: ["LEY 26.529 CONFORME", "0 EXTRAVÍO DE ANTECEDENTES", "+85% VELOCIDAD DE CONSULTA", "100% DIGITAL"],
+    metrics: ["+85% VELOCIDAD DE CONSULTA", "0 ANTECEDENTES EXTRAVIADOS"],
     tags: ["NEXT.JS", "NESTJS", "POSTGRESQL", "PRISMA", "TAILWIND CSS", "PDF GENERATION"],
     fullOverview:
       "Digitalización integral del flujo ambulatorio médico, conectando recepción, consultorios y pacientes en un entorno seguro y confidencial.",
@@ -505,14 +556,15 @@ const esProjects: ProjectItem[] = [
     id: "crm-concesionaria",
     imageKey: "crm-concesionaria",
     slug: "crm-concesionaria-rosario",
-    title: "AUTOLEADS — CRM DE VENTAS PARA CONCESIONARIA",
-    client: "Concesionaria oficial de vehículos",
+    title: "CUATRO CANALES DE CONSULTAS EN UN SOLO CRM",
+    client: "AUTOLEADS // CONCESIONARIA OFICIAL",
+    plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Santa Fe",
     category: "VENTAS (CRM)",
     year: "2025",
     description:
       "Centralización de leads de WhatsApp, Instagram, Facebook y Mercado Libre en una sola base unificada con asignación por asesor y métricas de conversión.",
-    metrics: ["4 CANALES CENTRALIZADOS", "+40% TASA DE CONTACTO", "CERO LEADS OLVIDADOS", "REPORTE EN SEGUNDOS"],
+    metrics: ["4 CANALES CENTRALIZADOS", "+40% TASA DE CONTACTO", "CERO LEADS OLVIDADOS"],
     tags: ["REACT", "VITE", "PRIMEREACT", ".NET 9", "DAPPER", "POSTGRESQL", "DOCKER"],
     fullOverview:
       "Plataforma comercial desarrollada para concesionarias automotrices que procesan cientos de consultas digitales semanales.",
@@ -586,8 +638,9 @@ const esProjects: ProjectItem[] = [
     id: "landing-limpieza",
     imageKey: "landing-limpieza",
     slug: "landing-empresa-limpieza",
-    title: "AZ SERVICIOS — SITIO WEB CORPORATIVO",
-    client: "AZ Servicios de Limpieza",
+    title: "UNA WEB QUE TRAE CONSULTAS CALIFICADAS",
+    client: "SITIO DE AZ SERVICIOS",
+    plazo: "1 a 2 semanas",
     location: "Rosario, Santa Fe",
     liveUrl: {
       href: "https://azserviciosdelimpieza.com",
@@ -597,7 +650,7 @@ const esProjects: ProjectItem[] = [
     year: "2026",
     description:
       "Sitio institucional con propuesta de valor de personal asegurado y supervisión GPS, captación calificada e integración con el ERP interno bajo un mismo dominio.",
-    metrics: ["100/100 LIGHTHOUSE", "< 0.6s LCP", "+120% LEADS CALIFICADOS", "DOMINIO UNIFICADO"],
+    metrics: ["+120% LEADS CALIFICADOS", "CARGA EN MENOS DE 0.6 S"],
     tags: ["ASTRO 7", "TYPESCRIPT", "TAILWIND CSS V4", "VERCEL EDGE", "SEO ESTRUCTURADO"],
     fullOverview:
       "Plataforma institucional de alta velocidad con cotizador inteligente que filtra prospectos y alimenta el embudo comercial corporativo.",
@@ -671,8 +724,9 @@ const esProjects: ProjectItem[] = [
     id: "landing-pediatrica",
     imageKey: "landing-pediatrica",
     slug: "landing-clinica-pediatrica",
-    title: "PORTAL PEDIÁTRICO — SITIO PÚBLICO & TURNOS",
-    client: "Clínica pediátrica especializada",
+    title: "TURNOS DESDE EL CELULAR, SIN ESPERAS",
+    client: "PORTAL PEDIÁTRICO // CLÍNICA PEDIÁTRICA",
+    plazo: "1 a 2 semanas",
     location: "Pueblo Esther, Santa Fe",
     liveUrl: {
       href: "https://dramartinangelio.com",
@@ -682,7 +736,7 @@ const esProjects: ProjectItem[] = [
     year: "2025",
     description:
       "Portal público con trayectoria médica, etapas del cuidado pediátrico y un flujo de solicitud de turnos amigable pensado para las familias.",
-    metrics: ["0ms TBT", "+150% RESERVAS MÓVILES", "CERO ESPERAS EN LÍNEA", "100% ACCESIBLE"],
+    metrics: ["+150% RESERVAS MÓVILES", "100% ACCESIBLE"],
     tags: ["ASTRO", "REACT", "TAILWIND CSS", "VIEW TRANSITIONS", "A11Y"],
     fullOverview:
       "Sitio web médico orientado a la experiencia del paciente familiar, con acceso directo a especialidades y reserva ágil de consultas.",
@@ -757,62 +811,141 @@ const esProjects: ProjectItem[] = [
 const esManifesto: ManifestoItem[] = [
   {
     number: "01",
-    title: "VELOCIDAD NO SIGNIFICA DESPROLIJIDAD",
-    description:
-      "Trabajar rápido no es tirar código sucio. La verdadera agilidad proviene de elegir bien las herramientas y tener claridad arquitectónica desde el día cero.",
+    title: "FECHA DE ENTREGA EN EL CONTRATO",
+    description: "Nunca incumplimos un plazo. Cada semana ves el avance real, no un resumen.",
   },
   {
     number: "02",
-    title: "CERO BUNDLES PESADOS INNECESARIOS",
-    description:
-      "No cargamos scripts pesados en el navegador de tu cliente para mostrar texto y fotos. Si algo puede resolverse en el servidor con páginas estáticas, se resuelve ahí.",
+    title: "PROTOTIPO GRATIS ANTES DE FIRMAR",
+    description: "Lo ves funcionando con tus datos. Si no te convence, no pagás.",
   },
   {
     number: "03",
-    title: "INGENIERÍA CENTRADA EN EL NEGOCIO",
-    description:
-      "El código más elegante es inútil si no convierte, no factura o es imposible de mantener. Diseñamos sistemas orientados a resultados medibles y retorno de inversión.",
+    title: "ENTREVISTA DE 2 HORAS SOBRE TU NEGOCIO",
+    description: "Sobre tu negocio y tus clientes, no un formulario genérico.",
   },
   {
     number: "04",
-    title: "COMUNICACIÓN DIRECTA, SIN INTERMEDIARIOS",
-    description:
-      "Hablas directamente con los desarrolladores e ingenieros que tocan tu código. Sin project managers corporativos que ralentizan las decisiones técnicas.",
+    title: "ERRORES ARREGLADOS GRATIS",
+    description: "Si encontrás un error después del lanzamiento, lo arreglamos gratis.",
+  },
+  {
+    number: "05",
+    title: "ENTREGAS SEMANALES",
+    description: "Cada semana ves el avance real de tu sistema, no un resumen armado para la ocasión.",
+  },
+  {
+    number: "06",
+    title: "EL CÓDIGO ES 100% TUYO",
+    description: "Lo mantenemos nosotros o capacitamos a tu equipo para que sea autónomo.",
+  },
+  {
+    number: "07",
+    title: "NO ESPERAMOS A QUE NOS ENCUENTRES",
+    description: "Vamos a tu empresa, entendemos tu negocio y te decimos dónde se te va la plata.",
   },
 ];
 
-const esHowWeWork: WorkStep[] = [
-  {
-    step: "01",
-    title: "DESCARGA TÉCNICA (24-48H)",
-    description:
-      "Analizamos tus requerimientos, definimos el modelo de datos, la arquitectura óptima y eliminamos todo lo que sobre para llegar al MVP más veloz.",
-  },
-  {
-    step: "02",
-    title: "PROTOTIPADO & DIRECCIÓN DE ARTE",
-    description:
-      "Validamos la interacción, la estética y la experiencia de usuario con maquetas funcionales de alto contraste antes de escribir la primera línea de backend.",
-  },
-  {
-    step: "03",
-    title: "DESARROLLO EN SPRINTS INTENSOS",
-    description:
-      "Construcción modular con commits diarios, entornos de staging visibles en tiempo real y pruebas automáticas de rendimiento.",
-  },
-  {
-    step: "04",
-    title: "DESPLIEGUE A PRODUCCIÓN",
-    description:
-      "Lanzamiento en infraestructura global, verificación de rendimiento al 100% y documentación viva.",
-  },
-];
+// Home: 3-step diagnostic (§3.6).
+const esHowWeWork: ProcessContent = {
+  eyebrow: "// TU DIAGNÓSTICO GRATIS",
+  title: "TU DIAGNÓSTICO GRATIS, PASO A PASO",
+  intro: "Tres pasos, sin compromiso y sin tarjeta.",
+  steps: [
+    {
+      step: "01",
+      title: "ENTREVISTA DE 2 HORAS",
+      description:
+        "En tu empresa o por videollamada. Nos contás cómo trabajás hoy y qué te hace perder tiempo o plata. Hablás con quien después escribe el código.",
+    },
+    {
+      step: "02",
+      title: "INFORME EN 48 HORAS",
+      description:
+        "Te decimos qué procesos te cuestan plata, cuánto ahorrarías y qué sistema conviene. Es tuyo aunque no trabajemos juntos.",
+    },
+    {
+      step: "03",
+      title: "PROTOTIPO GRATIS",
+      description:
+        "Armamos una maqueta funcional de tu sistema para que lo veas antes de firmar. Si no te convence, no pagás.",
+    },
+  ],
+  ctaLabel: "Quiero mi diagnóstico gratis",
+  ctaHref: "/contacto/",
+  ctaMicrocopy: "Solo te pedimos 4 datos.",
+};
+
+// /nosotros: full 4-step process (§6).
+const esHowWeWorkNosotros: ProcessContent = {
+  eyebrow: "// CÓMO TRABAJAMOS",
+  title: "DE LA PRIMERA CHARLA A TU SISTEMA FUNCIONANDO, EN 4 PASOS",
+  intro: "Diagnóstico, prototipo y entrega con fecha en el contrato.",
+  steps: [
+    {
+      step: "01",
+      title: "DIAGNÓSTICO GRATIS",
+      description:
+        "Entrevista de 2 horas + informe en 48 h. Entendemos tu negocio y te decimos dónde se te va la plata.",
+    },
+    {
+      step: "02",
+      title: "PROTOTIPO GRATIS",
+      description: "Ves una maqueta funcional de tu sistema antes de firmar.",
+    },
+    {
+      step: "03",
+      title: "DESARROLLO EN SEMANAS",
+      description: "Avances semanales visibles en un entorno de prueba. Vos opinás mientras se construye.",
+    },
+    {
+      step: "04",
+      title: "LANZAMIENTO Y SOPORTE",
+      description:
+        "Salimos a producción con documentación. Después, mantenimiento mensual con horas de desarrollo para los cambios.",
+    },
+  ],
+};
+
+// /nosotros: written guarantees (§6).
+const esGuarantees: ProcessContent = {
+  eyebrow: "// GARANTÍAS",
+  title: "LO QUE TE GARANTIZAMOS, POR ESCRITO",
+  intro: "Cada punto queda en el contrato.",
+  steps: [
+    {
+      step: "01",
+      title: "FECHA DE ENTREGA EN EL CONTRATO",
+      description: "Nunca incumplimos un plazo. Cada semana ves el avance real.",
+    },
+    {
+      step: "02",
+      title: "PROTOTIPO GRATIS ANTES DE FIRMAR",
+      description: "Lo ves funcionando con tus datos. Si no te convence, no pagás.",
+    },
+    {
+      step: "03",
+      title: "PRECIO CERRADO",
+      description: "Un anticipo al iniciar y el saldo contra entrega validada en producción.",
+    },
+    {
+      step: "04",
+      title: "ERRORES ARREGLADOS GRATIS",
+      description: "Si encontrás un error después del lanzamiento, lo arreglamos sin cargo.",
+    },
+    {
+      step: "05",
+      title: "CÓDIGO 100% TUYO",
+      description: "Lo mantenemos nosotros o capacitamos a tu equipo.",
+    },
+  ],
+};
 
 const esTeam: TeamMember[] = [
   {
     name: "AGUSTÍN ANGELINI",
     role: "DESARROLLADOR FULL STACK",
-    bio: "Orientación en Frontend e integraciones con IA. Me gusta que el software sea rápido, simple y fácil de usar.",
+    bio: "Desarrollador full stack. Frontend e integraciones con IA. Me gusta que el software sea rápido, simple y fácil de usar.",
     tags: ["ASTRO", "TYPESCRIPT", "REACT", "TAILWIND", "SISTEMAS DISTRIBUIDOS"],
     github: "https://github.com/angelini-agus",
     linkedin: "https://www.linkedin.com/in/agustin-angelini/",
@@ -820,7 +953,7 @@ const esTeam: TeamMember[] = [
   {
     name: "FRANCO CUSCIANNA",
     role: "DESARROLLADOR FULL STACK",
-    bio: "Orientación en Backend y Arquitectura de Sistemas. Me gusta que el software sea sólido, seguro y escalable.",
+    bio: "Desarrollador full stack. Backend y arquitectura de sistemas. Me gusta que el software sea sólido, seguro y escalable.",
     tags: ["BACKEND", "ARQUITECTURA DE SISTEMAS", "SEGURIDAD", "ESCALABILIDAD"],
     github: "https://github.com/francocus",
     linkedin: "https://www.linkedin.com/in/francocus/",
@@ -829,34 +962,49 @@ const esTeam: TeamMember[] = [
 
 const esFaqList: FaqItem[] = [
   {
-    question: "¿Cuánto demora el desarrollo de una landing page o sistema con Deftcode?",
+    question: "¿Cuánto cuesta?",
     answer:
-      "Nuestra arquitectura modular nos permite entregar landing pages institucionales en 1 a 2 semanas, y sistemas o aplicaciones web a medida en sprints de 3 a 6 semanas, con despliegues funcionales visibles desde los primeros días.",
+      "Una landing, desde USD 200. Un CRM o ERP a medida, entre USD 1.000 y 2.000 según alcance. Después del diagnóstico recibís un presupuesto cerrado.",
+  },
+  {
+    question: "¿De verdad el diagnóstico es gratis? ¿Cuál es el truco?",
+    answer:
+      "No hay truco. Preferimos ganarnos tu confianza antes de que gastes un peso. Vos ves qué encontramos y qué conviene, y decidís. El informe es tuyo aunque elijas a otro.",
+  },
+  {
+    question: "¿Cuánto demora?",
+    answer:
+      "Landings en 1 a 2 semanas. Sistemas a medida en 3 a 6 semanas, con avances visibles desde los primeros días.",
   },
   {
     question: "¿Cómo sé que van a cumplir el plazo si son una empresa nueva?",
     answer:
-      "No dependés de nuestra palabra: la fecha de lanzamiento y el cronograma de entregas semanales quedan en el contrato antes de arrancar. Cada semana ves el avance real, no un resumen armado para la ocasión.",
+      "No dependés de nuestra palabra: la fecha de lanzamiento y las entregas semanales quedan en el contrato antes de arrancar. Hasta hoy nunca incumplimos un plazo.",
   },
   {
-    question: "¿El sitio incluye posicionamiento SEO?",
+    question: "¿Y si el sistema no se adapta a cómo trabajo?",
     answer:
-      "Absolutamente. Todo proyecto de Deftcode incluye SEO técnico de primer nivel: etiquetas sociales completas, datos estructurados para Google, sitemap dinámico, carga instantánea en móviles y rendimiento medido en verde.",
+      "Por eso primero hacemos el prototipo: lo probás antes de firmar. Después del lanzamiento, el mantenimiento mensual incluye horas de desarrollo para los cambios.",
   },
   {
     question: "¿Qué pasa después del lanzamiento?",
     answer:
-      "Seguimos disponibles para soporte y mejoras. Si encontramos un error, te avisamos antes de que lo notes; si lo encontrás vos, nos escribís y lo resolvemos sin cargo.",
+      "Seguimos disponibles. Si encontramos un error, te avisamos antes de que lo notes. Si lo encontrás vos, nos escribís y lo resolvemos sin cargo.",
   },
   {
-    question: "¿Cómo se gestiona el mantenimiento y las actualizaciones?",
+    question: "¿El sitio incluye SEO?",
     answer:
-      "El código fuente te pertenece al 100%. Ofrecemos planes de soporte continuo para nuevas funcionalidades, optimización de infraestructura y monitoreo, o capacitamos a tu equipo para que sea totalmente autónomo.",
+      "Toda landing sale con SEO técnico: etiquetas sociales, datos estructurados, sitemap y carga en menos de 2 segundos en el celular. Si querés seguir posicionándote y sumar Meta Ads, está el plan mensual.",
   },
   {
-    question: "¿Cómo es el flujo de contratación y pago?",
+    question: "¿El código es mío?",
     answer:
-      "Trabajamos con presupuestos cerrados y transparentes. Se abona un anticipo al iniciar el sprint de arquitectura y el saldo contra entrega validada en producción.",
+      "Sí, 100%. Podés contratar mantenimiento con nosotros o capacitamos a tu equipo para que sea autónomo.",
+  },
+  {
+    question: "¿Cómo es el pago?",
+    answer:
+      "Presupuesto cerrado. Un anticipo al iniciar y el saldo contra entrega validada en producción.",
   },
 ];
 
@@ -872,29 +1020,257 @@ const esClientQuote = {
 };
 
 const esCtaContent: CtaContent = {
-  kicker: "TIEMPO DE MOVERSE RÁPIDO",
-  heading: "CONSTRUYAMOS ALGO ÁGIL.",
-  headingLines: ["CONSTRUYAMOS", "ALGO ÁGIL."],
-  subheading: "Llevamos tu infraestructura digital a la velocidad que tu empresa necesita.",
-  buttonLabel: "AGENDÁ 20 MIN. CON NOSOTROS",
+  kicker: "// EMPEZÁ HOY",
+  heading: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS.",
+  headingLines: ["DESCUBRÍ CUÁNTO TE CUESTAN", "HOY TUS PLANILLAS."],
+  subheading: "Entrevista de 2 horas, informe en 48 h y prototipo gratis. Sin compromiso.",
+  buttonLabel: "Quiero mi diagnóstico gratis",
   buttonHref: "/contacto/",
   emailLabel: "contacto@deftcode.dev",
 };
 
 const esForWho = {
-  eyebrow: "// PARA QUIÉN",
+  eyebrow: "// ¿ES PARA VOS?",
   title: "NO TRABAJAMOS CON CUALQUIERA.",
   yesLabel: "ES PARA VOS SI",
   yesItems: [
-    "Tu operación tiene procesos claros que necesitan dejar de vivir en planillas.",
-    "Buscás un sistema a medida o una landing que convierta, no una plantilla genérica.",
-    "Valorás velocidad: presupuesto cerrado y entrega en semanas, no en trimestres.",
+    "Tus procesos están claros y hoy viven en planillas.",
+    "Querés un sistema a medida o una landing que convierta, no una plantilla genérica.",
+    "Querés ver tu sistema antes de firmar, con precio cerrado y fecha en el contrato.",
   ],
   noLabel: "NO ES PARA VOS SI",
   noItems: [
-    "Estás buscando el precio más bajo sin importar el resultado.",
+    "Buscás el precio más bajo sin importar el resultado.",
     "Querés solo algo lindo, sin métricas ni objetivos de negocio.",
-    "Preferís entregar el proyecto y olvidarte: sin tu input, ningún sistema refleja el proceso real.",
+    "Preferís entregar el proyecto y olvidarte: sin tu opinión, ningún sistema refleja cómo trabajás de verdad.",
+  ],
+  closingText: "Si te viste en la segunda tarjeta, pedí tu diagnóstico gratis.",
+  ctaLabel: "Quiero mi diagnóstico gratis",
+  ctaHref: "/contacto/",
+};
+
+// ==========================================
+// HOME PROBLEM SEGMENTATION (§3.4)
+// ==========================================
+
+const esProblems: ProblemsContent = {
+  eyebrow: "// ¿TE PASA ALGO DE ESTO?",
+  title: "¿TE PASA ALGO DE ESTO?",
+  intro: "Si marcaste una, el diagnóstico es para vos.",
+  cards: [
+    {
+      key: "planillas",
+      title: "YA NO TE ALCANZA EL EXCEL",
+      description:
+        "Planillas que solo entiende una persona, datos duplicados y errores que cuestan plata. Lo unificamos en un solo sistema hecho a tu medida.",
+      buttonLabel: "Quiero salir de las planillas",
+      buttonHref: "/contacto/?problema=planillas",
+    },
+    {
+      key: "consultas",
+      title: "PERDÉS CONSULTAS ENTRE WHATSAPP, INSTAGRAM Y MAILS",
+      description:
+        "Las juntamos en un CRM con asignación por asesor. En una concesionaria centralizamos 4 canales y no se olvidó ningún lead.",
+      buttonLabel: "Quiero ordenar mis consultas",
+      buttonHref: "/contacto/?problema=consultas",
+    },
+    {
+      key: "sistemas",
+      title: "UN SISTEMA PARA UNA COSA, UN EXCEL PARA OTRA Y WHATSAPP PARA LA TERCERA",
+      description: "Reemplazamos ese rompecabezas por un solo sistema a medida.",
+      buttonLabel: "Quiero un solo sistema",
+      buttonHref: "/contacto/?problema=sistemas",
+    },
+    {
+      key: "web",
+      title: "TU WEB NO TE TRAE CLIENTES",
+      description: "Landing con SEO y anuncios en Meta, con informe mensual.",
+      buttonLabel: "Quiero más consultas",
+      buttonHref: "/contacto/?problema=web",
+    },
+  ],
+  closingText: "Cada problema tiene su solución y todas empiezan igual: con un diagnóstico gratis.",
+  ctaLabel: "Quiero mi diagnóstico gratis",
+  ctaHref: "/contacto/",
+};
+
+// ==========================================
+// FEATURED CASE & MORE SOFTWARE (§3.3 / §3.7)
+// ==========================================
+
+const esFeaturedCase: FeaturedCaseContent = {
+  eyebrow: "// PRUEBA SOCIAL",
+  title: "UNA EMPRESA DE LIMPIEZA DE ROSARIO DEJÓ LAS PLANILLAS Y HOY AHORRA $2.8M ARS POR MES.",
+  description:
+    "Pidieron control de asistencia. Terminamos unificando asistencia, sueldos, impuestos y stock de más de 30 edificios en un solo sistema. Cero quejas por inasistencia.",
+  stats: [
+    "-$2.8M ARS/MES EN SUELDOS",
+    "0 QUEJAS POR INASISTENCIA",
+    "30+ EDIFICIOS EN VIVO",
+    "100% TRAZABLE",
+  ],
+  calcCtaLabel: "Calculá cuánto ahorraría tu empresa",
+  // TODO: lead magnet calculator pending (ESTRATEGIA-COPY.md §8). Keep the placeholder href.
+  calcCtaHref: "#",
+  caseCtaLabel: "Ver el caso completo",
+};
+
+const esMoreSoftware: MoreSoftwareContent = {
+  eyebrow: "// MÁS SOFTWARE FUNCIONANDO",
+  title: "MÁS SISTEMAS FUNCIONANDO HOY",
+  intro: "Distintos rubros, el mismo método: diagnóstico, prototipo y entrega con fecha en el contrato.",
+  viewCaseLabel: "Ver el caso",
+  bandLabel: "Ver los 6 casos",
+  bandHref: "/proyectos/",
+};
+
+// ==========================================
+// HOME SERVICES LADDER (§3.5)
+// ==========================================
+
+const esServicesHome: ServicesHomeContent = {
+  eyebrow: "// QUÉ HACEMOS",
+  title: "QUÉ HACEMOS",
+  intro: "Todo empieza con el diagnóstico. Lo que sigue lo decide lo que encontremos.",
+  items: [
+    {
+      index: "00",
+      title: "EMPEZÁ ACÁ: DIAGNÓSTICO DEFT",
+      line: "Entrevista de 2 horas sobre tu negocio, informe en 48 h con lo que te cuesta plata y prototipo gratis. Gratis.",
+      buttonLabel: "Quiero mi diagnóstico gratis",
+      buttonHref: "/contacto/",
+    },
+    {
+      index: "01",
+      title: "SISTEMAS DE GESTIÓN (ERP)",
+      line: "Asistencia, sueldos, stock, facturación y remitos en un solo lugar. Entre USD 1.000 y 2.000 según alcance. Listo en 3 a 6 semanas.",
+      buttonLabel: "Ver un ERP funcionando",
+      buttonHref: "/proyectos/empresa-limpieza-rosario/",
+      slug: "sistemas-gestion-erp",
+    },
+    {
+      index: "02",
+      title: "CRM Y VENTAS",
+      line: "Que no se pierda ninguna consulta ni ningún turno. Entre USD 1.000 y 2.000 según alcance.",
+      buttonLabel: "Ver un CRM funcionando",
+      buttonHref: "/proyectos/crm-concesionaria-rosario/",
+      slug: "sistemas-gestion-ventas",
+    },
+    {
+      index: "03",
+      title: "LANDING + SEO + META ADS",
+      line: "Tu web y clientes todos los meses. Landing desde USD 200, lista en 1 a 2 semanas; SEO y anuncios en plan mensual.",
+      buttonLabel: "Quiero más consultas",
+      buttonHref: "/contacto/?problema=web",
+      slug: "landing-pages",
+    },
+    {
+      index: "04",
+      title: "AUTOMATIZACIÓN CON IA",
+      line: "Que tu equipo deje de repetir tareas: WhatsApp, AFIP/ARCA, integraciones. Se cotiza en el diagnóstico.",
+      buttonLabel: "Ver qué se puede automatizar",
+      buttonHref: "/proyectos/gestion-legal-estudio/",
+      slug: "automatizacion-ia",
+    },
+  ],
+};
+
+// ==========================================
+// PRICING REFERENCE (§3.11)
+// ==========================================
+
+const esPricing: PricingContent = {
+  eyebrow: "// PRECIOS DE REFERENCIA",
+  title: "CUÁNTO CUESTA, SIN VUELTAS.",
+  intro: "Estos son los rangos. El precio cerrado lo definimos después del diagnóstico.",
+  whatHeading: "QUÉ",
+  priceHeading: "DESDE",
+  timeframeHeading: "PLAZO",
+  rows: [
+    { what: "Landing page", price: "USD 200", timeframe: "1 a 2 semanas" },
+    { what: "CRM o ERP a medida", price: "USD 1.000 a 2.000", timeframe: "3 a 6 semanas" },
+    { what: "E-commerce", price: "USD 1.500 a 3.000", timeframe: "[COMPLETAR: semanas]" },
+    { what: "SEO + Meta Ads (plan mensual)", price: "USD [COMPLETAR] por mes", timeframe: "Desde el primer mes" },
+  ],
+  footnote: "Se paga un anticipo al iniciar y el saldo contra entrega validada en producción.",
+};
+
+// ==========================================
+// GLOBAL CHROME (§2)
+// ==========================================
+
+const esNavCta: NavCtaContent = {
+  label: "Quiero mi diagnóstico gratis",
+  href: "/contacto/",
+};
+
+const esFooterContent: FooterContent = {
+  offerLine: "Diagnóstico gratis. Prototipo gratis. Precio cerrado.",
+  locationLine: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
+};
+
+// Single source for the WhatsApp number: the floating button and the form's
+// WhatsApp alternative read it from here.
+// TODO: replace "[COMPLETAR]" with the real business number before launch
+// (ESTRATEGIA-COPY.md §8).
+const whatsappContact: WhatsAppContact = {
+  number: "[COMPLETAR]",
+  labelEs: "Escribinos por WhatsApp",
+  labelEn: "Message us on WhatsApp",
+  messageEs: "Hola, quiero mi diagnóstico gratis. Mi empresa es ___ y hoy manejamos todo en ___.",
+  messageEn: "Hi, I want my free diagnosis. My company is ___ and today we run everything on ___.",
+};
+
+// ==========================================
+// 4-FIELD DIAGNOSTIC FORM (§7)
+// ==========================================
+
+const esContactForm: ContactFormContent = {
+  nameLabel: "NOMBRE",
+  namePlaceholder: "Tu nombre",
+  companyLabel: "EMPRESA",
+  companyPlaceholder: "El nombre de tu empresa",
+  emailLabel: "EMAIL",
+  emailPlaceholder: "tu@empresa.com",
+  phoneLabel: "TELÉFONO",
+  phonePlaceholder: "+54 9 ...",
+  problemSelectedPrefix: "Marcaste:",
+  submitLabel: "Quiero mi diagnóstico gratis",
+  microcopy: "Te escribimos hoy para coordinar la entrevista. Solo usamos tus datos para eso.",
+  whatsappAltLabel: "Prefiero escribir por WhatsApp",
+  successTitlePrefix: "Listo,",
+  successBody: "Te escribimos hoy para coordinar tu entrevista de 2 horas. Mientras tanto:",
+  successCalcLabel: "Calculá cuánto ahorraría tu empresa.",
+  // TODO: lead magnet calculator pending (ESTRATEGIA-COPY.md §8).
+  successCalcHref: "#",
+};
+
+// ==========================================
+// AD LANDING /diagnostico (§7)
+// ==========================================
+
+const esDiagnosticoLanding: DiagnosticoLandingContent = {
+  eyebrow: "// DIAGNÓSTICO DEFT",
+  h1: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS. DIAGNÓSTICO GRATIS EN 48 HORAS.",
+  subtitle:
+    "Una entrevista de 2 horas sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
+  ctaLabel: "Quiero mi diagnóstico gratis",
+  proofLine: "Una empresa de limpieza de Rosario ahorra $2.8M ARS por mes desde que dejó las planillas.",
+  receiveEyebrow: "// QUÉ RECIBÍS",
+  receiveTitle: "QUÉ RECIBÍS",
+  receiveItems: [
+    "Un informe de una página con los 3 procesos que más te cuestan, en pesos por mes.",
+    "Qué se automatiza primero y qué sistema conviene (CRM, ERP, landing o IA).",
+    "Un rango de precio y de plazo reales para cada opción.",
+    "Un prototipo gratis de lo más importante, para que lo veas antes de firmar.",
+    "Un video corto con los hallazgos, para compartirlo con tu equipo o tu socio.",
+  ],
+  notEyebrow: "// QUÉ NO ES",
+  notTitle: "QUÉ NO ES",
+  notItems: [
+    "No es una llamada de ventas.",
+    "No tiene costo ni te pedimos tarjeta.",
+    "No te obliga a contratarnos.",
   ],
 };
 
@@ -903,14 +1279,14 @@ const esForWho = {
 // ==========================================
 
 const enSiteMeta: SiteMeta = {
-  title: "DEFTCODE // HIGH-VELOCITY SOFTWARE & DIGITAL ENGINEERING",
+  title: "Custom software in Rosario | Free diagnosis | Deftcode",
   description:
-    "Agile, modern, high-performance software engineering. We craft web platforms, custom digital systems, and high-impact digital experiences with velocity and technical rigor.",
+    "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
   siteUrl: "https://deftcode.dev",
   ogImage: "/og-deftcode.png",
   author: "Deftcode Studio",
-  location: "ROSARIO, ARGENTINA // WORLDWIDE REMOTE",
-  tagline: "SOFTWARE AT VELOCITY",
+  location: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
+  tagline: "Software at velocity.",
   foundedYear: 2026,
 };
 
@@ -923,32 +1299,57 @@ const enNavLinks: NavLink[] = [
 ];
 
 const enPages: Record<string, PageContent> = {
-  nosotros: {
-    title: "ABOUT // MANIFESTO & TEAM - DEFTCODE",
+  home: {
+    title: "Custom software in Rosario | Free diagnosis | Deftcode",
     description:
-      "Discover Deftcode's philosophy: high-velocity dev, zero-bloat modern architectures, and an obsessive focus on performance and business ROI.",
-    eyebrow: "PHILOSOPHY & ENGINEERING",
-    h1: "VELOCITY, PRECISION AND ZERO BLOATWARE.",
+      "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
+    eyebrow: "ROSARIO, ARGENTINA",
+    h1: "YOUR CUSTOM-BUILT SYSTEM",
+  },
+  nosotros: {
+    title: "Who we are: developers who understand business | Deftcode",
+    description:
+      "Meet Agustín and Franco, the free diagnosis method and the written guarantees we work with.",
+    eyebrow: "ABOUT",
+    h1: "WE ARE THE ONES WHO WRITE THE CODE. AND THE ONES WHO SIGN THE DELIVERY DATE.",
     intro:
-      "We disrupt traditional, sluggish agency workflows. At Deftcode, we build software with cutting-edge stacks, clean architectures, and continuous shipping in weeks—not quarters.",
+      "We are systems people who understand business. First we learn how you work, then we show you a prototype and only then do we sign. We deliver in weeks, not semesters.",
   },
   proyectos: {
-    title: "PROJECTS // PORTFOLIO & CASE STUDIES - DEFTCODE",
+    title: "Real cases: systems, CRM and landings in production | Deftcode",
     description:
-      "Explore our production deployments: enterprise ERP platforms, web applications and high-velocity landing pages, measured to the millisecond.",
-    eyebrow: "PRODUCTION DEPLOYMENTS",
-    h1: "REAL SOFTWARE FOR REAL BUSINESS PROBLEMS.",
+      "See what each system we built saved, organized and sold: ERP, CRM, landings and portals in production.",
+    eyebrow: "REAL CASES",
+    h1: "REAL SOFTWARE THAT SAVES MONEY AND TIME, WITH NUMBERS.",
     intro:
-      "Every product is engineered to maximize conversion, eliminate cloud waste, and scale without operational friction.",
+      "Each case shows what problem the client had, how long it took and what changed. Yours can start with a free diagnosis.",
+  },
+  servicios: {
+    title: "Custom systems, CRM, ERP and landings | Deftcode",
+    description:
+      "We always start with a free diagnosis. Then you choose what to build, with a closed price and the date in the contract.",
+    eyebrow: "SERVICES",
+    h1: "CUSTOM SYSTEMS THAT REPLACE YOUR SPREADSHEETS IN 3 TO 6 WEEKS.",
+    intro:
+      "We always start with a free diagnosis. Then you choose what to build, with a closed price and the date in the contract.",
   },
   contacto: {
-    title: "CONTACT // START YOUR PROJECT - DEFTCODE",
+    title: "Free diagnosis for your company | Deftcode",
     description:
-      "Let's discuss your next digital product. Transparent estimates, free architectural assessment, and answers within 24 hours.",
-    eyebrow: "DIRECT LINE",
-    h1: "LET'S BUILD SOMETHING DEFT.",
+      "2-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
+    eyebrow: "FREE DIAGNOSIS",
+    h1: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY. FREE DIAGNOSIS IN 48 HOURS.",
     intro:
-      "We respond immediately. No fluff meetings: we define technical scope, deliver timelines, and start building.",
+      "A 2-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
+  },
+  diagnostico: {
+    title: "Free diagnosis for your company | Deftcode",
+    description:
+      "2-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
+    eyebrow: "FREE DIAGNOSIS",
+    h1: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY. FREE DIAGNOSIS IN 48 HOURS.",
+    intro:
+      "A 2-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   privacidad: {
     title: "PRIVACY POLICY - DEFTCODE",
@@ -960,32 +1361,44 @@ const enPages: Record<string, PageContent> = {
 };
 
 const enHeroContent: HeroContent = {
-  headlineMain: "DEFTCODE",
-  headlineSub: "SOFTWARE AT VELOCITY",
-  badge: "SYSTEMS / WEB / SAAS",
-  locationText: "BASED IN ROSARIO, AR // WORLDWIDE REMOTE",
-  roleText: "AGILE DIGITAL ENGINEERING // MODERN ARCHITECTURES // HIGH-PERFORMANCE WEB",
-  ctaLabel: "START PROJECT",
+  headlineMain: "YOUR SYSTEM",
+  headlineSub: "CUSTOM-BUILT. IN 3 TO 6 WEEKS AT A CLOSED PRICE.",
+  subtitle:
+    "We run a free diagnosis of your business and show you a prototype before you sign. That's how a cleaning company in Rosario saves $2.8M ARS per month in payroll.",
+  kicker: "SEE IT FIRST, SIGN AFTER.",
+  badge: "ROSARIO, ARGENTINA // FOR SMBS ACROSS THE COUNTRY",
+  locationText: "ROSARIO, ARGENTINA // FOR SMBS ACROSS THE COUNTRY",
+  roleText: "CUSTOM SYSTEMS // CRM // ERP // LANDINGS THAT BRING CLIENTS",
+  stats: [
+    "-$2.8M ARS/MO IN PAYROLL",
+    "0 ABSENCE COMPLAINTS",
+    "30+ BUILDINGS LIVE",
+    "0 MISSED DEADLINES",
+  ],
+  ctaLabel: "Get my free diagnosis",
   ctaHref: "/en/contact/",
-  scrollText: "SCROLL DOWN • EXPLORE DEFT • ",
+  ctaSecondaryLabel: "See how we did it for AZ",
+  ctaSecondaryHref: "/en/projects/empresa-limpieza-rosario/",
+  microcopy: "2-hour interview. Report in 48 h. Yours even if we never work together.",
+  scrollText: "SCROLL DOWN • SEE THE REAL CASE • ",
 };
 
 const enMarqueeItems = {
   row1: [
-    "HIGH-VELOCITY DEV",
-    "MODERN ARCHITECTURES",
-    "ZERO-JANK MOTION",
-    "DEFT & PRECISE",
-    "BUILT FOR SCALE",
-    "HIGH-VELOCITY DEV",
+    "FREE DIAGNOSIS",
+    "FREE PROTOTYPE",
+    "CLOSED PRICE",
+    "DATE IN THE CONTRACT",
+    "100% YOUR CODE",
+    "WEEKLY DELIVERIES",
   ],
   row2: [
-    "SOFTWARE IN PRODUCTION",
-    "CUSTOM SYSTEMS & SAAS",
-    "AI AUTOMATION",
-    "DELIVERY IN WEEKS",
-    "METRICS IN THE GREEN",
-    "BESPOKE DESIGN",
+    "NO SPREADSHEETS",
+    "NO LOOSE WHATSAPP",
+    "NO OFF-THE-SHELF SYSTEMS",
+    "ONE CUSTOM-BUILT SYSTEM",
+    "SUPPORT AFTER LAUNCH",
+    "-$2.8M ARS/MO IN PAYROLL",
   ],
 };
 
@@ -1146,8 +1559,9 @@ const enProjects: ProjectItem[] = [
     id: "empresa-limpieza",
     imageKey: "empresa-limpieza",
     slug: "empresa-limpieza-rosario",
-    title: "SERVICETRACK — FACILITY OPERATIONS ERP",
-    client: "AZ Cleaning & Facility Services",
+    title: "FROM SPREADSHEETS TO A SYSTEM SAVING $2.8M ARS PER MONTH",
+    client: "SERVICETRACK // AZ CLEANING & FACILITY SERVICES",
+    plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Argentina",
     category: "OPERATIONS ERP",
     year: "2026",
@@ -1227,14 +1641,15 @@ const enProjects: ProjectItem[] = [
     id: "gestion-legal",
     imageKey: "gestion-legal",
     slug: "gestion-legal-estudio",
-    title: "LEGALDESK — CROSS-BORDER LEGAL MANAGEMENT",
-    client: "International Law Firm",
+    title: "TWO COUNTRIES, ONE SYSTEM, ZERO MISSED DEADLINES",
+    client: "LEGALDESK // INTERNATIONAL LAW FIRM",
+    plazo: "[COMPLETAR: semanas]",
     location: "Argentina & Paraguay",
     category: "LEGAL ERP",
     year: "2026",
     description:
       "Cloud platform to manage judicial and corporate cases across two countries, procedural deadline tracking, multi-currency billing, and AI jurisprudence search.",
-    metrics: ["2 ACTIVE JURISDICTIONS", "100% TRACEABILITY", "-60% RESEARCH TIME", "ZERO MISSED DEADLINES"],
+    metrics: ["2 ACTIVE JURISDICTIONS", "-60% RESEARCH TIME", "ZERO MISSED DEADLINES"],
     tags: ["NEXT.JS", "REACT", "TYPESCRIPT", "POSTGRESQL", "PRISMA", "EMBEDDED AI"],
     fullOverview:
       "Comprehensive cloud platform designed for cross-border law firms managing complex litigation and corporate clients.",
@@ -1308,14 +1723,15 @@ const enProjects: ProjectItem[] = [
     id: "sistema-pediatrico",
     imageKey: "sistema-pediatrico",
     slug: "sistema-clinica-pediatrica",
-    title: "PEDIATRICCARE — PEDIATRIC EHR & CLINIC SUITE",
-    client: "Outpatient Pediatric Clinic",
+    title: "PAPERLESS RECORDS AND BOOKINGS, HEALTHCARE-LAW COMPLIANT",
+    client: "PEDIATRICCARE // PEDIATRIC CLINIC",
+    plazo: "[COMPLETAR: semanas]",
     location: "Pueblo Esther, Santa Fe",
     category: "HEALTHCARE & ERP",
     year: "2025",
     description:
       "Compliant Electronic Health Records (EHR), intelligent scheduling agenda, real-time clinical dashboard, and digital PDF prescription generation.",
-    metrics: ["LEGAL EHR COMPLIANT", "0 MISPLACED RECORDS", "+85% CONSULTATION SPEED", "100% DIGITAL"],
+    metrics: ["+85% CONSULTATION SPEED", "0 MISPLACED RECORDS"],
     tags: ["NEXT.JS", "NESTJS", "POSTGRESQL", "PRISMA", "TAILWIND CSS", "PDF GENERATION"],
     fullOverview:
       "Full digitization of outpatient medical workflows, bridging front-desk reception, doctor consultation rooms, and families within a secure, confidential environment.",
@@ -1389,14 +1805,15 @@ const enProjects: ProjectItem[] = [
     id: "crm-concesionaria",
     imageKey: "crm-concesionaria",
     slug: "crm-concesionaria-rosario",
-    title: "AUTOLEADS — AUTOMOTIVE SALES CRM",
-    client: "Official Automotive Dealership",
+    title: "FOUR INQUIRY CHANNELS IN ONE CRM",
+    client: "AUTOLEADS // OFFICIAL DEALERSHIP",
+    plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Santa Fe",
     category: "SALES CRM",
     year: "2025",
     description:
       "Centralization of inbound leads from WhatsApp, Instagram, Facebook, and Mercado Libre into one unified pipeline with sales rep assignment and conversion metrics.",
-    metrics: ["4 CENTRALIZED CHANNELS", "+40% CONTACT RATE", "ZERO FORGOTTEN LEADS", "INSTANT METRICS"],
+    metrics: ["4 CENTRALIZED CHANNELS", "+40% CONTACT RATE", "ZERO FORGOTTEN LEADS"],
     tags: ["REACT", "VITE", "PRIMEREACT", ".NET 9", "DAPPER", "POSTGRESQL", "DOCKER"],
     fullOverview:
       "Commercial sales pipeline developed for automotive dealerships processing hundreds of digital inquiries each week.",
@@ -1470,8 +1887,9 @@ const enProjects: ProjectItem[] = [
     id: "landing-limpieza",
     imageKey: "landing-limpieza",
     slug: "landing-empresa-limpieza",
-    title: "AZ SERVICIOS — CORPORATE WEB PLATFORM",
-    client: "AZ Cleaning & Facility Services",
+    title: "A WEBSITE THAT BRINGS IN QUALIFIED INQUIRIES",
+    client: "AZ SERVICIOS WEBSITE",
+    plazo: "1 to 2 weeks",
     location: "Rosario, Santa Fe",
     liveUrl: {
       href: "https://azserviciosdelimpieza.com",
@@ -1481,7 +1899,7 @@ const enProjects: ProjectItem[] = [
     year: "2026",
     description:
       "Corporate web presence highlighting verified insured staff and GPS supervision, qualified lead capture, and seamless integration with the internal ERP under a single domain.",
-    metrics: ["100/100 LIGHTHOUSE", "< 0.6s LCP", "+120% QUALIFIED LEADS", "UNIFIED DOMAIN"],
+    metrics: ["+120% QUALIFIED LEADS", "LOADS IN UNDER 0.6 S"],
     tags: ["ASTRO 7", "TYPESCRIPT", "TAILWIND CSS V4", "VERCEL EDGE", "STRUCTURED SEO"],
     fullOverview:
       "Ultra-fast corporate platform with an interactive quoting engine that filters serious commercial leads into the sales funnel.",
@@ -1555,8 +1973,9 @@ const enProjects: ProjectItem[] = [
     id: "landing-pediatrica",
     imageKey: "landing-pediatrica",
     slug: "landing-clinica-pediatrica",
-    title: "PEDIATRIC PORTAL — PUBLIC SITE & BOOKINGS",
-    client: "Specialized Pediatric Clinic",
+    title: "BOOKINGS FROM THE PHONE, NO WAITING",
+    client: "PEDIATRIC PORTAL // PEDIATRIC CLINIC",
+    plazo: "1 to 2 weeks",
     location: "Pueblo Esther, Santa Fe",
     liveUrl: {
       href: "https://dramartinangelio.com",
@@ -1566,7 +1985,7 @@ const enProjects: ProjectItem[] = [
     year: "2025",
     description:
       "Public-facing portal showcasing pediatric specialties, medical team credentials, and an intuitive family-friendly booking workflow.",
-    metrics: ["0ms TBT", "+150% MOBILE APPOINTMENTS", "ZERO WAIT TIMES", "100% ACCESSIBLE"],
+    metrics: ["+150% MOBILE APPOINTMENTS", "100% ACCESSIBLE"],
     tags: ["ASTRO", "REACT", "TAILWIND CSS", "VIEW TRANSITIONS", "A11Y"],
     fullOverview:
       "Patient-first healthcare website providing direct access to medical specialties, physician bios, and seamless online booking.",
@@ -1641,56 +2060,135 @@ const enProjects: ProjectItem[] = [
 const enManifesto: ManifestoItem[] = [
   {
     number: "01",
-    title: "VELOCITY DOES NOT MEAN SLOPPINESS",
-    description:
-      "Moving fast is not about slapping dirty code together. Real agility comes from choosing the right tools and having architectural clarity on day zero.",
+    title: "DELIVERY DATE IN THE CONTRACT",
+    description: "We never miss a deadline. Every week you see real progress, not a summary.",
   },
   {
     number: "02",
-    title: "ZERO UNNECESSARY HEAVY BUNDLES",
-    description:
-      "We never ship heavy client scripts just to display text and imagery. If a section can be pre-rendered as clean static pages on the server, it stays there.",
+    title: "FREE PROTOTYPE BEFORE SIGNING",
+    description: "You see it working with your data. If it doesn't convince you, you don't pay.",
   },
   {
     number: "03",
-    title: "BUSINESS-FIRST ENGINEERING",
-    description:
-      "The cleanest code is worthless if it doesn't convert, bill, or scale reliably. We engineer software aimed at tangible business impact and high ROI.",
+    title: "A 2-HOUR INTERVIEW ABOUT YOUR BUSINESS",
+    description: "About your business and your clients, not a generic form.",
   },
   {
     number: "04",
-    title: "DIRECT ACCESS, NO MIDDLEMEN",
-    description:
-      "You communicate directly with the senior engineers writing your code. No bureaucratic corporate account handlers slowing down critical technical choices.",
+    title: "BUGS FIXED FOR FREE",
+    description: "If you find a bug after launch, we fix it free of charge.",
+  },
+  {
+    number: "05",
+    title: "WEEKLY DELIVERIES",
+    description: "Every week you see real progress, not a summary made for the occasion.",
+  },
+  {
+    number: "06",
+    title: "THE CODE IS 100% YOURS",
+    description: "We maintain it or train your team to be self-sufficient.",
+  },
+  {
+    number: "07",
+    title: "WE DON'T WAIT FOR YOU TO FIND US",
+    description: "We go to your company, understand your business, and tell you where your money is leaking.",
   },
 ];
 
-const enHowWeWork: WorkStep[] = [
-  {
-    step: "01",
-    title: "TECHNICAL DISCOVERY (24-48H)",
-    description:
-      "We deconstruct your requirements, map the data model, select the optimal architecture, and prune superfluous complexity to build the leanest MVP.",
-  },
-  {
-    step: "02",
-    title: "PROTOTYPING & ART DIRECTION",
-    description:
-      "We validate ergonomics, interactions, and aesthetic impact through functional high-contrast mockups before touching production backend code.",
-  },
-  {
-    step: "03",
-    title: "INTENSE SPRINT CYCLES",
-    description:
-      "Modular implementation with daily commits, real-time preview staging environments, and automated performance suites.",
-  },
-  {
-    step: "04",
-    title: "GLOBAL PRODUCTION SHIP",
-    description:
-      "Deployment to worldwide infrastructure with edge caching, 100/100 performance verification, and living documentation.",
-  },
-];
+// EN home: 3-step diagnostic (§3.6).
+const enHowWeWork: ProcessContent = {
+  eyebrow: "// YOUR FREE DIAGNOSIS",
+  title: "YOUR FREE DIAGNOSIS, STEP BY STEP",
+  intro: "Three steps, no commitment and no card.",
+  steps: [
+    {
+      step: "01",
+      title: "2-HOUR INTERVIEW",
+      description:
+        "At your company or on a video call. You tell us how you work today and what costs you time or money. You talk to whoever writes the code afterwards.",
+    },
+    {
+      step: "02",
+      title: "REPORT IN 48 HOURS",
+      description:
+        "We tell you which processes cost you money, how much you would save, and which system fits. It's yours even if we never work together.",
+    },
+    {
+      step: "03",
+      title: "FREE PROTOTYPE",
+      description:
+        "We build a functional mockup of your system so you can see it before signing. If it doesn't convince you, you pay nothing.",
+    },
+  ],
+  ctaLabel: "Get my free diagnosis",
+  ctaHref: "/en/contact/",
+  ctaMicrocopy: "We only ask for 4 details.",
+};
+
+// EN /about: full 4-step process (§6).
+const enHowWeWorkNosotros: ProcessContent = {
+  eyebrow: "// HOW WE WORK",
+  title: "FROM THE FIRST CHAT TO YOUR SYSTEM RUNNING, IN 4 STEPS",
+  intro: "Diagnosis, prototype and delivery with the date in the contract.",
+  steps: [
+    {
+      step: "01",
+      title: "FREE DIAGNOSIS",
+      description:
+        "2-hour interview + report in 48 h. We understand your business and tell you where your money is leaking.",
+    },
+    {
+      step: "02",
+      title: "FREE PROTOTYPE",
+      description: "You see a functional mockup of your system before signing.",
+    },
+    {
+      step: "03",
+      title: "DEVELOPMENT IN WEEKS",
+      description: "Visible weekly progress in a test environment. You give feedback while it is built.",
+    },
+    {
+      step: "04",
+      title: "LAUNCH & SUPPORT",
+      description:
+        "We ship to production with documentation. Then, monthly maintenance with development hours for changes.",
+    },
+  ],
+};
+
+// EN /about: written guarantees (§6).
+const enGuarantees: ProcessContent = {
+  eyebrow: "// GUARANTEES",
+  title: "WHAT WE GUARANTEE, IN WRITING",
+  intro: "Every point ends up in the contract.",
+  steps: [
+    {
+      step: "01",
+      title: "DELIVERY DATE IN THE CONTRACT",
+      description: "We never miss a deadline. Every week you see real progress.",
+    },
+    {
+      step: "02",
+      title: "FREE PROTOTYPE BEFORE SIGNING",
+      description: "You see it working with your data. If it doesn't convince you, you don't pay.",
+    },
+    {
+      step: "03",
+      title: "CLOSED PRICE",
+      description: "An advance payment at kickoff and the balance against a validated production delivery.",
+    },
+    {
+      step: "04",
+      title: "BUGS FIXED FOR FREE",
+      description: "If you find a bug after launch, we fix it at no charge.",
+    },
+    {
+      step: "05",
+      title: "100% YOUR CODE",
+      description: "We maintain it or train your team.",
+    },
+  ],
+};
 
 const enTeam: TeamMember[] = [
   {
@@ -1713,34 +2211,49 @@ const enTeam: TeamMember[] = [
 
 const enFaqList: FaqItem[] = [
   {
-    question: "How long does it take to deliver a landing page or custom system?",
+    question: "How much does it cost?",
     answer:
-      "Our modular architecture allows us to deliver high-converting institutional landing pages in 1-2 weeks, and custom web applications or ERP modules in 3-6 week sprints, with testable staging builds live from the first week.",
+      "A landing page, from USD 200. A custom CRM or ERP, between USD 1,000 and 2,000 depending on scope. After the diagnosis you receive a closed quote.",
+  },
+  {
+    question: "Is the diagnosis really free? What's the catch?",
+    answer:
+      "There is no catch. We would rather earn your trust before you spend a peso. You see what we find and what fits, and you decide. The report is yours even if you choose someone else.",
+  },
+  {
+    question: "How long does it take?",
+    answer:
+      "Landing pages in 1 to 2 weeks. Custom systems in 3 to 6 weeks, with visible progress from the first days.",
   },
   {
     question: "How do I know you'll meet the deadline if you're a new company?",
     answer:
-      "You don't depend on our word: the launch date and the weekly delivery schedule are in the contract before we start. Every week you see real progress, not a summary put together for the occasion.",
+      "You don't depend on our word: the launch date and the weekly deliveries are in the contract before we start. To date we have never missed a deadline.",
   },
   {
-    question: "Is technical SEO optimization included?",
+    question: "What if the system doesn't fit how I work?",
     answer:
-      "Absolutely. Every Deftcode deployment includes enterprise-tier SEO: complete social tags, structured data for Google, dynamic XML sitemaps, instant mobile loading, and verified green performance scores.",
+      "That's why we build the prototype first: you test it before signing. After launch, monthly maintenance includes development hours for changes.",
   },
   {
     question: "What happens after launch?",
     answer:
-      "We stay available for support and improvements. If we find a bug, we tell you before you notice it; if you find it, you write to us and we fix it at no charge.",
+      "We stay available. If we find a bug, we tell you before you notice it. If you find it, you write to us and we fix it at no charge.",
   },
   {
-    question: "How are maintenance and future updates handled?",
+    question: "Does the website include SEO?",
     answer:
-      "You own 100% of the source code and intellectual property. We offer monthly ongoing support retainers for new features and infrastructure monitoring, or we train your in-house team for total autonomy.",
+      "Every landing ships with technical SEO: social tags, structured data, sitemap and mobile load in under 2 seconds. If you want to keep ranking and add Meta Ads, there's a monthly plan.",
   },
   {
-    question: "What is your engagement and payment structure?",
+    question: "Is the code mine?",
     answer:
-      "We operate with fixed, transparent quotes. A milestone advance is paid upon sprint kickoff, and the balance upon validated production handover.",
+      "Yes, 100%. You can contract maintenance with us or we train your team to be self-sufficient.",
+  },
+  {
+    question: "How does payment work?",
+    answer:
+      "Closed quote. An advance payment at kickoff and the balance against a validated production delivery.",
   },
 ];
 
@@ -1754,29 +2267,245 @@ const enClientQuote = {
 };
 
 const enCtaContent: CtaContent = {
-  kicker: "TIME TO MOVE FAST",
-  heading: "LET'S BUILD SOMETHING DEFT.",
-  headingLines: ["LET'S BUILD", "SOMETHING DEFT."],
-  subheading: "We accelerate your digital infrastructure to the velocity your business demands.",
-  buttonLabel: "BOOK A 20-MINUTE CALL",
+  kicker: "// START TODAY",
+  heading: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY.",
+  headingLines: ["FIND OUT WHAT YOUR", "SPREADSHEETS COST YOU TODAY."],
+  subheading: "2-hour interview, report in 48 h and a free prototype. No commitment.",
+  buttonLabel: "GET MY FREE DIAGNOSIS",
   buttonHref: "/en/contact/",
   emailLabel: "contacto@deftcode.dev",
 };
 
 const enForWho = {
-  eyebrow: "// WHO IT'S FOR",
+  eyebrow: "// IS IT FOR YOU?",
   title: "WE DON'T WORK WITH JUST ANYONE.",
   yesLabel: "IT'S FOR YOU IF",
   yesItems: [
-    "Your operation has clear processes that need to stop living in spreadsheets.",
-    "You want a custom system or a landing page that converts, not a generic template.",
-    "You value speed: closed budget and delivery in weeks, not quarters.",
+    "Your processes are clear and today they live in spreadsheets.",
+    "You want a custom system or a landing that converts, not a generic template.",
+    "You want to see your system before signing, with a closed price and the date in the contract.",
   ],
   noLabel: "IT'S NOT FOR YOU IF",
   noItems: [
     "You are hunting for the lowest price regardless of the outcome.",
     "You want something just pretty, with no metrics or business goals.",
-    "You would rather hand it off and disappear: without your input, no system reflects the real process.",
+    "You would rather hand it off and disappear: without your input, no system reflects how you really work.",
+  ],
+  closingText: "If you saw yourself in the second card, book your free diagnosis.",
+  ctaLabel: "Get my free diagnosis",
+  ctaHref: "/en/contact/",
+};
+
+// ==========================================
+// HOME PROBLEM SEGMENTATION (§3.4)
+// ==========================================
+
+const enProblems: ProblemsContent = {
+  eyebrow: "// DOES ANY OF THIS SOUND LIKE YOU?",
+  title: "DOES ANY OF THIS SOUND LIKE YOU?",
+  intro: "If you check one, the diagnosis is for you.",
+  cards: [
+    {
+      key: "planillas",
+      title: "EXCEL IS NOT ENOUGH ANYMORE",
+      description:
+        "Spreadsheets only one person understands, duplicated data and mistakes that cost money. We unify it all in one custom-built system.",
+      buttonLabel: "Get out of the spreadsheets",
+      buttonHref: "/en/contact/?problema=planillas",
+    },
+    {
+      key: "consultas",
+      title: "YOU LOSE INQUIRIES BETWEEN WHATSAPP, INSTAGRAM AND EMAIL",
+      description:
+        "We gather them in a CRM with per-rep assignment. At one dealership we centralized 4 channels and not a single lead was forgotten.",
+      buttonLabel: "Sort out my inquiries",
+      buttonHref: "/en/contact/?problema=consultas",
+    },
+    {
+      key: "sistemas",
+      title: "ONE SYSTEM FOR ONE THING, AN EXCEL FOR ANOTHER AND WHATSAPP FOR THE THIRD",
+      description: "We replace that puzzle with one custom-built system.",
+      buttonLabel: "I want one system",
+      buttonHref: "/en/contact/?problema=sistemas",
+    },
+    {
+      key: "web",
+      title: "YOUR WEBSITE DOESN'T BRING YOU CLIENTS",
+      description: "Landing page with SEO and Meta ads, with a monthly report.",
+      buttonLabel: "I want more inquiries",
+      buttonHref: "/en/contact/?problema=web",
+    },
+  ],
+  closingText: "Every problem has a solution and they all start the same way: with a free diagnosis.",
+  ctaLabel: "Get my free diagnosis",
+  ctaHref: "/en/contact/",
+};
+
+// ==========================================
+// FEATURED CASE & MORE SOFTWARE (§3.3 / §3.7)
+// ==========================================
+
+const enFeaturedCase: FeaturedCaseContent = {
+  eyebrow: "// SOCIAL PROOF",
+  title: "A CLEANING COMPANY IN ROSARIO DROPPED ITS SPREADSHEETS AND NOW SAVES $2.8M ARS PER MONTH.",
+  description:
+    "They asked for attendance control. We ended up unifying attendance, payroll, taxes and stock for 30+ buildings in one system. Zero absence complaints.",
+  stats: [
+    "-$2.8M ARS/MO IN PAYROLL",
+    "0 ABSENCE COMPLAINTS",
+    "30+ BUILDINGS LIVE",
+    "100% TRACEABLE",
+  ],
+  calcCtaLabel: "Calculate what your company would save",
+  // TODO: lead magnet calculator pending (ESTRATEGIA-COPY.md §8). Keep the placeholder href.
+  calcCtaHref: "#",
+  caseCtaLabel: "Explore the full case",
+};
+
+const enMoreSoftware: MoreSoftwareContent = {
+  eyebrow: "// MORE SOFTWARE RUNNING",
+  title: "MORE SYSTEMS RUNNING TODAY",
+  intro: "Different industries, the same method: diagnosis, prototype and delivery with the date in the contract.",
+  viewCaseLabel: "View the case",
+  bandLabel: "See all 6 cases",
+  bandHref: "/en/projects/",
+};
+
+// ==========================================
+// HOME SERVICES LADDER (§3.5)
+// ==========================================
+
+const enServicesHome: ServicesHomeContent = {
+  eyebrow: "// WHAT WE DO",
+  title: "WHAT WE DO",
+  intro: "Everything starts with the diagnosis. What comes next is decided by what we find.",
+  items: [
+    {
+      index: "00",
+      title: "START HERE: DEFT DIAGNOSIS",
+      line: "A 2-hour interview about your business, a 48 h report on what costs you money, and a free prototype. Free.",
+      buttonLabel: "Get my free diagnosis",
+      buttonHref: "/en/contact/",
+    },
+    {
+      index: "01",
+      title: "MANAGEMENT SYSTEMS (ERP)",
+      line: "Attendance, payroll, stock, invoicing and delivery notes in one place. Between USD 1,000 and 2,000 depending on scope. Ready in 3 to 6 weeks.",
+      buttonLabel: "See an ERP working",
+      buttonHref: "/en/projects/empresa-limpieza-rosario/",
+      slug: "erp-systems",
+    },
+    {
+      index: "02",
+      title: "CRM & SALES",
+      line: "So no inquiry and no appointment gets lost. Between USD 1,000 and 2,000 depending on scope.",
+      buttonLabel: "See a CRM working",
+      buttonHref: "/en/projects/crm-concesionaria-rosario/",
+      slug: "sales-management-systems",
+    },
+    {
+      index: "03",
+      title: "LANDING + SEO + META ADS",
+      line: "Your website and clients every month. Landing from USD 200, ready in 1 to 2 weeks; SEO and ads on a monthly plan.",
+      buttonLabel: "I want more inquiries",
+      buttonHref: "/en/contact/?problema=web",
+      slug: "landing-pages",
+    },
+    {
+      index: "04",
+      title: "AI AUTOMATION",
+      line: "So your team stops repeating tasks: WhatsApp, AFIP/ARCA, integrations. Quoted during the diagnosis.",
+      buttonLabel: "See what can be automated",
+      buttonHref: "/en/projects/gestion-legal-estudio/",
+      slug: "ai-automation",
+    },
+  ],
+};
+
+// ==========================================
+// PRICING REFERENCE (§3.11)
+// ==========================================
+
+const enPricing: PricingContent = {
+  eyebrow: "// REFERENCE PRICING",
+  title: "HOW MUCH IT COSTS, NO RUNAROUND.",
+  intro: "These are the ranges. The closed price is set after the diagnosis.",
+  whatHeading: "WHAT",
+  priceHeading: "FROM",
+  timeframeHeading: "TIMELINE",
+  rows: [
+    { what: "Landing page", price: "USD 200", timeframe: "1 to 2 weeks" },
+    { what: "Custom CRM or ERP", price: "USD 1,000 to 2,000", timeframe: "3 to 6 weeks" },
+    { what: "E-commerce", price: "USD 1,500 to 3,000", timeframe: "[COMPLETAR: semanas]" },
+    { what: "SEO + Meta Ads (monthly plan)", price: "USD [COMPLETAR] per month", timeframe: "From the first month" },
+  ],
+  footnote: "An advance payment at kickoff and the balance against a validated production delivery.",
+};
+
+// ==========================================
+// GLOBAL CHROME (§2)
+// ==========================================
+
+const enNavCta: NavCtaContent = {
+  label: "Get my free diagnosis",
+  href: "/en/contact/",
+};
+
+const enFooterContent: FooterContent = {
+  offerLine: "Free diagnosis. Free prototype. Closed price.",
+  locationLine: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
+};
+
+// ==========================================
+// 4-FIELD DIAGNOSTIC FORM (§7)
+// ==========================================
+
+const enContactForm: ContactFormContent = {
+  nameLabel: "NAME",
+  namePlaceholder: "Your name",
+  companyLabel: "COMPANY",
+  companyPlaceholder: "Your company name",
+  emailLabel: "EMAIL",
+  emailPlaceholder: "you@company.com",
+  phoneLabel: "PHONE",
+  phonePlaceholder: "+54 9 ...",
+  problemSelectedPrefix: "You checked:",
+  submitLabel: "Get my free diagnosis",
+  microcopy: "We write to you today to schedule the interview. We only use your data for that.",
+  whatsappAltLabel: "I'd rather write on WhatsApp",
+  successTitlePrefix: "Done,",
+  successBody: "We write to you today to schedule your 2-hour interview. Meanwhile:",
+  successCalcLabel: "Calculate what your company would save.",
+  // TODO: lead magnet calculator pending (ESTRATEGIA-COPY.md §8).
+  successCalcHref: "#",
+};
+
+// ==========================================
+// AD LANDING /diagnostico (§7)
+// ==========================================
+
+const enDiagnosticoLanding: DiagnosticoLandingContent = {
+  eyebrow: "// DEFT DIAGNOSIS",
+  h1: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY. FREE DIAGNOSIS IN 48 HOURS.",
+  subtitle:
+    "A 2-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
+  ctaLabel: "Get my free diagnosis",
+  proofLine: "A cleaning company in Rosario saves $2.8M ARS per month since it dropped its spreadsheets.",
+  receiveEyebrow: "// WHAT YOU GET",
+  receiveTitle: "WHAT YOU GET",
+  receiveItems: [
+    "A one-page report with the 3 processes that cost you the most, in pesos per month.",
+    "What to automate first and which system fits (CRM, ERP, landing or AI).",
+    "A real price and timeline range for each option.",
+    "A free prototype of the most important part, so you see it before signing.",
+    "A short video with the findings, to share with your team or partner.",
+  ],
+  notEyebrow: "// WHAT IT'S NOT",
+  notTitle: "WHAT IT'S NOT",
+  notItems: [
+    "It's not a sales call.",
+    "It has no cost and we don't ask for a card.",
+    "It doesn't oblige you to hire us.",
   ],
 };
 
@@ -1793,12 +2522,24 @@ export const getContent = (lang: Lang = "es") => {
     heroContent: isEn ? enHeroContent : esHeroContent,
     marqueeItems: isEn ? enMarqueeItems : esMarqueeItems,
     services: isEn ? enServices : esServices,
+    servicesHome: isEn ? enServicesHome : esServicesHome,
     projects: isEn ? enProjects : esProjects,
     manifesto: isEn ? enManifesto : esManifesto,
     howWeWork: isEn ? enHowWeWork : esHowWeWork,
+    howWeWorkNosotros: isEn ? enHowWeWorkNosotros : esHowWeWorkNosotros,
+    guarantees: isEn ? enGuarantees : esGuarantees,
     team: isEn ? enTeam : esTeam,
     faqList: isEn ? enFaqList : esFaqList,
     forWho: isEn ? enForWho : esForWho,
+    problems: isEn ? enProblems : esProblems,
+    featuredCase: isEn ? enFeaturedCase : esFeaturedCase,
+    moreSoftware: isEn ? enMoreSoftware : esMoreSoftware,
+    pricing: isEn ? enPricing : esPricing,
+    navCta: isEn ? enNavCta : esNavCta,
+    footerContent: isEn ? enFooterContent : esFooterContent,
+    whatsapp: whatsappContact,
+    contactForm: isEn ? enContactForm : esContactForm,
+    diagnosticoLanding: isEn ? enDiagnosticoLanding : esDiagnosticoLanding,
     socialLinks: esSocialLinks,
     clientQuote: isEn ? enClientQuote : esClientQuote,
     ctaContent: isEn ? enCtaContent : esCtaContent,
@@ -1819,12 +2560,24 @@ export const pages = esPages;
 export const heroContent = esHeroContent;
 export const marqueeItems = esMarqueeItems;
 export const services = esServices;
+export const servicesHome = esServicesHome;
 export const projects = esProjects;
 export const manifesto = esManifesto;
 export const howWeWork = esHowWeWork;
+export const howWeWorkNosotros = esHowWeWorkNosotros;
+export const guarantees = esGuarantees;
 export const team = esTeam;
 export const faqList = esFaqList;
 export const forWho = esForWho;
+export const problems = esProblems;
+export const featuredCase = esFeaturedCase;
+export const moreSoftware = esMoreSoftware;
+export const pricing = esPricing;
+export const navCta = esNavCta;
+export const footerContent = esFooterContent;
+export const whatsapp = whatsappContact;
+export const contactForm = esContactForm;
+export const diagnosticoLanding = esDiagnosticoLanding;
 export const socialLinks = esSocialLinks;
 export const ctaContent = esCtaContent;
 export const clientQuote = esClientQuote;

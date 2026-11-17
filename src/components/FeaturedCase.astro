@@ -4,125 +4,225 @@ import type { Lang } from "../lib/types";
 
 interface Props {
   lang?: Lang;
+  /** "featured": §3.3 social proof with the AZ case. "stack": §3.7 more software. */
+  variant?: "featured" | "stack";
 }
 
-const { lang = "es" } = Astro.props;
-const { projects } = getContent(lang);
+const { lang = "es", variant = "featured" } = Astro.props;
+const content = getContent(lang);
+const { featuredCase, moreSoftware, projects } = content;
 
 // Featured case: shared id across both dictionaries, first project as fallback.
 const featured = projects.find((p) => p.id === "empresa-limpieza") ?? projects[0];
 
-const eyebrow = lang === "en" ? "// CASES & DELIVERABLES" : "// CASOS & ENTREGABLES";
-const sectionTitle = lang === "en" ? "SOFTWARE IN PRODUCTION" : "SOFTWARE EN PRODUCCIÓN";
-const intro =
-  lang === "en"
-    ? "REAL DEPLOYMENTS. ROBUST ARCHITECTURES AND SUB-MILLISECOND RESPONSE TIMES."
-    : "DESPLIEGUES REALES. ARQUITECTURAS ROBUSTAS Y TIEMPOS DE RESPUESTA MEDIDOS AL MILISEGUNDO.";
+// §3.7 stack: AutoLeads, LegalDesk and PediatricCare cards on the home.
+const stackIds = ["crm-concesionaria", "gestion-legal", "sistema-pediatrico"];
+const stackProjects = stackIds
+  .map((id) => projects.find((p) => p.id === id))
+  .filter((p): p is (typeof projects)[number] => Boolean(p));
+
+const caseHref = lang === "en" ? `/en/projects/${featured.slug}/` : `/proyectos/${featured.slug}/`;
+const plazoLabel = lang === "en" ? "TIMELINE" : "PLAZO";
 const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
-const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE" : "VER CASO COMPLETO";
-const allProjectsLabel = lang === "en" ? "EXPLORE ALL PROJECTS" : "VER TODOS LOS PROYECTOS";
-const allProjectsHref = lang === "en" ? "/en/projects/" : "/proyectos/";
 ---
 
-<!-- Unified projects section: editorial header + featured case folder card,
-     closing with a full-width band to the projects page. -->
-<section id="proyectos" class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
-  <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
-      <div>
-        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-          {eyebrow}
-        </span>
-        <h2 class="reveal font-display text-4xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
-          {sectionTitle}
-        </h2>
-      </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
-        {intro}
-      </p>
-    </div>
-
-    <!-- One folder card (ProjectsStack card structure: black folder on the
-         orange section) -->
-    <article class="w-full bg-black text-white border-2 border-black shadow-[0_16px_40px_rgba(0,0,0,0.35)] mt-10 md:mt-12">
-      <!-- Folder Tab Header -->
-      <div class="flex items-center justify-between border-b-2 border-white/20 bg-black px-6 py-3">
-        <div class="flex items-center gap-3">
-          <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
-          <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-wider">
-            {cardLabel} [01]
-          </span>
+{
+  variant === "featured" ? (
+    <section id="proyectos" class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
+          <div>
+            <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+              {featuredCase.eyebrow}
+            </span>
+            <h2 class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9] max-w-4xl">
+              {featuredCase.title}
+            </h2>
+          </div>
+          <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
+            {featuredCase.description}
+          </p>
         </div>
-        <span class="font-mono-meta text-xs uppercase text-white/60">
-          {featured.year} // {featured.category}
-        </span>
-      </div>
 
-      <!-- Folder Body -->
-      <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-        <div class="lg:col-span-7 flex flex-col gap-4">
-          {
-            featured.client && (
-              <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-semibold tracking-wide">
-                // {featured.client}
+        <!-- Four standout numbers (§3.3) -->
+        <div class="mt-8 border-y-2 border-black">
+          <div class="grid grid-cols-2 md:grid-cols-4">
+            {featuredCase.stats.map((stat, index) => (
+              <div
+                class={`font-mono-meta text-[10px] sm:text-xs font-bold uppercase tracking-tight py-3 text-center text-black border-black ${
+                  index % 2 === 1 ? "border-l-2" : ""
+                } ${index >= 2 ? "border-t-2 md:border-t-0" : ""} ${index > 0 ? "md:border-l-2" : ""}`}
+              >
+                {stat}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Folder card: ProjectsStack structure on the orange section -->
+        <article class="w-full bg-black text-white border-2 border-black shadow-[0_16px_40px_rgba(0,0,0,0.35)] mt-10 md:mt-12">
+          <!-- Folder Tab Header -->
+          <div class="flex items-center justify-between border-b-2 border-white/20 bg-black px-6 py-3">
+            <div class="flex items-center gap-3">
+              <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
+              <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-wider">
+                {cardLabel} [01]
               </span>
-            )
-          }
-          <h3 class="font-display text-2xl sm:text-4xl text-white uppercase tracking-[-0.03em] leading-tight m-0">
-            {featured.title}
-          </h3>
-          <p class="text-white/80 font-sans text-sm sm:text-base leading-relaxed">
-            {featured.description}
-          </p>
-
-          <!-- Direct link to the full case breakdown -->
-          <div class="pt-2">
-            <a
-              href={lang === "en" ? `/en/projects/${featured.slug}/` : `/proyectos/${featured.slug}/`}
-              class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
-            >
-              <span>{viewCaseLabel}</span>
-              <span>&rarr;</span>
-            </a>
+            </div>
+            <span class="font-mono-meta text-xs uppercase text-white/60 text-right">
+              {featured.year} // {featured.category}
+              {featured.plazo && <span>&nbsp;// {plazoLabel}: {featured.plazo}</span>}
+            </span>
           </div>
-        </div>
 
-        <!-- Metrics panel (replaces the screenshot frame) -->
-        <div class="lg:col-span-5 bg-black border-2 border-white/20 p-6">
-          <p class="font-display text-3xl sm:text-4xl text-[#FF4D00] uppercase tracking-tight leading-tight m-0">
-            {featured.metrics[0]}
-          </p>
-          <div class="mt-4">
-            {
-              featured.metrics.slice(1).map((metric) => (
-                <p class="font-mono-meta text-xs text-white/80 uppercase tracking-wide border-b border-white/10 py-2 m-0">
-                  {metric}
-                </p>
-              ))
-            }
+          <!-- Folder Body -->
+          <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div class="lg:col-span-7 flex flex-col gap-4">
+              {featured.client && (
+                <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-semibold tracking-wide">
+                  // {featured.client}
+                </span>
+              )}
+              <h3 class="font-display text-2xl sm:text-4xl text-white uppercase tracking-[-0.03em] leading-tight m-0">
+                {featured.title}
+              </h3>
+              <p class="text-white/80 font-sans text-sm sm:text-base leading-relaxed">
+                {featured.description}
+              </p>
+
+              <!-- §3.3 CTAs: calculator (TODO lead magnet) + full case -->
+              <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+                <a
+                  href={featuredCase.calcCtaHref}
+                  class="inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:bg-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  <span>{featuredCase.calcCtaLabel}</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+                <a
+                  href={caseHref}
+                  class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+                >
+                  <span>{featuredCase.caseCtaLabel}</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Metrics panel (replaces the screenshot frame) -->
+            <div class="lg:col-span-5 bg-black border-2 border-white/20 p-6">
+              <p class="font-display text-3xl sm:text-4xl text-[#FF4D00] uppercase tracking-tight leading-tight m-0">
+                {featured.metrics[0]}
+              </p>
+              <div class="mt-4">
+                {featured.metrics.slice(1).map((metric) => (
+                  <p class="font-mono-meta text-xs text-white/80 uppercase tracking-wide border-b border-white/10 py-2 m-0">
+                    {metric}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
-    </article>
+    </section>
+  ) : (
+    <section id="mas-software" class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
+          <div>
+            <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+              {moreSoftware.eyebrow}
+            </span>
+            <h2 class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
+              {moreSoftware.title}
+            </h2>
+          </div>
+          <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
+            {moreSoftware.intro}
+          </p>
+        </div>
 
-    <!-- Closing band to the full projects page (internal route) -->
-    <a
-      href={allProjectsHref}
-      class="mt-8 md:mt-10 flex items-center justify-between gap-4 bg-black text-white px-6 py-5 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
-    >
-      <span class="font-mono-meta text-sm md:text-base font-bold uppercase tracking-wider group-hover:text-[#FF4D00]">
-        {allProjectsLabel}
-      </span>
-      <svg
-        class="w-5 h-5 shrink-0 transition-transform duration-300 group-hover:translate-x-2"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        stroke-width="2.5"
-        aria-hidden="true"
-      >
-        <path stroke-linecap="square" stroke-linejoin="miter" d="M4 12h16m-6-6l6 6-6 6"></path>
-      </svg>
-    </a>
-  </div>
-</section>
+        <!-- §3.7 cards: problema → solución → resultado, real screenshot -->
+        <div class="mt-10 md:mt-12 flex flex-col gap-6">
+          {stackProjects.map((item) => (
+            <article class="w-full bg-black text-white border-2 border-black shadow-[0_16px_40px_rgba(0,0,0,0.35)]">
+              <div class="flex items-center justify-between border-b-2 border-white/20 bg-black px-6 py-3">
+                <div class="flex items-center gap-3">
+                  <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
+                  <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-wider">
+                    // {item.client}
+                  </span>
+                </div>
+                <span class="font-mono-meta text-xs uppercase text-white/60 text-right">
+                  {item.year} // {item.category}
+                  {item.plazo && <span>&nbsp;// {plazoLabel}: {item.plazo}</span>}
+                </span>
+              </div>
+              <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                  <h3 class="font-display text-2xl sm:text-4xl text-white uppercase tracking-[-0.03em] leading-tight m-0">
+                    {item.title}
+                  </h3>
+                  <p class="text-white/80 font-sans text-sm sm:text-base leading-relaxed">
+                    {item.description}
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    {item.metrics.map((metric) => (
+                      <div class="bg-[#FF4D00] text-black font-mono-meta text-xs font-bold px-3 py-1 uppercase tracking-tight">
+                        {metric}
+                      </div>
+                    ))}
+                  </div>
+                  <div class="pt-2">
+                    <a
+                      href={lang === "en" ? `/en/projects/${item.slug}/` : `/proyectos/${item.slug}/`}
+                      class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+                    >
+                      <span>{moreSoftware.viewCaseLabel}</span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Real screenshot frame -->
+                <div class="lg:col-span-5 bg-black border-2 border-white/20 p-6">
+                  <p class="font-display text-3xl sm:text-4xl text-[#FF4D00] uppercase tracking-tight leading-tight m-0">
+                    {item.metrics[0]}
+                  </p>
+                  <div class="mt-4">
+                    {item.metrics.slice(1).map((metric) => (
+                      <p class="font-mono-meta text-xs text-white/80 uppercase tracking-wide border-b border-white/10 py-2 m-0">
+                        {metric}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Banda final (§3.7): Ver los 6 casos -->
+        <a
+          href={moreSoftware.bandHref}
+          class="mt-8 md:mt-10 flex items-center justify-between gap-4 bg-black text-white px-6 py-5 group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
+        >
+          <span class="font-mono-meta text-sm md:text-base font-bold uppercase tracking-wider group-hover:text-[#FF4D00]">
+            {moreSoftware.bandLabel}
+          </span>
+          <svg
+            class="w-5 h-5 shrink-0 transition-transform duration-300 group-hover:translate-x-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="square" stroke-linejoin="miter" d="M4 12h16m-6-6l6 6-6 6"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+  )
+}

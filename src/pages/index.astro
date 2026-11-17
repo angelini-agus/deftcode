@@ -2,21 +2,35 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import SkewedMarquee from "../components/SkewedMarquee.astro";
-import ServicesList from "../components/ServicesList.astro";
 import FeaturedCase from "../components/FeaturedCase.astro";
+import ClientQuote from "../components/ClientQuote.astro";
 import ForWhoSection from "../components/ForWhoSection.astro";
+import ServicesList from "../components/ServicesList.astro";
+import HowWeWorkSection from "../components/HowWeWorkSection.astro";
+import ManifestoSection from "../components/ManifestoSection.astro";
 import TeamTeaser from "../components/TeamTeaser.astro";
 import FaqSection from "../components/FaqSection.astro";
 import CtaSection from "../components/CtaSection.astro";
+import { pages } from "../lib/content";
 ---
 
-<BaseLayout lang="es">
+<!-- Home section order per ESTRATEGIA-COPY.md §3:
+     1 hero · 2 cinta · 3 prueba social + cita · 4 ¿te pasa algo de esto? ·
+     5 qué hacemos · 6 tu diagnóstico paso a paso · 7 más software ·
+     8 ¿es para vos? · 9 manifiesto · 10 equipo · 11 precios · 12 FAQ ·
+     13 CTA final. -->
+<BaseLayout lang="es" title={pages.home.title} description={pages.home.description}>
   <Hero lang="es" />
   <SkewedMarquee lang="es" />
-  <ServicesList lang="es" />
   <FeaturedCase lang="es" />
-  <ForWhoSection lang="es" />
+  <ClientQuote lang="es" />
+  <ForWhoSection lang="es" variant="problems" />
+  <ServicesList lang="es" />
+  <HowWeWorkSection lang="es" />
+  <FeaturedCase lang="es" variant="stack" />
+  <ForWhoSection lang="es" variant="fit" />
+  <ManifestoSection lang="es" />
   <TeamTeaser lang="es" />
   <FaqSection lang="es" />
-  <CtaSection lang="es" />
+  <CtaSection lang="es" withForm />
 </BaseLayout>

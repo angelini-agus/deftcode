@@ -1,14 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
-import ManifestoSection from "../components/ManifestoSection.astro";
 import HowWeWorkSection from "../components/HowWeWorkSection.astro";
+import ManifestoSection from "../components/ManifestoSection.astro";
 import TeamSection from "../components/TeamSection.astro";
 import ClientQuote from "../components/ClientQuote.astro";
 import CtaSection from "../components/CtaSection.astro";
 import { pages } from "../lib/content";
 ---
 
+<!-- /nosotros per ESTRATEGIA-COPY.md §6: banner, garantías por escrito,
+     manifiesto en lenguaje de beneficio, cómo trabajamos en 4 pasos,
+     equipo, testimonio y CTA final. -->
 <BaseLayout
   lang="es"
   title={pages.nosotros.title}
@@ -19,8 +22,9 @@ import { pages } from "../lib/content";
     title={pages.nosotros.h1}
     intro={pages.nosotros.intro}
   />
+  <HowWeWorkSection lang="es" variant="guarantees" />
   <ManifestoSection lang="es" />
-  <HowWeWorkSection lang="es" />
+  <HowWeWorkSection lang="es" variant="nosotros" />
   <TeamSection lang="es" />
   <ClientQuote lang="es" />
   <CtaSection lang="es" />

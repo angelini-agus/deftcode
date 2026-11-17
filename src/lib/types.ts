@@ -16,6 +16,25 @@ export interface NavLink {
   href: string;
 }
 
+export interface NavCtaContent {
+  label: string;
+  href: string;
+}
+
+export interface FooterContent {
+  offerLine: string;
+  locationLine: string;
+}
+
+export interface WhatsAppContact {
+  /** TODO: real business number pending (ESTRATEGIA-COPY.md §8). */
+  number: string;
+  labelEs: string;
+  labelEn: string;
+  messageEs: string;
+  messageEn: string;
+}
+
 export interface ServiceModuleGroup {
   heading: string;
   /** Pre-split heading lines for the fit-to-width CTA heading. */
@@ -35,6 +54,24 @@ export interface ServiceItem {
   clients: string;
   value: string[];
   tags: string[];
+}
+
+/** Home services ladder (§3.5): lead diagnostic entry + per-service CTA. */
+export interface ServiceHomeEntry {
+  index: string;
+  title: string;
+  line: string;
+  buttonLabel: string;
+  buttonHref: string;
+  /** Service sheet slug; the (00) diagnostic entry has none. */
+  slug?: string;
+}
+
+export interface ServicesHomeContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  items: ServiceHomeEntry[];
 }
 
 export interface CaseStudyContrastRow {
@@ -64,6 +101,8 @@ export interface ProjectItem {
   year: string;
   description: string;
   metrics: string[];
+  /** Delivery time from the §5 table; unresolved values stay as [COMPLETAR] literals. */
+  plazo?: string;
   tags: string[];
   link?: string;
   liveUrl?: {
@@ -81,6 +120,44 @@ export interface ProjectItem {
   resultsMetrics?: CaseStudyMetric[];
 }
 
+/** §3.4 problem cards; ?problema=<key> preselects the form's problem field. */
+export interface ProblemCard {
+  key: string;
+  title: string;
+  description: string;
+  buttonLabel: string;
+  buttonHref: string;
+}
+
+export interface ProblemsContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  cards: ProblemCard[];
+  closingText: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+export interface FeaturedCaseContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  stats: string[];
+  calcCtaLabel: string;
+  calcCtaHref: string;
+  caseCtaLabel: string;
+}
+
+export interface MoreSoftwareContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  viewCaseLabel: string;
+  bandLabel: string;
+  bandHref: string;
+}
+
 export interface TeamMember {
   name: string;
   role: string;
@@ -94,6 +171,35 @@ export interface WorkStep {
   step: string;
   title: string;
   description: string;
+}
+
+/** Shared shape for the home 3-step diagnostic (§3.6), the /nosotros
+ *  4-step process and the written guarantees list (§6). */
+export interface ProcessContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  steps: WorkStep[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaMicrocopy?: string;
+}
+
+export interface PricingRow {
+  what: string;
+  price: string;
+  timeframe: string;
+}
+
+export interface PricingContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  whatHeading: string;
+  priceHeading: string;
+  timeframeHeading: string;
+  rows: PricingRow[];
+  footnote: string;
 }
 
 export interface FaqItem {
@@ -129,11 +235,17 @@ export interface CtaContent {
 export interface HeroContent {
   headlineMain: string;
   headlineSub: string;
+  subtitle: string;
+  kicker: string;
   badge: string;
   locationText: string;
   roleText: string;
+  stats: string[];
   ctaLabel: string;
   ctaHref: string;
+  ctaSecondaryLabel: string;
+  ctaSecondaryHref: string;
+  microcopy: string;
   scrollText: string;
 }
 
@@ -141,4 +253,40 @@ export interface ManifestoItem {
   number: string;
   title: string;
   description: string;
+}
+
+/** 4-field friction-free diagnostic form (§7). */
+export interface ContactFormContent {
+  nameLabel: string;
+  namePlaceholder: string;
+  companyLabel: string;
+  companyPlaceholder: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  phoneLabel: string;
+  phonePlaceholder: string;
+  problemSelectedPrefix: string;
+  submitLabel: string;
+  microcopy: string;
+  whatsappAltLabel: string;
+  successTitlePrefix: string;
+  successBody: string;
+  successCalcLabel: string;
+  /** TODO: lead magnet calculator pending (§8). */
+  successCalcHref: string;
+}
+
+/** Ad landing /diagnostico (§7). */
+export interface DiagnosticoLandingContent {
+  eyebrow: string;
+  h1: string;
+  subtitle: string;
+  ctaLabel: string;
+  proofLine: string;
+  receiveEyebrow: string;
+  receiveTitle: string;
+  receiveItems: string[];
+  notEyebrow: string;
+  notTitle: string;
+  notItems: string[];
 }

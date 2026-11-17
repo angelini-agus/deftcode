@@ -1,13 +1,16 @@
 ---
+import ContactFormSection from "./ContactFormSection.astro";
 import { getContent } from "../lib/content";
 import type { Lang } from "../lib/types";
 
 interface Props {
   lang?: Lang;
+  /** Home CTA final (§3.13): renders the inline 4-field form. */
+  withForm?: boolean;
 }
 
-const { lang = "es" } = Astro.props;
-const { ctaContent } = getContent(lang);
+const { lang = "es", withForm = false } = Astro.props;
+const { ctaContent, whatsapp } = getContent(lang);
 
 // Heading lines fall back to the whole heading string when no split is
 // authored, keeping the component resilient without the fit layout.
@@ -18,9 +21,19 @@ const headingLines = ctaContent.headingLines ?? [ctaContent.heading];
 const isInternalHref = ctaContent.buttonHref.startsWith("/");
 
 const sectionId = lang === "en" ? "contact-cta" : "contacto";
+
+// WhatsApp secondary (§3.13) shares the single number constant.
+const waHref = `https://wa.me/${whatsapp.number}?text=${encodeURIComponent(
+  lang === "en" ? whatsapp.messageEn : whatsapp.messageEs,
+)}`;
+const waAltLabel = lang === "en" ? "I'd rather write on WhatsApp" : "Prefiero escribir por WhatsApp";
+const waMicrocopy =
+  lang === "en"
+    ? "We write to you to schedule the interview. We don't ask for a card."
+    : "Te escribimos para coordinar la entrevista. No te pedimos tarjeta.";
 ---
 
-<section id={sectionId} class="relative bg-[#FF4D00] text-black py-28 px-4 md:px-12 overflow-hidden text-center flex flex-col items-center justify-center">
+<section id={sectionId} class="relative bg-[#FF4D00] text-black py-24 px-4 md:px-12 overflow-hidden flex flex-col items-center justify-center">
   <!-- Fit-to-width heading in Archivo Black. One shared scale for both -->
   <!-- languages (set by the widest measured line, EN "SOMETHING DEFT.") -->
   <!-- so ES and EN render at the identical font size with zero clipping, -->
@@ -33,28 +46,54 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
   </div>
 
   <div class="max-w-7xl mx-auto flex flex-col items-center">
-
-    <p class="font-sans text-base sm:text-xl md:text-2xl font-bold max-w-2xl text-black/90 mt-8 mb-12">
+    <p class="font-sans text-base sm:text-xl md:text-2xl font-bold max-w-2xl text-black/90 mt-8 mb-12 text-center">
       {ctaContent.subheading}
     </p>
 
-    <!-- Large Rounded-Full Black Button (Scales on hover, stays solid black) -->
-    <a
-      href={ctaContent.buttonHref}
-      target={isInternalHref ? undefined : "_blank"}
-      rel={isInternalHref ? undefined : "noopener noreferrer"}
-      class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-105 hover:bg-black hover:text-[#FF4D00] hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black md:min-w-[22.75rem]"
-    >
-      <span>{ctaContent.buttonLabel}</span>
-      <svg
-        class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        stroke-width="2.5"
-      >
-        <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-      </svg>
-    </a>
+    {
+      withForm ? (
+        <>
+          <!-- §3.13: inline 4-field form; the submit button is the
+               "Quiero mi diagnóstico gratis" CTA. -->
+          <div class="w-full max-w-3xl">
+            <ContactFormSection lang={lang} embedded />
+          </div>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-3 bg-white text-black font-mono-meta text-xs font-bold uppercase px-6 py-3.5 rounded-full border-2 border-black hover:bg-black hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+            >
+              <span>{waAltLabel}</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+            <p class="font-mono-meta text-[11px] uppercase tracking-wide text-black/70 m-0">
+              {waMicrocopy}
+            </p>
+          </div>
+        </>
+      ) : (
+        <a
+          href={ctaContent.buttonHref}
+          target={isInternalHref ? undefined : "_blank"}
+          rel={isInternalHref ? undefined : "noopener noreferrer"}
+          class="group inline-flex items-center gap-4 bg-black text-white font-mono-meta text-sm sm:text-base md:text-lg font-bold uppercase px-8 sm:px-12 py-5 sm:py-6 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 transform hover:scale-105 hover:bg-black hover:text-[#FF4D00] hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black md:min-w-[22.75rem]"
+        >
+          <span>{ctaContent.buttonLabel}</span>
+          <svg
+            class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+          >
+            <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      )
+    }
   </div>
 </section>

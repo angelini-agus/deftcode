@@ -4,80 +4,157 @@ import type { Lang } from "../lib/types";
 
 interface Props {
   lang?: Lang;
+  /** "problems": §3.4 problem cards. "fit": §3.8 NO/SI cards. */
+  variant?: "problems" | "fit";
 }
 
-const { lang = "es" } = Astro.props;
-const { forWho } = getContent(lang);
+const { lang = "es", variant = "fit" } = Astro.props;
+const content = getContent(lang);
+const forWho = content.forWho;
+const problems = content.problems;
 ---
 
-<section id="para-quien" class="relative bg-black text-white">
-  <div class="max-w-7xl mx-auto px-4 md:px-12 py-16 md:py-20">
-    <div class="border-b border-white/20 pb-8">
-      <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-        {forWho.eyebrow}
-      </span>
-      <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
-        {forWho.title}
-      </h2>
-    </div>
+{
+  variant === "problems" ? (
+    <section id="que-pasa" class="relative bg-black text-white">
+      <div class="max-w-7xl mx-auto px-4 md:px-12 py-16 md:py-20">
+        <div class="border-b border-white/20 pb-8">
+          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+            {problems.eyebrow}
+          </span>
+          <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
+            {problems.title}
+          </h2>
+        </div>
+        <p class="font-mono-meta text-xs sm:text-sm text-white/70 font-medium mt-6">
+          {problems.intro}
+        </p>
 
-    <!-- Cross / check two columns. The NO card leads: the section's
-         message is "NO TRABAJAMOS CON CUALQUIERA", so the orange card
-         carries the exclusions first and the ghost card answers with
-         who the work IS for. -->
-    <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12">
-      <!-- NO card (first, orange) -->
-      <div class="bg-[#FF4D00] text-black border-2 border-black p-8">
-        <span class="font-mono-meta text-xs uppercase font-bold text-black tracking-widest">
-          {forWho.noLabel}
-        </span>
-        <ul class="m-0 p-0 list-none">
-          {
-            forWho.noItems.map((item) => (
-              <li class="flex items-start gap-3 mt-5">
-                <svg
-                  class="w-5 h-5 shrink-0 text-black mt-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  stroke-width="2.5"
-                  aria-hidden="true"
-                >
-                  <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
+        <!-- §3.4: four problem cards, each button carries the problema
+             query param so the form arrives with the problem preselected. -->
+        <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12">
+          {problems.cards.map((card) => (
+            <article class="border-2 border-white/20 p-8 bg-white/[0.02] flex flex-col justify-between hover:border-[#FF4D00] transition-colors duration-200">
+              <div>
+                <h3 class="font-display text-2xl sm:text-3xl text-white uppercase tracking-[-0.03em] leading-tight m-0">
+                  {card.title}
+                </h3>
+                <p class="text-white/80 font-sans text-sm sm:text-base leading-relaxed mt-4 mb-0">
+                  {card.description}
+                </p>
+              </div>
+              <a
+                href={card.buttonHref}
+                class="mt-6 self-start inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:bg-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <span>{card.buttonLabel}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
-                <span class="text-black/85 font-sans text-sm leading-relaxed">{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+              </a>
+            </article>
+          ))}
+        </div>
 
-      <!-- YES card: ghost white-on-black, matching the team cards below
-           the section (the user rejected the second orange card) -->
-      <div class="border-2 border-white/20 p-8 bg-white/[0.02] text-white">
-        <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
-          {forWho.yesLabel}
-        </span>
-        <ul class="m-0 p-0 list-none">
-          {
-            forWho.yesItems.map((item) => (
-              <li class="flex items-start gap-3 mt-5">
-                <svg
-                  class="w-5 h-5 shrink-0 text-[#FF4D00] mt-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  stroke-width="2.5"
-                  aria-hidden="true"
-                >
-                  <path stroke-linecap="square" stroke-linejoin="miter" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-white/85 font-sans text-sm leading-relaxed">{item}</span>
-              </li>
-            ))
-          }
-        </ul>
+        <!-- Cierre (§3.4) -->
+        <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-white/20 pt-8">
+          <p class="font-sans text-base text-white/85 font-bold m-0 max-w-2xl">
+            {problems.closingText}
+          </p>
+          <a
+            href={problems.ctaHref}
+            class="sm:ml-auto inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:bg-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            <span>{problems.ctaLabel}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  ) : (
+    <section id="para-quien" class="relative bg-black text-white">
+      <div class="max-w-7xl mx-auto px-4 md:px-12 py-16 md:py-20">
+        <div class="border-b border-white/20 pb-8">
+          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+            {forWho.eyebrow}
+          </span>
+          <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
+            {forWho.title}
+          </h2>
+        </div>
+
+        <!-- Cross / check two columns. The NO card leads: the section's
+             message is no-working-with-anyone, so the orange card
+             carries the exclusions first and the ghost card answers with
+             who the work IS for. -->
+        <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12">
+          <!-- NO card (first, orange) -->
+          <div class="bg-[#FF4D00] text-black border-2 border-black p-8">
+            <span class="font-mono-meta text-xs uppercase font-bold text-black tracking-widest">
+              {forWho.noLabel}
+            </span>
+            <ul class="m-0 p-0 list-none">
+              {forWho.noItems.map((item) => (
+                <li class="flex items-start gap-3 mt-5">
+                  <svg
+                    class="w-5 h-5 shrink-0 text-black mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
+                  </svg>
+                  <span class="text-black/85 font-sans text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- YES card: ghost white-on-black -->
+          <div class="border-2 border-white/20 p-8 bg-white/[0.02] text-white">
+            <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
+              {forWho.yesLabel}
+            </span>
+            <ul class="m-0 p-0 list-none">
+              {forWho.yesItems.map((item) => (
+                <li class="flex items-start gap-3 mt-5">
+                  <svg
+                    class="w-5 h-5 shrink-0 text-[#FF4D00] mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="square" stroke-linejoin="miter" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-white/85 font-sans text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Cierre + CTA (§3.8) -->
+        <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-white/20 pt-8">
+          <p class="font-sans text-base text-white/85 font-bold m-0 max-w-2xl">
+            {forWho.closingText}
+          </p>
+          <a
+            href={forWho.ctaHref}
+            class="sm:ml-auto inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:bg-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            <span>{forWho.ctaLabel}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}

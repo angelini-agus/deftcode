@@ -7,7 +7,8 @@ interface Props {
 }
 
 const { lang = "es" } = Astro.props;
-const { faqList } = getContent(lang);
+const content = getContent(lang);
+const { pricing, faqList } = content;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -22,10 +23,68 @@ const faqSchema = {
   })),
 };
 
-const eyebrow = lang === "en" ? "// DIRECT ANSWERS" : "// RESPUESTAS DIRECTAS";
-const title = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECUENTES";
-const intro = lang === "en" ? "CLARITY ON TIMELINES, ARCHITECTURE, AND SCOPE." : "CLARIDAD SOBRE TIEMPOS, ARQUITECTURA Y PROCESOS.";
+const faqEyebrow = lang === "en" ? "// DIRECT ANSWERS" : "// RESPUESTAS DIRECTAS";
+const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECUENTES";
+const faqIntro =
+  lang === "en"
+    ? "DIRECT ANSWERS ON COSTS, TIMELINES AND RISK."
+    : "RESPUESTAS DIRECTAS SOBRE COSTOS, PLAZOS Y RIESGOS.";
 ---
+
+<!-- Pricing reference table (§3.11): its own section, always rendered
+     before the FAQ by this component (home, /contacto and EN mirrors).
+     Unresolved figures stay as [COMPLETAR] literals per the placeholder
+     discipline. -->
+<section id="precios" class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12 border-b-2 border-black">
+  <div class="max-w-7xl mx-auto">
+    <div class="border-b-2 border-black pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+      <div>
+        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+          {pricing.eyebrow}
+        </span>
+        <h2 class="reveal font-display text-4xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
+          {pricing.title}
+        </h2>
+      </div>
+      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
+        {pricing.intro}
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto border-2 border-black bg-black text-white shadow-[8px_8px_0_#000000] overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b-2 border-white/20">
+            <th scope="col" class="font-mono-meta text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-4 sm:px-6 py-4">
+              {pricing.whatHeading}
+            </th>
+            <th scope="col" class="font-mono-meta text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-4 sm:px-6 py-4">
+              {pricing.priceHeading}
+            </th>
+            <th scope="col" class="font-mono-meta text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-4 sm:px-6 py-4">
+              {pricing.timeframeHeading}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            pricing.rows.map((row) => (
+              <tr class="border-b border-white/10 last:border-b-0">
+                <td class="font-sans text-sm sm:text-base font-bold px-4 sm:px-6 py-4">{row.what}</td>
+                <td class="font-mono-meta text-sm text-[#FF4D00] font-bold px-4 sm:px-6 py-4 whitespace-nowrap">{row.price}</td>
+                <td class="font-mono-meta text-xs text-white/80 uppercase px-4 sm:px-6 py-4 whitespace-nowrap">{row.timeframe}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="font-mono-meta text-[11px] text-black/70 uppercase tracking-wide mt-6 mb-0 text-center">
+      {pricing.footnote}
+    </p>
+  </div>
+</section>
 
 <section id="faq" class="relative bg-black text-white py-20 px-4 md:px-12">
   <!-- Schema.org FAQPage Structured Data -->
@@ -35,14 +94,14 @@ const intro = lang === "en" ? "CLARITY ON TIMELINES, ARCHITECTURE, AND SCOPE." :
     <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
       <div>
         <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-          {eyebrow}
+          {faqEyebrow}
         </span>
         <h2 class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
-          {title}
+          {faqTitle}
         </h2>
       </div>
       <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
-        {intro}
+        {faqIntro}
       </p>
     </div>
 

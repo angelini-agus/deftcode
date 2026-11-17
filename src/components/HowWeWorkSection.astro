@@ -4,57 +4,91 @@ import type { Lang } from "../lib/types";
 
 interface Props {
   lang?: Lang;
+  /** "home": 3-step diagnostic (§3.6, with CTA). "nosotros": 4-step process
+   *  (§6). "guarantees": written guarantees list (§6, dark section). */
+  variant?: "home" | "nosotros" | "guarantees";
 }
 
-const { lang = "es" } = Astro.props;
-const { howWeWork } = getContent(lang);
+const { lang = "es", variant = "home" } = Astro.props;
+const content = getContent(lang);
+const process =
+  variant === "home"
+    ? content.howWeWork
+    : variant === "nosotros"
+      ? content.howWeWorkNosotros
+      : content.guarantees;
 
-const eyebrow = lang === "en" ? "// PROCESS & METHODOLOGY" : "// PROCESO & METODOLOGÍA";
-const title = lang === "en" ? "HOW WE SHIP" : "CÓMO TRABAJAMOS";
-const intro =
-  lang === "en"
-    ? "FROM INITIAL DISCOVERY TO CONTINUOUS DEPLOYMENT IN 4 PRECISE PHASES."
-    : "DE LA IDEA AL DESPLIEGUE CONTINUO EN 4 ETAPAS PRECISAS.";
+const dark = variant === "guarantees";
+const colsClass =
+  variant === "home" ? "lg:grid-cols-3" : variant === "nosotros" ? "lg:grid-cols-4" : "lg:grid-cols-3";
 ---
 
-<section class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12">
+<section class={`relative ${dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"} py-20 px-4 md:px-12`}>
   <div class="max-w-7xl mx-auto">
-    <div class="border-b-2 border-black pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+    <div class={`border-b-2 ${dark ? "border-white/20" : "border-black"} pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4`}>
       <div>
-        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-          {eyebrow}
+        <span class={`font-mono-meta text-xs uppercase font-bold tracking-widest block mb-2 ${dark ? "text-[#FF4D00]" : "text-black"}`}>
+          {process.eyebrow}
         </span>
-        <h2 class="reveal font-display text-4xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
-          {title}
+        <h2 class={`reveal font-display text-4xl sm:text-5xl uppercase tracking-[-0.04em] leading-[0.9] ${dark ? "text-white" : "text-black"}`}>
+          {process.title}
         </h2>
       </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
-        {intro}
+      <p class={`font-mono-meta text-xs sm:text-sm max-w-sm sm:text-right font-medium ${dark ? "text-white/70" : "text-black/80"}`}>
+        {process.intro}
       </p>
     </div>
 
     <!-- Steps Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class={`grid grid-cols-1 sm:grid-cols-2 ${colsClass} gap-6`}>
       {
-        howWeWork.map((step) => (
-          <article class="bg-black text-white p-6 md:p-8 border-2 border-black flex flex-col justify-between shadow-[8px_8px_0_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
+        process.steps.map((step) => (
+          <article
+            class={`p-6 md:p-8 border-2 flex flex-col justify-between ${
+              dark
+                ? "bg-white/[0.02] border-white/20 hover:border-[#FF4D00] transition-colors"
+                : "bg-black text-white border-black shadow-[8px_8px_0_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform"
+            }`}
+          >
             <div>
-              <div class="flex items-center justify-between border-b border-white/20 pb-3 mb-6">
+              <div class={`flex items-center justify-between border-b pb-3 mb-6 ${dark ? "border-white/10" : "border-white/20"}`}>
                 <span class="font-mono-meta text-2xl font-bold text-[#FF4D00]">
                   [{step.step}]
                 </span>
                 <span class="w-2 h-2 bg-[#FF4D00]"></span>
               </div>
-              <h3 class="font-display text-xl md:text-2xl text-white uppercase tracking-[-0.03em] leading-tight mb-3">
+              <h3 class={`font-display text-xl md:text-2xl uppercase tracking-[-0.03em] leading-tight mb-3 ${dark ? "text-white" : "text-white"}`}>
                 {step.title}
               </h3>
             </div>
-            <p class="font-sans text-xs sm:text-sm text-white/70 leading-relaxed mt-4">
+            <p class={`font-sans text-xs sm:text-sm leading-relaxed mt-4 ${dark ? "text-white/70" : "text-white/70"}`}>
               {step.description}
             </p>
           </article>
         ))
       }
     </div>
+
+    <!-- CTA + microcopy (§3.6) -->
+    {
+      process.ctaLabel && (
+        <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
+          <a
+            href={process.ctaHref ?? "#"}
+            class="inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 py-4 rounded-full border-2 border-black shadow-[0_10px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-105 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+          >
+            <span>{process.ctaLabel}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+          {process.ctaMicrocopy && (
+            <p class={`font-mono-meta text-[11px] uppercase tracking-wide m-0 ${dark ? "text-white/60" : "text-black/70"}`}>
+              {process.ctaMicrocopy}
+            </p>
+          )}
+        </div>
+      )
+    }
   </div>
 </section>

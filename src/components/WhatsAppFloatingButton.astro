@@ -1,0 +1,37 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { whatsapp } = getContent(lang);
+
+// TODO: replace the "[COMPLETAR]" placeholder in content.ts
+// (whatsappContact.number) with the real business number before launch
+// (ESTRATEGIA-COPY.md §8). The href stays wa.me/[COMPLETAR] meanwhile.
+const waHref = `https://wa.me/${whatsapp.number}?text=${encodeURIComponent(
+  lang === "en" ? whatsapp.messageEn : whatsapp.messageEs,
+)}`;
+const label = lang === "en" ? whatsapp.labelEn : whatsapp.labelEs;
+---
+
+<a
+  href={waHref}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  class="whatsapp-fab fixed bottom-5 right-5 z-50 flex items-center gap-2.5 bg-[#25D366] text-black font-mono-meta text-xs font-bold uppercase px-4 py-3 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+>
+  <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.298.347-.497.115-.198.057-.371-.058-.52-.115-.148-.694-1.673-.951-2.272-.25-.598-.503-.517-.694-.527-.18-.009-.385-.011-.59-.011-.206 0-.54.077-.822.377-.282.299-1.078 1.052-1.078 2.564 0 1.512 1.104 2.973 1.258 3.179.154.205 2.165 3.302 5.246 4.631.734.317 1.307.506 1.752.648.736.234 1.406.201 1.936.122.59-.088 1.818-.742 2.074-1.46.256-.718.256-1.334.18-1.464-.077-.129-.28-.205-.577-.354z"
+    ></path>
+    <path
+      d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.445h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.48-8.448zM12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.002-5.45 4.436-9.884 9.889-9.884a9.82 9.82 0 016.994 2.906 9.82 9.82 0 012.909 6.993c-.003 5.45-4.437 9.881-9.909 9.881z"
+    ></path>
+  </svg>
+  <span>{label}</span>
+</a>

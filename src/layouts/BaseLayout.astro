@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import WhatsAppFloatingButton from "../components/WhatsAppFloatingButton.astro";
 import Analytics from "@vercel/analytics/astro";
 import { getContent } from "../lib/content";
 import type { Lang } from "../lib/types";
@@ -14,10 +15,13 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   lang?: Lang;
+  /** Ad landing mode (/diagnostico): no menu, no footer links (§7). */
+  minimal?: boolean;
 }
 
 const {
   lang = "es",
+  minimal = false,
   title: titleProp,
   description: descProp,
   ogImage: ogImageProp,
@@ -118,11 +122,12 @@ const organizationSchema = {
     <Analytics />
   </head>
   <body class="bg-[#FF4D00] text-black min-h-screen flex flex-col font-sans selection:bg-black selection:text-[#FF4D00]">
-    <Navbar lang={lang} />
+    {!minimal && <Navbar lang={lang} />}
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer lang={lang} />
+    {!minimal && <Footer lang={lang} />}
+    <WhatsAppFloatingButton lang={lang} />
 
     <script>
       // Scroll entrance: reveal each .reveal element once when it enters
