@@ -20,19 +20,42 @@ pendientes antes de publicar). Toda tarea futura de copy/UI debe salir de este d
 
 ## Non-goals
 
-- No se modifica el sitio en este turno: solo se crea el archivo de contexto.
-- No se completan los `[COMPLETAR]` del copy (se conservan como pendientes marcados).
-- No se inventan datos: todos los números son los que da la estrategia (con checklist de verificación).
+- La versión EN se reescribe en otro turno (decisión del usuario 17/11: ES primero; las claves
+  nuevas se agregan a ambas const para que el build pase, con traducciones breves).
+- No se inventan datos: los `[COMPLETAR]` del copy quedan visibles como marcadores (decisión del
+  usuario) y el checklist de §8 del doc los rastrea.
+- No se pushea: el deploy a Vercel depende del push, y el push lo decide el usuario.
 
-## Tasks
+## Tasks (fase 2: aplicación al sitio, 17/11)
 
 1. [x] Explorar deftcode y verificar estado del copy actual (grep content.ts).
-2. [x] Crear este feature doc + espejo Engram.
-3. [x] Escribir `ESTRATEGIA-COPY.md` (raíz, español, 595 líneas, con mapeo a componentes y páginas reales).
-4. [x] Commit de los archivos nuevos (solo paths explícitos).
+2. [x] Crear este feature doc + espejo Engram + `ESTRATEGIA-COPY.md` (commit `00aaee4`).
+3. [x] Delegar writer (gentle-ai-worker, budget 50 comandos): copy ES completo en `content.ts`
+   + Navbar/Footer + WhatsAppFloatingButton + landing `/diagnostico` + formulario de 4 campos con
+   éxito y preselección por query param. Reportado sin pendientes de brief.
+4. [x] Verificar build del sitio: `npm run build` OK (34 páginas), `astro check` 0 errores,
+   placeholders literales en dist, voseo sin tuteo residual (verificado por el padre).
+5. [x] Work-unit commits + evidencia en este doc.
 
-## Evidence
+## Evidence (fase 2)
 
-- Commit: `00aaee4` en `main` (docs: add sales & copy strategy source of truth), 2 archivos, 631 insertiones.
-- Sin pushear: el push lo decide el usuario.
-- Próximo paso natural: implementar la oferta en `src/lib/content.ts` siguiendo el gap map de §0 del doc.
+- `3c91d67` fix(en): remove pre-existing build blocker in projects slug page (mecánico: ternario
+  con ambas ramas idénticas → literal; bloqueaba el build antes del writer).
+- `10eeddc` feat(copy): apply diagnostic-first sales strategy to the Spanish site (18 archivos:
+  content.ts +1191, types.ts +148, 10 componentes, layout, index, nosotros, landing nueva,
+  botón WhatsApp nuevo).
+- Desviaciones forzadas del writer (sin inventar datos): H1 del hero partido por el layout de
+  16vw (concatenado = H1 del doc); la tabla de precios vive dentro de FaqSection (componente fuera
+  de surfaces); §4 fichas de /servicios pendientes (páginas fuera de surfaces); "Nuestro enfoque"
+  del §6 quedó como item del manifiesto; EN home/about muestran la versión breve de las claves
+  nuevas (reescritura EN = otro turno).
+- Placeholders visibles: número de WhatsApp, precios mensuales Base/Crecimiento/Pro, plazo del
+  e-commerce, semanas de los casos 01-04, href de la calculadora (TODO), access key Web3Forms.
+
+## Decisiones de producto (17/11, con el usuario)
+
+- Placeholders: se aplican con `[COMPLETAR]` marcado; el usuario los cierra después.
+- Alcance: lote completo (copy + landing `/diagnostico` + botón WhatsApp).
+- Idioma: ES primero; EN después.
+- CTA global del sitio apunta a `/contacto` (donde vive el formulario); la landing `/diagnostico`
+  es para anuncios de Meta, sin menú, con el botón como ancla interna.
