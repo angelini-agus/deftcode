@@ -41,7 +41,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     <p
       data-hero-sub
       data-hero-scramble
-      class="font-display text-[5vw] sm:text-[5.5vw] leading-[0.9] tracking-[-0.03em] text-black uppercase mt-2"
+      class="font-display text-[4.6vw] leading-[0.9] tracking-[-0.03em] text-black uppercase mt-2 text-balance"
     >
       {heroContent.headlineSub}
     </p>
@@ -384,10 +384,21 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
         }
         const node = document.createElement("span");
         node.style.display = "inline-block";
-        node.dataset.final = ch;
-        node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        node.textContent = ch;
         el.appendChild(node);
         spans.push({ node, final: ch });
+      }
+      // Lock every letter box to its FINAL glyph width before the flicker
+      // starts: the cycling glyphs keep the exact box the settled letter
+      // will occupy, so the paragraph wraps identically mid-glitch (the
+      // sub never reflows past its final two lines) and the nowrap h1
+      // keeps a constant width.
+      for (const { node } of spans) {
+        const w = node.getBoundingClientRect().width;
+        node.style.width = `${w}px`;
+        node.style.textAlign = "center";
+        node.dataset.final = node.textContent;
+        node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
       }
       return spans;
     };
