@@ -9,9 +9,8 @@ interface Props {
 const { lang = "es" } = Astro.props;
 const { heroContent } = getContent(lang);
 
-// §3.1: the circular control points at the real case (featured section).
-const scrollHref = lang === "en" ? "#services" : "#proyectos";
-const scrollAriaLabel = lang === "en" ? "See the real case" : "Ver el caso real";
+const servicesHref = lang === "en" ? "#services" : "#servicios";
+const scrollAriaLabel = lang === "en" ? "Scroll to services" : "Desplazarse a servicios";
 const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA";
 ---
 
@@ -25,7 +24,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       data-hero-label
       class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black ml-[var(--hero-indent,0px)]"
     >
-      {heroContent.badge}
+      {lang === "en" ? "EST. 2026 // AGILE DEV" : "EST. 2026 // DESARROLLO ÁGIL"}
     </div>
   </div>
 
@@ -40,52 +39,6 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       class="font-display text-[5vw] sm:text-[5.5vw] leading-[0.9] tracking-[-0.03em] text-black uppercase mt-2"
     >
       {heroContent.headlineSub}
-    </p>
-
-    <!-- Subtítulo (§3.1) -->
-    <p
-      class="font-sans text-sm sm:text-base text-black/90 max-w-2xl mx-auto mt-5 mb-3 leading-relaxed font-medium"
-    >
-      {heroContent.subtitle}
-    </p>
-
-    <!-- Kicker: second half of the doc H1 -->
-    <p
-      class="font-display text-base sm:text-xl text-black uppercase tracking-[-0.02em] mb-7"
-    >
-      {heroContent.kicker}
-    </p>
-
-    <!-- CTA principal + secundaria (§3.1) -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a
-        href={heroContent.ctaHref}
-        class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 sm:px-8 py-4 rounded-full border-2 border-black shadow-[0_10px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-105 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
-      >
-        <span>{heroContent.ctaLabel}</span>
-        <svg
-          class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          stroke-width="2.5"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-        </svg>
-      </a>
-      <a
-        href={heroContent.ctaSecondaryHref}
-        class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-black uppercase tracking-wider border-b-2 border-black hover:opacity-70 transition-opacity pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
-      >
-        <span>{heroContent.ctaSecondaryLabel}</span>
-        <span aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-
-    <!-- Microcopy bajo los botones (§3.1) -->
-    <p class="font-mono-meta text-[11px] text-black/70 uppercase tracking-wide mt-5 mb-0">
-      {heroContent.microcopy}
     </p>
   </div>
 
@@ -104,7 +57,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       <!-- Center: 144px Rotating Circular 'Scroll Down' Text Indicator with Dynamic Rotating Arrow -->
       <div class="flex justify-center items-center py-2">
         <a
-          href={scrollHref}
+          href={servicesHref}
           data-hero-arrow-link
           class="relative w-[144px] h-[144px] flex items-center justify-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
           aria-label={scrollAriaLabel}
@@ -153,23 +106,6 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
         {heroContent.roleText}
       </div>
     </div>
-
-    <!-- Franja de números (§3.1): real AZ case numbers -->
-    <div class="mt-6 border-y-2 border-black">
-      <div class="grid grid-cols-2 md:grid-cols-4">
-        {
-          heroContent.stats.map((stat, index) => (
-            <div
-              class={`font-mono-meta text-[10px] sm:text-xs font-bold uppercase tracking-tight py-3 text-center text-black border-black ${
-                index % 2 === 1 ? "border-l-2" : ""
-              } ${index >= 2 ? "border-t-2 md:border-t-0" : ""} ${index > 0 ? "md:border-l-2" : ""}`}
-            >
-              {stat}
-            </div>
-          ))
-        }
-      </div>
-    </div>
   </div>
 </section>
 
@@ -193,13 +129,6 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     #top .hero-middle {
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
-    }
-    #top .hero-middle p.font-sans {
-      margin-top: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-    #top .hero-middle p.font-display + p.font-display {
-      margin-bottom: 1rem;
     }
     #top .hero-divider {
       margin-bottom: 1rem;
@@ -281,7 +210,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   document.addEventListener("DOMContentLoaded", initHeroArrowRotation);
   initHeroArrowRotation();
 
-  // Align the top label with the h1's left text edge: the giant
+  // Align the EST. 2026 label with the h1's left text edge: the giant
   // centered headline starts well inside the section padding, and the
   // label must carry the same visual margin at any viewport width.
   const heroSection = document.getElementById("top");
