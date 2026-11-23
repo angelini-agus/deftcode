@@ -166,25 +166,34 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
      the hero always paints fully rendered. GSAP drives these states to
      their natural values from the 2.1s handoff event and drops .intro-run
      when the entrance completes. */
-  html.intro-run [data-hero-h1],
+  /* Every group arrives from its own side: headline from the LEFT, sub
+     from the RIGHT, top label from ABOVE, origen from the left, role
+     from the right, scroll circle from BELOW. */
+  html.intro-run [data-hero-h1] {
+    opacity: 0;
+    transform: translateX(-70px);
+  }
   html.intro-run [data-hero-sub] {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateX(70px);
   }
-  html.intro-run [data-hero-label],
+  html.intro-run [data-hero-label] {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
   html.intro-run [data-hero-origen] {
     opacity: 0;
-    transform: translateX(-24px);
+    transform: translateX(-30px);
   }
   html.intro-run [data-hero-role] {
     opacity: 0;
-    transform: translateX(24px);
+    transform: translateX(30px);
   }
   html.intro-run .hero-divider {
     transform: scaleX(0);
   }
   html.intro-run [data-hero-arrow-link] {
-    transform: scale(0.8) rotate(-90deg);
+    transform: translateY(34px) scale(0.8) rotate(-90deg);
   }
   /* The terminal scramble keeps one line but transiently varies the line
      width; clip it inside the section for the intro only. */
@@ -361,42 +370,46 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     const decode = (el: HTMLElement | null, at: number, duration: number, speed = 1.5) => {
       const text = el ? finalTexts.get(el) : undefined;
       if (!el || !text) return;
-      tl.to(el, { scrambleText: { text, chars: "#/01_X%", speed }, duration, ease: "none" }, at);
+      // Narrow glyphs only: %/# blow the centered lines wide open in
+      // Archivo Black, 1_/X keep the box width stable while glitching.
+      tl.to(el, { scrambleText: { text, chars: "10_/X", speed }, duration, ease: "none" }, at);
     };
 
     introScrambling = true;
 
-    // Headline + sub: rise, then decode letter by letter with a fast
-    // scramble. fitHeroH1 already fixed the one-line font size from the
-    // final string, so the nowrap line never reflows or wraps.
+    // Headline enters from the LEFT, sub from the RIGHT: the glitch is a
+    // short flicker (≈0.2s) that resolves while each group lands.
+    // fitHeroH1 already fixed the one-line font size from the final
+    // string, so the nowrap line never reflows or wraps.
     if (h1) {
-      tl.to(h1, { y: 0, opacity: 1, duration: 0.6 }, 0);
-      decode(h1, 0.05, 0.65);
+      tl.to(h1, { x: 0, opacity: 1, duration: 0.45 }, 0);
+      decode(h1, 0, 0.22);
     }
     if (sub) {
-      tl.to(sub, { y: 0, opacity: 1, duration: 0.6 }, 0.12);
-      decode(sub, 0.17, 0.75, 2);
+      tl.to(sub, { x: 0, opacity: 1, duration: 0.45 }, 0.06);
+      decode(sub, 0.06, 0.25, 2);
     }
-    // Mono labels slide in from their sides while their text decodes.
+    // Top label drops from above, origen slides from the left, role from
+    // the right — each with a quick terminal flicker.
     if (label) {
-      tl.to(label, { x: 0, opacity: 1, duration: 0.5 }, 0.1);
-      decode(label, 0.15, 0.6);
+      tl.to(label, { y: 0, opacity: 1, duration: 0.4 }, 0.02);
+      decode(label, 0.02, 0.18);
     }
     if (origen) {
-      tl.to(origen, { x: 0, opacity: 1, duration: 0.5 }, 0.18);
-      origenLines.forEach((line, i) => decode(line, 0.23 + i * 0.05, 0.6));
+      tl.to(origen, { x: 0, opacity: 1, duration: 0.4 }, 0.08);
+      origenLines.forEach((line, i) => decode(line, 0.08 + i * 0.04, 0.18));
     }
     if (role) {
-      tl.to(role, { x: 0, opacity: 1, duration: 0.5 }, 0.26);
-      decode(role, 0.31, 0.6);
+      tl.to(role, { x: 0, opacity: 1, duration: 0.4 }, 0.14);
+      decode(role, 0.14, 0.18);
     }
     // Divider: scaleX 0→1 from the center.
     if (divider) {
-      tl.to(divider, { scaleX: 1, duration: 0.55 }, 0.35);
+      tl.to(divider, { scaleX: 1, duration: 0.45 }, 0.1);
     }
-    // Scroll circle: soft settle with a slight rotation overshoot.
+    // Scroll circle: rises from below with a slight rotation settle.
     if (circle) {
-      tl.to(circle, { scale: 1, rotation: 0, duration: 0.7, ease: "back.out(1.6)" }, 0.3);
+      tl.to(circle, { y: 0, scale: 1, rotation: 0, duration: 0.55, ease: "back.out(1.6)" }, 0.12);
     }
   };
 
