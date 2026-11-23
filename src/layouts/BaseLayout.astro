@@ -77,21 +77,49 @@ const organizationSchema = {
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth bg-[#FF4D00]">
+<html lang={lang} class="scroll-smooth bg-[#FF4D00]" data-intro={minimal ? "off" : "auto"}>
   <head>
     <script is:inline>document.documentElement.classList.add("js");</script>
     <script is:inline>
-      // Preloader gate: first visit per session only, and never for
-      // reduced-motion users. Decided before first paint (no flash).
-      try {
-        if (
-          sessionStorage.getItem("deftPreload") ||
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        )
-          document.documentElement.classList.add("preload-skip");
-      } catch {
-        /* storage blocked: let it play */
-      }
+      // Preloader gate: the intro plays on every page refresh (reload) and
+      // on arrivals from outside the site, but never on internal navigation
+      // (logo, menu, links) and never on back/forward. Reduced-motion users
+      // never get it. Decided before first paint (no flash). When the intro
+      // will actually run, .intro-run (hero targets) and .intro-nav (navbar
+      // groups) apply the hidden entrance states, and an inline 4s failsafe
+      // reveals everything if the "deft:intro:hero" handoff never arrives
+      // — the user must never land on an invisible hero. Skip/reduced/no-JS
+      // pages never get any hidden state.
+      (function () {
+        try {
+          var root = document.documentElement;
+          if (root.getAttribute("data-intro") === "off") return; // /diagnostico: no intro
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            root.classList.add("preload-skip");
+            return;
+          }
+          var entry = performance.getEntriesByType("navigation")[0];
+          var type = entry ? entry.type : "navigate";
+          var internal =
+            document.referrer.indexOf(location.origin + "/") === 0 ||
+            document.referrer === location.origin;
+          if (type === "back_forward" || (type === "navigate" && internal)) {
+            root.classList.add("preload-skip");
+            return;
+          }
+          root.classList.add("intro-run", "intro-nav");
+          window.setTimeout(function () {
+            // The navbar entrance should be long done by now; the hero
+            // entrance owns .intro-run once started (dataset.introStarted).
+            root.classList.remove("intro-nav");
+            if (root.dataset.introStarted !== "1") {
+              root.classList.remove("intro-run");
+            }
+          }, 4000);
+        } catch {
+          /* storage blocked: let it play */
+        }
+      })();
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

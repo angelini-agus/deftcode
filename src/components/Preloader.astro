@@ -1,14 +1,31 @@
 ---
 /**
- * Type preloader (first visit per session): giant DEFTCODE rides a black
- * wave crest and lands as the navbar brand — bigger to smaller, orange
- * and black only. The wave swells, swallows the word mid-travel, covers
- * the screen (the swap to the real page happens behind it) and recedes
- * downward, revealing the navbar first with the brand already docked.
+ * Intro preloader (first visit per session) — one GSAP master timeline:
  *
- * Guards: sessionStorage skip (head inline script adds .preload-skip),
- * prefers-reduced-motion skip, no-JS noscript hide, 6s JS failsafe,
- * scroll lock auto-released on removal.
+ *   0.0–0.8  solid black base; the orange DEFTCODE word emerges from
+ *            darkness (opacity 0→1, blur(6px)→0, scale 1.04→1, power2.out).
+ *   0.8–1.7  solid orange curtain rises from the bottom (yPercent 100→0,
+ *            power3.inOut) carrying its own screen-anchored BLACK word
+ *            copy: the inner wrapper is counter-translated in lockstep
+ *            inside the clipped curtain, so the curtain's top edge inverts
+ *            the word orange→black in real time with no manual clip math.
+ *   1.7–2.1  both word copies fade (power2.in); the curtain already covers
+ *            the viewport, so the overlay is dropped at ~2.06s with no
+ *            visual jump — the page behind is the orange hero.
+ *   2.1      handoff: "deft:intro:hero" event + scroll lock release; the
+ *            hero entrance (Hero.astro) answers the event (2.1s–3.3s).
+ *   2.1–2.8  navbar groups slide down staggered (logo → menu pill → right
+ *            cluster) inside this same master timeline, so every
+ *            non-minimal page gets the header entrance even without a Hero.
+ *
+ * Total intro: 3.3s. Timeline is driven from document.fonts.ready.
+ *
+ * Guards preserved: replay policy via the head inline script (plays on
+ * refresh and external arrivals, skips internal navigation and
+ * back/forward by adding .preload-skip), prefers-reduced-motion, no-JS
+ * noscript hide, 6s JS
+ * failsafe + pure-CSS 6s failsafe, scroll lock released on finish,
+ * bfcache pageshow(persisted) teardown.
  */
 interface Props {
   lang?: "es" | "en";
@@ -17,29 +34,33 @@ const { lang = "es" } = Astro.props;
 const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando";
 ---
 
-<div data-preloader class="fixed inset-0 z-[100] overflow-hidden" role="img" aria-label={srLabel}>
-  <div data-preloader-bg class="absolute inset-0 bg-[#FF4D00]"></div>
+<div
+  data-preloader
+  class="fixed inset-0 z-[100] overflow-hidden bg-black"
+  role="img"
+  aria-label={srLabel}
+  aria-hidden="true"
+>
+  <!-- Base layer: solid black canvas behind everything (phase 1 backdrop). -->
+  <div data-preloader-base class="absolute inset-0 bg-black"></div>
 
-  <!-- Centering wrapper: the word stays untransformed inside it so the
-       FLIP travel starts from its natural rect. -->
+  <!-- Orange word copy: screen-anchored, centered, emerges from darkness. -->
   <div class="absolute inset-0 flex items-center justify-center">
-    <span
-      data-preloader-word
-      class="font-logo font-extrabold uppercase leading-none tracking-[-0.035em] text-black whitespace-nowrap block"
->DEFTCODE</span>
+    <span data-preloader-word-orange class="preloader-word text-[#FF4D00]">DEFTCODE</span>
   </div>
 
-  <!-- Black swell: curved crest (SVG) on top of a full black body. -->
-  <div data-preloader-wave class="absolute left-[-30%] right-[-30%] top-0 h-[145%] bg-black will-change-transform">
-    <svg
-      class="absolute bottom-full left-0 w-full h-[9vh] text-black"
-      viewBox="0 0 1440 60"
-      preserveAspectRatio="none"
-      fill="currentColor"
-      aria-hidden="true"
+  <!-- Orange curtain: rises from the bottom carrying its own clipped BLACK
+       word copy. The inner wrapper is counter-translated in lockstep with
+       the curtain, so the black word stays screen-anchored while the
+       curtain's top edge crosses the centered word — orange above the
+       edge, black below it, exact sync. -->
+  <div data-preloader-curtain class="preloader-curtain absolute inset-0 overflow-hidden bg-[#FF4D00]">
+    <div
+      data-preloader-curtain-inner
+      class="preloader-curtain-inner absolute inset-0 flex items-center justify-center"
     >
-      <path d="M0,60 L0,34 C240,10 480,4 720,22 C960,40 1200,44 1440,18 L1440,60 Z"></path>
-    </svg>
+      <span data-preloader-word-black class="preloader-word text-black">DEFTCODE</span>
+    </div>
   </div>
 </div>
 
@@ -51,44 +72,10 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
 
 <style>
   [data-preloader] {
-    /* Overlay paints its own orange; page is identical beneath. */
+    /* Overlay paints its own canvas; page is identical beneath. */
     contain: strict;
-  }
-  [data-preloader-word] {
-    font-size: 15.5vw;
-    opacity: 0;
-    will-change: transform, opacity;
-  }
-  /* Entrance only when fonts are ready (no FOUT): slight inhale from a
-     bigger scale — the word then only ever gets smaller. */
-  [data-preloader].is-ready [data-preloader-word] {
-    animation: preloader-in 500ms ease-out backwards;
-  }
-  @keyframes preloader-in {
-    from {
-      opacity: 0;
-      transform: scale(1.12);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  [data-preloader-wave] {
-    transform: translate3d(0, 103%, 0);
-    transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
-  }
-  /* At full cover the swap is invisible: hide bg + word behind the wave. */
-  [data-preloader].is-covered [data-preloader-bg],
-  [data-preloader].is-covered [data-preloader-word] {
-    opacity: 0;
-  }
-  [data-preloader-bg] {
-    transition: opacity 60ms linear;
-  }
-  /* Pure-CSS failsafe: even if the module script never runs, the overlay
-     cannot trap the page. */
-  [data-preloader] {
+    /* Pure-CSS failsafe: even if the module script never runs, the overlay
+       cannot trap the page. */
     animation: preloader-failsafe 1ms linear 6s forwards;
   }
   @keyframes preloader-failsafe {
@@ -96,6 +83,34 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
       visibility: hidden;
       pointer-events: none;
     }
+  }
+  .preloader-word {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    white-space: nowrap;
+    /* Spec clamp; the min() fit cap keeps the word off the screen edges on
+       narrow viewports (DEFTCODE measures ~5.3em in Archivo Black). */
+    font-size: min(clamp(4.5rem, 11vw, 10rem), calc((100vw - 2rem) / 6.2));
+    will-change: opacity, transform, filter;
+  }
+  /* Phase 1 initial state: the orange word waits in darkness. */
+  [data-preloader-word-orange] {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(6px);
+  }
+  /* Phase 2 initial states: curtain parked below the viewport; its inner
+     copy counter-translated so the black word is screen-anchored. */
+  .preloader-curtain {
+    transform: translateY(100%);
+    will-change: transform;
+  }
+  .preloader-curtain-inner {
+    transform: translateY(-100%);
+    will-change: transform;
   }
 </style>
 
@@ -106,106 +121,137 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
   html.preload-skip [data-preloader] {
     display: none;
   }
+
+  /* Navbar entrance initial state, applied only while the intro actually
+     runs (html.intro-nav, decided pre-paint by the BaseLayout head script).
+     The master timeline slides the three groups down at 2.1s: logo, menu
+     pill, right cluster. Zero hidden states on skip/reduced/no-JS. A
+     dedicated gate (not .intro-run) lets the master drop the inline styles
+     at ~2.8s while the hero entrance still needs its own hidden states. */
+  html.intro-nav .site-nav .navbar-brand-logo,
+  html.intro-nav .site-nav nav[aria-label="Main Navigation"],
+  html.intro-nav .site-nav .nav-shell > div:last-child {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
 </style>
 
 <script>
+  import gsap from "gsap";
+
   const overlay = document.querySelector<HTMLElement>("[data-preloader]");
   const html = document.documentElement;
-
-  // The head inline script flags skips before paint; belt and braces here.
-  const skipped =
-    !overlay || html.classList.contains("preload-skip");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // The head inline script flags skips before paint; belt and braces here.
+  const skipped = !overlay || html.classList.contains("preload-skip");
 
-  const finish = () => {
-    if (!overlay || !overlay.isConnected) return;
-    try {
-      sessionStorage.setItem("deftPreload", "1");
-    } catch {
-      /* private mode: preloader just replays next navigation */
-    }
-    overlay.remove();
+  // Navbar entrance targets (every non-minimal page renders the navbar).
+  const navGroups = [
+    document.querySelector<HTMLElement>(".site-nav .navbar-brand-logo"),
+    document.querySelector<HTMLElement>('.site-nav nav[aria-label="Main Navigation"]'),
+    document.querySelector<HTMLElement>(".site-nav .nav-shell > div:last-child"),
+  ].filter((el): el is HTMLElement => Boolean(el));
+
+  let tl: ReturnType<typeof gsap.timeline> | null = null;
+  let finished = false;
+
+  const releaseScrollLock = () => {
     html.style.overflow = "";
   };
 
+  const removeOverlay = () => overlay?.remove();
+
+  // Nav entrance done: drop its gate and the inline styles so CSS-driven
+  // details (e.g. the logo's hover dim) keep working afterwards.
+  const revealNav = () => {
+    html.classList.remove("intro-nav");
+    gsap.set(navGroups, { clearProps: "opacity,transform" });
+  };
+
+  // Intro handoff at t=2.1s: the hero entrance is signalled and the scroll
+  // lock releases. The navbar groups keep animating inside this timeline.
+  const handoff = () => {
+    releaseScrollLock();
+    html.dataset.introHandoff = "1";
+    window.dispatchEvent(new CustomEvent("deft:intro:hero"));
+  };
+
+  const onPageShow = (e: PageTransitionEvent) => {
+    if (e.persisted) teardown();
+  };
+
+  // Abrupt end (failsafe, bfcache restore): kill the timeline, drop the
+  // overlay, release the lock and reveal the page. Once the hero entrance
+  // started it owns .intro-run (removed by its own onComplete); until then
+  // it is dropped here so nothing stays hidden.
+  const teardown = () => {
+    if (finished) return;
+    finished = true;
+    window.removeEventListener("pageshow", onPageShow);
+    tl?.kill();
+    tl = null;
+    removeOverlay();
+    releaseScrollLock();
+    revealNav();
+    if (html.dataset.introStarted !== "1") html.classList.remove("intro-run");
+  };
+
   if (!skipped && reduced) {
-    finish();
+    teardown();
   } else if (skipped) {
     overlay?.remove();
   } else if (overlay) {
     html.style.overflow = "hidden";
-    window.addEventListener(
-      "pageshow",
-      (e) => {
-        if (e.persisted) finish();
-      },
-      { once: true },
-    );
+    window.addEventListener("pageshow", onPageShow);
+    window.setTimeout(teardown, 6000); // hard failsafe: never trap the user
 
-    const word = overlay.querySelector<HTMLElement>("[data-preloader-word]")!;
-    const wave = overlay.querySelector<HTMLElement>("[data-preloader-wave]")!;
-    const brand = document.querySelector<HTMLElement>(".navbar-brand-logo");
+    const orangeWord = overlay.querySelector<HTMLElement>("[data-preloader-word-orange]");
+    const blackWord = overlay.querySelector<HTMLElement>("[data-preloader-word-black]");
+    const curtain = overlay.querySelector<HTMLElement>("[data-preloader-curtain]");
+    const curtainInner = overlay.querySelector<HTMLElement>("[data-preloader-curtain-inner]");
 
-    const TIMELINE = {
-      entrance: 0, // .is-ready starts the 500ms inhale
-      waveRise: 900, // 700ms rise
-      wordTravel: 950, // 700ms FLIP to the brand rect
-      covered: 1650, // swap happens behind the wave
-      waveRecede: 1750, // 800ms recede reveals the navbar first
-      done: 2600,
-    };
+    const build = () => {
+      if (finished || !overlay?.isConnected) return;
 
-    const run = () => {
-      // FLIP measure with the real font loaded: giant word -> brand rect.
-      if (brand) {
-        const wordRect = word.getBoundingClientRect();
-        const brandRect = brand.getBoundingClientRect();
-        if (wordRect.width > 0 && brandRect.width > 0) {
-          const scale = brandRect.width / wordRect.width;
-          const dx = brandRect.left - wordRect.left;
-          const dy = brandRect.top - wordRect.top;
-          word.style.transformOrigin = "top left";
-          word.style.transition = "transform 700ms cubic-bezier(0.76, 0, 0.24, 1)";
-          // Store as custom props: applied at waveRise so the word rides
-          // the crest instead of leaving before it.
-          word.style.setProperty("--fly-x", `${dx}px`);
-          word.style.setProperty("--fly-y", `${dy}px`);
-          word.style.setProperty("--fly-s", `${scale}`);
-        }
+      tl = gsap.timeline();
+
+      // Phase 1 (0–0.8s): the orange word emerges from the black base.
+      if (orangeWord) {
+        tl.to(orangeWord, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power2.out" }, 0);
       }
 
-      setTimeout(() => {
-        overlay.classList.add("is-ready");
-      }, TIMELINE.entrance);
+      // Phase 2 (0.8–1.7s): the orange curtain rises; the clipped black
+      // word copy inverts the word color in real time. Both tweens share
+      // duration + ease + start so the counter-translation stays in exact
+      // lockstep (screen-anchored black word).
+      if (curtain && curtainInner) {
+        tl.to(curtain, { yPercent: 0, duration: 0.9, ease: "power3.inOut" }, 0.8);
+        tl.to(curtainInner, { yPercent: 0, duration: 0.9, ease: "power3.inOut" }, 0.8);
+      }
 
-      setTimeout(() => {
-        wave.style.transform = "translate3d(0, 0, 0)";
-      }, TIMELINE.waveRise);
+      // Phase 3 (1.7–2.1s): both copies fade out; the curtain already
+      // covers the viewport, so the overlay is dropped at ~2.06s with no
+      // visual jump — the page behind is the orange hero.
+      const words = [orangeWord, blackWord].filter((el): el is HTMLElement => Boolean(el));
+      if (words.length > 0) {
+        tl.to(words, { opacity: 0, duration: 0.3, ease: "power2.in" }, 1.7);
+      }
+      tl.call(removeOverlay, undefined, 2.06);
 
-      setTimeout(() => {
-        word.style.transform = `translate3d(${word.style.getPropertyValue("--fly-x") || "0px"}, ${
-          word.style.getPropertyValue("--fly-y") || "0px"
-        }, 0) scale(${word.style.getPropertyValue("--fly-s") || "0.2"})`;
-      }, TIMELINE.wordTravel);
-
-      setTimeout(() => overlay.classList.add("is-covered"), TIMELINE.covered);
-
-      setTimeout(() => {
-        wave.style.transition = "transform 800ms cubic-bezier(0.45, 0, 0.55, 1)";
-        wave.style.transform = "translate3d(0, 103%, 0)";
-      }, TIMELINE.waveRecede);
-
-      setTimeout(finish, TIMELINE.done);
+      // Phase 4a (2.1s–~2.8s): navbar slides down, staggered logo → pill →
+      // right cluster. The hero elements answer the handoff event below.
+      if (navGroups.length > 0) {
+        tl.to(navGroups, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out", stagger: 0.08 }, 2.1);
+      }
+      tl.call(revealNav, undefined, 2.82);
+      tl.call(handoff, undefined, 2.1);
     };
 
-    const start = () => requestAnimationFrame(run);
+    // Fonts first: measurements are real and there is no FOUT.
     if (document.fonts?.ready) {
-      document.fonts.ready.then(start);
+      document.fonts.ready.then(build);
     } else {
-      start();
+      build();
     }
-
-    // Hard failsafe: never trap the user behind the overlay.
-    setTimeout(finish, 6000);
   }
 </script>
