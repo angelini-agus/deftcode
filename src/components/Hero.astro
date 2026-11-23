@@ -31,7 +31,8 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   <!-- Giant Typographic Headline (16vw) -->
   <div class="my-auto py-8 flex flex-col items-center justify-center text-center hero-middle">
     <h1
-      class="font-display text-[15vw] sm:text-[16vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 text-balance w-full"
+      data-hero-h1
+      class="font-display text-[15vw] sm:text-[16vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 whitespace-nowrap w-full"
     >
       {heroContent.headlineMain}
     </h1>
@@ -217,6 +218,21 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   const heroLabel = document.querySelector("[data-hero-label]");
   const heroH1 = heroSection?.querySelector("h1");
 
+  // One-line headline: the giant h1 must never wrap. Start from the CSS
+  // fluid size, then shrink proportionally by the measured overflow ratio
+  // until the text fits its container width on exactly one line.
+  const fitHeroH1 = () => {
+    if (!heroH1) return;
+    heroH1.style.fontSize = "";
+    let px = parseFloat(getComputedStyle(heroH1).fontSize);
+    for (let pass = 0; pass < 3; pass++) {
+      const overflow = heroH1.scrollWidth / heroH1.clientWidth;
+      if (overflow <= 1) break;
+      px = Math.max(16, Math.floor((px / overflow) * 0.98));
+      heroH1.style.fontSize = `${px}px`;
+    }
+  };
+
   if (heroSection && heroLabel && heroH1) {
     const alignHeroLabel = () => {
       const range = document.createRange();
@@ -228,8 +244,15 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       heroSection.style.setProperty("--hero-indent", `${indent}px`);
     };
 
-    document.fonts.ready.then(alignHeroLabel);
-    window.addEventListener("resize", alignHeroLabel, { passive: true });
-    alignHeroLabel();
+    document.fonts.ready.then(() => {
+      fitHeroH1();
+      alignHeroLabel();
+    });
+    const onHeroLayout = () => {
+      fitHeroH1();
+      alignHeroLabel();
+    };
+    window.addEventListener("resize", onHeroLayout, { passive: true });
+    onHeroLayout();
   }
 </script>
