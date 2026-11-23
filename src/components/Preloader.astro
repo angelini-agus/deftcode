@@ -103,7 +103,10 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
     filter: blur(6px);
   }
   /* Phase 2 initial states: curtain parked below the viewport; its inner
-     copy counter-translated so the black word is screen-anchored. */
+     copy counter-translated so the black word is screen-anchored. These
+     CSS transforms are only the pre-paint fallback — the module re-declares
+     them with gsap.set(yPercent) before the timeline builds (a CSS %
+     translate parsed by GSAP becomes a pixel y and the tween would no-op). */
   .preloader-curtain {
     transform: translateY(100%);
     will-change: transform;
@@ -224,7 +227,14 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
       // word copy inverts the word color in real time. Both tweens share
       // duration + ease + start so the counter-translation stays in exact
       // lockstep (screen-anchored black word).
+      // Initial offsets are set HERE with gsap.set, not in CSS: GSAP
+      // parses a CSS translateY(100%) into a pixel `y` component (900px)
+      // and keeps it — tweening yPercent alone would ride ON TOP of that
+      // frozen 900px offset (1800→900: still off-screen the whole time).
+      // y:0 clears the inherited pixel component, yPercent re-parks it.
       if (curtain && curtainInner) {
+        gsap.set(curtain, { y: 0, yPercent: 100 });
+        gsap.set(curtainInner, { y: 0, yPercent: -100 });
         tl.to(curtain, { yPercent: 0, duration: 0.9, ease: "power3.inOut" }, 0.8);
         tl.to(curtainInner, { yPercent: 0, duration: 0.9, ease: "power3.inOut" }, 0.8);
       }

@@ -367,41 +367,91 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       ? Array.from(origen.querySelectorAll<HTMLElement>("[data-hero-scramble]"))
       : [];
 
-    const decode = (el: HTMLElement | null, at: number, duration: number, speed = 1.5) => {
+    // Per-letter decode: each character is an inline-block span that
+    // GROWS from small (scale 0.25) to full size while its glyph cycles
+    // through the narrow glitch set — letters appear small and get bigger
+    // exactly as they stop glitching.
+    const GLYPHS = "10_/X";
+    const restored: HTMLElement[] = [];
+
+    const buildCharSpans = (el: HTMLElement, text: string) => {
+      el.textContent = "";
+      const spans: { node: HTMLSpanElement; final: string }[] = [];
+      for (const ch of text) {
+        if (ch === " ") {
+          el.appendChild(document.createTextNode(" "));
+          continue;
+        }
+        const node = document.createElement("span");
+        node.style.display = "inline-block";
+        node.dataset.final = ch;
+        node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        el.appendChild(node);
+        spans.push({ node, final: ch });
+      }
+      return spans;
+    };
+
+    const decode = (el: HTMLElement | null, at: number, total = 0.42) => {
       const text = el ? finalTexts.get(el) : undefined;
       if (!el || !text) return;
-      // Narrow glyphs only: %/# blow the centered lines wide open in
-      // Archivo Black, 1_/X keep the box width stable while glitching.
-      tl.to(el, { scrambleText: { text, chars: "10_/X", speed }, duration, ease: "none" }, at);
+      restored.push(el);
+      const spans = buildCharSpans(el, text);
+      const each = Math.min(0.022, 0.3 / spans.length);
+      const flickerMs = 110;
+      spans.forEach(({ node, final }, i) => {
+        const startAt = at + i * each;
+        tl.fromTo(
+          node,
+          { scale: 0.25, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(1.8)" },
+          startAt,
+        );
+        tl.call(
+          () => {
+            node.dataset.settled = "1";
+            node.textContent = final;
+          },
+          undefined,
+          startAt + flickerMs / 1000,
+        );
+      });
+      // Random glyph cycling for every letter that has not settled yet.
+      const cycler = window.setInterval(() => {
+        for (const { node } of spans) {
+          if (!node.dataset.settled) {
+            node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          }
+        }
+      }, 42);
+      tl.call(() => window.clearInterval(cycler), undefined, at + total + 0.1);
     };
 
     introScrambling = true;
 
-    // Headline enters from the LEFT, sub from the RIGHT: the glitch is a
-    // short flicker (≈0.2s) that resolves while each group lands.
-    // fitHeroH1 already fixed the one-line font size from the final
-    // string, so the nowrap line never reflows or wraps.
+    // Headline enters from the LEFT, sub from the RIGHT: each group
+    // slides while its letters grow from small and de-glitch.
     if (h1) {
       tl.to(h1, { x: 0, opacity: 1, duration: 0.45 }, 0);
-      decode(h1, 0, 0.22);
+      decode(h1, 0, 0.42);
     }
     if (sub) {
       tl.to(sub, { x: 0, opacity: 1, duration: 0.45 }, 0.06);
-      decode(sub, 0.06, 0.25, 2);
+      decode(sub, 0.06, 0.5);
     }
-    // Top label drops from above, origen slides from the left, role from
-    // the right — each with a quick terminal flicker.
+    // Top label drops from above, origen from the left, role from the
+    // right — letters growing while the flicker cycles.
     if (label) {
       tl.to(label, { y: 0, opacity: 1, duration: 0.4 }, 0.02);
-      decode(label, 0.02, 0.18);
+      decode(label, 0.02, 0.32);
     }
     if (origen) {
       tl.to(origen, { x: 0, opacity: 1, duration: 0.4 }, 0.08);
-      origenLines.forEach((line, i) => decode(line, 0.08 + i * 0.04, 0.18));
+      origenLines.forEach((line, i) => decode(line, 0.08 + i * 0.05, 0.28));
     }
     if (role) {
       tl.to(role, { x: 0, opacity: 1, duration: 0.4 }, 0.14);
-      decode(role, 0.14, 0.18);
+      decode(role, 0.14, 0.32);
     }
     // Divider: scaleX 0→1 from the center.
     if (divider) {
@@ -411,6 +461,19 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     if (circle) {
       tl.to(circle, { y: 0, scale: 1, rotation: 0, duration: 0.55, ease: "back.out(1.6)" }, 0.12);
     }
+
+    // Unwrap the char spans and leave the plain strings exactly as they
+    // were authored, so fitHeroH1/alignHeroLabel measure clean DOM.
+    tl.call(
+      () => {
+        for (const el of restored) {
+          const text = finalTexts.get(el);
+          if (text) el.textContent = text;
+        }
+      },
+      undefined,
+      0.95,
+    );
   };
 
   if (introRoot.dataset.introHandoff === "1") {
