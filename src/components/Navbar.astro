@@ -47,7 +47,7 @@ const socialAria: Record<string, string> =
 ---
 
 <header class="site-nav fixed top-0 left-0 w-full z-50 pointer-events-none px-4 md:px-12 py-4">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
+  <div class="nav-shell max-w-7xl mx-auto flex items-center justify-between">
     <!-- Brand Logo (Pure text, no black box, weight 800 Archivo Variable) -->
     <a
       href={homeHref}
@@ -204,30 +204,26 @@ const socialAria: Record<string, string> =
 </header>
 
 <style>
-  /* Scrolled state: solid black bar so page content never renders
-     "through" the transparent navbar (user report: form/cards visibly
-     colliding with the header mid-scroll). Above the fold the bar stays
-     transparent over the orange hero/banner. */
-  .site-nav {
-    transition: background-color 250ms ease;
+  /* Scrolled state: the glass is a PILL wrapping the whole navbar
+     (brand + menu + CTA), not a full-width rectangle. Above the fold
+     the shell is invisible: transparent, no padding, no border — only
+     the pill surfaces on scroll, morphing smoothly. */
+  .nav-shell {
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease,
+      box-shadow 300ms ease,
+      padding 300ms ease;
   }
-  .site-nav.navbar-scrolled {
-    /* Frosted glass instead of the flat black bar: translucent black
-       over the blurred page, warm saturate to keep the orange alive,
-       hairline bottom edge and a soft drop for depth. */
+  .site-nav.navbar-scrolled .nav-shell {
     background-color: rgba(0, 0, 0, 0.55);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     backdrop-filter: blur(14px) saturate(140%);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition:
-      background-color 300ms ease,
-      box-shadow 300ms ease;
-  }
-  .site-nav {
-    transition:
-      background-color 300ms ease,
-      box-shadow 300ms ease;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    padding: 0.55rem 1.25rem;
   }
 </style>
 
