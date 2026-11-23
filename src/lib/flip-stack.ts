@@ -65,28 +65,37 @@ export const flipCardState = (
 
   const { hold, entryOffset: rise, step } = geometry;
   const u = p / segment;
-  // Card i rises from below during the last `hold` portion of card
-  // (i - 1)'s segment: u ∈ [i - hold, i]. Card 0 is always in place.
-  // Once landed it stays put; fully covered cards drift up by `step`
-  // per extra segment so the deck keeps its stacked peek.
-  const riseStart = index - hold;
+  // Every card — the first one included — stays HIDDEN until its own
+  // rise starts: card i rises during the first `hold` portion of its
+  // own segment [i, i + hold], so nothing of the deck is ever visible
+  // before the user scrolls (user request: the deck must not peek at
+  // the bottom of the viewport at any resolution). Once landed it holds
+  // uncovered for the rest of its segment; fully covered cards drift
+  // up by `step` per extra segment so the deck keeps its stacked peek.
   let y: number;
+  let opacity: number;
 
   if (u > index + 1) {
     y = step * (index + 1 - u);
-  } else if (u >= index) {
+    opacity = 1;
+  } else if (u >= index + hold) {
     y = 0;
-  } else if (u <= riseStart) {
-    y = rise + (riseStart - u) * geometry.stackGap;
-  } else {
-    const t = (u - riseStart) / Math.max(hold, 1e-6);
+    opacity = 1;
+  } else if (u > index) {
+    const t = (u - index) / Math.max(hold, 1e-6);
     y = rise * (1 - t);
+    // Fade in fast while rising so a card never pops in abruptly.
+    opacity = clamp01(t / 0.3);
+  } else {
+    // Waiting below the stage: fully hidden, zero footprint on screen.
+    y = rise + (index - u) * geometry.stackGap;
+    opacity = 0;
   }
 
   const scaleT = clamp01(Math.abs(y) / Math.max(rise, 1e-6));
   const scale = lerp(1, 0.98, scaleT);
 
-  return { y, scale, opacity: 1 };
+  return { y, scale, opacity };
 };
 
 export const flipFront = (progress: number, geometry: FlipGeometry): number => {

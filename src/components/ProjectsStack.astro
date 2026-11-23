@@ -177,8 +177,8 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
 <style>
   .projects-stack__runway {
     /* Height creates the scroll runway: 100vh base + 90vh per card
-       (raised from 75vh: each card now holds fully visible for the
-       first half of its segment before the next one rises over it) */
+     (each card rises during the first half of its own segment and
+     holds fully uncovered for the rest, before the next one rises) */
     min-height: calc(100vh + (var(--flip-count, 6) * 90vh));
   }
 
