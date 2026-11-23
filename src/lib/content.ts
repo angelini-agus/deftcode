@@ -131,7 +131,7 @@ const esHeroContent: HeroContent = {
   ctaSecondaryLabel: "Ver cómo lo hicimos en AZ",
   ctaSecondaryHref: "/proyectos/empresa-limpieza-rosario/",
   microcopy: "Entrevista de 2 horas. Informe en 48 h. Es tuyo aunque no trabajemos juntos.",
-  scrollText: "DESLIZAR HACIA ABAJO • VER EL CASO REAL • ",
+  scrollText: "DESLIZAR HACIA ABAJO • EXPLORAR DEFTCODE • ",
 };
 
 const esMarqueeItems = {
@@ -1380,7 +1380,7 @@ const enHeroContent: HeroContent = {
   ctaSecondaryLabel: "See how we did it for AZ",
   ctaSecondaryHref: "/en/projects/empresa-limpieza-rosario/",
   microcopy: "2-hour interview. Report in 48 h. Yours even if we never work together.",
-  scrollText: "SCROLL DOWN • SEE THE REAL CASE • ",
+  scrollText: "SCROLL DOWN • EXPLORE DEFT • ",
 };
 
 const enMarqueeItems = {
