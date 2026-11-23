@@ -3,6 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
 import ProjectsStack from "../components/ProjectsStack.astro";
 import CtaSection from "../components/CtaSection.astro";
+import FeaturedCase from "../components/FeaturedCase.astro";
+import ClientQuote from "../components/ClientQuote.astro";
 import { pages, projects } from "../lib/content";
 import { Image } from "astro:assets";
 import { buildLightboxGalleries, projectAssets } from "../lib/project-images";
@@ -19,6 +21,10 @@ import ScreenLightbox from "../components/ScreenLightbox.astro";
     title={pages.proyectos.h1}
     intro={pages.proyectos.intro}
   />
+
+  <!-- Social proof (AZ case) + client testimonial, before the deck -->
+  <FeaturedCase lang="es" />
+  <ClientQuote lang="es" />
 
   <!-- Interactive Runway Deck -->
   <ProjectsStack lang="es" />
