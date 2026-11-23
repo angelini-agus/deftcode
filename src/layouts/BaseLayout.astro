@@ -2,7 +2,6 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import Preloader from "../components/Preloader.astro";
-import WhatsAppFloatingButton from "../components/WhatsAppFloatingButton.astro";
 import Analytics from "@vercel/analytics/astro";
 import { getContent } from "../lib/content";
 import type { Lang } from "../lib/types";
@@ -111,7 +110,7 @@ const organizationSchema = {
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={esUrl} />
 
-    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
@@ -142,7 +141,6 @@ const organizationSchema = {
       <slot />
     </main>
     {!minimal && <Footer lang={lang} />}
-    <WhatsAppFloatingButton lang={lang} />
 
     <script>
       // Scroll entrance: reveal each .reveal element once when it enters

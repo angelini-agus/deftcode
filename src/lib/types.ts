@@ -26,15 +26,6 @@ export interface FooterContent {
   locationLine: string;
 }
 
-export interface WhatsAppContact {
-  /** TODO: real business number pending (ESTRATEGIA-COPY.md §8). */
-  number: string;
-  labelEs: string;
-  labelEn: string;
-  messageEs: string;
-  messageEn: string;
-}
-
 export interface ServiceModuleGroup {
   heading: string;
   /** Pre-split heading lines for the fit-to-width CTA heading. */
@@ -268,7 +259,6 @@ export interface ContactFormContent {
   problemSelectedPrefix: string;
   submitLabel: string;
   microcopy: string;
-  whatsappAltLabel: string;
   successTitlePrefix: string;
   successBody: string;
   successCalcLabel: string;

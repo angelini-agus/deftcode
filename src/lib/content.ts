@@ -4,7 +4,6 @@ import type {
   NavLink,
   NavCtaContent,
   FooterContent,
-  WhatsAppContact,
   ServiceItem,
   ServicesHomeContent,
   ProjectItem,
@@ -1209,18 +1208,6 @@ const esFooterContent: FooterContent = {
   locationLine: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
 };
 
-// Single source for the WhatsApp number: the floating button and the form's
-// WhatsApp alternative read it from here.
-// TODO: replace "[COMPLETAR]" with the real business number before launch
-// (ESTRATEGIA-COPY.md §8).
-const whatsappContact: WhatsAppContact = {
-  number: "[COMPLETAR]",
-  labelEs: "Escribinos por WhatsApp",
-  labelEn: "Message us on WhatsApp",
-  messageEs: "Hola, quiero mi diagnóstico gratis. Mi empresa es ___ y hoy manejamos todo en ___.",
-  messageEn: "Hi, I want my free diagnosis. My company is ___ and today we run everything on ___.",
-};
-
 // ==========================================
 // 4-FIELD DIAGNOSTIC FORM (§7)
 // ==========================================
@@ -1237,7 +1224,6 @@ const esContactForm: ContactFormContent = {
   problemSelectedPrefix: "Marcaste:",
   submitLabel: "Quiero mi diagnóstico gratis",
   microcopy: "Te escribimos hoy para coordinar la entrevista. Solo usamos tus datos para eso.",
-  whatsappAltLabel: "Prefiero escribir por WhatsApp",
   successTitlePrefix: "Listo,",
   successBody: "Te escribimos hoy para coordinar tu entrevista de 2 horas. Mientras tanto:",
   successCalcLabel: "Calculá cuánto ahorraría tu empresa.",
@@ -2472,7 +2458,6 @@ const enContactForm: ContactFormContent = {
   problemSelectedPrefix: "You checked:",
   submitLabel: "Get my free diagnosis",
   microcopy: "We write to you today to schedule the interview. We only use your data for that.",
-  whatsappAltLabel: "I'd rather write on WhatsApp",
   successTitlePrefix: "Done,",
   successBody: "We write to you today to schedule your 2-hour interview. Meanwhile:",
   successCalcLabel: "Calculate what your company would save.",
@@ -2537,7 +2522,6 @@ export const getContent = (lang: Lang = "es") => {
     pricing: isEn ? enPricing : esPricing,
     navCta: isEn ? enNavCta : esNavCta,
     footerContent: isEn ? enFooterContent : esFooterContent,
-    whatsapp: whatsappContact,
     contactForm: isEn ? enContactForm : esContactForm,
     diagnosticoLanding: isEn ? enDiagnosticoLanding : esDiagnosticoLanding,
     socialLinks: esSocialLinks,
@@ -2575,7 +2559,6 @@ export const moreSoftware = esMoreSoftware;
 export const pricing = esPricing;
 export const navCta = esNavCta;
 export const footerContent = esFooterContent;
-export const whatsapp = whatsappContact;
 export const contactForm = esContactForm;
 export const diagnosticoLanding = esDiagnosticoLanding;
 export const socialLinks = esSocialLinks;

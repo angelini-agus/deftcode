@@ -9,17 +9,11 @@ interface Props {
 }
 
 const { lang = "es", embedded = false } = Astro.props;
-const { contactForm, whatsapp, problems } = getContent(lang);
+const { contactForm, problems } = getContent(lang);
 
 // TODO: Meta Pixel + Conversions API — fire a Lead conversion event on
 // every successful submit before launching paid campaigns
 // (ESTRATEGIA-COPY.md §7 "Reglas de la landing de Meta Ads").
-
-// WhatsApp alternative shares the single number constant in content.ts.
-// TODO: replace the [COMPLETAR] placeholder there with the real number.
-const waHref = `https://wa.me/${whatsapp.number}?text=${encodeURIComponent(
-  lang === "en" ? whatsapp.messageEn : whatsapp.messageEs,
-)}`;
 
 // ?problema=<key> → label map for the preselection note (client-side).
 const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, card.buttonLabel]));
@@ -124,17 +118,6 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
         <p class="font-mono-meta text-[11px] text-white/60 uppercase tracking-wider m-0">
           {contactForm.microcopy}
         </p>
-
-        <!-- WhatsApp alternative (§7) -->
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="self-start inline-flex items-center gap-2 font-mono-meta text-xs font-bold uppercase text-[#FF4D00] hover:text-white transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
-        >
-          <span>{contactForm.whatsappAltLabel}</span>
-          <span aria-hidden="true">&rarr;</span>
-        </a>
       </form>
 
       <!-- Success screen (§7) -->
