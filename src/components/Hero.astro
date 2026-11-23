@@ -22,6 +22,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   <div class="flex items-center justify-between pb-4">
     <div
       data-hero-label
+      data-hero-scramble
       class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black ml-[var(--hero-indent,0px)]"
     >
       {lang === "en" ? "EST. 2026 // AGILE DEV" : "EST. 2026 // DESARROLLO ÁGIL"}
@@ -32,11 +33,14 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   <div class="my-auto py-8 flex flex-col items-center justify-center text-center hero-middle">
     <h1
       data-hero-h1
+      data-hero-scramble
       class="font-display text-[15vw] sm:text-[16vw] leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 whitespace-nowrap w-full"
     >
       {heroContent.headlineMain}
     </h1>
     <p
+      data-hero-sub
+      data-hero-scramble
       class="font-display text-[5vw] sm:text-[5.5vw] leading-[0.9] tracking-[-0.03em] text-black uppercase mt-2"
     >
       {heroContent.headlineSub}
@@ -50,9 +54,12 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
 
     <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-4">
       <!-- Left: Location -->
-      <div class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black">
-        <span class="block text-[11px] opacity-75 font-normal">{originLabel}</span>
-        {heroContent.locationText}
+      <div
+        data-hero-origen
+        class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black"
+      >
+        <span data-hero-scramble class="block text-[11px] opacity-75 font-normal">{originLabel}</span>
+        <span data-hero-scramble class="block">{heroContent.locationText}</span>
       </div>
 
       <!-- Center: 144px Rotating Circular 'Scroll Down' Text Indicator with Dynamic Rotating Arrow -->
@@ -103,7 +110,11 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       </div>
 
       <!-- Right: Role / Title description -->
-      <div class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black md:text-right">
+      <div
+        data-hero-role
+        data-hero-scramble
+        class="font-mono-meta text-xs md:text-sm font-bold uppercase tracking-[-0.02em] text-black md:text-right"
+      >
         {heroContent.roleText}
       </div>
     </div>
@@ -147,7 +158,47 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   }
 </style>
 
+<style is:global>
+  /* Intro entrance initial states, applied ONLY while the intro actually
+     runs: the BaseLayout head script adds html.intro-run pre-paint when it
+     decides not to skip (no sessionStorage flag, motion OK). Subsequent
+     navigations (.preload-skip), reduced motion and no-JS never match, so
+     the hero always paints fully rendered. GSAP drives these states to
+     their natural values from the 2.1s handoff event and drops .intro-run
+     when the entrance completes. */
+  html.intro-run [data-hero-h1],
+  html.intro-run [data-hero-sub] {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  html.intro-run [data-hero-label],
+  html.intro-run [data-hero-origen] {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  html.intro-run [data-hero-role] {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  html.intro-run .hero-divider {
+    transform: scaleX(0);
+  }
+  html.intro-run [data-hero-arrow-link] {
+    transform: scale(0.8) rotate(-90deg);
+  }
+  /* The terminal scramble keeps one line but transiently varies the line
+     width; clip it inside the section for the intro only. */
+  html.intro-run #top {
+    overflow-x: clip;
+  }
+</style>
+
 <script>
+  import gsap from "gsap";
+  import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+
+  gsap.registerPlugin(ScrambleTextPlugin);
+
   const initHeroArrowRotation = () => {
     const arrow = document.querySelector<SVGElement>("[data-hero-arrow]");
     const link = document.querySelector<HTMLAnchorElement>("[data-hero-arrow-link]");
@@ -233,26 +284,126 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     }
   };
 
-  if (heroSection && heroLabel && heroH1) {
-    const alignHeroLabel = () => {
-      const range = document.createRange();
-      range.selectNodeContents(heroH1);
-      const rects = Array.from(range.getClientRects());
-      const textLeft = rects.length ? Math.min(...rects.map((r) => r.left)) : heroH1.getBoundingClientRect().left;
-      const padding = parseFloat(getComputedStyle(heroSection).paddingLeft) || 0;
-      const indent = Math.max(0, Math.round(textLeft - heroSection.getBoundingClientRect().left - padding));
-      heroSection.style.setProperty("--hero-indent", `${indent}px`);
-    };
+  const alignHeroLabel = () => {
+    if (!heroSection || !heroLabel || !heroH1) return;
+    const range = document.createRange();
+    range.selectNodeContents(heroH1);
+    const rects = Array.from(range.getClientRects());
+    const textLeft = rects.length ? Math.min(...rects.map((r) => r.left)) : heroH1.getBoundingClientRect().left;
+    const padding = parseFloat(getComputedStyle(heroSection).paddingLeft) || 0;
+    const indent = Math.max(0, Math.round(textLeft - heroSection.getBoundingClientRect().left - padding));
+    heroSection.style.setProperty("--hero-indent", `${indent}px`);
+  };
 
+  // During the intro decode the h1 text is transient scramble garbage:
+  // fitting waits until the final string is restored (see onComplete).
+  let introScrambling = false;
+  const onHeroLayout = () => {
+    if (introScrambling) return;
+    fitHeroH1();
+    alignHeroLabel();
+  };
+
+  if (heroSection && heroLabel && heroH1) {
     document.fonts.ready.then(() => {
       fitHeroH1();
       alignHeroLabel();
     });
-    const onHeroLayout = () => {
-      fitHeroH1();
-      alignHeroLabel();
-    };
     window.addEventListener("resize", onHeroLayout, { passive: true });
     onHeroLayout();
+  }
+
+  // --- Intro entrance (phase 4, 2.1s–3.3s) --------------------------------
+  // Final strings are read from the DOM at runtime (never hardcoded): the
+  // scramble decodes letter by letter and restores them exactly, so the
+  // one-line fit (fitHeroH1, whitespace-nowrap) keeps holding. Normalizing
+  // the captured strings is render-neutral: HTML collapses whitespace.
+  const introRoot = document.documentElement;
+  const finalTexts = new Map<HTMLElement, string>();
+  for (const el of Array.from(document.querySelectorAll<HTMLElement>("[data-hero-scramble]"))) {
+    const original = (el.textContent ?? "").replace(/\s+/g, " ").trim();
+    if (original) {
+      finalTexts.set(el, original);
+      el.textContent = original;
+    }
+  }
+
+  let heroIntroStarted = false;
+
+  const startHeroIntro = () => {
+    if (heroIntroStarted) return;
+    // The inline 4s failsafe may already have revealed everything.
+    if (!introRoot.classList.contains("intro-run")) return;
+    heroIntroStarted = true;
+    introRoot.dataset.introStarted = "1";
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      onComplete: () => {
+        introRoot.classList.remove("intro-run");
+        introScrambling = false;
+        fitHeroH1();
+        alignHeroLabel();
+      },
+    });
+
+    const h1 = document.querySelector<HTMLElement>("[data-hero-h1]");
+    const sub = document.querySelector<HTMLElement>("[data-hero-sub]");
+    const label = document.querySelector<HTMLElement>("[data-hero-label]");
+    const origen = document.querySelector<HTMLElement>("[data-hero-origen]");
+    const role = document.querySelector<HTMLElement>("[data-hero-role]");
+    const divider = document.querySelector<HTMLElement>(".hero-divider");
+    const circle = document.querySelector<HTMLElement>("[data-hero-arrow-link]");
+    const origenLines = origen
+      ? Array.from(origen.querySelectorAll<HTMLElement>("[data-hero-scramble]"))
+      : [];
+
+    const decode = (el: HTMLElement | null, at: number, duration: number, speed = 1.5) => {
+      const text = el ? finalTexts.get(el) : undefined;
+      if (!el || !text) return;
+      tl.to(el, { scrambleText: { text, chars: "#/01_X%", speed }, duration, ease: "none" }, at);
+    };
+
+    introScrambling = true;
+
+    // Headline + sub: rise, then decode letter by letter with a fast
+    // scramble. fitHeroH1 already fixed the one-line font size from the
+    // final string, so the nowrap line never reflows or wraps.
+    if (h1) {
+      tl.to(h1, { y: 0, opacity: 1, duration: 0.6 }, 0);
+      decode(h1, 0.05, 0.65);
+    }
+    if (sub) {
+      tl.to(sub, { y: 0, opacity: 1, duration: 0.6 }, 0.12);
+      decode(sub, 0.17, 0.75, 2);
+    }
+    // Mono labels slide in from their sides while their text decodes.
+    if (label) {
+      tl.to(label, { x: 0, opacity: 1, duration: 0.5 }, 0.1);
+      decode(label, 0.15, 0.6);
+    }
+    if (origen) {
+      tl.to(origen, { x: 0, opacity: 1, duration: 0.5 }, 0.18);
+      origenLines.forEach((line, i) => decode(line, 0.23 + i * 0.05, 0.6));
+    }
+    if (role) {
+      tl.to(role, { x: 0, opacity: 1, duration: 0.5 }, 0.26);
+      decode(role, 0.31, 0.6);
+    }
+    // Divider: scaleX 0→1 from the center.
+    if (divider) {
+      tl.to(divider, { scaleX: 1, duration: 0.55 }, 0.35);
+    }
+    // Scroll circle: soft settle with a slight rotation overshoot.
+    if (circle) {
+      tl.to(circle, { scale: 1, rotation: 0, duration: 0.7, ease: "back.out(1.6)" }, 0.3);
+    }
+  };
+
+  if (introRoot.dataset.introHandoff === "1") {
+    // The handoff fired before this module executed: start immediately.
+    startHeroIntro();
+  } else {
+    window.addEventListener("deft:intro:hero", startHeroIntro, { once: true });
   }
 </script>
