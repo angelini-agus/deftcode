@@ -1,0 +1,211 @@
+---
+/**
+ * Type preloader (first visit per session): giant DEFTCODE rides a black
+ * wave crest and lands as the navbar brand — bigger to smaller, orange
+ * and black only. The wave swells, swallows the word mid-travel, covers
+ * the screen (the swap to the real page happens behind it) and recedes
+ * downward, revealing the navbar first with the brand already docked.
+ *
+ * Guards: sessionStorage skip (head inline script adds .preload-skip),
+ * prefers-reduced-motion skip, no-JS noscript hide, 6s JS failsafe,
+ * scroll lock auto-released on removal.
+ */
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
+const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando";
+---
+
+<div data-preloader class="fixed inset-0 z-[100] overflow-hidden" role="img" aria-label={srLabel}>
+  <div data-preloader-bg class="absolute inset-0 bg-[#FF4D00]"></div>
+
+  <!-- Centering wrapper: the word stays untransformed inside it so the
+       FLIP travel starts from its natural rect. -->
+  <div class="absolute inset-0 flex items-center justify-center">
+    <span
+      data-preloader-word
+      class="font-logo font-extrabold uppercase leading-none tracking-[-0.035em] text-black whitespace-nowrap block"
+>DEFTCODE</span>
+  </div>
+
+  <!-- Black swell: curved crest (SVG) on top of a full black body. -->
+  <div data-preloader-wave class="absolute left-[-30%] right-[-30%] top-0 h-[145%] bg-black will-change-transform">
+    <svg
+      class="absolute bottom-full left-0 w-full h-[9vh] text-black"
+      viewBox="0 0 1440 60"
+      preserveAspectRatio="none"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M0,60 L0,34 C240,10 480,4 720,22 C960,40 1200,44 1440,18 L1440,60 Z"></path>
+    </svg>
+  </div>
+</div>
+
+<noscript>
+  <style>
+    [data-preloader] { display: none !important; }
+  </style>
+</noscript>
+
+<style>
+  [data-preloader] {
+    /* Overlay paints its own orange; page is identical beneath. */
+    contain: strict;
+  }
+  [data-preloader-word] {
+    font-size: 15.5vw;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  /* Entrance only when fonts are ready (no FOUT): slight inhale from a
+     bigger scale — the word then only ever gets smaller. */
+  [data-preloader].is-ready [data-preloader-word] {
+    animation: preloader-in 500ms ease-out backwards;
+  }
+  @keyframes preloader-in {
+    from {
+      opacity: 0;
+      transform: scale(1.12);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  [data-preloader-wave] {
+    transform: translate3d(0, 103%, 0);
+    transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  /* At full cover the swap is invisible: hide bg + word behind the wave. */
+  [data-preloader].is-covered [data-preloader-bg],
+  [data-preloader].is-covered [data-preloader-word] {
+    opacity: 0;
+  }
+  [data-preloader-bg] {
+    transition: opacity 60ms linear;
+  }
+  /* Pure-CSS failsafe: even if the module script never runs, the overlay
+     cannot trap the page. */
+  [data-preloader] {
+    animation: preloader-failsafe 1ms linear 6s forwards;
+  }
+  @keyframes preloader-failsafe {
+    to {
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+</style>
+
+<style is:global>
+  /* Global on purpose: Astro scoping would hash the `html` compound and
+     the skip decided at head time would never match. Unique attribute,
+     no leak risk. */
+  html.preload-skip [data-preloader] {
+    display: none;
+  }
+</style>
+
+<script>
+  const overlay = document.querySelector<HTMLElement>("[data-preloader]");
+  const html = document.documentElement;
+
+  // The head inline script flags skips before paint; belt and braces here.
+  const skipped =
+    !overlay || html.classList.contains("preload-skip");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const finish = () => {
+    if (!overlay || !overlay.isConnected) return;
+    try {
+      sessionStorage.setItem("deftPreload", "1");
+    } catch {
+      /* private mode: preloader just replays next navigation */
+    }
+    overlay.remove();
+    html.style.overflow = "";
+  };
+
+  if (!skipped && reduced) {
+    finish();
+  } else if (skipped) {
+    overlay?.remove();
+  } else if (overlay) {
+    html.style.overflow = "hidden";
+    window.addEventListener(
+      "pageshow",
+      (e) => {
+        if (e.persisted) finish();
+      },
+      { once: true },
+    );
+
+    const word = overlay.querySelector<HTMLElement>("[data-preloader-word]")!;
+    const wave = overlay.querySelector<HTMLElement>("[data-preloader-wave]")!;
+    const brand = document.querySelector<HTMLElement>(".navbar-brand-logo");
+
+    const TIMELINE = {
+      entrance: 0, // .is-ready starts the 500ms inhale
+      waveRise: 900, // 700ms rise
+      wordTravel: 950, // 700ms FLIP to the brand rect
+      covered: 1650, // swap happens behind the wave
+      waveRecede: 1750, // 800ms recede reveals the navbar first
+      done: 2600,
+    };
+
+    const run = () => {
+      // FLIP measure with the real font loaded: giant word -> brand rect.
+      if (brand) {
+        const wordRect = word.getBoundingClientRect();
+        const brandRect = brand.getBoundingClientRect();
+        if (wordRect.width > 0 && brandRect.width > 0) {
+          const scale = brandRect.width / wordRect.width;
+          const dx = brandRect.left - wordRect.left;
+          const dy = brandRect.top - wordRect.top;
+          word.style.transformOrigin = "top left";
+          word.style.transition = "transform 700ms cubic-bezier(0.76, 0, 0.24, 1)";
+          // Store as custom props: applied at waveRise so the word rides
+          // the crest instead of leaving before it.
+          word.style.setProperty("--fly-x", `${dx}px`);
+          word.style.setProperty("--fly-y", `${dy}px`);
+          word.style.setProperty("--fly-s", `${scale}`);
+        }
+      }
+
+      setTimeout(() => {
+        overlay.classList.add("is-ready");
+      }, TIMELINE.entrance);
+
+      setTimeout(() => {
+        wave.style.transform = "translate3d(0, 0, 0)";
+      }, TIMELINE.waveRise);
+
+      setTimeout(() => {
+        word.style.transform = `translate3d(${word.style.getPropertyValue("--fly-x") || "0px"}, ${
+          word.style.getPropertyValue("--fly-y") || "0px"
+        }, 0) scale(${word.style.getPropertyValue("--fly-s") || "0.2"})`;
+      }, TIMELINE.wordTravel);
+
+      setTimeout(() => overlay.classList.add("is-covered"), TIMELINE.covered);
+
+      setTimeout(() => {
+        wave.style.transition = "transform 800ms cubic-bezier(0.45, 0, 0.55, 1)";
+        wave.style.transform = "translate3d(0, 103%, 0)";
+      }, TIMELINE.waveRecede);
+
+      setTimeout(finish, TIMELINE.done);
+    };
+
+    const start = () => requestAnimationFrame(run);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(start);
+    } else {
+      start();
+    }
+
+    // Hard failsafe: never trap the user behind the overlay.
+    setTimeout(finish, 6000);
+  }
+</script>

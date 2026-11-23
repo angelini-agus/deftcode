@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Preloader from "../components/Preloader.astro";
 import WhatsAppFloatingButton from "../components/WhatsAppFloatingButton.astro";
 import Analytics from "@vercel/analytics/astro";
 import { getContent } from "../lib/content";
@@ -80,6 +81,19 @@ const organizationSchema = {
 <html lang={lang} class="scroll-smooth bg-[#FF4D00]">
   <head>
     <script is:inline>document.documentElement.classList.add("js");</script>
+    <script is:inline>
+      // Preloader gate: first visit per session only, and never for
+      // reduced-motion users. Decided before first paint (no flash).
+      try {
+        if (
+          sessionStorage.getItem("deftPreload") ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        )
+          document.documentElement.classList.add("preload-skip");
+      } catch {
+        /* storage blocked: let it play */
+      }
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
@@ -123,6 +137,7 @@ const organizationSchema = {
   </head>
   <body class="bg-[#FF4D00] text-black min-h-screen flex flex-col font-sans selection:bg-black selection:text-[#FF4D00]">
     {!minimal && <Navbar lang={lang} />}
+    {!minimal && <Preloader lang={lang} />}
     <main class="flex-grow">
       <slot />
     </main>
