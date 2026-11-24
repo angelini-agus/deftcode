@@ -30,7 +30,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   </div>
 
   <!-- Giant Typographic Headline (16vw) -->
-  <div class="my-auto py-8 flex flex-col items-center justify-center text-center hero-middle">
+  <div class="flex flex-col items-center justify-center text-center pt-8 pb-0 hero-middle">
     <h1
       data-hero-h1
       data-hero-scramble
@@ -47,31 +47,35 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     </p>
   </div>
 
-  <!-- §7 conversion CTA: the fold shows what we do AND the action. User
-       request: the block sits low, meeting the 2px divider with its own
-       air (mb-6), and the microcopy stays on a single line on sm+. -->
-  <div data-hero-cta class="flex flex-col items-center gap-2 mb-6">
-    <a
-      href={heroContent.ctaHref}
-      class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border-2 border-black shadow-[0_10px_26px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-    >
-      <span>{heroContent.ctaLabel}</span>
-      <svg
-        class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        stroke-width="2.5"
-        aria-hidden="true"
+  <!-- §7 conversion CTA: user request — the block sits at the exact
+       vertical midpoint of the gap between the subheadline and the 2px
+       divider. my-auto absorbs ALL leftover section space symmetrically
+       around this block, so its center lands exactly on the midpoint of
+       that gap regardless of viewport height. Microcopy on one line (sm+). -->
+  <div class="my-auto flex items-center justify-center">
+    <div data-hero-cta class="flex flex-col items-center gap-2">
+      <a
+        href={heroContent.ctaHref}
+        class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border-2 border-black shadow-[0_10px_26px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
       >
-        <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-      </svg>
-    </a>
-    <p
-      class="font-mono-meta text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-black/75 m-0 text-center whitespace-normal sm:whitespace-nowrap leading-relaxed"
-    >
-      {heroContent.microcopy}
-    </p>
+        <span>{heroContent.ctaLabel}</span>
+        <svg
+          class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </a>
+      <p
+        class="font-mono-meta text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-black/75 m-0 text-center whitespace-normal sm:whitespace-nowrap leading-relaxed"
+      >
+        {heroContent.microcopy}
+      </p>
+    </div>
   </div>
 
   <!-- 2px Black Divider & Metadata Row -->
@@ -167,15 +171,15 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     }
     #top .hero-middle {
       padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+      padding-bottom: 0;
     }
     #top .hero-divider {
       margin-bottom: 1rem;
     }
-    /* The CTA keeps its copy and control height; only its air shrinks. */
+    /* The CTA keeps its copy and control height; only its air shrinks.
+       (No margin-bottom: the flex-1 half already centers the block.) */
     #top [data-hero-cta] {
       gap: 0.3rem;
-      margin-bottom: 1rem;
     }
     #top [data-hero-cta] p {
       font-size: 10px;

@@ -115,7 +115,7 @@ const esHeroContent: HeroContent = {
   // the dream outcome (out of spreadsheet chaos), the sub sells production
   // speed with a closed price. Short h1 keeps the one-line fit at ~15vw.
   headlineMain: "SALÍ DEL EXCEL.",
-  headlineSub: "TU SISTEMA A MEDIDA EN PRODUCCIÓN EN 3 A 6 SEMANAS. PRECIO CERRADO.",
+  headlineSub: "TU SISTEMA EN PRODUCCIÓN EN 4 A 6 SEMANAS. DESARROLLO A MEDIDA.",
   subtitle:
     "Auditamos tu operación gratis y te mostramos un prototipo funcionando con tus datos antes de que pagues un peso. Así una empresa de Rosario ahorra $2.8M ARS por mes en sueldos.",
   kicker: "VELOCIDAD DE STARTUP. ARQUITECTURA DE INGENIERÍA. CERO RIESGO.",
@@ -1432,7 +1432,7 @@ const enPages: Record<string, PageContent> = {
 const enHeroContent: HeroContent = {
   // Macro speed mirror of the ES hero: dream outcome + production speed.
   headlineMain: "DITCH EXCEL.",
-  headlineSub: "YOUR CUSTOM SYSTEM IN PRODUCTION IN 3 TO 6 WEEKS. CLOSED PRICE.",
+  headlineSub: "YOUR SYSTEM IN PRODUCTION IN 4 TO 6 WEEKS. CUSTOM DEVELOPMENT.",
   subtitle:
     "We audit your operation for free and show you a working prototype with your data before you pay a cent. That's how a company in Rosario saves $2.8M ARS per month in payroll.",
   kicker: "STARTUP SPEED. ENGINEERING ARCHITECTURE. ZERO RISK.",
