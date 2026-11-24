@@ -86,20 +86,20 @@ const esPages: Record<string, PageContent> = {
   contacto: {
     title: "Diagnóstico gratis para tu empresa | Deftcode",
     description:
-      "Entrevista de 2 horas, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
+      "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
     eyebrow: "DIAGNÓSTICO GRATIS",
     h1: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS. DIAGNÓSTICO GRATIS EN 48 HORAS.",
     intro:
-      "Una entrevista de 2 horas sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
+      "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   diagnostico: {
     title: "Diagnóstico gratis para tu empresa | Deftcode",
     description:
-      "Entrevista de 2 horas, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
+      "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
     eyebrow: "DIAGNÓSTICO GRATIS",
     h1: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS. DIAGNÓSTICO GRATIS EN 48 HORAS.",
     intro:
-      "Una entrevista de 2 horas sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
+      "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   privacidad: {
     title: "POLÍTICA DE PRIVACIDAD - DEFTCODE",
@@ -132,7 +132,7 @@ const esHeroContent: HeroContent = {
   ctaHref: "/contacto/",
   ctaSecondaryLabel: "Ver caso real (-$2.8M/mes)",
   ctaSecondaryHref: "/proyectos/empresa-limpieza-rosario/",
-  microcopy: "Entrevista de 2 h • Informe en 48 h • Prototipo gratis antes de firmar.",
+  microcopy: "Entrevista de 1 h • Informe en 48 h • Prototipo gratis antes de firmar.",
   scrollText: "DESLIZAR HACIA ABAJO • VELOCIDAD Y PRECISIÓN • ",
 };
 
@@ -922,7 +922,7 @@ const esHowWeWork: ProcessContent = {
   steps: [
     {
       step: "01",
-      title: "ENTREVISTA DE 2 HORAS",
+      title: "ENTREVISTA DE 1 HORA",
       description:
         "En tu empresa o por videollamada. Nos contás cómo trabajás hoy y qué te hace perder tiempo o plata. Hablás con quien después escribe el código.",
     },
@@ -954,7 +954,7 @@ const esHowWeWorkNosotros: ProcessContent = {
       step: "01",
       title: "DIAGNÓSTICO GRATIS",
       description:
-        "Entrevista de 2 horas + informe en 48 h. Entendemos tu negocio y te decimos dónde se te va la plata.",
+        "Entrevista de 1 hora + informe en 48 h. Entendemos tu negocio y te decimos dónde se te va la plata.",
     },
     {
       step: "02",
@@ -1097,7 +1097,7 @@ const esCtaContent: CtaContent = {
   kicker: "// EMPEZÁ HOY",
   heading: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS.",
   headingLines: ["DESCUBRÍ CUÁNTO TE CUESTAN", "HOY TUS PLANILLAS."],
-  subheading: "Entrevista de 2 horas, informe en 48 h y prototipo gratis. Sin compromiso.",
+  subheading: "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso.",
   buttonLabel: "Quiero mi diagnóstico gratis",
   buttonHref: "/contacto/",
   emailLabel: "contacto@deftcode.dev",
@@ -1210,7 +1210,7 @@ const esServicesHome: ServicesHomeContent = {
     {
       index: "00",
       title: "EMPEZÁ ACÁ: DIAGNÓSTICO DEFT",
-      line: "Entrevista de 2 horas sobre tu negocio, informe en 48 h con lo que te cuesta plata y prototipo gratis. Gratis.",
+      line: "Entrevista de 1 hora sobre tu negocio, informe en 48 h con lo que te cuesta plata y prototipo gratis. Gratis.",
       buttonLabel: "Quiero mi diagnóstico gratis",
       buttonHref: "/contacto/",
     },
@@ -1305,7 +1305,7 @@ const esContactForm: ContactFormContent = {
     "Te respondemos hoy • Sin compromiso • No pedimos tarjeta ni datos bancarios. Solo usamos tus datos para contactarte.",
   successTitlePrefix: "Listo,",
   successBody:
-    "Ya recibimos tus datos. Te escribimos hoy por WhatsApp para coordinar tu entrevista de 2 horas. Mientras tanto:",
+    "Ya recibimos tus datos. Te escribimos hoy por WhatsApp para coordinar tu entrevista de 1 hora. Mientras tanto:",
   successCalcLabel: "Calculá cuánto te cuestan tus planillas hoy.",
   // TODO: lead magnet calculator pending (ESTRATEGIA-COPY.md §8).
   successCalcHref: "#",
@@ -1319,7 +1319,7 @@ const esDiagnosticoLanding: DiagnosticoLandingContent = {
   eyebrow: "// DIAGNÓSTICO DEFT",
   h1: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS. DIAGNÓSTICO GRATIS EN 48 HORAS.",
   subtitle:
-    "Una entrevista de 2 horas sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
+    "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   ctaLabel: "Quiero mi diagnóstico gratis",
   proofLine: "Una empresa de limpieza de Rosario ahorra $2.8M ARS por mes desde que dejó las planillas.",
   receiveEyebrow: "// QUÉ RECIBÍS",
@@ -1402,20 +1402,20 @@ const enPages: Record<string, PageContent> = {
   contacto: {
     title: "Free diagnosis for your company | Deftcode",
     description:
-      "2-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
+      "1-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
     eyebrow: "FREE DIAGNOSIS",
     h1: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY. FREE DIAGNOSIS IN 48 HOURS.",
     intro:
-      "A 2-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
+      "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   diagnostico: {
     title: "Free diagnosis for your company | Deftcode",
     description:
-      "2-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
+      "1-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
     eyebrow: "FREE DIAGNOSIS",
     h1: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY. FREE DIAGNOSIS IN 48 HOURS.",
     intro:
-      "A 2-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
+      "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   privacidad: {
     title: "PRIVACY POLICY - DEFTCODE",
@@ -1446,7 +1446,7 @@ const enHeroContent: HeroContent = {
   ctaHref: "/en/contact/",
   ctaSecondaryLabel: "See the real case (-$2.8M/mo)",
   ctaSecondaryHref: "/en/projects/empresa-limpieza-rosario/",
-  microcopy: "2-hour interview • Report in 48 h • Free prototype before signing.",
+  microcopy: "1-hour interview • Report in 48 h • Free prototype before signing.",
   scrollText: "SCROLL DOWN • SPEED AND PRECISION • ",
 };
 
@@ -2232,7 +2232,7 @@ const enHowWeWork: ProcessContent = {
   steps: [
     {
       step: "01",
-      title: "2-HOUR INTERVIEW",
+      title: "1-HOUR INTERVIEW",
       description:
         "At your company or on a video call. You tell us how you work today and what costs you time or money. You talk to whoever writes the code afterwards.",
     },
@@ -2264,7 +2264,7 @@ const enHowWeWorkNosotros: ProcessContent = {
       step: "01",
       title: "FREE DIAGNOSIS",
       description:
-        "2-hour interview + report in 48 h. We understand your business and tell you where your money is leaking.",
+        "1-hour interview + report in 48 h. We understand your business and tell you where your money is leaking.",
     },
     {
       step: "02",
@@ -2405,7 +2405,7 @@ const enCtaContent: CtaContent = {
   kicker: "// START TODAY",
   heading: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY.",
   headingLines: ["FIND OUT WHAT YOUR", "SPREADSHEETS COST YOU TODAY."],
-  subheading: "2-hour interview, report in 48 h and a free prototype. No commitment.",
+  subheading: "1-hour interview, report in 48 h and a free prototype. No commitment.",
   buttonLabel: "GET MY FREE DIAGNOSIS",
   buttonHref: "/en/contact/",
   emailLabel: "contacto@deftcode.dev",
@@ -2518,7 +2518,7 @@ const enServicesHome: ServicesHomeContent = {
     {
       index: "00",
       title: "START HERE: DEFT DIAGNOSIS",
-      line: "A 2-hour interview about your business, a 48 h report on what costs you money, and a free prototype. Free.",
+      line: "A 1-hour interview about your business, a 48 h report on what costs you money, and a free prototype. Free.",
       buttonLabel: "Get my free diagnosis",
       buttonHref: "/en/contact/",
     },
@@ -2611,7 +2611,7 @@ const enContactForm: ContactFormContent = {
     "We answer today • No commitment • No card or banking details required. We only use your data to contact you.",
   successTitlePrefix: "Done,",
   successBody:
-    "Got it. We message you today on WhatsApp to schedule your 2-hour interview. Meanwhile:",
+    "Got it. We message you today on WhatsApp to schedule your 1-hour interview. Meanwhile:",
   successCalcLabel: "Calculate what your spreadsheets cost you today.",
   // TODO: lead magnet calculator pending (ESTRATEGIA-COPY.md §8).
   successCalcHref: "#",
@@ -2625,7 +2625,7 @@ const enDiagnosticoLanding: DiagnosticoLandingContent = {
   eyebrow: "// DEFT DIAGNOSIS",
   h1: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY. FREE DIAGNOSIS IN 48 HOURS.",
   subtitle:
-    "A 2-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
+    "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   ctaLabel: "Get my free diagnosis",
   proofLine: "A cleaning company in Rosario saves $2.8M ARS per month since it dropped its spreadsheets.",
   receiveEyebrow: "// WHAT YOU GET",
