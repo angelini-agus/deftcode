@@ -5,6 +5,7 @@ import SkewedMarquee from "../components/SkewedMarquee.astro";
 import ForWhoSection from "../components/ForWhoSection.astro";
 import ServicesList from "../components/ServicesList.astro";
 import HowWeWorkSection from "../components/HowWeWorkSection.astro";
+import WhyDeftcodeSection from "../components/WhyDeftcodeSection.astro";
 import TeamTeaser from "../components/TeamTeaser.astro";
 import FaqSection from "../components/FaqSection.astro";
 import CtaSection from "../components/CtaSection.astro";
@@ -15,13 +16,15 @@ import { pages } from "../lib/content";
      más software y manifiesto se movieron a /proyectos y /nosotros):
      1 hero · 2 cinta · 3 ¿te pasa algo de esto? ·
      4 qué hacemos · 5 tu diagnóstico paso a paso ·
-     6 ¿es para vos? · 7 equipo · 8 FAQ · 9 CTA final. -->
+     6 por qué deftcode (matriz) · 7 ¿es para vos? · 8 equipo ·
+     9 FAQ + precios · 10 CTA final. -->
 <BaseLayout lang="es" title={pages.home.title} description={pages.home.description}>
   <Hero lang="es" />
   <SkewedMarquee lang="es" />
   <ForWhoSection lang="es" variant="problems" />
   <ServicesList lang="es" />
   <HowWeWorkSection lang="es" />
+  <WhyDeftcodeSection lang="es" />
   <ForWhoSection lang="es" variant="fit" />
   <TeamTeaser lang="es" />
   <FaqSection lang="es" />

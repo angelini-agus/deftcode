@@ -810,43 +810,99 @@ const esProjects: ProjectItem[] = [
   },
 ];
 
+// Manifesto rebuilt around Hormozi's macro-speed principle: speed done
+// right forces quality, focus and truth (no bureaucracy, no rework).
 const esManifesto: ManifestoItem[] = [
   {
     number: "01",
-    title: "FECHA DE ENTREGA EN EL CONTRATO",
-    description: "Nunca incumplimos un plazo. Cada semana ves el avance real, no un resumen.",
+    title: "EL DINERO AMA LA VELOCIDAD (Y TU EMPRESA TAMBIÉN)",
+    description:
+      "Cada mes que seguís operando en Excel perdés plata y horas. No hacemos proyectos de 6 meses: entregamos sistemas en producción en 3 a 6 semanas.",
   },
   {
     number: "02",
-    title: "PROTOTIPO GRATIS ANTES DE FIRMAR",
-    description: "Lo ves funcionando con tus datos. Si no te convence, no pagás.",
+    title: "VELOCIDAD REAL EXIGE CALIDAD Y SEGURIDAD",
+    description:
+      "Sacar código rápido con IA pero inseguro te frena a los dos meses por retrabajo. Construimos rápido sobre bases sólidas: roles, auditoría y cero brechas de datos.",
   },
   {
     number: "03",
-    title: "ENTREVISTA DE 2 HORAS SOBRE TU NEGOCIO",
-    description: "Sobre tu negocio y tus clientes, no un formulario genérico.",
+    title: "CERO BUROCRACIA, CERO TELÉFONO DESCOMPUESTO",
+    description:
+      "No tenemos vendedores ni gerentes de cuenta en el medio. Entrevistás y hablás directo con los fundadores que escriben el código.",
   },
   {
     number: "04",
-    title: "ERRORES ARREGLADOS GRATIS",
-    description: "Si encontrás un error después del lanzamiento, lo arreglamos gratis.",
+    title: "PRIMERO LO VES, DESPUÉS FIRMÁS",
+    description:
+      "Matamos el riesgo antes de que gastes un peso: te mostramos un prototipo funcional con la lógica de tu negocio antes de cerrar el contrato.",
   },
   {
     number: "05",
-    title: "ENTREGAS SEMANALES",
-    description: "Cada semana ves el avance real de tu sistema, no un resumen armado para la ocasión.",
+    title: "ENTREGAS SEMANALES VISIBLES",
+    description:
+      "Nada de desaparecer hasta el día final. Todos los viernes ves el sistema avanzando en vivo y ajustamos el rumbo en 24 horas.",
   },
   {
     number: "06",
-    title: "EL CÓDIGO ES 100% TUYO",
-    description: "Lo mantenemos nosotros o capacitamos a tu equipo para que sea autónomo.",
+    title: "FECHA DE ENTREGA Y GARANTÍA POR CONTRATO",
+    description:
+      "Precio cerrado desde el día uno y fecha de lanzamiento firmada. Si aparece un error después de salir a producción, lo arreglamos gratis.",
   },
   {
     number: "07",
-    title: "NO ESPERAMOS A QUE NOS ENCUENTRES",
-    description: "Vamos a tu empresa, entendemos tu negocio y te decimos dónde se te va la plata.",
+    title: "EL CÓDIGO Y TUS DATOS SON 100% TUYOS",
+    description:
+      "Sin licencias eternas ni secuestro tecnológico. Te entregamos el repositorio, la documentación y capacitamos a tu equipo si querés operarlo solo.",
   },
 ];
+
+// Home: why-def tcode comparison (§regla 8 differentiation): kills both
+// 2026 objections (slow agencies, unsupervised home-built AI) right before
+// the qualification filter and the pricing/FAQ block.
+const esComparison: ComparisonContent = {
+  eyebrow: "// POR QUÉ DEFTCODE",
+  title: "NI MESES DE BUROCRACIA, NI PARCHES GENERADOS CON IA.",
+  intro:
+    "Hoy tenés dos extremos que te hacen perder plata: consultoras que tardan 6 meses y apps hechas con IA sin supervisión que se rompen con el primer cliente real.",
+  columns: [
+    {
+      type: "competitor-slow",
+      title: "SOFTWARE FACTORY TRADICIONAL",
+      subtitle: "Lenta, cara y llena de intermediarios",
+      points: [
+        "3 a 6 meses de reuniones y documentos antes de ver una pantalla.",
+        "Hablás con vendedores y Project Managers, nunca con quien programa.",
+        "Presupuestos abiertos que se inflan con cada cambio.",
+        "Si se atrasan, pagás vos el costo de esperar.",
+      ],
+    },
+    {
+      type: "competitor-ai",
+      title: "HACERLO VOS CON IA / NO-CODE",
+      subtitle: "Rápido el día 1, un dolor de cabeza el día 30",
+      points: [
+        "Prototipo lindo en 2 días, pero sin seguridad ni control de roles.",
+        "Datos de clientes y precios expuestos: nadie audita qué ve cada empleado.",
+        "Cuando querés conectar AFIP/ARCA, WhatsApp o reglas reales, se rompe.",
+        "Terminás pagando el doble para que un ingeniero lo reescriba de cero.",
+      ],
+    },
+    {
+      type: "deftcode",
+      title: "MÉTODO DEFTCODE",
+      subtitle: "Velocidad macro con seguridad de producción",
+      points: [
+        "Diagnóstico en 48 h y prototipo funcional gratis antes de firmar.",
+        "Usamos IA para acelerar, pero la arquitectura la diseñan ingenieros.",
+        "Seguridad real: permisos por rol, historial de cambios y Ley 25.326 de datos personales.",
+        "Entrega en 3 a 6 semanas a precio cerrado y fecha en contrato.",
+      ],
+    },
+  ],
+  ctaLabel: "Quiero ver mi prototipo gratis",
+  ctaHref: "/contacto/",
+};
 
 // Home: 3-step diagnostic (§3.6).
 const esHowWeWork: ProcessContent = {
@@ -2047,43 +2103,96 @@ const enProjects: ProjectItem[] = [
   },
 ];
 
+// EN manifesto mirror: macro-speed philosophy in 7 principles.
 const enManifesto: ManifestoItem[] = [
   {
     number: "01",
-    title: "DELIVERY DATE IN THE CONTRACT",
-    description: "We never miss a deadline. Every week you see real progress, not a summary.",
+    title: "THE MONEY LOVES SPEED (AND SO DOES YOUR BUSINESS)",
+    description:
+      "Every month you keep operating in spreadsheets costs you money and hours. We don't run 6-month projects: we ship systems to production in 3 to 6 weeks.",
   },
   {
     number: "02",
-    title: "FREE PROTOTYPE BEFORE SIGNING",
-    description: "You see it working with your data. If it doesn't convince you, you don't pay.",
+    title: "REAL SPEED DEMANDS QUALITY AND SECURITY",
+    description:
+      "Fast but insecure AI-generated code slows you down two months in with rework. We build fast on solid foundations: roles, audit trails and zero data gaps.",
   },
   {
     number: "03",
-    title: "A 2-HOUR INTERVIEW ABOUT YOUR BUSINESS",
-    description: "About your business and your clients, not a generic form.",
+    title: "ZERO BUREAUCRACY, ZERO BROKEN TELEPHONE",
+    description:
+      "No salespeople or account managers in the middle. You interview and talk directly with the founders who write the code.",
   },
   {
     number: "04",
-    title: "BUGS FIXED FOR FREE",
-    description: "If you find a bug after launch, we fix it free of charge.",
+    title: "YOU SEE IT FIRST, THEN YOU SIGN",
+    description:
+      "We kill the risk before you spend a cent: you see a working prototype with your business logic before closing the contract.",
   },
   {
     number: "05",
-    title: "WEEKLY DELIVERIES",
-    description: "Every week you see real progress, not a summary made for the occasion.",
+    title: "VISIBLE WEEKLY DELIVERIES",
+    description:
+      "No disappearing until the final day. Every Friday you see the system advancing live, and we adjust course within 24 hours.",
   },
   {
     number: "06",
-    title: "THE CODE IS 100% YOURS",
-    description: "We maintain it or train your team to be self-sufficient.",
+    title: "DELIVERY DATE AND GUARANTEE IN THE CONTRACT",
+    description:
+      "Closed price from day one and a signed launch date. If a bug appears after going to production, we fix it for free.",
   },
   {
     number: "07",
-    title: "WE DON'T WAIT FOR YOU TO FIND US",
-    description: "We go to your company, understand your business, and tell you where your money is leaking.",
+    title: "THE CODE AND YOUR DATA ARE 100% YOURS",
+    description:
+      "No eternal licenses, no vendor lock-in. We hand over the repository and documentation, and we train your team if you want to run it yourself.",
   },
 ];
+
+// EN home: why-def tcode comparison (mirror of the ES matrix).
+const enComparison: ComparisonContent = {
+  eyebrow: "// WHY DEFTCODE",
+  title: "NO MONTHS OF BUREAUCRACY, NO AI-GENERATED PATCHES.",
+  intro:
+    "Today you have two extremes that cost you money: consultancies that take 6 months and unsupervised AI-built apps that break with the first real client.",
+  columns: [
+    {
+      type: "competitor-slow",
+      title: "TRADITIONAL SOFTWARE FACTORY",
+      subtitle: "Slow, expensive, full of middlemen",
+      points: [
+        "3 to 6 months of meetings and documents before seeing a screen.",
+        "You talk to salespeople and project managers, never to whoever codes.",
+        "Open-ended quotes that inflate with every change.",
+        "If they run late, you pay the cost of waiting.",
+      ],
+    },
+    {
+      type: "competitor-ai",
+      title: "BUILD IT YOURSELF WITH AI / NO-CODE",
+      subtitle: "Fast on day 1, a headache by day 30",
+      points: [
+        "A nice prototype in 2 days, but no security and no role control.",
+        "Client data and prices exposed: nobody audits what each employee sees.",
+        "The moment you connect AFIP, WhatsApp or real business rules, it breaks.",
+        "You end up paying double for an engineer to rewrite it from scratch.",
+      ],
+    },
+    {
+      type: "deftcode",
+      title: "THE DEFTCODE METHOD",
+      subtitle: "Macro speed with production-grade security",
+      points: [
+        "Diagnosis in 48 h and a free working prototype before signing.",
+        "We use AI to accelerate, but engineers design the architecture.",
+        "Real security: role-based permissions, change history and data privacy law compliance.",
+        "Delivery in 3 to 6 weeks at a closed price with a date in the contract.",
+      ],
+    },
+  ],
+  ctaLabel: "I want to see my free prototype",
+  ctaHref: "/en/contact/",
+};
 
 // EN home: 3-step diagnostic (§3.6).
 const enHowWeWork: ProcessContent = {
@@ -2514,6 +2623,7 @@ export const getContent = (lang: Lang = "es") => {
     servicesHome: isEn ? enServicesHome : esServicesHome,
     projects: isEn ? enProjects : esProjects,
     manifesto: isEn ? enManifesto : esManifesto,
+    comparison: isEn ? enComparison : esComparison,
     howWeWork: isEn ? enHowWeWork : esHowWeWork,
     howWeWorkNosotros: isEn ? enHowWeWorkNosotros : esHowWeWorkNosotros,
     guarantees: isEn ? enGuarantees : esGuarantees,
@@ -2551,6 +2661,7 @@ export const services = esServices;
 export const servicesHome = esServicesHome;
 export const projects = esProjects;
 export const manifesto = esManifesto;
+export const comparison = esComparison;
 export const howWeWork = esHowWeWork;
 export const howWeWorkNosotros = esHowWeWorkNosotros;
 export const guarantees = esGuarantees;

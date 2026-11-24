@@ -246,6 +246,23 @@ export interface ManifestoItem {
   description: string;
 }
 
+export interface ComparisonColumn {
+  /** "competitor-slow" | "competitor-ai" | "deftcode" — drives the styling. */
+  type: string;
+  title: string;
+  subtitle: string;
+  points: string[];
+}
+
+export interface ComparisonContent {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  columns: ComparisonColumn[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
 /** 4-field friction-free diagnostic form (§7). */
 export interface ContactFormContent {
   nameLabel: string;

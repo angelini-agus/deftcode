@@ -1,0 +1,94 @@
+---
+import { getContent } from "../lib/content";
+import type { Lang } from "../lib/types";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "es" } = Astro.props;
+const { comparison } = getContent(lang);
+
+const sectionId = lang === "en" ? "why-deftcode" : "porque-deftcode";
+// Column styling: the two alternatives read muted against the orange
+// background; the Deftcode column is the only one in full contrast
+// (black card with hard shadow), so the eye lands there once.
+---
+
+<section id={sectionId} class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
+      <div>
+        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+          {comparison.eyebrow}
+        </span>
+        <h2
+          class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9] max-w-4xl"
+        >
+          {comparison.title}
+        </h2>
+      </div>
+      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
+        {comparison.intro}
+      </p>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {
+        comparison.columns.map((column) => (
+          <div
+            class:list={[
+              "flex flex-col p-6 sm:p-8 border-2 border-black",
+              column.type === "deftcode"
+                ? "bg-black text-white shadow-[12px_12px_0_#000000]"
+                : "bg-[#FF4D00] text-black/75",
+            ]}
+          >
+            <p
+              class={`font-mono-meta text-[11px] uppercase font-bold tracking-wider m-0 ${
+                column.type === "deftcode" ? "text-[#FF4D00]" : "text-black/60"
+              }`}
+            >
+              {column.subtitle}
+            </p>
+            <h3 class="font-display text-xl sm:text-2xl uppercase tracking-[-0.02em] leading-tight mt-3 mb-5 m-0">
+              {column.title}
+            </h3>
+            <ul class="flex flex-col gap-3 m-0 p-0 list-none">
+              {column.points.map((point) => (
+                <li class="font-mono-meta text-xs uppercase tracking-wide leading-relaxed flex gap-2">
+                  <span
+                    class={`shrink-0 ${column.type === "deftcode" ? "text-[#FF4D00]" : "text-black/40"}`}
+                    aria-hidden="true"
+                  >
+                    {column.type === "deftcode" ? "✓" : "✗"}
+                  </span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <a
+        href={comparison.ctaHref}
+        class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-sm font-bold uppercase tracking-wider px-8 py-4 rounded-full border-2 border-black shadow-[0_10px_26px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+      >
+        <span>{comparison.ctaLabel}</span>
+        <svg
+          class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
