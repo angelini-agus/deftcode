@@ -1167,6 +1167,7 @@ const esProblems: ProblemsContent = {
     },
   ],
   closingText: "Cada problema tiene su solución y todas empiezan igual: con un diagnóstico gratis.",
+  counterLabel: "MARCADAS {n}/4",
   ctaLabel: "Quiero mi diagnóstico gratis",
   ctaHref: "/contacto/",
 };
@@ -2476,6 +2477,7 @@ const enProblems: ProblemsContent = {
     },
   ],
   closingText: "Every problem has a solution and they all start the same way: with a free diagnosis.",
+  counterLabel: "{n}/4 CHECKED",
   ctaLabel: "Get my free diagnosis",
   ctaHref: "/en/contact/",
 };

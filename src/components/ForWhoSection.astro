@@ -26,30 +26,47 @@ const problems = content.problems;
             {problems.title}
           </h2>
         </div>
-        <p class="font-mono-meta text-xs sm:text-sm text-white/70 font-medium mt-6">
-          {problems.intro}
-        </p>
 
-        <!-- §3.4: the four problems as an animated index list (user
-             request): no per-card CTAs — the only action button on the
-             page is the final one. Rows stagger on reveal via the shared
-             IntersectionObserver (transition-delay) and invert on hover. -->
+        <!-- §3.4: the four problems as an animated checklist (user
+             request): each row is a real checkbox (click anywhere to
+             mark), the check draws itself, marked rows highlight, and a
+             live counter chip shows the tally. No per-row CTAs — the only
+             action button is the section closer. Rows stagger on reveal
+             via the shared IntersectionObserver (transition-delay). -->
         <ol class="mt-10 md:mt-12 m-0 p-0 list-none">
           {problems.cards.map((card, i) => (
             <li
               class:list={[
-                "group reveal border-b border-white/15 hover:bg-white/[0.05] transition-colors duration-200",
+                "problem-row group reveal border-b border-white/15 transition-colors duration-200",
                 i === 0 ? "border-t border-t-white/20" : "",
               ]}
               style={`transition-delay:${i * 90}ms`}
             >
-              <div class="grid md:grid-cols-[5rem_1fr] gap-2 md:gap-6 py-7 md:py-8 px-1 md:px-4 items-baseline">
-                <span class="font-mono-meta text-xs font-bold tracking-widest text-[#FF4D00]">
+              <label
+                for={`problem-mark-${card.key}`}
+                class="grid grid-cols-[auto_auto_1fr] md:grid-cols-[3.5rem_5rem_1fr] gap-3 md:gap-6 py-7 md:py-8 px-2 md:px-4 items-baseline cursor-pointer select-none hover:bg-white/[0.05] transition-colors duration-200"
+              >
+                <input data-problem-check type="checkbox" class="peer sr-only" />
+                <span
+                  class="problem-check-box w-6 h-6 md:w-7 md:h-7 shrink-0 border-2 border-white/30 peer-checked:bg-[#FF4D00] peer-checked:border-[#FF4D00] flex items-center justify-center self-center transition-colors duration-200"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="w-4 h-4 md:w-5 md:h-5 text-black"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    aria-hidden="true"
+                  >
+                    <path class="problem-check-path" d="M5 13l4 4L19 7" stroke-linecap="square" stroke-linejoin="miter"></path>
+                  </svg>
+                </span>
+                <span class="problem-index font-mono-meta text-xs font-bold tracking-widest text-[#FF4D00]">
                   ({String(i + 1).padStart(2, "0")})
                 </span>
                 <div>
                   <h3
-                    class="font-display text-2xl sm:text-3xl md:text-4xl text-white uppercase tracking-[-0.03em] leading-[0.95] m-0 transition-colors duration-200 group-hover:text-[#FF4D00]"
+                    class="font-display text-2xl sm:text-3xl md:text-4xl text-white uppercase tracking-[-0.03em] leading-[0.95] m-0 transition-colors duration-200"
                   >
                     {card.title}
                   </h3>
@@ -57,20 +74,27 @@ const problems = content.problems;
                     {card.description}
                   </p>
                 </div>
-              </div>
+              </label>
             </li>
           ))}
         </ol>
 
-        <!-- Cierre (§3.4): the invite line plus the final CTA (user
-             request). The rows stay link-free; this is the section's one
-             exit before the page-level final CTA. -->
+        <!-- Cierre (§3.4): user request — the "Si marcaste una..." line
+             sits between the last bullet and the CTA, with the live
+             checked-count chip next to it. -->
         <div
           class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-white/20 pt-8"
         >
           <p class="font-sans text-base text-white/85 font-bold m-0 max-w-2xl">
-            {problems.closingText}
+            {problems.intro}
           </p>
+          <span
+            id="problem-counter"
+            data-template={problems.counterLabel}
+            role="status"
+            aria-live="polite"
+            class="hidden font-mono-meta text-[11px] uppercase font-bold tracking-wider text-[#FF4D00] border border-[#FF4D00] px-3 py-1.5 whitespace-nowrap sm:ml-auto"
+          ></span>
           <a
             href={problems.ctaHref}
             class="sm:ml-auto inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:bg-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
@@ -166,3 +190,63 @@ const problems = content.problems;
     </section>
   )
 }
+
+<style>
+  /* Animated check: the stroke draws itself when the row is marked. */
+  .problem-check-path {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    transition: stroke-dashoffset 0.35s cubic-bezier(0.23, 1, 0.32, 1) 0.05s;
+  }
+  .problem-row input:checked ~ .problem-check-box .problem-check-path {
+    stroke-dashoffset: 0;
+  }
+  /* Marked row: stays highlighted after hover, title goes orange, the
+     index switches to white. :has() is supported in every modern
+     browser; without it only the checkbox itself changes. */
+  .problem-row:has(input:checked) {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+  .problem-row:has(input:checked) h3 {
+    color: #ff4d00;
+  }
+  .problem-row:has(input:checked) .problem-index {
+    color: #fff;
+  }
+  @keyframes counter-pop {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.18);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  #problem-counter.counter-pop {
+    animation: counter-pop 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+</style>
+
+<script>
+  // Live tally: updates the counter chip every time a row is marked or
+  // unmarked, with a single pop per change.
+  const boxes = document.querySelectorAll("[data-problem-check]");
+  const counter = document.getElementById("problem-counter");
+  if (boxes.length && counter) {
+    const update = () => {
+      const n = Array.from(boxes).filter((b) => b.checked).length;
+      const template = counter.dataset.template || "{n}";
+      if (n > 0) {
+        counter.textContent = template.replace("{n}", String(n));
+        counter.classList.remove("hidden", "counter-pop");
+        void counter.offsetWidth;
+        counter.classList.add("counter-pop");
+      } else {
+        counter.classList.add("hidden");
+      }
+    };
+    boxes.forEach((b) => b.addEventListener("change", update));
+  }
+</script>

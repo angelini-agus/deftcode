@@ -126,6 +126,8 @@ export interface ProblemsContent {
   intro: string;
   cards: ProblemCard[];
   closingText: string;
+  /** Live counter chip template; {n} is the checked count. */
+  counterLabel: string;
   ctaLabel: string;
   ctaHref: string;
 }
