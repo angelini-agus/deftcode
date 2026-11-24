@@ -222,31 +222,32 @@ body::-webkit-scrollbar {
 }
 
 @supports (container-type: inline-size) {
-  /* Divisor = widest-line width in em, EMPIRICALLY measured in the real
-     build via CDP (Range rect / computed font-size), which includes the
-     kerning GPOS that plain glyph advances miss. With the em-based
-     letter-spacing the factor stays constant across sizes:
-     ES widest "DESPUÉS FIRMÁS." = 8.5127em, EN widest
-     "SEE IT FIRST." = 5.9627em. Update these when the heading copy
-     changes or the line clips again.
+  /* Divisor = widest-line width in em, EMPIRICALLY measured on the REAL
+     page over HTTP with the real Archivo Black (CDP: Range rect /
+     computed font-size; kerning included). Measuring over file:// loads
+     the fallback font and gives a factor ~8% too small — never
+     calibrate from a file:// snippet. With the em-based letter-spacing
+     the factor is constant across sizes: ES widest "DESPUÉS FIRMÁS."
+     = 9.5648em, EN widest "SEE IT FIRST." = 6.8808em. Update these when
+     the heading copy changes or the line clips again.
      Target width = container + cancelled section padding (the heading
      margins undo the section px): page-edge to page-edge, minus 4px
      safety. px-4 (mobile) cancels 2rem, px-12 (md+) cancels 6rem. */
   .cta-heading__line {
-    font-size: calc((100cqw + 2rem - 4px) / 8.5127);
+    font-size: calc((100cqw + 2rem - 4px) / 9.5648);
   }
 
   html[lang="en"] .cta-heading__line {
-    font-size: calc((100cqw + 2rem - 4px) / 5.9627);
+    font-size: calc((100cqw + 2rem - 4px) / 6.8808);
   }
 
   @media (min-width: 768px) {
     .cta-heading__line {
-      font-size: calc((100cqw + 6rem - 4px) / 8.5127);
+      font-size: calc((100cqw + 6rem - 4px) / 9.5648);
     }
 
     html[lang="en"] .cta-heading__line {
-      font-size: calc((100cqw + 6rem - 4px) / 5.9627);
+      font-size: calc((100cqw + 6rem - 4px) / 6.8808);
     }
   }
 }
