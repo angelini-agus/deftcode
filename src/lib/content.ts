@@ -1096,7 +1096,10 @@ const esClientQuote = {
 const esCtaContent: CtaContent = {
   kicker: "// EMPEZÁ HOY",
   heading: "DESCUBRÍ CUÁNTO TE CUESTAN HOY TUS PLANILLAS.",
-  headingLines: ["DESCUBRÍ CUÁNTO TE CUESTAN", "HOY TUS PLANILLAS."],
+  // Short, near-equal-width lines so the fit-to-width scale lands huge
+  // and symmetric at every resolution (global.css divisor is calibrated
+  // to these strings). 15/15 chars.
+  headingLines: ["PRIMERO LO VES.", "DESPUÉS FIRMÁS."],
   subheading: "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso.",
   buttonLabel: "Quiero mi diagnóstico gratis",
   buttonHref: "/contacto/",
@@ -2404,7 +2407,8 @@ const enClientQuote = {
 const enCtaContent: CtaContent = {
   kicker: "// START TODAY",
   heading: "FIND OUT WHAT YOUR SPREADSHEETS COST YOU TODAY.",
-  headingLines: ["FIND OUT WHAT YOUR", "SPREADSHEETS COST YOU TODAY."],
+  // EN mirror, widest line calibrated in global.css (7.034em).
+  headingLines: ["SEE IT FIRST.", "SIGN AFTER."],
   subheading: "1-hour interview, report in 48 h and a free prototype. No commitment.",
   buttonLabel: "GET MY FREE DIAGNOSIS",
   buttonHref: "/en/contact/",

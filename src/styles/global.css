@@ -213,13 +213,41 @@ body::-webkit-scrollbar {
   text-align: center;
   white-space: nowrap;
   line-height: inherit;
+  /* Declared HERE, not on the h2: letter-spacing inherits as a computed
+     px value, so an em value on the parent freezes against the parent's
+     16px font size (-0.64px). Here it scales with the rendered line. */
+  letter-spacing: -0.04em;
   /* Fallback for browsers without container queries */
   font-size: 10vw;
 }
 
 @supports (container-type: inline-size) {
+  /* Divisor = widest-line width in em, EMPIRICALLY measured in the real
+     build via CDP (Range rect / computed font-size), which includes the
+     kerning GPOS that plain glyph advances miss. With the em-based
+     letter-spacing the factor stays constant across sizes:
+     ES widest "DESPUÉS FIRMÁS." = 8.5127em, EN widest
+     "SEE IT FIRST." = 5.9627em. Update these when the heading copy
+     changes or the line clips again.
+     Target width = container + cancelled section padding (the heading
+     margins undo the section px): page-edge to page-edge, minus 4px
+     safety. px-4 (mobile) cancels 2rem, px-12 (md+) cancels 6rem. */
   .cta-heading__line {
-    font-size: calc((100cqw - 4px) / 9.673125);
+    font-size: calc((100cqw + 2rem - 4px) / 8.5127);
+  }
+
+  html[lang="en"] .cta-heading__line {
+    font-size: calc((100cqw + 2rem - 4px) / 5.9627);
+  }
+
+  @media (min-width: 768px) {
+    .cta-heading__line {
+      font-size: calc((100cqw + 6rem - 4px) / 8.5127);
+    }
+
+    html[lang="en"] .cta-heading__line {
+      font-size: calc((100cqw + 6rem - 4px) / 5.9627);
+    }
   }
 }
 
