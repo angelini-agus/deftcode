@@ -10,13 +10,7 @@ interface Props {
 }
 
 const { lang = "es", withForm = false } = Astro.props;
-const { ctaContent, featuredCase, projects } = getContent(lang);
-
-// §7: microproof strip with the real AZ case, placed where the doubt peaks
-// (the half second before the submit click). Same featured project as the
-// projects page featured case.
-const featured = projects.find((p) => p.id === "empresa-limpieza") ?? projects[0];
-const caseHref = lang === "en" ? `/en/projects/${featured.slug}/` : `/proyectos/${featured.slug}/`;
+const { ctaContent } = getContent(lang);
 
 // Heading lines fall back to the whole heading string when no split is
 // authored, keeping the component resilient without the fit layout.
@@ -73,24 +67,5 @@ const sectionId = lang === "en" ? "contact-cta" : "contacto";
         </a>
       )
     }
-
-    <!-- §7 microproof strip: real case metrics right under the action -->
-    <div
-      class="w-full max-w-3xl border-t-2 border-black mt-10 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-    >
-      <p class="font-mono-meta text-[11px] uppercase font-bold tracking-wider text-black m-0 leading-relaxed">
-        <span class="opacity-60">{featuredCase.eyebrow}</span>
-        <span class="whitespace-nowrap">{featured.client}</span>
-        <span class="opacity-60">&middot;</span>
-        {featuredCase.stats[0]}
-      </p>
-      <a
-        href={caseHref}
-        class="inline-flex items-center gap-2 font-mono-meta text-[11px] font-bold uppercase tracking-wider text-black whitespace-nowrap border-b border-black/40 hover:border-black hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
-      >
-        <span>{featuredCase.caseCtaLabel}</span>
-        <span aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
   </div>
 </section>
