@@ -175,7 +175,6 @@ export interface ProcessContent {
   steps: WorkStep[];
   ctaLabel?: string;
   ctaHref?: string;
-  ctaMicrocopy?: string;
 }
 
 export interface PricingRow {

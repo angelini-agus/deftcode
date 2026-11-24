@@ -918,7 +918,7 @@ const esComparison: ComparisonContent = {
 const esHowWeWork: ProcessContent = {
   eyebrow: "// TU DIAGNÓSTICO GRATIS",
   title: "TU DIAGNÓSTICO GRATIS, PASO A PASO",
-  intro: "Tres pasos, sin compromiso y sin tarjeta.",
+  intro: "Solo te pedimos 4 datos. Tres pasos, sin compromiso.",
   steps: [
     {
       step: "01",
@@ -941,7 +941,6 @@ const esHowWeWork: ProcessContent = {
   ],
   ctaLabel: "Quiero mi diagnóstico gratis",
   ctaHref: "/contacto/",
-  ctaMicrocopy: "Solo te pedimos 4 datos.",
 };
 
 // /nosotros: full 4-step process (§6).
@@ -1306,7 +1305,7 @@ const esContactForm: ContactFormContent = {
   problemSelectedPrefix: "Marcaste:",
   submitLabel: "Pedir mi diagnóstico y prototipo gratis",
   microcopy:
-    "Te respondemos hoy • Sin compromiso • No pedimos tarjeta ni datos bancarios. Solo usamos tus datos para contactarte.",
+    "Te respondemos hoy • Sin compromiso • Solo usamos tus datos para contactarte.",
   successTitlePrefix: "Listo,",
   successBody:
     "Ya recibimos tus datos. Te escribimos hoy por WhatsApp para coordinar tu entrevista de 1 hora. Mientras tanto:",
@@ -2232,7 +2231,7 @@ const enComparison: ComparisonContent = {
 const enHowWeWork: ProcessContent = {
   eyebrow: "// YOUR FREE DIAGNOSIS",
   title: "YOUR FREE DIAGNOSIS, STEP BY STEP",
-  intro: "Three steps, no commitment and no card.",
+  intro: "We only ask for 4 details. Three steps, no commitment.",
   steps: [
     {
       step: "01",
@@ -2255,7 +2254,6 @@ const enHowWeWork: ProcessContent = {
   ],
   ctaLabel: "Get my free diagnosis",
   ctaHref: "/en/contact/",
-  ctaMicrocopy: "We only ask for 4 details.",
 };
 
 // EN /about: full 4-step process (§6).
@@ -2614,7 +2612,7 @@ const enContactForm: ContactFormContent = {
   problemSelectedPrefix: "You checked:",
   submitLabel: "Get my diagnosis and free prototype",
   microcopy:
-    "We answer today • No commitment • No card or banking details required. We only use your data to contact you.",
+    "We answer today • No commitment • We only use your data to contact you.",
   successTitlePrefix: "Done,",
   successBody:
     "Got it. We message you today on WhatsApp to schedule your 1-hour interview. Meanwhile:",
