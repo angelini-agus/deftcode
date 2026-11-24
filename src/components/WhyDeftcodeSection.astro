@@ -37,16 +37,11 @@ const sectionId = lang === "en" ? "why-deftcode" : "porque-deftcode";
       {
         comparison.columns.map((column) => (
           <div
-            class:list={[
-              "flex flex-col p-6 sm:p-8 border-2 border-black",
-              column.type === "deftcode"
-                ? "bg-black text-white shadow-[12px_12px_0_#000000]"
-                : "bg-[#FF4D00] text-black/75",
-            ]}
+            class="flex flex-col p-6 sm:p-8 border-2 border-black bg-black text-white shadow-[12px_12px_0_#000000]"
           >
             <p
               class={`font-mono-meta text-[11px] uppercase font-bold tracking-wider m-0 ${
-                column.type === "deftcode" ? "text-[#FF4D00]" : "text-black/60"
+                column.type === "deftcode" ? "text-[#FF4D00]" : "text-white/50"
               }`}
             >
               {column.subtitle}
@@ -58,7 +53,7 @@ const sectionId = lang === "en" ? "why-deftcode" : "porque-deftcode";
               {column.points.map((point) => (
                 <li class="font-mono-meta text-xs uppercase tracking-wide leading-relaxed flex gap-2">
                   <span
-                    class={`shrink-0 ${column.type === "deftcode" ? "text-[#FF4D00]" : "text-black/40"}`}
+                    class={`shrink-0 ${column.type === "deftcode" ? "text-[#FF4D00]" : "text-white/40"}`}
                     aria-hidden="true"
                   >
                     {column.type === "deftcode" ? "✓" : "✗"}
