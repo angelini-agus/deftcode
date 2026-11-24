@@ -8,7 +8,7 @@ interface Props {
 
 const { lang = "es" } = Astro.props;
 const content = getContent(lang);
-const { navLinks, navCta } = content;
+const { navLinks } = content;
 
 // Target URLs for language switcher based on current page
 const pathname = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
@@ -79,16 +79,11 @@ const socialAria: Record<string, string> =
       }
     </nav>
 
-    <!-- Right Controls: Diagnosis CTA, Language Switcher & Social Icons -->
+    <!-- Right Controls: Language Switcher & Social Icons. The navbar CTA
+         was removed (user request): the same action repeated in the nav,
+         the hero, section closers and the final CTA saturated the page.
+         The final CTA is the only "Quiero mi diagnóstico gratis" left. -->
     <div class="pointer-events-auto flex items-center gap-2 sm:gap-3">
-      <!-- Prominent right CTA (§2): Quiero mi diagnóstico gratis -->
-      <a
-        href={navCta.href}
-        class="hidden md:inline-flex items-center gap-2 bg-[#FF4D00] text-black font-mono-meta text-[11px] font-bold uppercase tracking-tight px-4 py-2 rounded-full border-2 border-black shadow-md transition-all duration-200 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
-      >
-        {navCta.label}
-      </a>
-
       <!-- Language Switcher Pill -->
       <div class="flex items-center bg-black rounded-full border-2 border-black p-0.5 font-mono-meta text-[11px] font-bold shadow-md">
         <a
@@ -158,13 +153,6 @@ const socialAria: Record<string, string> =
     id="mobile-drawer"
     class="pointer-events-auto hidden lg:hidden mt-3 bg-black border-2 border-black p-4 flex-col gap-3 shadow-2xl"
   >
-    <!-- Prominent CTA on top of the drawer (§2) -->
-    <a
-      href={navCta.href}
-      class="bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase text-center py-3 px-3 rounded-full border-2 border-black hover:bg-white transition-colors"
-    >
-      {navCta.label}
-    </a>
     {
       navLinks.map((link) => (
         <a
