@@ -14,20 +14,15 @@ const sheetLabel = lang === "en" ? "FULL SERVICE SHEET" : "FICHA COMPLETA";
 ---
 
 <section id={sectionId} class="relative bg-black text-white py-20 md:py-24 px-4 md:px-12">
-  <div class="max-w-7xl mx-auto">
-    <!-- Editorial heading + §3.5 intro -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/20 pb-8">
-      <div>
-        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-          {servicesHome.eyebrow}
-        </span>
-        <h2 class="reveal font-display text-[15vw] sm:text-[13vw] md:text-[9.5vw] leading-[0.85] tracking-[-0.04em] text-white uppercase m-0">
-          {servicesHome.title}
-        </h2>
-      </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-white/70 max-w-sm sm:text-right font-medium">
-        {servicesHome.intro}
-      </p>
+  <div class="max-w-7xl mx-auto @container">
+    <!-- Editorial heading (§3.5 intro removed by user request) -->
+    <div class="border-b border-white/20 pb-8">
+      <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+        {servicesHome.eyebrow}
+      </span>
+      <h2 class="reveal font-display text-[15vw] sm:text-[13vw] md:text-[10.56cqw] leading-[0.85] tracking-[-0.04em] text-white uppercase m-0">
+        {servicesHome.title}
+      </h2>
     </div>
 
     <!-- Service rows: ( index ) + title + line + §3.5 button. The ( 00 )
