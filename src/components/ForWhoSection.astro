@@ -22,7 +22,7 @@ const problems = content.problems;
           <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
             {problems.eyebrow}
           </span>
-          <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
+          <h2 data-fit-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
             {problems.title}
           </h2>
         </div>
@@ -36,33 +36,32 @@ const problems = content.problems;
         <ol class="mt-10 md:mt-12 m-0 p-0 list-none">
           {problems.cards.map((card, i) => (
             <li
-              class:list={[
-                "problem-row group reveal border-b border-white/15 transition-colors duration-200",
-                i === 0 ? "border-t border-t-white/20" : "",
-              ]}
+              class="problem-row group reveal border-b border-white/15 transition-colors duration-200"
               style={`transition-delay:${i * 90}ms`}
             >
               <label
                 for={`problem-mark-${card.key}`}
-                class="grid grid-cols-[auto_auto_1fr] md:grid-cols-[3.5rem_5rem_1fr] gap-3 md:gap-6 py-7 md:py-8 px-2 md:px-4 items-baseline cursor-pointer select-none hover:bg-white/[0.05] transition-colors duration-200"
+                class="grid grid-cols-[auto_1fr] gap-3 md:gap-6 py-7 md:py-8 px-2 md:px-4 items-start cursor-pointer select-none hover:bg-white/[0.05] transition-colors duration-200"
               >
                 <input data-problem-check type="checkbox" class="peer sr-only" />
-                <span
-                  class="problem-check-box w-6 h-6 md:w-7 md:h-7 shrink-0 border-2 border-white/30 peer-checked:bg-[#FF4D00] peer-checked:border-[#FF4D00] flex items-center justify-center self-center transition-colors duration-200"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="w-4 h-4 md:w-5 md:h-5 text-black"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3.5"
-                    aria-hidden="true"
+                <span class="problem-marker flex items-center gap-2 md:gap-3 shrink-0 md:pt-1">
+                  <span
+                    class="problem-check-box w-7 h-7 md:w-8 md:h-8 shrink-0 rounded-full border-2 border-white/30 peer-checked:bg-[#FF4D00] peer-checked:border-[#FF4D00] flex items-center justify-center transition-colors duration-200"
                   >
-                    <path class="problem-check-path" d="M5 13l4 4L19 7" stroke-linecap="square" stroke-linejoin="miter"></path>
-                  </svg>
-                </span>
-                <span class="problem-index font-mono-meta text-xs font-bold tracking-widest text-[#FF4D00]">
-                  ({String(i + 1).padStart(2, "0")})
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="w-4 h-4 md:w-5 md:h-5 text-black"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3.5"
+                      aria-hidden="true"
+                    >
+                      <path class="problem-check-path" d="M5 13l4 4L19 7" stroke-linecap="square" stroke-linejoin="miter"></path>
+                    </svg>
+                  </span>
+                  <span class="problem-index font-mono-meta text-xs font-bold tracking-widest text-[#FF4D00]">
+                    ({String(i + 1).padStart(2, "0")})
+                  </span>
                 </span>
                 <div>
                   <h3
@@ -82,9 +81,7 @@ const problems = content.problems;
         <!-- Cierre (§3.4): user request — the "Si marcaste una..." line
              sits between the last bullet and the CTA, with the live
              checked-count chip next to it. -->
-        <div
-          class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-white/20 pt-8"
-        >
+        <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
           <p class="font-sans text-base text-white/85 font-bold m-0 max-w-2xl">
             {problems.intro}
           </p>
@@ -97,18 +94,18 @@ const problems = content.problems;
           ></span>
           <a
             href={problems.ctaHref}
-            class="sm:ml-auto inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:scale-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            class="sm:ml-auto group inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs font-bold uppercase px-5 py-3 rounded-full border-2 border-black hover:scale-105 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <span>{problems.ctaLabel}</span>
             <svg
-              class="w-4 h-4"
+              viewBox="0 0 24 24"
+              class="w-4 h-4 problem-cta-check"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
-              stroke-width="2.5"
+              stroke-width="3.5"
               aria-hidden="true"
             >
-              <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              <path stroke-linecap="square" stroke-linejoin="miter" d="M5 13l4 4L19 7"></path>
             </svg>
           </a>
         </div>
@@ -121,7 +118,7 @@ const problems = content.problems;
           <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
             {forWho.eyebrow}
           </span>
-          <h2 class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
+          <h2 data-fit-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-white uppercase tracking-[-0.04em] leading-[0.88]">
             {forWho.title}
           </h2>
         </div>
@@ -226,6 +223,24 @@ const problems = content.problems;
   }
   #problem-counter.counter-pop {
     animation: counter-pop 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  /* The closer CTA wears a check instead of an arrow: it redraws itself
+     on hover (site-wide rule: CTAs keep their face color, feedback is
+     motion, not color). */
+  .problem-cta-check path {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 0;
+  }
+  a:hover .problem-cta-check path {
+    animation: problem-check-draw 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @keyframes problem-check-draw {
+    from {
+      stroke-dashoffset: 24;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 </style>
 
