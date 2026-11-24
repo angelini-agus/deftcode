@@ -910,7 +910,7 @@ const esComparison: ComparisonContent = {
       ],
     },
   ],
-  ctaLabel: "Quiero ver mi prototipo gratis",
+  ctaLabel: "Ver mi prototipo gratis",
   ctaHref: "/contacto/",
 };
 
@@ -1211,7 +1211,7 @@ const esServicesHome: ServicesHomeContent = {
       index: "00",
       title: "EMPEZÁ ACÁ: DIAGNÓSTICO DEFT",
       line: "Entrevista de 1 hora sobre tu negocio, informe en 48 h con lo que te cuesta plata y prototipo gratis. Gratis.",
-      buttonLabel: "Quiero mi diagnóstico gratis",
+      buttonLabel: "Agendá la entrevista",
       buttonHref: "/contacto/",
     },
     {
@@ -1234,7 +1234,7 @@ const esServicesHome: ServicesHomeContent = {
       index: "03",
       title: "LANDING + SEO + META ADS",
       line: "Tu web y clientes todos los meses. Landing desde USD 200, lista en 1 a 2 semanas; SEO y anuncios en plan mensual.",
-      buttonLabel: "Quiero más consultas",
+      buttonLabel: "Traéme más consultas",
       buttonHref: "/contacto/?problema=web",
       slug: "landing-pages",
     },
@@ -2220,7 +2220,7 @@ const enComparison: ComparisonContent = {
       ],
     },
   ],
-  ctaLabel: "I want to see my free prototype",
+  ctaLabel: "See my free prototype",
   ctaHref: "/en/contact/",
 };
 
@@ -2519,7 +2519,7 @@ const enServicesHome: ServicesHomeContent = {
       index: "00",
       title: "START HERE: DEFT DIAGNOSIS",
       line: "A 1-hour interview about your business, a 48 h report on what costs you money, and a free prototype. Free.",
-      buttonLabel: "Get my free diagnosis",
+      buttonLabel: "Book the interview",
       buttonHref: "/en/contact/",
     },
     {
@@ -2542,7 +2542,7 @@ const enServicesHome: ServicesHomeContent = {
       index: "03",
       title: "LANDING + SEO + META ADS",
       line: "Your website and clients every month. Landing from USD 200, ready in 1 to 2 weeks; SEO and ads on a monthly plan.",
-      buttonLabel: "I want more inquiries",
+      buttonLabel: "Bring me more inquiries",
       buttonHref: "/en/contact/?problema=web",
       slug: "landing-pages",
     },
