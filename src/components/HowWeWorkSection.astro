@@ -25,18 +25,13 @@ const colsClass =
 
 <section class={`relative ${dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"} py-20 px-4 md:px-12`}>
   <div class="max-w-7xl mx-auto">
-    <div class={`border-b-2 ${dark ? "border-white/20" : "border-black"} pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4`}>
-      <div>
-        <span class={`font-mono-meta text-xs uppercase font-bold tracking-widest block mb-2 ${dark ? "text-[#FF4D00]" : "text-black"}`}>
-          {process.eyebrow}
-        </span>
-        <h2 class={`reveal font-display text-4xl sm:text-5xl uppercase tracking-[-0.04em] leading-[0.9] ${dark ? "text-white" : "text-black"}`}>
-          {process.title}
-        </h2>
-      </div>
-      <p class={`font-mono-meta text-xs sm:text-sm max-w-sm sm:text-right font-medium ${dark ? "text-white/70" : "text-black/80"}`}>
-        {process.intro}
-      </p>
+    <div class={`border-b-2 ${dark ? "border-white/20" : "border-black"} pb-8 mb-12`}>
+      <span class={`font-mono-meta text-xs uppercase font-bold tracking-widest block mb-2 ${dark ? "text-[#FF4D00]" : "text-black"}`}>
+        {process.eyebrow}
+      </span>
+      <h2 data-fit-title class={`reveal font-display text-4xl sm:text-5xl uppercase tracking-[-0.04em] leading-[0.9] ${dark ? "text-white" : "text-black"}`}>
+        {process.title}
+      </h2>
     </div>
 
     <!-- Steps Grid -->
@@ -69,24 +64,21 @@ const colsClass =
       }
     </div>
 
-    <!-- CTA + microcopy (§3.6) -->
+    <!-- CTA (§3.6): same design as the matrix CTA below — centered, with
+         the reveal animation and the scale hover. No color change on
+         hover (site-wide CTA rule). -->
     {
       process.ctaLabel && (
-        <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
+        <div class="mt-12 flex justify-center">
           <a
             href={process.ctaHref ?? "#"}
-            class="inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 py-4 rounded-full border-2 border-black shadow-[0_10px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-105 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+            class="reveal inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 py-4 rounded-full border-2 border-black shadow-[0_10px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
           >
             <span>{process.ctaLabel}</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
               <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </a>
-          {process.ctaMicrocopy && (
-            <p class={`font-mono-meta text-[11px] uppercase tracking-wide m-0 ${dark ? "text-white/60" : "text-black/70"}`}>
-              {process.ctaMicrocopy}
-            </p>
-          )}
         </div>
       )
     }

@@ -192,5 +192,40 @@ const organizationSchema = {
         revealables.forEach((el) => io.observe(el));
       }
     </script>
+    <script>
+      // Fit-to-width display titles ([data-fit-title]): scale each title so
+      // its widest line fills the container edge to edge (minus 4px). The
+      // real font shaping is not perfectly linear with size, so the fit
+      // iterates 3 times to converge through line re-wrapping. Runs after
+      // fonts are ready (metrics depend on the real face) and debounced on
+      // resize. Same approach as the services/hero title fits.
+      const fitTitles = () => {
+        document.querySelectorAll("[data-fit-title]").forEach((h2) => {
+          h2.style.fontSize = "";
+          const target = h2.parentElement.clientWidth - 4;
+          if (target <= 0) return;
+          const range = document.createRange();
+          range.selectNodeContents(h2);
+          let measured = range.getBoundingClientRect().width;
+          if (measured <= 0) return;
+          let fs = parseFloat(getComputedStyle(h2).fontSize);
+          for (let i = 0; i < 3; i++) {
+            fs = (fs * target) / measured;
+            h2.style.fontSize = `${fs}px`;
+            range.selectNodeContents(h2);
+            measured = range.getBoundingClientRect().width;
+          }
+        });
+      };
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitTitles);
+      }
+      fitTitles();
+      let fitTitlesT;
+      window.addEventListener("resize", () => {
+        clearTimeout(fitTitlesT);
+        fitTitlesT = setTimeout(fitTitles, 120);
+      });
+    </script>
   </body>
 </html>

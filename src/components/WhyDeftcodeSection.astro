@@ -17,20 +17,16 @@ const sectionId = lang === "en" ? "why-deftcode" : "porque-deftcode";
 
 <section id={sectionId} class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
   <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
-      <div>
-        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-          {comparison.eyebrow}
-        </span>
-        <h2
-          class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9] max-w-4xl"
-        >
-          {comparison.title}
-        </h2>
-      </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
-        {comparison.intro}
-      </p>
+    <div class="border-b-2 border-black pb-8">
+      <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+        {comparison.eyebrow}
+      </span>
+      <h2
+        data-fit-title
+        class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]"
+      >
+        {comparison.title}
+      </h2>
     </div>
 
     <div class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -37,18 +37,13 @@ const faqIntro =
      discipline. -->
 <section id="precios" class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12 border-b-2 border-black">
   <div class="max-w-7xl mx-auto">
-    <div class="border-b-2 border-black pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
-      <div>
-        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-          {pricing.eyebrow}
-        </span>
-        <h2 class="reveal font-display text-4xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
-          {pricing.title}
-        </h2>
-      </div>
-      <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
-        {pricing.intro}
-      </p>
+    <div class="border-b-2 border-black pb-8 mb-12">
+      <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+        {pricing.eyebrow}
+      </span>
+      <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
+        {pricing.title}
+      </h2>
     </div>
 
     <div class="max-w-4xl mx-auto border-2 border-black bg-black text-white shadow-[8px_8px_0_#000000] overflow-x-auto">
@@ -91,18 +86,15 @@ const faqIntro =
   <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
 
   <div class="max-w-7xl mx-auto">
-    <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+    <div class="border-b border-white/20 pb-8 mb-12">
       <div>
         <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
           {faqEyebrow}
         </span>
-        <h2 class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+        <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
           {faqTitle}
         </h2>
       </div>
-      <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
-        {faqIntro}
-      </p>
     </div>
 
     <!-- Accordion List -->
