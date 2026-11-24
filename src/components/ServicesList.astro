@@ -52,9 +52,14 @@ const sheetLabel = lang === "en" ? "FULL SERVICE SHEET" : "FICHA COMPLETA";
                     </h3>
                   </a>
                 ) : (
-                  <h3 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[4.5vw] uppercase tracking-[-0.04em] leading-[0.85] text-white m-0">
-                    {item.title}
-                  </h3>
+                  <a
+                    href={item.buttonHref}
+                    class="group inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+                  >
+                    <h3 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[4.5vw] uppercase tracking-[-0.04em] leading-[0.85] text-white group-hover:text-[#FF4D00] transition-colors duration-200 m-0">
+                      {item.title}
+                    </h3>
+                  </a>
                 )}
 
                 <p class="font-sans text-sm sm:text-base text-white/75 leading-relaxed max-w-2xl mt-3 mb-0">
