@@ -11,6 +11,16 @@ interface Props {
 const { lang = "es", embedded = false } = Astro.props;
 const { contactForm, problems } = getContent(lang);
 
+// Web3Forms access key (public by design: it ships in the rendered form).
+// Set it in .env so it never lands in the repository. Without it every
+// submit is rejected, so warn loudly at build time.
+const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY as string | undefined;
+if (import.meta.env.PROD && !ACCESS_KEY) {
+  console.warn(
+    "[deftcode] PUBLIC_WEB3FORMS_ACCESS_KEY is not set: the contact form cannot submit. Copy .env.example to .env and fill it in, then rebuild.",
+  );
+}
+
 // TODO: Meta Pixel + Conversions API — fire a Lead conversion event on
 // every successful submit before launching paid campaigns
 // (ESTRATEGIA-COPY.md §7 "Reglas de la landing de Meta Ads").
@@ -31,7 +41,7 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
         method="POST"
         class="flex flex-col gap-6"
       >
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+        <input type="hidden" name="access_key" value={ACCESS_KEY ?? ""} />
         <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
         <!-- Problem carried from the home cards (?problema=<key>) -->
         <input type="hidden" name="problema" id="problema-input" value="" />
