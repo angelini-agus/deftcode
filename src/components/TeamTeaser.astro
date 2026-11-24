@@ -51,7 +51,7 @@ const teamHref = lang === "en" ? "/en/about/" : "/nosotros/";
     <!-- Closing band to the team page -->
     <a
       href={teamHref}
-      class="mt-8 flex items-center justify-between gap-4 bg-white text-black px-6 md:px-8 py-5 rounded-full group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
+      class="mt-8 w-full flex items-center justify-center gap-3 bg-white text-black px-6 py-5 rounded-full border-2 border-black hover:scale-[1.02] shadow-lg transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
     >
       <span class="font-mono-meta text-sm md:text-base font-bold uppercase tracking-wider text-black">
         {teamLabel}
@@ -64,7 +64,7 @@ const teamHref = lang === "en" ? "/en/about/" : "/nosotros/";
         stroke-width="2.5"
         aria-hidden="true"
       >
-        <path stroke-linecap="square" stroke-linejoin="miter" d="M4 12h16m-6-6l6 6-6 6"></path>
+        <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
       </svg>
     </a>
   </div>
