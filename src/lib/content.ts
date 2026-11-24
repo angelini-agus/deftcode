@@ -111,26 +111,29 @@ const esPages: Record<string, PageContent> = {
 };
 
 const esHeroContent: HeroContent = {
-  headlineMain: "TU SISTEMA",
-  headlineSub: "A MEDIDA. EN 3 A 6 SEMANAS Y A PRECIO CERRADO.",
+  // Macro speed (fast-to-final-result beats fast-first-draft): the h1 sells
+  // the dream outcome (out of spreadsheet chaos), the sub sells production
+  // speed with a closed price. Short h1 keeps the one-line fit at ~15vw.
+  headlineMain: "SALÍ DEL EXCEL.",
+  headlineSub: "TU SISTEMA A MEDIDA EN PRODUCCIÓN EN 3 A 6 SEMANAS. PRECIO CERRADO.",
   subtitle:
-    "Hacemos un diagnóstico gratis de tu empresa y te mostramos un prototipo antes de firmar. Así una empresa de limpieza de Rosario ahorra $2.8M ARS por mes en sueldos.",
-  kicker: "PRIMERO LO VES, DESPUÉS FIRMÁS.",
-  badge: "ROSARIO, ARGENTINA // PARA PYMES DE TODO EL PAÍS",
-  locationText: "ROSARIO, ARGENTINA // PARA PYMES DE TODO EL PAÍS",
-  roleText: "SISTEMAS A MEDIDA // CRM // ERP // LANDINGS QUE TRAEN CLIENTES",
+    "Auditamos tu operación gratis y te mostramos un prototipo funcionando con tus datos antes de que pagues un peso. Así una empresa de Rosario ahorra $2.8M ARS por mes en sueldos.",
+  kicker: "VELOCIDAD DE STARTUP. ARQUITECTURA DE INGENIERÍA. CERO RIESGO.",
+  badge: "ROSARIO, ARGENTINA // PYMES DE TODO EL PAÍS",
+  locationText: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
+  roleText: "ERP A MEDIDA // CRM // AUTOMATIZACIÓN CON IA // LANDINGS QUE CONVIERTEN",
   stats: [
-    "-$2.8M ARS/MES EN SUELDOS",
+    "-$2.8M ARS/MES AHORRADOS EN AZ",
     "0 QUEJAS POR INASISTENCIA",
-    "30+ EDIFICIOS EN VIVO",
+    "3 A 6 SEMANAS A PRODUCCIÓN",
     "0 PLAZOS INCUMPLIDOS",
   ],
-  ctaLabel: "Quiero mi diagnóstico gratis",
+  ctaLabel: "Pedir mi diagnóstico y prototipo gratis",
   ctaHref: "/contacto/",
-  ctaSecondaryLabel: "Ver cómo lo hicimos en AZ",
+  ctaSecondaryLabel: "Ver caso real (-$2.8M/mes)",
   ctaSecondaryHref: "/proyectos/empresa-limpieza-rosario/",
-  microcopy: "Entrevista de 2 horas. Informe en 48 h. Es tuyo aunque no trabajemos juntos.",
-  scrollText: "DESLIZAR HACIA ABAJO • EXPLORAR DEFTCODE • ",
+  microcopy: "Entrevista de 2 h • Informe en 48 h • Prototipo gratis antes de firmar.",
+  scrollText: "DESLIZAR HACIA ABAJO • VELOCIDAD Y PRECISIÓN • ",
 };
 
 const esMarqueeItems = {
@@ -1347,26 +1350,27 @@ const enPages: Record<string, PageContent> = {
 };
 
 const enHeroContent: HeroContent = {
-  headlineMain: "YOUR SYSTEM",
-  headlineSub: "CUSTOM-BUILT. IN 3 TO 6 WEEKS AT A CLOSED PRICE.",
+  // Macro speed mirror of the ES hero: dream outcome + production speed.
+  headlineMain: "DITCH EXCEL.",
+  headlineSub: "YOUR CUSTOM SYSTEM IN PRODUCTION IN 3 TO 6 WEEKS. CLOSED PRICE.",
   subtitle:
-    "We run a free diagnosis of your business and show you a prototype before you sign. That's how a cleaning company in Rosario saves $2.8M ARS per month in payroll.",
-  kicker: "SEE IT FIRST, SIGN AFTER.",
+    "We audit your operation for free and show you a working prototype with your data before you pay a cent. That's how a company in Rosario saves $2.8M ARS per month in payroll.",
+  kicker: "STARTUP SPEED. ENGINEERING ARCHITECTURE. ZERO RISK.",
   badge: "ROSARIO, ARGENTINA // FOR SMBS ACROSS THE COUNTRY",
-  locationText: "ROSARIO, ARGENTINA // FOR SMBS ACROSS THE COUNTRY",
-  roleText: "CUSTOM SYSTEMS // CRM // ERP // LANDINGS THAT BRING CLIENTS",
+  locationText: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
+  roleText: "CUSTOM ERP // CRM // AI AUTOMATION // LANDINGS THAT CONVERT",
   stats: [
-    "-$2.8M ARS/MO IN PAYROLL",
+    "-$2.8M ARS/MO SAVED AT AZ",
     "0 ABSENCE COMPLAINTS",
-    "30+ BUILDINGS LIVE",
+    "3 TO 6 WEEKS TO PRODUCTION",
     "0 MISSED DEADLINES",
   ],
-  ctaLabel: "Get my free diagnosis",
+  ctaLabel: "Get my diagnosis and free prototype",
   ctaHref: "/en/contact/",
-  ctaSecondaryLabel: "See how we did it for AZ",
+  ctaSecondaryLabel: "See the real case (-$2.8M/mo)",
   ctaSecondaryHref: "/en/projects/empresa-limpieza-rosario/",
-  microcopy: "2-hour interview. Report in 48 h. Yours even if we never work together.",
-  scrollText: "SCROLL DOWN • EXPLORE DEFT • ",
+  microcopy: "2-hour interview • Report in 48 h • Free prototype before signing.",
+  scrollText: "SCROLL DOWN • SPEED AND PRECISION • ",
 };
 
 const enMarqueeItems = {
