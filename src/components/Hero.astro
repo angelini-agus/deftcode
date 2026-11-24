@@ -45,6 +45,32 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     >
       {heroContent.headlineSub}
     </p>
+
+    <!-- §7 conversion CTA: the fold shows what we do AND the action, with
+         the microcopy carrying the risk removal right under the button. -->
+    <div data-hero-cta class="flex flex-col items-center gap-2 mt-6 md:mt-8">
+      <a
+        href={heroContent.ctaHref}
+        class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border-2 border-black shadow-[0_10px_26px_rgba(0,0,0,0.35)] transition-all duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+      >
+        <span>{heroContent.ctaLabel}</span>
+        <svg
+          class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </a>
+      <p
+        class="font-mono-meta text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-black/75 m-0 text-center max-w-md leading-relaxed"
+      >
+        {heroContent.microcopy}
+      </p>
+    </div>
   </div>
 
   <!-- 2px Black Divider & Metadata Row -->
@@ -145,6 +171,14 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     #top .hero-divider {
       margin-bottom: 1rem;
     }
+    /* The CTA keeps its copy and control height; only its air shrinks. */
+    #top [data-hero-cta] {
+      margin-top: 0.4rem;
+      gap: 0.3rem;
+    }
+    #top [data-hero-cta] p {
+      font-size: 10px;
+    }
   }
   @media (max-height: 600px) {
     #top {
@@ -154,6 +188,12 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     #top .hero-middle {
       padding-top: 0;
       padding-bottom: 0;
+    }
+    /* Below 600px the decorative EST. 2026 tag collides with the fixed
+       navbar: hide it (it is brand air, not copy) and let the headline
+       breathe. */
+    #top [data-hero-label] {
+      display: none;
     }
   }
 </style>
@@ -194,6 +234,12 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
   }
   html.intro-run [data-hero-arrow-link] {
     transform: translateY(34px) scale(0.8) rotate(-90deg);
+  }
+  /* Conversion CTA rises from below with the metadata row (no scramble:
+     it is a single short label, so one slide-in is enough). */
+  html.intro-run [data-hero-cta] {
+    opacity: 0;
+    transform: translateY(22px);
   }
   /* The terminal scramble keeps one line but transiently varies the line
      width; clip it inside the section for the intro only. */
@@ -363,6 +409,7 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     const role = document.querySelector<HTMLElement>("[data-hero-role]");
     const divider = document.querySelector<HTMLElement>(".hero-divider");
     const circle = document.querySelector<HTMLElement>("[data-hero-arrow-link]");
+    const cta = document.querySelector<HTMLElement>("[data-hero-cta]");
     const origenLines = origen
       ? Array.from(origen.querySelectorAll<HTMLElement>("[data-hero-scramble]"))
       : [];
@@ -471,6 +518,10 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     // Scroll circle: rises from below with a slight rotation settle.
     if (circle) {
       tl.to(circle, { y: 0, scale: 1, rotation: 0, duration: 0.55, ease: "back.out(1.6)" }, 0.12);
+    }
+    // Conversion CTA rises from below, last: the eye reads headline → CTA.
+    if (cta) {
+      tl.to(cta, { y: 0, opacity: 1, duration: 0.4 }, 0.18);
     }
 
     // Unwrap the char spans and leave the plain strings exactly as they
