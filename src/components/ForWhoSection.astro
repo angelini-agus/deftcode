@@ -131,16 +131,16 @@ const problems = content.problems;
              carries the exclusions first and the ghost card answers with
              who the work IS for. -->
         <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12">
-          <!-- NO card (first, orange) -->
-          <div class="bg-[#FF4D00] text-black border-2 border-black p-8">
-            <span class="font-mono-meta text-xs uppercase font-bold text-black tracking-widest">
+          <!-- NO card (first): black face, white copy, orange crosses -->
+          <div class="bg-black text-white border-2 border-white/20 p-8">
+            <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
               {forWho.noLabel}
             </span>
             <ul class="m-0 p-0 list-none">
               {forWho.noItems.map((item) => (
                 <li class="flex items-start gap-3 mt-5">
                   <svg
-                    class="w-5 h-5 shrink-0 text-black mt-0.5"
+                    class="w-5 h-5 shrink-0 text-[#FF4D00] mt-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -149,7 +149,7 @@ const problems = content.problems;
                   >
                     <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
                   </svg>
-                  <span class="text-black/85 font-sans text-sm leading-relaxed">{item}</span>
+                  <span class="text-white/85 font-sans text-sm leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
