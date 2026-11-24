@@ -32,7 +32,7 @@ const esSiteMeta: SiteMeta = {
   title: "Software a medida en Rosario | Diagnóstico gratis | Deftcode",
   description:
     "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
-  siteUrl: "https://deftcode.dev",
+  siteUrl: "https://deftcode.com.ar",
   ogImage: "/og-deftcode.png",
   author: "Deftcode Studio",
   location: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
@@ -1268,7 +1268,7 @@ const enSiteMeta: SiteMeta = {
   title: "Custom software in Rosario | Free diagnosis | Deftcode",
   description:
     "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
-  siteUrl: "https://deftcode.dev",
+  siteUrl: "https://deftcode.com.ar",
   ogImage: "/og-deftcode.png",
   author: "Deftcode Studio",
   location: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
