@@ -251,7 +251,7 @@ const problems = content.problems;
   const counter = document.getElementById("problem-counter");
   if (boxes.length && counter) {
     const update = () => {
-      const n = Array.from(boxes).filter((b) => b.checked).length;
+      const n = Array.from(boxes).filter((b) => (b as HTMLInputElement).checked).length;
       const template = counter.dataset.template || "{n}";
       if (n > 0) {
         counter.textContent = template.replace("{n}", String(n));

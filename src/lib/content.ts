@@ -18,6 +18,7 @@ import type {
   HeroContent,
   ManifestoItem,
   ProblemsContent,
+  ComparisonContent,
   FeaturedCaseContent,
   MoreSoftwareContent,
   ContactFormContent,
