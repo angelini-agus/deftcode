@@ -146,3 +146,43 @@ must feel like the hero intro ("robótico medio bugueado"), not plain typing.
   visibility fix; contacto eyebrow+paragraph revealed and h1 settled
   66/66 after the preloader. Console: only /_vercel/insights/script.js
   404s (Vercel-only asset, production-only).
+
+## Round 4 (2026-11-25): no flash + session-once + the dead selection
+
+User: the h1 showed first, then vanished and re-animated (all animated
+elements, every page entry); home looked like things grew and shrank;
+the animations must play ONLY on the session's first fresh entry; and
+the ¿TE PASA ALGO DE ESTO? list needed its selecting animation (which
+turned out to be entirely dead).
+
+- [x] R11 first-paint guard: the server-rendered heading text flashed
+      because prep waits for fonts.ready while nothing hid the SSR text.
+      The head script now adds .motion-fresh on the session's fresh
+      entry and CSS keeps h1/h2/h3 invisible from the very first paint
+      (home hero h1 excluded: its intro owns it). The script releases
+      each heading inline at prep (box visible, letters still hidden)
+      and releases non-decoding headings at collection. The fit size
+      change now happens while invisible: the "grew and shrank" on home.
+- [x] R12 session-once: the entrance choreography (preloader + decode +
+      reveals + count-up) plays once per browser session
+      (sessionStorage deft-motion-played, set at the fresh entry).
+      Internal navigation, back/forward and replays land on preload-skip
+      pages: the motion script runs in static mode (root class
+      motion-static, transitions off, no decode, no count-up, reveals
+      instant, server text untouched). A reload replays nothing; closing
+      the browser restarts the session.
+- [x] R13 the selecting animation was DEAD: the checkbox input had no id
+      (its label for= pointed nowhere, so clicks toggled nothing), the
+      peer-checked fill required a sibling relationship the DOM does not
+      have (the box nests inside .problem-marker), and the draw selector
+      did too. Fixed with the input id + :has() rules: the circle fills
+      orange and stamps (back-out pop), the checkmark draws in, the row
+      highlights with the title going orange, and the live tally keeps
+      popping. Unchecking reverses everything.
+- Verified by CDP: fresh /proyectos at preloader-lift+250ms shows glitch
+  glyphs mid-decode with NO full SSR text ever visible; internal
+  navigation (click) and reload render static pages (skip=true,
+  motion-static, zero letter spans, 22/22 reveals instantly shown);
+  selection: checked -> dashoffset 0 + orange box + highlight + orange
+  title + counter "MARCADAS 1/4", uncheck reverts all. astro check 0
+  errors, build 35 pages.

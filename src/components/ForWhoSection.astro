@@ -43,10 +43,10 @@ const problems = content.problems;
                 for={`problem-mark-${card.key}`}
                 class="grid grid-cols-[auto_1fr] gap-3 md:gap-6 py-7 md:py-8 px-2 md:px-4 items-start cursor-pointer select-none hover:bg-white/[0.05] transition-colors duration-200"
               >
-                <input data-problem-check type="checkbox" class="peer sr-only" />
+                <input id={`problem-mark-${card.key}`} data-problem-check type="checkbox" class="peer sr-only" />
                 <span class="problem-marker flex items-center gap-2 md:gap-3 shrink-0 md:pt-1">
                   <span
-                    class="problem-check-box w-7 h-7 md:w-8 md:h-8 shrink-0 rounded-full border-2 border-white/30 peer-checked:bg-[#FF4D00] peer-checked:border-[#FF4D00] flex items-center justify-center transition-colors duration-200"
+                    class="problem-check-box w-7 h-7 md:w-8 md:h-8 shrink-0 rounded-full border-2 border-white/30 flex items-center justify-center transition-colors duration-200"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -195,8 +195,33 @@ const problems = content.problems;
     stroke-dashoffset: 24;
     transition: stroke-dashoffset 0.35s cubic-bezier(0.23, 1, 0.32, 1) 0.05s;
   }
-  .problem-row input:checked ~ .problem-check-box .problem-check-path {
+  .problem-row:has(input:checked) .problem-check-path {
     stroke-dashoffset: 0;
+  }
+  /* The circle fills orange and pops once, like a stamp. */
+  .problem-row:has(input:checked) .problem-check-box {
+    background-color: #ff4d00;
+    border-color: #ff4d00;
+    animation: problem-stamp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes problem-stamp {
+    0% {
+      transform: scale(0.85);
+    }
+    55% {
+      transform: scale(1.12);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .problem-check-path {
+      transition: none;
+    }
+    .problem-row:has(input:checked) .problem-check-box {
+      animation: none;
+    }
   }
   /* Marked row: stays highlighted after hover, title goes orange, the
      index switches to white. :has() is supported in every modern

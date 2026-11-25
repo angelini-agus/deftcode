@@ -93,21 +93,39 @@ const organizationSchema = {
       (function () {
         try {
           var root = document.documentElement;
-          if (root.getAttribute("data-intro") === "off") return; // /diagnostico: no intro
-          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            root.classList.add("preload-skip");
-            return;
-          }
+          // Session-once choreography: the preloader + robotic entrances
+          // play on the session's FIRST fresh entry only. Internal
+          // navigation, back/forward, reduced motion and session replays
+          // land on fully static pages (preload-skip); a reload still
+          // counts as the same session (the flag lives in sessionStorage).
+          var played = false;
+          try {
+            played = sessionStorage.getItem("deft-motion-played") === "1";
+          } catch (e) {}
           var entry = performance.getEntriesByType("navigation")[0];
           var type = entry ? entry.type : "navigate";
           var internal =
             document.referrer.indexOf(location.origin + "/") === 0 ||
             document.referrer === location.origin;
-          if (type === "back_forward" || (type === "navigate" && internal)) {
+          if (
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+            type === "back_forward" ||
+            (type === "navigate" && internal) ||
+            played
+          ) {
             root.classList.add("preload-skip");
             return;
           }
-          root.classList.add("intro-run", "intro-nav");
+          try {
+            sessionStorage.setItem("deft-motion-played", "1");
+          } catch (e) {}
+          if (root.getAttribute("data-intro") === "off") {
+            // Minimal pages have no preloader/handoff: fresh motion, but
+            // the title observer starts immediately (no intro-run).
+            root.classList.add("motion-fresh");
+            return;
+          }
+          root.classList.add("intro-run", "intro-nav", "motion-fresh");
           window.setTimeout(function () {
             // The navbar entrance should be long done by now; the hero
             // entrance owns .intro-run once started (dataset.introStarted).
@@ -200,6 +218,11 @@ const organizationSchema = {
         var hasIO = "IntersectionObserver" in window;
         var canvas = document.createElement("canvas");
         var ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
+        // Session replays / internal navigation / reduced motion: the
+        // page renders fully static (no decode, no reveals, no count-up).
+        var root = document.documentElement;
+        var staticMode =
+          reduced || !hasIO || root.classList.contains("preload-skip");
 
         // --- 1. Collect every heading, tagging decode behavior ---
         var titles = Array.prototype.slice
@@ -224,6 +247,16 @@ const organizationSchema = {
         titles.forEach(function (h) {
           if (!h.hasAttribute("data-fit-title")) h.setAttribute("data-decode-title", "");
         });
+        if (root.classList.contains("motion-fresh")) {
+          // Headings the system will NOT decode must not stay hidden
+          // under the first-paint blanket.
+          Array.prototype.slice
+            .call(document.querySelectorAll("h1, h2, h3"))
+            .forEach(function (h) {
+              if (h.hasAttribute("data-hero-scramble")) return;
+              if (titles.indexOf(h) === -1) h.style.opacity = "1";
+            });
+        }
         var prepared: Prepared[] = [];
 
         // --- 2. Directional reveals (non-title elements) ---
@@ -232,7 +265,8 @@ const organizationSchema = {
           .filter(function (el) {
             return !el.hasAttribute("data-fit-title") && !el.hasAttribute("data-decode-title");
           });
-        if (!hasIO || reduced) {
+        if (staticMode) {
+          root.classList.add("motion-static");
           revealables.forEach(function (el) {
             el.classList.add("is-revealed");
           });
@@ -338,8 +372,23 @@ const organizationSchema = {
               h.style.whiteSpace = "nowrap";
             }
             h.classList.add("is-revealed");
-            if (!hasIO || reduced || h.dataset.decoded) {
-              h.textContent = text;
+            // Session replays: keep the server text untouched (no letters
+            // are ever built) and release the first-paint blanket.
+            if (staticMode) {
+              if (root.classList.contains("motion-fresh")) h.style.opacity = "1";
+              prepared.push({ el: h, spans: null, text: text });
+              return;
+            }
+            if (h.dataset.decoded) {
+              // Resize re-prep of a settled title. Line groups keep their
+              // authored line spans (flattening would destroy the CTA).
+              if (h.hasAttribute("data-decode-lines")) {
+                Array.prototype.slice.call(h.children).forEach(function (line) {
+                  line.textContent = (line.textContent || "").replace(/\s+/g, " ").trim();
+                });
+              } else {
+                h.textContent = text;
+              }
               prepared.push({ el: h, spans: null, text: text });
               return;
             }
@@ -387,6 +436,9 @@ const organizationSchema = {
                   "opacity .28s cubic-bezier(.23,1,.32,1), transform .28s cubic-bezier(.34,1.56,.64,1)";
               }
             });
+            // Release the first-paint blanket: the box shows while the
+            // letters stay hidden until their decode window.
+            if (root.classList.contains("motion-fresh")) h.style.opacity = "1";
             prepared.push({ el: h, spans: spans, text: text });
           });
         }
@@ -535,7 +587,7 @@ const organizationSchema = {
           requestAnimationFrame(frame);
         }
 
-        if (hasIO && !reduced) {
+        if (!staticMode) {
           var countIO = new IntersectionObserver(
             function (entries) {
               entries.forEach(function (entry) {
@@ -555,7 +607,7 @@ const organizationSchema = {
 
         function boot() {
           prepAndFit();
-          if (!hasIO || reduced) return;
+          if (staticMode) return;
           var root = document.documentElement;
           var introDone =
             root.getAttribute("data-intro") === "off" ||

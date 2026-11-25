@@ -195,6 +195,25 @@ html.js .img-reveal.is-revealed {
   transform: scale(1);
 }
 
+/* First-paint guard (session-fresh entrances): the server-rendered
+   heading text would flash before the motion script arms the letters
+   (fonts.ready is async), so headings stay invisible from the very
+   first paint; the script releases each heading inline once its
+   letters are armed — or immediately for headings it skips. The home
+   hero h1 owns its own intro state and is excluded. */
+html.motion-fresh h1:not([data-hero-h1]),
+html.motion-fresh h2,
+html.motion-fresh h3 {
+  opacity: 0;
+}
+
+/* Session replays / internal navigation: fully static pages — no
+   transitions at all, so the instant is-revealed never fades. */
+html.motion-static .reveal,
+html.motion-static .img-reveal {
+  transition: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal,
   html.js .img-reveal {
