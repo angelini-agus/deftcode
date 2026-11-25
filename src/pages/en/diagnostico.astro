@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactFormSection from "../../components/ContactFormSection.astro";
+import { getContent } from "../../lib/content";
+
+const lang = "en";
+const { diagnosticoLanding, pages } = getContent(lang);
+
+// EN mirror of /diagnostico (the hreflang alternate BaseLayout declares
+// for the ES ad landing). Same ad-landing rules (§7): one offer, one
+// repeated button, no menu and no links that take the user away —
+// rendered in BaseLayout minimal mode.
+// TODO: Meta Pixel base code + Conversions API server events BEFORE
+// launching Meta Ads campaigns (ESTRATEGIA-COPY.md §7 y §8).
+// Event to wire: form submit (Lead).
+
+const waProof = diagnosticoLanding.proofLine;
+---
+
+<BaseLayout
+  lang={lang}
+  minimal
+  title={pages.diagnostico.title}
+  description={pages.diagnostico.description}
+  canonical="/en/diagnostico/"
+>
+  <!-- Hero (§7): H1 + subtitle + CTA anchor + social proof -->
+  <section id="top" class="relative bg-[#FF4D00] text-black pt-32 pb-16 md:pt-40 md:pb-20 px-4 md:px-12">
+    <div class="max-w-5xl mx-auto">
+      <div class="font-mono-meta text-xs uppercase font-bold tracking-widest mb-6">
+        {diagnosticoLanding.eyebrow}
+      </div>
+
+      <h1 data-decode-title class="reveal font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-[-0.04em] leading-[0.9] max-w-4xl m-0">
+        {diagnosticoLanding.h1}
+      </h1>
+
+      <p class="font-sans text-base sm:text-xl md:text-2xl font-bold max-w-3xl mt-8 leading-relaxed text-black/90">
+        {diagnosticoLanding.subtitle}
+      </p>
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4 mt-10">
+        <a
+          href="#formulario"
+          class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-8 py-5 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+        >
+          <span>{diagnosticoLanding.ctaLabel}</span>
+          <svg
+            class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+        <!-- Social proof on the first screen (§7) -->
+        <p class="font-mono-meta text-[11px] sm:text-xs uppercase font-bold tracking-wide text-black/80 m-0">
+          {waProof}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you get (§7): 5 bullets -->
+  <section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
+    <div class="max-w-5xl mx-auto">
+      <div class="border-b border-white/20 pb-8">
+        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          {diagnosticoLanding.receiveEyebrow}
+        </span>
+        <h2 class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+          {diagnosticoLanding.receiveTitle}
+        </h2>
+      </div>
+      <ul class="m-0 p-0 list-none mt-8 flex flex-col gap-5">
+        {
+          diagnosticoLanding.receiveItems.map((item, index) => (
+            <li class="flex items-start gap-4">
+              <span class="font-mono-meta text-sm font-bold text-[#FF4D00] shrink-0 pt-0.5">
+                [{String(index + 1).padStart(2, "0")}]
+              </span>
+              <span class="font-sans text-base sm:text-lg text-white/85 leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- What it is NOT (§7): 3 bullets -->
+  <section class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12 border-b-2 border-black">
+    <div class="max-w-5xl mx-auto">
+      <div class="border-b-2 border-black pb-8">
+        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+          {diagnosticoLanding.notEyebrow}
+        </span>
+        <h2 class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
+          {diagnosticoLanding.notTitle}
+        </h2>
+      </div>
+      <ul class="m-0 p-0 list-none mt-8 flex flex-col gap-5">
+        {
+          diagnosticoLanding.notItems.map((item) => (
+            <li class="flex items-start gap-4">
+              <svg
+                class="w-5 h-5 shrink-0 text-black mt-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="square" stroke-linejoin="miter" d="M6 6l12 12M18 6L6 18"></path>
+              </svg>
+              <span class="font-sans text-base sm:text-lg text-black/90 font-medium leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Repeated CTA + same 4-field form (§7) -->
+  <section class="relative bg-[#FF4D00] py-16 md:py-20 px-4 md:px-12">
+    <div class="max-w-3xl mx-auto flex justify-center mb-10">
+      <a
+        href="#formulario"
+        class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-8 py-5 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+      >
+        <span>{diagnosticoLanding.ctaLabel}</span>
+        <svg
+          class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </a>
+    </div>
+    <ContactFormSection lang={lang} embedded />
+  </section>
+</BaseLayout>
