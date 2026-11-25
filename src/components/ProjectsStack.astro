@@ -237,6 +237,10 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
         folder.style.setProperty("--folder-y", `${state.y.toFixed(2)}px`);
         folder.style.setProperty("--folder-scale", `${state.scale.toFixed(4)}`);
         folder.style.opacity = `${state.opacity.toFixed(3)}`;
+        // Waiting cards are transparent but still painted above the front
+        // card (increasing z-index) — without this they silently swallow
+        // clicks on its "VER CASO COMPLETO" link.
+        folder.style.pointerEvents = state.opacity > 0.01 ? "auto" : "none";
       });
     };
 
