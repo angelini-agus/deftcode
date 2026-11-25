@@ -83,6 +83,14 @@ html {
   letter-spacing: -0.02em;
 }
 
+/* Long labels and display words must never push layout past the viewport
+   on narrow screens. `anywhere` only breaks a word that cannot fit. */
+h1,
+h2,
+h3 {
+  overflow-wrap: anywhere;
+}
+
 /* Marquee keyframes */
 @keyframes kinetic-marquee {
   0% {

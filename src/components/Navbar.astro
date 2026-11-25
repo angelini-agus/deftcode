@@ -110,7 +110,9 @@ const socialAria: Record<string, string> =
         </a>
       </div>
 
-      <div class="flex items-center gap-2">
+      <!-- Below 360px the brand + language pill + menu already fill the
+           bar; the same links stay available in the drawer and footer. -->
+      <div class="hidden min-[360px]:flex items-center gap-2">
         {socialLinks.map((s) => (
           <a
             href={s.href}

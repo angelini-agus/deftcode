@@ -400,6 +400,23 @@ const organizationSchema = {
             } else {
               buildPhrase(h, text, !h.hasAttribute("data-fit-title"), spans);
             }
+            // A single long word (e.g. AUTOMATIZACIÓN on a 360px phone)
+            // must not push the page sideways. Only word wrappers that
+            // exceed their line box or the viewport lose nowrap and may
+            // break; every other word stays intact. Carousel slides sit
+            // offscreen by design and are excluded.
+            Array.prototype.slice.call(h.querySelectorAll("span")).forEach(function (w) {
+              if (w.style.whiteSpace !== "nowrap") return;
+              if (w.closest("[data-fan-track],[data-flip-runway],.marquee-container")) return;
+              var box = w.parentElement;
+              if (!box) return;
+              var avail = box.getBoundingClientRect().width;
+              var r = w.getBoundingClientRect();
+              if ((avail > 0 && r.width > avail + 1) || r.right > window.innerWidth - 1) {
+                w.style.whiteSpace = "normal";
+                w.style.overflowWrap = "anywhere";
+              }
+            });
             // Measure the NATURAL boxes of the FINAL glyphs:
             // getBoundingClientRect returns the transformed box, so
             // widths must be read before arming scale(0.25). Widths in
