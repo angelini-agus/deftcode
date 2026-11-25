@@ -186,3 +186,16 @@ turned out to be entirely dead).
   selection: checked -> dashoffset 0 + orange box + highlight + orange
   title + counter "MARCADAS 1/4", uncheck reverts all. astro check 0
   errors, build 35 pages.
+
+## Round 4b (2026-11-25): reload replays the show
+
+User: "no veo el preload ahora cuando recargo" — the session-once flag
+was an over-read of "salvo que se reinicie": a RELOAD restarts the show.
+- [x] R14 the sessionStorage flag is gone: the head script decides by
+      navigation type again — internal navigation and back/forward land
+      on static pages (preload-skip), while fresh entries AND reloads
+      play the full choreography (preloader + decode).
+- Verified by CDP on the preview port (never the user's 4321): reload
+  keeps intro-run, skip=false, the preloader visible and the h1 settles
+  45/45 after it; internal navigation stays static (skip, zero letter
+  spans). astro check 0 errors, build 35 pages.

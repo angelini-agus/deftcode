@@ -93,15 +93,10 @@ const organizationSchema = {
       (function () {
         try {
           var root = document.documentElement;
-          // Session-once choreography: the preloader + robotic entrances
-          // play on the session's FIRST fresh entry only. Internal
-          // navigation, back/forward, reduced motion and session replays
-          // land on fully static pages (preload-skip); a reload still
-          // counts as the same session (the flag lives in sessionStorage).
-          var played = false;
-          try {
-            played = sessionStorage.getItem("deft-motion-played") === "1";
-          } catch (e) {}
+          // Entrance choreography: the preloader + robotic entrances play
+          // on fresh entries AND on reloads (a reload restarts the show).
+          // Internal navigation and back/forward land on fully static
+          // pages (preload-skip); reduced motion too.
           var entry = performance.getEntriesByType("navigation")[0];
           var type = entry ? entry.type : "navigate";
           var internal =
@@ -110,15 +105,11 @@ const organizationSchema = {
           if (
             window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
             type === "back_forward" ||
-            (type === "navigate" && internal) ||
-            played
+            (type === "navigate" && internal)
           ) {
             root.classList.add("preload-skip");
             return;
           }
-          try {
-            sessionStorage.setItem("deft-motion-played", "1");
-          } catch (e) {}
           if (root.getAttribute("data-intro") === "off") {
             // Minimal pages have no preloader/handoff: fresh motion, but
             // the title observer starts immediately (no intro-run).
