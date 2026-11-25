@@ -42,17 +42,17 @@ const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECU
       </h2>
     </div>
 
-    <div class="reveal border-2 border-black bg-black text-white shadow-[8px_8px_0_#000000] overflow-x-auto">
-      <table class="w-full text-left border-collapse">
+    <div class="reveal border-2 border-black bg-black text-white shadow-[8px_8px_0_#000000]">
+      <table class="w-full table-fixed text-left border-collapse">
         <thead>
           <tr class="border-b-2 border-white/20">
-            <th scope="col" class="font-mono-meta text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-4 sm:px-6 py-4">
+            <th scope="col" class="font-mono-meta text-[10px] sm:text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-3 sm:px-6 py-4 w-[32%] sm:w-auto">
               {pricing.whatHeading}
             </th>
-            <th scope="col" class="font-mono-meta text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-4 sm:px-6 py-4">
+            <th scope="col" class="font-mono-meta text-[10px] sm:text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-3 sm:px-6 py-4 w-[38%] sm:w-auto">
               {pricing.priceHeading}
             </th>
-            <th scope="col" class="font-mono-meta text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-4 sm:px-6 py-4">
+            <th scope="col" class="font-mono-meta text-[10px] sm:text-[11px] uppercase text-[#FF4D00] font-bold tracking-widest px-3 sm:px-6 py-4 w-[30%] sm:w-auto">
               {pricing.timeframeHeading}
             </th>
           </tr>
@@ -61,9 +61,9 @@ const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECU
           {
             pricing.rows.map((row) => (
               <tr class="border-b border-white/10 last:border-b-0">
-                <td class="font-sans text-sm sm:text-base font-bold px-4 sm:px-6 py-4">{row.what}</td>
-                <td class="font-mono-meta text-sm text-[#FF4D00] font-bold px-4 sm:px-6 py-4 whitespace-nowrap">{row.price}</td>
-                <td class="font-mono-meta text-xs text-white/80 uppercase px-4 sm:px-6 py-4 whitespace-nowrap">{row.timeframe}</td>
+                <td class="font-sans text-xs sm:text-base font-bold px-3 sm:px-6 py-4 wrap-anywhere">{row.what}</td>
+                <td class="font-mono-meta text-[11px] sm:text-sm text-[#FF4D00] font-bold px-3 sm:px-6 py-4 wrap-anywhere">{row.price}</td>
+                <td class="font-mono-meta text-[10px] sm:text-xs text-white/80 uppercase px-3 sm:px-6 py-4 wrap-anywhere">{row.timeframe}</td>
               </tr>
             ))
           }

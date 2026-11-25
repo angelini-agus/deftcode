@@ -177,14 +177,14 @@ const FAN = [
 
       <div
         data-fan-track
-        class="flex gap-6 overflow-x-auto pt-3 pb-12 snap-x snap-mandatory scroll-smooth"
+        class="grid grid-cols-1 gap-6 pb-2 sm:flex sm:gap-6 sm:overflow-x-auto sm:pt-3 sm:pb-12 sm:snap-x sm:snap-mandatory scroll-smooth"
         style="scrollbar-width: none;"
       >
         {
           STAGES.map((stage) => (
             <article
               data-fan-slide
-              class="relative flex w-[calc(100%-16px)] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start flex-col items-center px-6 pb-8 pt-9 text-center bg-black text-white border-2 border-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1.5"
+              class="relative flex w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start flex-col items-center px-6 pb-8 pt-9 text-center bg-black text-white border-2 border-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1.5"
             >
               <span class="font-mono-meta text-[11px] uppercase font-bold tracking-widest text-[#FF4D00] border border-[#FF4D00] rounded-full px-4 py-1">
                 {stage.badge}
