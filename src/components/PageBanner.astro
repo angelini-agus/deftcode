@@ -74,9 +74,9 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
 
 <style>
   .page-banner {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding-block: clamp(4.5rem, 11svh, 8rem) clamp(2.5rem, 7svh, 5rem);
+    min-height: 90vh;
+    min-height: 90svh;
+    padding-block: clamp(4rem, 9svh, 6.5rem) clamp(2rem, 4svh, 3rem);
   }
 
   .page-banner__inner {
@@ -89,24 +89,24 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
   }
 
   .page-banner__eyebrow {
-    margin-bottom: clamp(0.75rem, 2.5svh, 1.5rem);
+    margin-bottom: clamp(0.5rem, 2svh, 1.25rem);
   }
 
   .page-banner__title {
-    font-size: clamp(2rem, 7cqw, 7.5rem);
-    line-height: 0.88;
+    font-size: clamp(2rem, min(9cqw, 11svh), 8.5rem);
+    line-height: 0.85;
   }
 
-  @supports (container-type: inline-size) {
+  @media (min-width: 360px) {
     .page-banner__title {
-      font-size: clamp(2rem, min(7cqw, 9svh), 7.5rem);
+      font-size: clamp(2.25rem, min(9cqw, 11svh), 8.5rem);
     }
   }
 
   .page-banner__intro {
     max-width: 48rem;
     margin-inline: auto;
-    margin-top: clamp(1rem, 3svh, 2rem);
+    margin-top: clamp(0.75rem, 2svh, 1.5rem);
   }
 
   @media (max-width: 639px) {
@@ -118,6 +118,12 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
   .page-banner__cta {
     display: flex;
     justify-content: center;
-    margin-top: clamp(1rem, 3svh, 2rem);
+    margin-top: clamp(0.75rem, 2svh, 1.5rem);
+  }
+
+  @media (max-width: 359px) {
+    .page-banner {
+      padding-top: 5.5rem;
+    }
   }
 </style>
