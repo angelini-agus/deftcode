@@ -158,6 +158,22 @@ html.js .reveal.is-revealed {
   transform: translateY(0);
 }
 
+/* Directional reveals: non-title elements slide in from their side
+   (assigned by position), center-biased ones keep the bottom rise.
+   Display titles ([data-fit-title] one-line fit, [data-decode-title]
+   CSS-sized wrapping) fade in place — the robotic decode handles their
+   letters, no slide; is-revealed lands at prep, before the letters. */
+html.js .reveal.reveal-left {
+  transform: translateX(-24px);
+}
+html.js .reveal.reveal-right {
+  transform: translateX(24px);
+}
+html.js .reveal[data-fit-title],
+html.js .reveal[data-decode-title] {
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal {
     opacity: 1;

@@ -426,7 +426,10 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     // GROWS from small (scale 0.25) to full size while its glyph cycles
     // through the narrow glitch set — letters appear small and get bigger
     // exactly as they stop glitching.
-    const GLYPHS = "10_/X";
+    // Glitch glyphs with widths close to uppercase letter boxes: narrow
+    // glyphs (1, _, /) centered in a fixed letter box read as extra air
+    // and made the settled text look like it contracted at the end.
+    const GLYPHS = "X0O#";
     const restored: HTMLElement[] = [];
 
     const buildCharSpans = (el: HTMLElement, text: string) => {

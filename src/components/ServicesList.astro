@@ -20,7 +20,7 @@ const sheetLabel = lang === "en" ? "FULL SERVICE SHEET" : "FICHA COMPLETA";
       <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
         {servicesHome.eyebrow}
       </span>
-      <h2 class="reveal font-display text-[calc((100cqw_-_4px)/8.75)] leading-[0.85] tracking-[-0.04em] text-white uppercase m-0">
+      <h2 data-fit-title class="reveal font-display text-[15vw] sm:text-[13vw] leading-[0.85] tracking-[-0.04em] text-white uppercase m-0">
         {servicesHome.title}
       </h2>
     </div>
@@ -90,31 +90,3 @@ const sheetLabel = lang === "en" ? "FULL SERVICE SHEET" : "FICHA COMPLETA";
     </div>
   </div>
 </section>
-
-<script>
-  // Fit-to-width for the section display title: scales the font so the
-  // widest text line fills the container edge to edge (minus 4px), on
-  // every viewport and for any future copy. Runs after fonts are ready
-  // and on resize, same approach as the hero headline fit.
-  const fitServiceTitle = () => {
-    const h2 = document.querySelector("#servicios h2, #services h2");
-    if (!h2 || !h2.textContent.trim()) return;
-    const target = h2.parentElement.clientWidth - 4;
-    if (target <= 0) return;
-    const range = document.createRange();
-    range.selectNodeContents(h2);
-    const measured = range.getBoundingClientRect().width;
-    if (measured <= 0) return;
-    const fs = parseFloat(getComputedStyle(h2).fontSize);
-    h2.style.fontSize = `${(fs * target) / measured}px`;
-  };
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(fitServiceTitle);
-  }
-  fitServiceTitle();
-  let serviceFitT;
-  window.addEventListener("resize", () => {
-    clearTimeout(serviceFitT);
-    serviceFitT = setTimeout(fitServiceTitle, 120);
-  });
-</script>
