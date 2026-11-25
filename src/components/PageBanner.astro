@@ -85,6 +85,7 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
     /* Wider than the rest of the site: the banner headline needs room to
        hold its line count when the viewport itself is 4K. */
     max-width: min(92vw, 1800px);
+    text-align: center;
   }
 
   .page-banner__eyebrow {
@@ -104,6 +105,7 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
 
   .page-banner__intro {
     max-width: 48rem;
+    margin-inline: auto;
     margin-top: clamp(1rem, 3svh, 2rem);
   }
 
@@ -114,6 +116,8 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
   }
 
   .page-banner__cta {
+    display: flex;
+    justify-content: center;
     margin-top: clamp(1rem, 3svh, 2rem);
   }
 </style>
