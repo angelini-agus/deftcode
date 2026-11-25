@@ -12,24 +12,26 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
 ---
 
 <header
-  class={`relative pt-32 pb-16 md:pt-40 md:pb-20 px-4 md:px-12 ${
+  class={`page-banner relative flex flex-col justify-center px-4 md:px-12 ${
     dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"
   }`}
 >
-  <div class="max-w-7xl mx-auto">
+  <div class="page-banner__inner mx-auto">
     <!-- Eyebrow: plain text, no chip box. Matches the bare section
          eyebrows used across the site (no border, no dot). -->
     <div
-      class={`reveal font-mono-meta text-xs uppercase font-bold tracking-widest mb-6 ${
+      class={`page-banner__eyebrow reveal font-mono-meta text-xs uppercase font-bold tracking-widest ${
         dark ? "text-[#FF4D00]" : "text-black"
       }`}
     >
       // {eyebrow}
     </div>
 
-    <!-- Title in Archivo Black -->
+    <!-- Title in Archivo Black. Sized from the container width (not raw vw)
+         so a 4K screen keeps the same line partition as a laptop, and capped
+         by viewport height so short screens never push the hero past one page. -->
     <h1
-      class={`reveal font-display text-4xl sm:text-6xl md:text-[7vw] lg:text-[6.2vw] uppercase tracking-[-0.04em] leading-[0.88] m-0 ${
+      class={`page-banner__title reveal font-display uppercase tracking-[-0.04em] m-0 ${
         dark ? "text-white" : "text-black"
       }`}
     >
@@ -39,7 +41,7 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
     {
       intro && (
         <p
-          class={`reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold mt-8 leading-relaxed ${
+          class={`page-banner__intro reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold leading-relaxed ${
             dark ? "text-white/80" : "text-black/90"
           }`}
         >
@@ -50,7 +52,7 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
 
     {
       ctaLabel && ctaHref && (
-        <div class="mt-8">
+        <div class="page-banner__cta">
           <a
             href={ctaHref}
             class={`group reveal inline-flex items-center gap-3 font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 py-4 rounded-full border-2 border-black transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 ${
@@ -69,3 +71,49 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
     }
   </div>
 </header>
+
+<style>
+  .page-banner {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-block: clamp(4.5rem, 11svh, 8rem) clamp(2.5rem, 7svh, 5rem);
+  }
+
+  .page-banner__inner {
+    container-type: inline-size;
+    width: 100%;
+    /* Wider than the rest of the site: the banner headline needs room to
+       hold its line count when the viewport itself is 4K. */
+    max-width: min(92vw, 1800px);
+  }
+
+  .page-banner__eyebrow {
+    margin-bottom: clamp(0.75rem, 2.5svh, 1.5rem);
+  }
+
+  .page-banner__title {
+    font-size: clamp(2rem, 7cqw, 7.5rem);
+    line-height: 0.88;
+  }
+
+  @supports (container-type: inline-size) {
+    .page-banner__title {
+      font-size: clamp(2rem, min(7cqw, 9svh), 7.5rem);
+    }
+  }
+
+  .page-banner__intro {
+    max-width: 48rem;
+    margin-top: clamp(1rem, 3svh, 2rem);
+  }
+
+  @media (max-width: 639px) {
+    .page-banner__intro {
+      line-height: 1.45;
+    }
+  }
+
+  .page-banner__cta {
+    margin-top: clamp(1rem, 3svh, 2rem);
+  }
+</style>
