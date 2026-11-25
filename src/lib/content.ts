@@ -46,7 +46,7 @@ const esNavLinks: NavLink[] = [
   { label: "SERVICIOS", href: "/#servicios" },
   { label: "PROYECTOS", href: "/proyectos/" },
   { label: "NOSOTROS", href: "/nosotros/" },
-  { label: "CONTACTO", href: "/contacto/" },
+  { label: "CONTACTO", href: "/contacto/#formulario" },
 ];
 
 const esPages: Record<string, PageContent> = {
@@ -130,7 +130,7 @@ const esHeroContent: HeroContent = {
     "0 PLAZOS INCUMPLIDOS",
   ],
   ctaLabel: "Pedir mi diagnóstico y prototipo gratis",
-  ctaHref: "/contacto/",
+  ctaHref: "/contacto/#formulario",
   ctaSecondaryLabel: "Ver caso real (-$2.8M/mes)",
   ctaSecondaryHref: "/proyectos/empresa-limpieza-rosario/",
   microcopy: "Entrevista de 1 h • Informe en 48 h • Prototipo gratis antes de firmar.",
@@ -922,7 +922,7 @@ const esComparison: ComparisonContent = {
     },
   ],
   ctaLabel: "Ver mi prototipo gratis",
-  ctaHref: "/contacto/",
+  ctaHref: "/contacto/#formulario",
 };
 
 // Home: 3-step diagnostic (§3.6).
@@ -951,7 +951,7 @@ const esHowWeWork: ProcessContent = {
     },
   ],
   ctaLabel: "Quiero mi diagnóstico gratis",
-  ctaHref: "/contacto/",
+  ctaHref: "/contacto/#formulario",
 };
 
 // /nosotros: full 4-step process (§6).
@@ -1112,7 +1112,7 @@ const esCtaContent: CtaContent = {
   headingLines: ["PRIMERO LO VES.", "DESPUÉS FIRMÁS."],
   subheading: "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso.",
   buttonLabel: "Quiero mi diagnóstico gratis",
-  buttonHref: "/contacto/",
+  buttonHref: "/contacto/#formulario",
   emailLabel: "contacto@deftcode.com.ar",
 };
 
@@ -1133,7 +1133,7 @@ const esForWho = {
   ],
   closingText: "Si te viste en la segunda tarjeta, pedí tu diagnóstico gratis.",
   ctaLabel: "Quiero mi diagnóstico gratis",
-  ctaHref: "/contacto/",
+  ctaHref: "/contacto/#formulario",
 };
 
 // ==========================================
@@ -1151,7 +1151,7 @@ const esProblems: ProblemsContent = {
       description:
         "Planillas que solo entiende una persona, datos duplicados y errores que cuestan plata. Lo unificamos en un solo sistema hecho a tu medida.",
       buttonLabel: "Quiero salir de las planillas",
-      buttonHref: "/contacto/?problema=planillas",
+      buttonHref: "/contacto/?problema=planillas#formulario",
     },
     {
       key: "consultas",
@@ -1159,27 +1159,27 @@ const esProblems: ProblemsContent = {
       description:
         "Las juntamos en un CRM con asignación por asesor. En una concesionaria centralizamos 4 canales y no se olvidó ningún lead.",
       buttonLabel: "Quiero ordenar mis consultas",
-      buttonHref: "/contacto/?problema=consultas",
+      buttonHref: "/contacto/?problema=consultas#formulario",
     },
     {
       key: "sistemas",
       title: "UN SISTEMA PARA UNA COSA, UN EXCEL PARA OTRA Y WHATSAPP PARA LA TERCERA",
       description: "Reemplazamos ese rompecabezas por un solo sistema a medida.",
       buttonLabel: "Quiero un solo sistema",
-      buttonHref: "/contacto/?problema=sistemas",
+      buttonHref: "/contacto/?problema=sistemas#formulario",
     },
     {
       key: "web",
       title: "TU WEB NO TE TRAE CLIENTES",
       description: "Landing con SEO y anuncios en Meta, con informe mensual.",
       buttonLabel: "Quiero más consultas",
-      buttonHref: "/contacto/?problema=web",
+      buttonHref: "/contacto/?problema=web#formulario",
     },
   ],
   closingText: "Cada problema tiene su solución y todas empiezan igual: con un diagnóstico gratis.",
   counterLabel: "MARCADAS {n}/4",
   ctaLabel: "Quiero mi diagnóstico gratis",
-  ctaHref: "/contacto/",
+  ctaHref: "/contacto/#formulario",
 };
 
 // ==========================================
@@ -1226,7 +1226,7 @@ const esServicesHome: ServicesHomeContent = {
       title: "EMPEZÁ ACÁ: DIAGNÓSTICO DEFT",
       line: "Entrevista de 1 hora, informe en 48 h y prototipo gratis.",
       buttonLabel: "Agendá la entrevista",
-      buttonHref: "/contacto/",
+      buttonHref: "/contacto/#formulario",
     },
     {
       index: "01",
@@ -1249,7 +1249,7 @@ const esServicesHome: ServicesHomeContent = {
       title: "LANDING + SEO + META ADS",
       line: "Web, SEO y anuncios para traer consultas todos los meses. Landing desde USD 200, lista en 1 a 2 semanas; SEO y ads en plan mensual.",
       buttonLabel: "Traéme más consultas",
-      buttonHref: "/contacto/?problema=web",
+      buttonHref: "/contacto/?problema=web#formulario",
       slug: "landing-pages",
     },
     {
@@ -1289,7 +1289,7 @@ const esPricing: PricingContent = {
 
 const esNavCta: NavCtaContent = {
   label: "Quiero mi diagnóstico gratis",
-  href: "/contacto/",
+  href: "/contacto/#formulario",
 };
 
 // ==========================================
@@ -1370,7 +1370,7 @@ const enNavLinks: NavLink[] = [
   { label: "SERVICES", href: "/en/#services" },
   { label: "PROJECTS", href: "/en/projects/" },
   { label: "ABOUT", href: "/en/about/" },
-  { label: "CONTACT", href: "/en/contact/" },
+  { label: "CONTACT", href: "/en/contact/#formulario" },
 ];
 
 const enPages: Record<string, PageContent> = {
@@ -1452,7 +1452,7 @@ const enHeroContent: HeroContent = {
     "0 MISSED DEADLINES",
   ],
   ctaLabel: "Get my diagnosis and free prototype",
-  ctaHref: "/en/contact/",
+  ctaHref: "/en/contact/#formulario",
   ctaSecondaryLabel: "See the real case (-$2.8M/mo)",
   ctaSecondaryHref: "/en/projects/empresa-limpieza-rosario/",
   microcopy: "1-hour interview • Report in 48 h • Free prototype before signing.",
@@ -2240,7 +2240,7 @@ const enComparison: ComparisonContent = {
     },
   ],
   ctaLabel: "See my free prototype",
-  ctaHref: "/en/contact/",
+  ctaHref: "/en/contact/#formulario",
 };
 
 // EN home: 3-step diagnostic (§3.6).
@@ -2269,7 +2269,7 @@ const enHowWeWork: ProcessContent = {
     },
   ],
   ctaLabel: "Get my free diagnosis",
-  ctaHref: "/en/contact/",
+  ctaHref: "/en/contact/#formulario",
 };
 
 // EN /about: full 4-step process (§6).
@@ -2426,7 +2426,7 @@ const enCtaContent: CtaContent = {
   headingLines: ["SEE IT FIRST.", "SIGN AFTER."],
   subheading: "1-hour interview, report in 48 h and a free prototype. No commitment.",
   buttonLabel: "GET MY FREE DIAGNOSIS",
-  buttonHref: "/en/contact/",
+  buttonHref: "/en/contact/#formulario",
   emailLabel: "contacto@deftcode.com.ar",
 };
 
@@ -2447,7 +2447,7 @@ const enForWho = {
   ],
   closingText: "If you saw yourself in the second card, book your free diagnosis.",
   ctaLabel: "Get my free diagnosis",
-  ctaHref: "/en/contact/",
+  ctaHref: "/en/contact/#formulario",
 };
 
 // ==========================================
@@ -2465,7 +2465,7 @@ const enProblems: ProblemsContent = {
       description:
         "Spreadsheets only one person understands, duplicated data and mistakes that cost money. We unify it all in one custom-built system.",
       buttonLabel: "Get out of the spreadsheets",
-      buttonHref: "/en/contact/?problema=planillas",
+      buttonHref: "/en/contact/?problema=planillas#formulario",
     },
     {
       key: "consultas",
@@ -2473,27 +2473,27 @@ const enProblems: ProblemsContent = {
       description:
         "We gather them in a CRM with per-rep assignment. At one dealership we centralized 4 channels and not a single lead was forgotten.",
       buttonLabel: "Sort out my inquiries",
-      buttonHref: "/en/contact/?problema=consultas",
+      buttonHref: "/en/contact/?problema=consultas#formulario",
     },
     {
       key: "sistemas",
       title: "ONE SYSTEM FOR ONE THING, AN EXCEL FOR ANOTHER AND WHATSAPP FOR THE THIRD",
       description: "We replace that puzzle with one custom-built system.",
       buttonLabel: "I want one system",
-      buttonHref: "/en/contact/?problema=sistemas",
+      buttonHref: "/en/contact/?problema=sistemas#formulario",
     },
     {
       key: "web",
       title: "YOUR WEBSITE DOESN'T BRING YOU CLIENTS",
       description: "Landing page with SEO and Meta ads, with a monthly report.",
       buttonLabel: "I want more inquiries",
-      buttonHref: "/en/contact/?problema=web",
+      buttonHref: "/en/contact/?problema=web#formulario",
     },
   ],
   closingText: "Every problem has a solution and they all start the same way: with a free diagnosis.",
   counterLabel: "{n}/4 CHECKED",
   ctaLabel: "Get my free diagnosis",
-  ctaHref: "/en/contact/",
+  ctaHref: "/en/contact/#formulario",
 };
 
 // ==========================================
@@ -2540,7 +2540,7 @@ const enServicesHome: ServicesHomeContent = {
       title: "START HERE: DEFT DIAGNOSIS",
       line: "A 1-hour interview, a 48 h report and a free prototype.",
       buttonLabel: "Book the interview",
-      buttonHref: "/en/contact/",
+      buttonHref: "/en/contact/#formulario",
     },
     {
       index: "01",
@@ -2563,7 +2563,7 @@ const enServicesHome: ServicesHomeContent = {
       title: "LANDING + SEO + META ADS",
       line: "SEO and ads to bring in inquiries every month. Landing from USD 200, ready in 1 to 2 weeks; SEO and ads on a monthly plan.",
       buttonLabel: "Bring me more inquiries",
-      buttonHref: "/en/contact/?problema=web",
+      buttonHref: "/en/contact/?problema=web#formulario",
       slug: "landing-pages",
     },
     {
@@ -2603,7 +2603,7 @@ const enPricing: PricingContent = {
 
 const enNavCta: NavCtaContent = {
   label: "Get my free diagnosis",
-  href: "/en/contact/",
+  href: "/en/contact/#formulario",
 };
 
 // ==========================================

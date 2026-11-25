@@ -19,7 +19,7 @@ if (cleanPath.startsWith("/projects/")) cleanPath = cleanPath.replace("/projects
 if (cleanPath.startsWith("/contact/")) cleanPath = cleanPath.replace("/contact/", "/contacto/");
 if (cleanPath.startsWith("/privacy/")) cleanPath = cleanPath.replace("/privacy/", "/privacidad/");
 
-const esTargetHref = cleanPath;
+const esTargetHref = cleanPath.startsWith("/contacto/") ? `${cleanPath}#formulario` : cleanPath;
 
 let enTargetPath = cleanPath;
 if (enTargetPath.startsWith("/nosotros/")) enTargetPath = enTargetPath.replace("/nosotros/", "/about/");
@@ -27,7 +27,8 @@ if (enTargetPath.startsWith("/proyectos/")) enTargetPath = enTargetPath.replace(
 if (enTargetPath.startsWith("/contacto/")) enTargetPath = enTargetPath.replace("/contacto/", "/contact/");
 if (enTargetPath.startsWith("/privacidad/")) enTargetPath = enTargetPath.replace("/privacidad/", "/privacy/");
 
-const enTargetHref = enTargetPath === "/" ? "/en/" : `/en${enTargetPath}`;
+const enTargetBase = enTargetPath === "/" ? "/en/" : `/en${enTargetPath}`;
+const enTargetHref = enTargetBase.startsWith("/en/contact/") ? `${enTargetBase}#formulario` : enTargetBase;
 
 const homeHref = lang === "en" ? "/en/" : "/";
 
