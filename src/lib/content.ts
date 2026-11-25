@@ -1292,11 +1292,6 @@ const esNavCta: NavCtaContent = {
   href: "/contacto/",
 };
 
-const esFooterContent: FooterContent = {
-  offerLine: "Diagnóstico gratis. Prototipo gratis. Precio cerrado.",
-  locationLine: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
-};
-
 // ==========================================
 // 4-FIELD DIAGNOSTIC FORM (§7)
 // ==========================================
@@ -2611,11 +2606,6 @@ const enNavCta: NavCtaContent = {
   href: "/en/contact/",
 };
 
-const enFooterContent: FooterContent = {
-  offerLine: "Free diagnosis. Free prototype. Closed price.",
-  locationLine: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
-};
-
 // ==========================================
 // 4-FIELD DIAGNOSTIC FORM (§7)
 // ==========================================
@@ -2699,7 +2689,6 @@ export const getContent = (lang: Lang = "es") => {
     moreSoftware: isEn ? enMoreSoftware : esMoreSoftware,
     pricing: isEn ? enPricing : esPricing,
     navCta: isEn ? enNavCta : esNavCta,
-    footerContent: isEn ? enFooterContent : esFooterContent,
     contactForm: isEn ? enContactForm : esContactForm,
     diagnosticoLanding: isEn ? enDiagnosticoLanding : esDiagnosticoLanding,
     socialLinks: esSocialLinks,
@@ -2737,7 +2726,6 @@ export const featuredCase = esFeaturedCase;
 export const moreSoftware = esMoreSoftware;
 export const pricing = esPricing;
 export const navCta = esNavCta;
-export const footerContent = esFooterContent;
 export const contactForm = esContactForm;
 export const diagnosticoLanding = esDiagnosticoLanding;
 export const socialLinks = esSocialLinks;

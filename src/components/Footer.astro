@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { lang = "es" } = Astro.props;
-const { socialLinks, footerContent } = getContent(lang);
+const { socialLinks } = getContent(lang);
 const currentYear = new Date().getFullYear();
 
 const privacyHref = lang === "en" ? "/en/privacy/" : "/privacidad/";
@@ -63,15 +63,5 @@ const topLabel = lang === "en" ? "TOP" : "ARRIBA";
         </svg>
       </a>
     </div>
-  </div>
-
-  <!-- Offer + location lines (§2) -->
-  <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-2">
-    <p class="font-mono-meta text-[12px] uppercase font-bold text-[#FF4D00] tracking-tight m-0">
-      {footerContent.offerLine}
-    </p>
-    <p class="font-mono-meta text-[12px] uppercase text-white/70 tracking-tight m-0">
-      {footerContent.locationLine}
-    </p>
   </div>
 </footer>
