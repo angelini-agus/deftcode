@@ -33,7 +33,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
     <div class="max-w-7xl mx-auto pt-20 pb-10">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
         <div>
-          <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+          <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
             {eyebrow}
           </span>
           <h2 data-fit-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-black uppercase tracking-[-0.04em] leading-[0.88]">
@@ -91,7 +91,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                     <!-- Metrics Badges -->
                     <div class="flex flex-wrap gap-2 pt-1">
                       {item.metrics.map((metric) => (
-                        <div class="bg-[#FF4D00] text-black font-mono-meta text-xs font-bold px-3 py-1 uppercase tracking-tight">
+                        <div data-count-up class="bg-[#FF4D00] text-black font-mono-meta text-xs font-bold px-3 py-1 uppercase tracking-tight">
                           {metric}
                         </div>
                       ))}
@@ -144,7 +144,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                           width={1280}
                           height={800}
                           quality={90}
-                          class="w-full h-44 sm:h-52 md:h-60 object-cover object-top group-hover:brightness-105 group-hover:scale-[1.02] transition-transform duration-300"
+                          class="img-reveal w-full h-44 sm:h-52 md:h-60 object-cover object-top group-hover:brightness-105 group-hover:scale-[1.02] transition-transform duration-300"
                           loading="lazy"
                         />
                         <span

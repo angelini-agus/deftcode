@@ -127,9 +127,9 @@ const problems = content.problems;
              message is no-working-with-anyone, so the orange card
              carries the exclusions first and the ghost card answers with
              who the work IS for. -->
-        <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12">
+        <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12" data-stagger="90">
           <!-- NO card (first): black face, white copy, orange crosses -->
-          <div class="bg-black text-white border-2 border-white/20 p-8">
+          <div class="reveal bg-black text-white border-2 border-white/20 p-8">
             <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
               {forWho.noLabel}
             </span>

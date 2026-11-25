@@ -228,7 +228,7 @@ const organizationSchema = {
 
         // --- 2. Directional reveals (non-title elements) ---
         var revealables = Array.prototype.slice
-          .call(document.querySelectorAll(".reveal"))
+          .call(document.querySelectorAll(".reveal, .img-reveal"))
           .filter(function (el) {
             return !el.hasAttribute("data-fit-title") && !el.hasAttribute("data-decode-title");
           });
@@ -237,7 +237,19 @@ const organizationSchema = {
             el.classList.add("is-revealed");
           });
         } else {
+          // Staggered groups (cards, numbered rows): every reveal child
+          // gets an incremental transition-delay instead of its own IO
+          // timing, and keeps the plain rise (no directional slide).
+          Array.prototype.slice.call(document.querySelectorAll("[data-stagger]")).forEach(function (group) {
+            var step = parseInt(group.getAttribute("data-stagger"), 10) || 70;
+            Array.prototype.slice.call(group.children).forEach(function (k, i) {
+              if (k.classList.contains("reveal") || k.classList.contains("img-reveal")) {
+                k.style.transitionDelay = i * step + "ms";
+              }
+            });
+          });
           revealables.forEach(function (el) {
+            if (el.classList.contains("img-reveal") || el.closest("[data-stagger]")) return;
             var r = el.getBoundingClientRect();
             var mid = r.left + r.width / 2;
             if (mid < window.innerWidth * 0.35) el.classList.add("reveal-left");
@@ -246,10 +258,13 @@ const organizationSchema = {
           var io = new IntersectionObserver(
             function (entries) {
               entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("is-revealed");
-                  io.unobserve(entry.target);
-                }
+                if (!entry.isIntersecting) return;
+                io.unobserve(entry.target);
+                // Deck folders / hidden fan panels: reveal only when the
+                // element is actually visible (ancestor opacity >= 0.5).
+                whenActuallyVisible(entry.target as HTMLElement, function (el) {
+                  el.classList.add("is-revealed");
+                });
               });
             },
             { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
@@ -414,8 +429,10 @@ const organizationSchema = {
         // folders per scroll segment and the process fan hides inactive
         // panels): a heading only decodes once it is actually seen.
         function effectiveVisibility(el: HTMLElement): number {
+          // Walk ANCESTORS only: the element's own opacity is the
+          // reveal's hidden state (0 by design) and must not veto itself.
           var o = 1;
-          var n: HTMLElement | null = el;
+          var n: HTMLElement | null = el.parentElement;
           while (n && n !== document.documentElement) {
             var cs = getComputedStyle(n);
             if (cs.display === "none" || cs.visibility === "hidden") return 0;
@@ -447,25 +464,9 @@ const organizationSchema = {
                 if (!p || !p.spans || p.el.dataset.decoded) return;
                 p.el.dataset.decoded = "1";
                 const target = p;
-                var fire = function () {
+                whenActuallyVisible(target.el, function (el) {
                   decode(target);
-                };
-                // Deck folders / hidden panels: wait (rAF polling) until
-                // the heading is actually visible before decoding.
-                if (effectiveVisibility(target.el) >= 0.5) {
-                  fire();
-                  return;
-                }
-                var poll = function () {
-                  if (effectiveVisibility(target.el) >= 0.5) {
-                    fire();
-                    return;
-                  }
-                  requestAnimationFrame(function () {
-                    setTimeout(poll, 100);
-                  });
-                };
-                poll();
+                });
               });
             },
             { threshold: 0.2 },
@@ -473,6 +474,83 @@ const organizationSchema = {
           prepared.forEach(function (p) {
             titleIO.observe(p.el);
           });
+        }
+
+        // Shared gate: run `fire` once the heading/element is really
+        // seen (geometric intersect + effective ancestor opacity >= 0.5),
+        // polling via rAF for scroll-faded containers (deck folders,
+        // process fan panels).
+        function whenActuallyVisible(el: HTMLElement, fire: (el: HTMLElement) => void) {
+          if (effectiveVisibility(el) >= 0.5) {
+            fire(el);
+            return;
+          }
+          var poll = function () {
+            if (effectiveVisibility(el) >= 0.5) {
+              fire(el);
+              return;
+            }
+            requestAnimationFrame(function () {
+              setTimeout(poll, 100);
+            });
+          };
+          poll();
+        }
+
+        // --- Count-up (the standout numbers): numeric tokens inside
+        // [data-count-up] rise from 0 to their value once, when seen.
+        // Plain text under reduced motion; hidden containers wait via
+        // the shared gate. ---
+        function animateCountUp(el: HTMLElement) {
+          if (el.dataset.counted) return;
+          el.dataset.counted = "1";
+          var parts = el.textContent.split(/(-?\d+(?:[.,]\d+)?)/);
+          if (parts.length === 1) return;
+          el.textContent = "";
+          var nums: { node: HTMLElement; raw: string; target: number }[] = [];
+          parts.forEach(function (t: string) {
+            if (/^-?\d/.test(t)) {
+              var s = document.createElement("span");
+              s.textContent = t;
+              el.appendChild(s);
+              nums.push({ node: s, raw: t, target: parseFloat(t.replace(",", ".")) });
+            } else if (t) {
+              el.appendChild(document.createTextNode(t));
+            }
+          });
+          var t0 = performance.now();
+          var dur = 1100;
+          var frame = function (now: number) {
+            var k = Math.min(1, (now - t0) / dur);
+            var eased = 1 - Math.pow(1 - k, 3);
+            nums.forEach(function (n) {
+              var decimals = (n.raw.split(/[.,]/)[1] || "").length;
+              n.node.textContent = (n.target * eased).toFixed(decimals);
+            });
+            if (k < 1) requestAnimationFrame(frame);
+            else nums.forEach(function (n) {
+              n.node.textContent = n.raw;
+            });
+          };
+          requestAnimationFrame(frame);
+        }
+
+        if (hasIO && !reduced) {
+          var countIO = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                countIO.unobserve(entry.target);
+                whenActuallyVisible(entry.target as HTMLElement, animateCountUp);
+              });
+            },
+            { threshold: 0.4 },
+          );
+          Array.prototype.slice
+            .call(document.querySelectorAll("[data-count-up]"))
+            .forEach(function (el) {
+              countIO.observe(el);
+            });
         }
 
         function boot() {

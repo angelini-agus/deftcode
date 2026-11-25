@@ -35,7 +35,7 @@ const waProof = diagnosticoLanding.proofLine;
         {diagnosticoLanding.h1}
       </h1>
 
-      <p class="font-sans text-base sm:text-xl md:text-2xl font-bold max-w-3xl mt-8 leading-relaxed text-black/90">
+      <p class="reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold max-w-3xl mt-8 leading-relaxed text-black/90">
         {diagnosticoLanding.subtitle}
       </p>
 
@@ -75,10 +75,10 @@ const waProof = diagnosticoLanding.proofLine;
           {diagnosticoLanding.receiveTitle}
         </h2>
       </div>
-      <ul class="m-0 p-0 list-none mt-8 flex flex-col gap-5">
+      <ul class="m-0 p-0 list-none mt-8 flex flex-col gap-5" data-stagger="70">
         {
           diagnosticoLanding.receiveItems.map((item, index) => (
-            <li class="flex items-start gap-4">
+            <li class="reveal flex items-start gap-4">
               <span class="font-mono-meta text-sm font-bold text-[#FF4D00] shrink-0 pt-0.5">
                 [{String(index + 1).padStart(2, "0")}]
               </span>
@@ -101,10 +101,10 @@ const waProof = diagnosticoLanding.proofLine;
           {diagnosticoLanding.notTitle}
         </h2>
       </div>
-      <ul class="m-0 p-0 list-none mt-8 flex flex-col gap-5">
+      <ul class="m-0 p-0 list-none mt-8 flex flex-col gap-5" data-stagger="70">
         {
           diagnosticoLanding.notItems.map((item) => (
-            <li class="flex items-start gap-4">
+            <li class="reveal flex items-start gap-4">
               <svg
                 class="w-5 h-5 shrink-0 text-black mt-1"
                 fill="none"

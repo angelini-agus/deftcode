@@ -22,7 +22,7 @@ const teamHref = lang === "en" ? "/en/about/" : "/nosotros/";
 <section id="equipo-teaser" class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
   <div class="max-w-7xl mx-auto">
     <div class="border-b border-white/20 pb-8">
-      <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+      <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
         {eyebrow}
       </span>
       <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
@@ -31,10 +31,10 @@ const teamHref = lang === "en" ? "/en/about/" : "/nosotros/";
     </div>
 
     <!-- Member cards -->
-    <div class="grid gap-4 sm:grid-cols-2 mt-10 md:mt-12">
+    <div class="grid gap-4 sm:grid-cols-2 mt-10 md:mt-12" data-stagger="90">
       {
         team.map((member) => (
-          <div class="border-2 border-white/20 p-6 bg-white/[0.02]">
+          <div class="reveal border-2 border-white/20 p-6 bg-white/[0.02]">
             <h3 class="font-display text-xl text-white uppercase tracking-tight m-0">{member.name}</h3>
             <p class="font-mono-meta text-xs text-[#FF4D00] font-bold uppercase mt-1 m-0">{member.role}</p>
             <p class="text-white/75 font-sans text-sm leading-relaxed mt-3 m-0">{member.bio}</p>

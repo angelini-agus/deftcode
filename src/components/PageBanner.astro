@@ -18,7 +18,7 @@ const { eyebrow, title, intro, dark = false } = Astro.props;
     <!-- Eyebrow: plain text, no chip box. Matches the bare section
          eyebrows used across the site (no border, no dot). -->
     <div
-      class={`font-mono-meta text-xs uppercase font-bold tracking-widest mb-6 ${
+      class={`reveal font-mono-meta text-xs uppercase font-bold tracking-widest mb-6 ${
         dark ? "text-white" : "text-black"
       }`}
     >
@@ -37,7 +37,7 @@ const { eyebrow, title, intro, dark = false } = Astro.props;
     {
       intro && (
         <p
-          class={`font-sans text-base sm:text-xl md:text-2xl font-bold max-w-3xl mt-8 leading-relaxed ${
+          class={`reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold max-w-3xl mt-8 leading-relaxed ${
             dark ? "text-white/80" : "text-black/90"
           }`}
         >

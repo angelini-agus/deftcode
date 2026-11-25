@@ -18,23 +18,23 @@ const intro = lang === "en" ? "OUR TECHNICAL AND ETHICAL ENGINEERING STANDARD." 
   <div class="max-w-7xl mx-auto">
     <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
       <div>
-        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+        <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
           {eyebrow}
         </span>
         <h2 data-decode-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
           {title}
         </h2>
       </div>
-      <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
+      <p class="reveal reveal-late font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
         {intro}
       </p>
     </div>
 
     <!-- Grid of Manifesto Principles -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-stagger="90">
       {
         manifesto.map((item) => (
-          <article class="border-2 border-white/20 p-8 flex flex-col justify-between hover:border-[#FF4D00] transition-colors duration-200 bg-white/[0.02]">
+          <article class="reveal border-2 border-white/20 p-8 flex flex-col justify-between hover:border-[#FF4D00] transition-colors duration-200 bg-white/[0.02]">
             <div>
               <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
                 <span class="font-mono-meta text-2xl font-bold text-[#FF4D00]">

@@ -111,3 +111,38 @@ must feel like the hero intro ("robótico medio bugueado"), not plain typing.
   contacto, 9 privacidad, 10 EN case) + deck stepwise walk (6/6 folders
   settled) + frames: glitch glyphs visible mid-decode at /contacto, CTA
   bespoke composition intact after settle.
+
+## Round 3 (2026-11-25): the essential non-heading motion (user picked all 6)
+
+- [x] R5 staggered groups: [data-stagger="<step>"] containers assign an
+      incremental transition-delay to their reveal children (cards 90ms,
+      numbered rows 70ms); stagger children keep the plain rise (no
+      directional slide). Applied to services rows, WhyDeftcode columns,
+      ForWho cards, HowWeWork steps/guarantees, Manifesto items, team
+      cards (Teaser + Section), FAQ rows, pricing table, diagnostico
+      receive/not rows (ES+EN), directorio cards (ES+EN).
+- [x] R6 count-up: [data-count-up] numeric tokens rise 0->value once
+      (ease-out cubic 1.1s, decimals and exact final preserved) with the
+      shared visibility gate. Applied to the featured-case proof strip
+      and metric rows/panels (ES+EN mirrors) and the deck folder metric
+      chips. The hero renders no stats (verified), so no hero changes.
+- [x] R7 eyebrows: section eyebrows reveal with the positional slide
+      (left edge -> reveal-left) right before their titles decode.
+- [x] R8 late paragraphs: .reveal-late (260ms delay) on section intro
+      paragraphs so the body follows the decoded title (PageBanner,
+      Manifesto, Team, proyectos banner, diagnostico subtitle, CTA
+      subheading).
+- [x] R9 image reveal: .img-reveal (opacity + scale 1.02->1 via
+      transform, 500ms) on the deck folder screenshots; revealed with
+      the shared visibility gate per folder.
+- [x] R10 the shared visibility gate now walks ANCESTORS ONLY: the
+      element's own opacity is the reveal's hidden state (0 by design)
+      and was vetoing itself (deck folder images never revealed —
+      measured, fixed).
+- Verified: astro check 0/47, build 35 pages; stagger delays assigned
+  (home rows 0/90/180ms, stats cells 0/90/180/270, diag rows 0/70ms,
+  nosotros 4 groups); count-up settles at exact values on all 6 deck
+  folders + proof strip; img-reveal opacity 1 on all 6 folders after the
+  visibility fix; contacto eyebrow+paragraph revealed and h1 settled
+  66/66 after the preloader. Console: only /_vercel/insights/script.js
+  404s (Vercel-only asset, production-only).

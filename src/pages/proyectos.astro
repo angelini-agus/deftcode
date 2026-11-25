@@ -43,18 +43,18 @@ import ScreenLightbox from "../components/ScreenLightbox.astro";
             TODOS LOS PROYECTOS
           </h2>
         </div>
-        <p class="font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
+        <p class="reveal reveal-late font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
           SELECCIONA CUALQUIER SISTEMA PARA EXPLORAR SU FICHA COMPLETA.
         </p>
       </div>
 
       <!-- 3-Column Brutalist Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-stagger="90">
         {
           projects.map((item, index) => (
             <a
               href={`/proyectos/${item.slug}/`}
-              class="group border-2 border-white/20 bg-white/[0.02] flex flex-col justify-between hover:border-[#FF4D00] transition-all duration-300 hover:translate-y-[-4px] overflow-hidden"
+              class="reveal group border-2 border-white/20 bg-white/[0.02] flex flex-col justify-between hover:border-[#FF4D00] transition-all duration-300 hover:translate-y-[-4px] overflow-hidden"
             >
               <!-- Card Top: Screenshot Thumbnail Frame -->
               <div>

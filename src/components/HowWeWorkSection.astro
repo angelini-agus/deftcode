@@ -26,7 +26,7 @@ const colsClass =
 <section class={`relative ${dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"} py-20 px-4 md:px-12`}>
   <div class="max-w-7xl mx-auto">
     <div class={`border-b-2 ${dark ? "border-white/20" : "border-black"} pb-8 mb-12`}>
-      <span class={`font-mono-meta text-xs uppercase font-bold tracking-widest block mb-2 ${dark ? "text-[#FF4D00]" : "text-black"}`}>
+      <span class={`reveal font-mono-meta text-xs uppercase font-bold tracking-widest block mb-2 ${dark ? "text-[#FF4D00]" : "text-black"}`}>
         {process.eyebrow}
       </span>
       <h2 data-fit-title class={`reveal font-display text-4xl sm:text-5xl uppercase tracking-[-0.04em] leading-[0.9] ${dark ? "text-white" : "text-black"}`}>
@@ -35,11 +35,11 @@ const colsClass =
     </div>
 
     <!-- Steps Grid -->
-    <div class={`grid grid-cols-1 sm:grid-cols-2 ${colsClass} gap-6`}>
+    <div class={`grid grid-cols-1 sm:grid-cols-2 ${colsClass} gap-6`} data-stagger="90">
       {
         process.steps.map((step) => (
           <article
-            class={`p-6 md:p-8 border-2 flex flex-col justify-between ${
+            class={`reveal p-6 md:p-8 border-2 flex flex-col justify-between ${
               dark
                 ? "bg-white/[0.02] border-white/20 hover:border-[#FF4D00] transition-colors"
                 : "bg-black text-white border-black shadow-[8px_8px_0_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform"
