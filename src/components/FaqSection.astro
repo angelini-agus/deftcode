@@ -25,17 +25,13 @@ const faqSchema = {
 
 const faqEyebrow = lang === "en" ? "// DIRECT ANSWERS" : "// RESPUESTAS DIRECTAS";
 const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECUENTES";
-const faqIntro =
-  lang === "en"
-    ? "DIRECT ANSWERS ON COSTS, TIMELINES AND RISK."
-    : "RESPUESTAS DIRECTAS SOBRE COSTOS, PLAZOS Y RIESGOS.";
 ---
 
 <!-- Pricing reference table (§3.11): its own section, always rendered
      before the FAQ by this component (home, /contacto and EN mirrors).
      Unresolved figures stay as [COMPLETAR] literals per the placeholder
      discipline. -->
-<section id="precios" class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12 border-b-2 border-black">
+<section id="precios" class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12">
   <div class="max-w-7xl mx-auto">
     <div class="border-b-2 border-black pb-8 mb-12">
       <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
@@ -46,7 +42,7 @@ const faqIntro =
       </h2>
     </div>
 
-    <div class="reveal max-w-4xl mx-auto border-2 border-black bg-black text-white shadow-[8px_8px_0_#000000] overflow-x-auto">
+    <div class="reveal border-2 border-black bg-black text-white shadow-[8px_8px_0_#000000] overflow-x-auto">
       <table class="w-full text-left border-collapse">
         <thead>
           <tr class="border-b-2 border-white/20">
@@ -98,7 +94,7 @@ const faqIntro =
     </div>
 
     <!-- Accordion List -->
-    <div class="divide-y divide-white/20 max-w-4xl mx-auto" data-stagger="70">
+    <div class="divide-y divide-white/20" data-stagger="70">
       {
         faqList.map((item, index) => (
           <details class="reveal group py-6 cursor-pointer">

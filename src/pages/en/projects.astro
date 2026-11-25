@@ -24,6 +24,9 @@ const { projects } = content;
     eyebrow={page.eyebrow}
     title={page.h1}
     intro={page.intro}
+    dark
+    ctaLabel="Get my free audit"
+    ctaHref="/en/contact/"
   />
 
   <!-- Social proof + client testimonial, before the deck -->
@@ -36,18 +39,13 @@ const { projects } = content;
   <!-- Directory of Project Cases (Links directly to each dedicated route) -->
   <section class="relative bg-black text-white py-20 px-4 md:px-12">
     <div class="max-w-7xl mx-auto">
-      <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
-        <div>
-          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-            // CASE DIRECTORY
-          </span>
-          <h2 data-decode-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
-            ALL CASE STUDIES
-          </h2>
-        </div>
-        <p class="reveal reveal-late font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
-          SELECT ANY PRODUCTION DEPLOYMENT TO EXPLORE ITS ARCHITECTURE.
-        </p>
+      <div class="border-b border-white/20 pb-8 mb-12">
+        <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          // CASE DIRECTORY
+        </span>
+        <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+          ALL CASE STUDIES
+        </h2>
       </div>
 
       <!-- 3-Column Brutalist Cards Grid -->
@@ -60,19 +58,19 @@ const { projects } = content;
             >
               <!-- Card Top: Screenshot Thumbnail Frame -->
               <div>
-                <div class="flex justify-between items-center text-[11px] font-mono-meta text-white/70 px-4 py-2 bg-neutral-900 border-b border-white/20">
+                <div class="flex justify-between items-center text-[11px] font-mono-meta text-white/70 px-4 py-2 bg-black border-b border-white/20">
                   <span class="font-bold text-[#FF4D00]">[{String(index + 1).padStart(2, "0")}] {item.category}</span>
                   <span class="text-white/50">{item.year}</span>
                 </div>
 
                 {item.imageKey && projectAssets[item.imageKey] && (
-                  <div class="relative bg-neutral-950 overflow-hidden aspect-[16/10]">
+                  <div class="relative bg-black overflow-hidden aspect-[16/10]">
                     <Image
                       src={projectAssets[item.imageKey].main}
                       alt={projectAssets[item.imageKey].altEn}
                       width={600}
                       height={375}
-                      class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      class="img-reveal w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 )}

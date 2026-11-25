@@ -30,12 +30,12 @@ import type {
 // ==========================================
 
 const esSiteMeta: SiteMeta = {
-  title: "Software a medida en Rosario | Diagnóstico gratis | Deftcode",
+  title: "Software a medida en Rosario | Diagnóstico gratis | DEFTCODE®",
   description:
     "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
   siteUrl: "https://deftcode.com.ar",
   ogImage: "/og-deftcode.png",
-  author: "Deftcode Studio",
+  author: "DEFTCODE®",
   location: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
   tagline: "Software a gran velocidad.",
   foundedYear: 2026,
@@ -51,14 +51,14 @@ const esNavLinks: NavLink[] = [
 
 const esPages: Record<string, PageContent> = {
   home: {
-    title: "Software a medida en Rosario | Diagnóstico gratis | Deftcode",
+    title: "Software a medida en Rosario | Diagnóstico gratis | DEFTCODE®",
     description:
       "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
     eyebrow: "ROSARIO, ARGENTINA",
     h1: "TU SISTEMA A MEDIDA",
   },
   nosotros: {
-    title: "Quiénes somos: desarrolladores que entienden de negocios | Deftcode",
+    title: "Quiénes somos: desarrolladores que entienden de negocios | DEFTCODE®",
     description:
       "Conocé a Agustín y Franco, el método de diagnóstico gratis y las garantías por escrito con las que trabajamos.",
     eyebrow: "NOSOTROS",
@@ -67,7 +67,7 @@ const esPages: Record<string, PageContent> = {
       "Somos gente de sistemas que entiende de negocios. Primero entendemos cómo trabajás, después te mostramos un prototipo y recién ahí firmás. Entregamos en semanas, no en semestres.",
   },
   proyectos: {
-    title: "Casos reales: sistemas, CRM y landings en producción | Deftcode",
+    title: "Casos reales: sistemas, CRM y landings en producción | DEFTCODE®",
     description:
       "Mirá qué ahorró, ordenó y vendió cada sistema que construimos: ERP, CRM, landings y portales en producción.",
     eyebrow: "CASOS REALES",
@@ -76,7 +76,7 @@ const esPages: Record<string, PageContent> = {
       "Cada caso muestra qué problema tenía el cliente, cuánto tardamos y qué cambió. Los tuyos pueden empezar con un diagnóstico gratis.",
   },
   servicios: {
-    title: "Sistemas, CRM, ERP y landings a medida | Deftcode",
+    title: "Sistemas, CRM, ERP y landings a medida | DEFTCODE®",
     description:
       "Siempre empezamos con un diagnóstico gratis. Después elegís qué construir, con precio cerrado y fecha en el contrato.",
     eyebrow: "SERVICIOS",
@@ -85,7 +85,7 @@ const esPages: Record<string, PageContent> = {
       "Siempre empezamos con un diagnóstico gratis. Después elegís qué construir, con precio cerrado y fecha en el contrato.",
   },
   contacto: {
-    title: "Diagnóstico gratis para tu empresa | Deftcode",
+    title: "Diagnóstico gratis para tu empresa | DEFTCODE®",
     description:
       "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
     eyebrow: "DIAGNÓSTICO GRATIS",
@@ -94,7 +94,7 @@ const esPages: Record<string, PageContent> = {
       "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   diagnostico: {
-    title: "Diagnóstico gratis para tu empresa | Deftcode",
+    title: "Diagnóstico gratis para tu empresa | DEFTCODE®",
     description:
       "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
     eyebrow: "DIAGNÓSTICO GRATIS",
@@ -103,9 +103,9 @@ const esPages: Record<string, PageContent> = {
       "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   privacidad: {
-    title: "POLÍTICA DE PRIVACIDAD - DEFTCODE",
+    title: "POLÍTICA DE PRIVACIDAD - DEFTCODE®",
     description:
-      "Compromiso de privacidad de Deftcode: sin cookies invasivas de terceros, analítica anónima y respeto total por tus datos personales.",
+      "Compromiso de privacidad de DEFTCODE®: sin cookies invasivas de terceros, analítica anónima y respeto total por tus datos personales.",
     eyebrow: "LEGAL & COMPLIANCE",
     h1: "PRIVACIDAD TRANSPARENTE.",
   },
@@ -119,7 +119,7 @@ const esHeroContent: HeroContent = {
   headlineSub: "TU SISTEMA EN PRODUCCIÓN EN 4 A 6 SEMANAS. DESARROLLO A MEDIDA.",
   subtitle:
     "Auditamos tu operación gratis y te mostramos un prototipo funcionando con tus datos antes de que pagues un peso. Así una empresa de Rosario ahorra $2.8M ARS por mes en sueldos.",
-  kicker: "VELOCIDAD DE STARTUP. ARQUITECTURA DE INGENIERÍA. CERO RIESGO.",
+  kicker: "EN SEMANAS. PRECIO CERRADO. EL CÓDIGO ES TUYO.",
   badge: "ROSARIO, ARGENTINA // PYMES DE TODO EL PAÍS",
   locationText: "ROSARIO, ARGENTINA // TRABAJAMOS CON PYMES DE TODO EL PAÍS",
   roleText: "ERP A MEDIDA // CRM // AUTOMATIZACIÓN CON IA // LANDINGS QUE CONVIERTEN",
@@ -247,16 +247,16 @@ const esServices: ServiceItem[] = [
     index: "03",
     title: "LANDING PAGES",
     description:
-      "Landing pages de carga instantánea: cero tiempo de bloqueo, métricas en verde y SEO técnico de serie.",
+      "Landings que cargan rápido, con SEO técnico y código propio.",
     kicker: "TU PRIMER PUNTO DE VENTA DIGITAL",
     intro:
-      "Tu primer punto de venta digital: una página que carga al instante, se posiciona orgánicamente y convierte la visita.",
+      "Una página que carga rápido, aparece en Google y te trae consultas.",
     modules: [
       {
         heading: "VELOCIDAD",
         items: [
-          "Páginas estáticas: carga instantánea, cero tiempo de bloqueo.",
-          "Rendimiento en verde, que además suma para el ranking SEO.",
+          "Páginas estáticas: cargan rápido y sin bloqueos.",
+          "Eso también ayuda a posicionar en Google.",
           "Diseño a medida editorial-brutalista.",
         ],
       },
@@ -276,7 +276,7 @@ const esServices: ServiceItem[] = [
       "Una página que carga antes de que el cliente piense en volver atrás.",
       "Código 100% propio, sin plataformas genéricas detrás.",
     ],
-    tags: ["CARGA INSTANTÁNEA", "SEO TÉCNICO", "MÉTRICAS EN VERDE", "CONVERSIÓN"],
+    tags: ["CARGA RÁPIDA", "SEO TÉCNICO", "GOOGLE", "CONSULTAS"],
   },
   {
     id: "automatizacion-ia",
@@ -312,7 +312,7 @@ const esServices: ServiceItem[] = [
     value: [
       "El trabajo manual de pasar datos de un sistema a otro desaparece.",
       "Respuestas más rápidas al cliente, todos los días.",
-      "Desarrollo puntual de alto impacto, sin levantar un sistema nuevo.",
+      "Un trabajo puntual, sin levantar un sistema nuevo.",
     ],
     tags: ["INTEGRACIONES", "WHATSAPP", "AFIP / ARCA", "IA"],
   },
@@ -352,7 +352,7 @@ const esProjects: ProjectItem[] = [
         after: "Mapa en vivo con alertas automáticas de inasistencia",
       },
     ],
-    solutionTitle: "Arquitectura web de trazabilidad total y liquidación inmediata",
+    solutionTitle: "Registro de asistencia y sueldos calculados al momento.",
     solution:
       "Plataforma web donde el personal registra entrada y salida validada por código QR y GPS en su celular, liquidando sueldos en minutos y alertando inasistencias en un mapa en tiempo real.",
     solutionFeatures: [
@@ -434,7 +434,7 @@ const esProjects: ProjectItem[] = [
         after: "Una sola plataforma en la nube con toda la operación del estudio",
       },
     ],
-    solutionTitle: "Ecosistema jurídico integral con validación de fuentes en tiempo real",
+    solutionTitle: "Expedientes, plazos y normas vigentes en un solo lugar.",
     solution:
       "Base unificada en la nube con alertas automáticas de caducidad procesal, liquidación de honorarios multimoneda y motor de IA con verificación estricta de fuentes oficiales.",
     solutionFeatures: [
@@ -509,7 +509,7 @@ const esProjects: ProjectItem[] = [
       },
       {
         before: "Turnos asignados exclusivamente por llamada telefónica en horario administrativo",
-        after: "Solicitud directa de las familias desde el portal y confirmación en 1 clic",
+        after: "Solicitud directa de las familias desde el portal; la clínica confirma en el panel.",
       },
       {
         before: "Dirección física y datos sensibles expuestos públicamente",
@@ -518,7 +518,7 @@ const esProjects: ProjectItem[] = [
     ],
     solutionTitle: "ERP clínico modular con API dedicada y portal de familias",
     solution:
-      "Plataforma clínica reactiva con buscador instantáneo de pacientes, curvas de crecimiento percentilares automáticas y emisión de órdenes firmadas digitalmente.",
+      "Plataforma clínica con búsqueda rápida de pacientes, curvas de crecimiento automáticas y órdenes firmadas digitalmente.",
     solutionFeatures: [
       {
         title: "Cumplimiento normativo Ley 26.529",
@@ -528,7 +528,7 @@ const esProjects: ProjectItem[] = [
       {
         title: "Agenda de turnos sin fricción telefónica",
         description:
-          "Las familias consultan disponibilidad real y solicitan citas desde el portal; la clínica aprueba con un clic y actualiza la agenda instantáneamente.",
+          "Las familias consultan disponibilidad real y solicitan citas desde el portal; la clínica aprueba en el panel y actualiza la agenda al momento.",
       },
       {
         title: "Superficies diferenciadas por rol",
@@ -595,12 +595,12 @@ const esProjects: ProjectItem[] = [
       },
       {
         before: "Búsquedas lentas filtrando filas manualmente",
-        after: "Filtros instantáneos por modelo, estado de compra y número de teléfono",
+        after: "Filtros por modelo, estado de compra y número de teléfono.",
       },
     ],
-    solutionTitle: "CRM de alto rendimiento con captura centralizada y asignación equitativa",
+    solutionTitle: "CRM con los 4 canales en una base y un responsable por consulta.",
     solution:
-      "CRM a medida con Webhooks y APIs de captura inmediata, filtros avanzados por marca/modelo, asignación round-robin equitativa y exportación de métricas en vivo.",
+      "CRM a medida con webhooks y APIs, filtros por marca/modelo, asignación por turnos y métricas exportables.",
     solutionFeatures: [
       {
         title: "Centralización de canales digitales",
@@ -662,18 +662,18 @@ const esProjects: ProjectItem[] = [
     category: "LANDING & WEB",
     year: "2026",
     description:
-      "Sitio institucional con propuesta de valor de personal asegurado y supervisión GPS, captación calificada e integración con el ERP interno bajo un mismo dominio.",
+      "Sitio con personal asegurado y supervisión GPS, formulario de consultas y acceso al ERP.",
     metrics: ["+120% LEADS CALIFICADOS", "CARGA EN MENOS DE 0.6 S"],
     tags: ["ASTRO 7", "TYPESCRIPT", "TAILWIND CSS V4", "VERCEL EDGE", "SEO ESTRUCTURADO"],
     fullOverview:
-      "Plataforma institucional de alta velocidad con cotizador inteligente que filtra prospectos y alimenta el embudo comercial corporativo.",
-    challengeTitle: "Una operación robusta que requería una vidriera corporativa a su altura",
+      "Sitio rápido con un cotizador que filtra consultas y las manda al CRM.",
+    challengeTitle: "Un sistema ordenado, pero una web que no lo mostraba.",
     challenge:
       "La empresa contaba con un ERP moderno para gestionar edificios, pero su sitio web anterior no transmitía la formalidad del personal ni la tecnología satelital que la diferenciaba de la competencia informal.",
     contrastRows: [
       {
         before: "Operación profesional sin presencia web que reflejara su solidez",
-        after: "Sitio institucional de alto impacto con propuesta de valor clara",
+        after: "Sitio institucional claro: qué hacen y por qué elegirlos.",
       },
       {
         before: "Consultas entrantes desordenadas sin datos del edificio o frecuencia",
@@ -684,9 +684,9 @@ const esProjects: ProjectItem[] = [
         after: "Dominio único con ruteo edge hacia el sistema de gestión interno",
       },
     ],
-    solutionTitle: "Arquitectura estática ultra veloz con cotizador multi-paso",
+    solutionTitle: "Sitio estático rápido con cotizador en 4 pasos.",
     solution:
-      "Sitio desarrollado en Astro y Tailwind v4 con puntuaciones perfectas en Core Web Vitals, cotizador interactivo multi-paso y proxy edge para unificar la marca.",
+      "Sitio en Astro y Tailwind v4 con cotizador en 4 pasos y un solo dominio.",
     solutionFeatures: [
       {
         title: "Propuesta de valor como eje de conversión",
@@ -704,9 +704,9 @@ const esProjects: ProjectItem[] = [
           "El dominio principal aloja el sitio público, mientras que rutas internas /admin rutean por Edge al software operativo.",
       },
       {
-        title: "Velocidad extrema y SEO estructurado",
+        title: "Carga rápida y SEO local.",
         description:
-          "Cero tiempo de bloqueo (TBT 0ms), Schema.org para posicionamiento local en Rosario y carga en menos de 600ms.",
+          "TBT 0 ms, Schema.org para posicionamiento local en Rosario y carga en menos de 600 ms.",
       },
     ],
     resultsTitle: "Rendimiento y conversión en vivo",
@@ -719,12 +719,12 @@ const esProjects: ProjectItem[] = [
       {
         value: "100/100",
         unit: "Lighthouse",
-        label: "puntuaciones perfectas en Performance, Accesibilidad, Mejores Prácticas y SEO",
+        label: "resultados altos en Performance, Accesibilidad, Mejores Prácticas y SEO",
       },
       {
         value: "< 0.6s",
         unit: "LCP",
-        label: "despliegue estático global con respuesta instantánea en conexiones móviles",
+        label: "despliegue estático con carga rápida también en el celular.",
       },
       {
         value: "+120%",
@@ -753,7 +753,7 @@ const esProjects: ProjectItem[] = [
     tags: ["ASTRO", "REACT", "TAILWIND CSS", "VIEW TRANSITIONS", "A11Y"],
     fullOverview:
       "Sitio web médico orientado a la experiencia del paciente familiar, con acceso directo a especialidades y reserva ágil de consultas.",
-    challengeTitle: "Apertura de consultorio: presencia online inmediata y privacidad rigurosa",
+    challengeTitle: "Consultorio nuevo: online desde el día uno, sin exponer la dirección.",
     challenge:
       "Un consultorio nuevo que necesitaba canalizar pacientes desde el día uno sin colapsar el teléfono de secretaría, resguardando la dirección exacta del consultorio para preservar la seguridad de los menores.",
     contrastRows: [
@@ -772,7 +772,7 @@ const esProjects: ProjectItem[] = [
     ],
     solutionTitle: "Sitio estático con componentes interactivos y puente a turnos clínicos",
     solution:
-      "Portal web con reserva en 3 clics optimizada para celulares, selector de cobertura médica y confirmación instantánea sin intermediarios.",
+      "Portal para reservar turnos desde el celular, con selector de cobertura y confirmación por WhatsApp o email.",
     solutionFeatures: [
       {
         title: "Autoridad y confianza médica",
@@ -800,7 +800,7 @@ const esProjects: ProjectItem[] = [
       {
         value: "0ms",
         unit: "TBT",
-        label: "tiempo de bloqueo total: carga ultrarrápida sin bundles pesados de JavaScript",
+        label: "sin bloqueos ni JavaScript pesado.",
       },
       {
         value: "+150%",
@@ -834,11 +834,11 @@ const esManifesto: ManifestoItem[] = [
     number: "02",
     title: "VELOCIDAD REAL EXIGE CALIDAD Y SEGURIDAD",
     description:
-      "Sacar código rápido con IA pero inseguro te frena a los dos meses por retrabajo. Construimos rápido sobre bases sólidas: roles, auditoría y cero brechas de datos.",
+      "Sacar código rápido con IA pero inseguro te frena a los dos meses por retrabajo. Construimos rápido con permisos por rol e historial de cambios.",
   },
   {
     number: "03",
-    title: "CERO BUROCRACIA, CERO TELÉFONO DESCOMPUESTO",
+    title: "CERO BUROCRACIA, CERO MALENTENDIDOS.",
     description:
       "No tenemos vendedores ni gerentes de cuenta en el medio. Entrevistás y hablás directo con los fundadores que escriben el código.",
   },
@@ -846,7 +846,7 @@ const esManifesto: ManifestoItem[] = [
     number: "04",
     title: "PRIMERO LO VES, DESPUÉS FIRMÁS",
     description:
-      "Matamos el riesgo antes de que gastes un peso: te mostramos un prototipo funcional con la lógica de tu negocio antes de cerrar el contrato.",
+      "Te mostramos el sistema andando antes de cobrarte: prototipo con la lógica de tu negocio.",
   },
   {
     number: "05",
@@ -872,7 +872,7 @@ const esManifesto: ManifestoItem[] = [
 // 2026 objections (slow agencies, unsupervised home-built AI) right before
 // the qualification filter and the pricing/FAQ block.
 const esComparison: ComparisonContent = {
-  eyebrow: "// POR QUÉ DEFTCODE",
+  eyebrow: "// POR QUÉ DEFTCODE®",
   title: "NI MESES DE BUROCRACIA, NI PARCHES GENERADOS CON IA.",
   intro:
     "Hoy tenés dos extremos que te hacen perder plata: consultoras que tardan 6 meses y apps hechas con IA sin supervisión que se rompen con el primer cliente real.",
@@ -901,8 +901,8 @@ const esComparison: ComparisonContent = {
     },
     {
       type: "deftcode",
-      title: "MÉTODO DEFTCODE",
-      subtitle: "Velocidad macro con seguridad de producción",
+      title: "MÉTODO DEFTCODE®",
+      subtitle: "Entregas en semanas, con permisos e historial de cambios.",
       points: [
         "Diagnóstico en 48 h y prototipo funcional gratis antes de firmar.",
         "Usamos IA para acelerar, pero la arquitectura la diseñan ingenieros.",
@@ -1021,8 +1021,8 @@ const esTeam: TeamMember[] = [
   {
     name: "FRANCO CUSCIANNA",
     role: "DESARROLLADOR FULL STACK",
-    bio: "Desarrollador full stack. Backend y arquitectura de sistemas. Me gusta que el software sea sólido, seguro y escalable.",
-    tags: ["BACKEND", "ARQUITECTURA DE SISTEMAS", "SEGURIDAD", "ESCALABILIDAD"],
+    bio: "Desarrollador full stack. Backend y arquitectura de sistemas. Me gusta que el software sea claro, seguro y fácil de mantener.",
+    tags: ["BACKEND", "ARQUITECTURA DE SISTEMAS", "SEGURIDAD", "CÓDIGO LIMPIO"],
     github: "https://github.com/francocus",
     linkedin: "https://www.linkedin.com/in/francocus/",
   },
@@ -1087,7 +1087,7 @@ const esFaqList: FaqItem[] = [
 // traducir la voz de una clienta seria inventarla.
 const esClientQuote = {
   eyebrow: "TESTIMONIO",
-  text: "Antes perdíamos horas llenando planillas a mano para saber quién había trabajado qué día en cada edificio, y encima las quejas por inasistencias eran un dolor de cabeza semana a semana. Con deftcode ahora todo se carga solo, y una tarea que antes le consumía gran parte de su jornada a un empleado, hoy se resuelve de forma automática. Para mí fue de las mejores decisiones que tomé en la empresa, ya que dejé de lidiar con problemas cotidianos y puse mi foco en hacer crecer el negocio.",
+  text: "Antes perdíamos horas llenando planillas a mano para saber quién había trabajado qué día en cada edificio, y encima las quejas por inasistencias eran un dolor de cabeza semana a semana. Con DEFTCODE® ahora todo se carga solo, y una tarea que antes le consumía gran parte de su jornada a un empleado, hoy se resuelve de forma automática. Para mí fue de las mejores decisiones que tomé en la empresa, ya que dejé de lidiar con problemas cotidianos y puse mi foco en hacer crecer el negocio.",
   author: "PAOLA ZORILA",
   source: "AZ SERVICIOS DE LIMPIEZA, ROSARIO",
   highlight: "se resuelve de forma automática",
@@ -1103,7 +1103,7 @@ const esCtaContent: CtaContent = {
   subheading: "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso.",
   buttonLabel: "Quiero mi diagnóstico gratis",
   buttonHref: "/contacto/",
-  emailLabel: "contacto@deftcode.dev",
+  emailLabel: "contacto@deftcode.com.ar",
 };
 
 const esForWho = {
@@ -1131,7 +1131,7 @@ const esForWho = {
 // ==========================================
 
 const esProblems: ProblemsContent = {
-  eyebrow: "// ¿TE PASA ALGO DE ESTO?",
+  eyebrow: "MARCADÁ LO QUE TE SUENE FAMILIAR",
   title: "¿TE PASA ALGO DE ESTO?",
   intro: "Si marcaste una, el diagnóstico es para vos.",
   cards: [
@@ -1177,7 +1177,7 @@ const esProblems: ProblemsContent = {
 // ==========================================
 
 const esFeaturedCase: FeaturedCaseContent = {
-  eyebrow: "// PRUEBA SOCIAL",
+  eyebrow: "CASO REAL",
   title: "UNA EMPRESA DE LIMPIEZA DE ROSARIO DEJÓ LAS PLANILLAS Y HOY AHORRA $2.8M ARS POR MES.",
   description:
     "Pidieron control de asistencia. Terminamos unificando asistencia, sueldos, impuestos y stock de más de 30 edificios en un solo sistema. Cero quejas por inasistencia.",
@@ -1209,12 +1209,12 @@ const esMoreSoftware: MoreSoftwareContent = {
 const esServicesHome: ServicesHomeContent = {
   eyebrow: "// QUÉ HACEMOS",
   title: "QUÉ HACEMOS",
-  intro: "Todo empieza con el diagnóstico. Lo que sigue lo decide lo que encontremos.",
+  intro: "Todo empieza con el diagnóstico. Después decidimos qué construir según lo que encontremos.",
   items: [
     {
       index: "00",
       title: "EMPEZÁ ACÁ: DIAGNÓSTICO DEFT",
-      line: "Entrevista de 1 hora sobre tu negocio, informe en 48 h con lo que te cuesta plata y prototipo gratis. Gratis.",
+      line: "Entrevista de 1 hora, informe en 48 h y prototipo gratis.",
       buttonLabel: "Agendá la entrevista",
       buttonHref: "/contacto/",
     },
@@ -1237,7 +1237,7 @@ const esServicesHome: ServicesHomeContent = {
     {
       index: "03",
       title: "LANDING + SEO + META ADS",
-      line: "Tu web y clientes todos los meses. Landing desde USD 200, lista en 1 a 2 semanas; SEO y anuncios en plan mensual.",
+      line: "Web, SEO y anuncios para traer consultas todos los meses. Landing desde USD 200, lista en 1 a 2 semanas; SEO y ads en plan mensual.",
       buttonLabel: "Traéme más consultas",
       buttonHref: "/contacto/?problema=web",
       slug: "landing-pages",
@@ -1340,7 +1340,7 @@ const esDiagnosticoLanding: DiagnosticoLandingContent = {
   notItems: [
     "No es una llamada de ventas.",
     "No tiene costo ni te pedimos tarjeta.",
-    "No te obliga a contratarnos.",
+    "No tenés que contratarnos.",
   ],
 };
 
@@ -1349,14 +1349,14 @@ const esDiagnosticoLanding: DiagnosticoLandingContent = {
 // ==========================================
 
 const enSiteMeta: SiteMeta = {
-  title: "Custom software in Rosario | Free diagnosis | Deftcode",
+  title: "Custom software in Rosario | Free diagnosis | DEFTCODE®",
   description:
     "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
   siteUrl: "https://deftcode.com.ar",
   ogImage: "/og-deftcode.png",
-  author: "Deftcode Studio",
+  author: "DEFTCODE®",
   location: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
-  tagline: "Software at velocity.",
+  tagline: "Software that ships in weeks.",
   foundedYear: 2026,
 };
 
@@ -1370,14 +1370,14 @@ const enNavLinks: NavLink[] = [
 
 const enPages: Record<string, PageContent> = {
   home: {
-    title: "Custom software in Rosario | Free diagnosis | Deftcode",
+    title: "Custom software in Rosario | Free diagnosis | DEFTCODE®",
     description:
       "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
     eyebrow: "ROSARIO, ARGENTINA",
     h1: "YOUR CUSTOM-BUILT SYSTEM",
   },
   nosotros: {
-    title: "Who we are: developers who understand business | Deftcode",
+    title: "Who we are: developers who understand business | DEFTCODE®",
     description:
       "Meet Agustín and Franco, the free diagnosis method and the written guarantees we work with.",
     eyebrow: "ABOUT",
@@ -1386,7 +1386,7 @@ const enPages: Record<string, PageContent> = {
       "We are systems people who understand business. First we learn how you work, then we show you a prototype and only then do we sign. We deliver in weeks, not semesters.",
   },
   proyectos: {
-    title: "Real cases: systems, CRM and landings in production | Deftcode",
+    title: "Real cases: systems, CRM and landings in production | DEFTCODE®",
     description:
       "See what each system we built saved, organized and sold: ERP, CRM, landings and portals in production.",
     eyebrow: "REAL CASES",
@@ -1395,7 +1395,7 @@ const enPages: Record<string, PageContent> = {
       "Each case shows what problem the client had, how long it took and what changed. Yours can start with a free diagnosis.",
   },
   servicios: {
-    title: "Custom systems, CRM, ERP and landings | Deftcode",
+    title: "Custom systems, CRM, ERP and landings | DEFTCODE®",
     description:
       "We always start with a free diagnosis. Then you choose what to build, with a closed price and the date in the contract.",
     eyebrow: "SERVICES",
@@ -1404,7 +1404,7 @@ const enPages: Record<string, PageContent> = {
       "We always start with a free diagnosis. Then you choose what to build, with a closed price and the date in the contract.",
   },
   contacto: {
-    title: "Free diagnosis for your company | Deftcode",
+    title: "Free diagnosis for your company | DEFTCODE®",
     description:
       "1-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
     eyebrow: "FREE DIAGNOSIS",
@@ -1413,7 +1413,7 @@ const enPages: Record<string, PageContent> = {
       "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   diagnostico: {
-    title: "Free diagnosis for your company | Deftcode",
+    title: "Free diagnosis for your company | DEFTCODE®",
     description:
       "1-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
     eyebrow: "FREE DIAGNOSIS",
@@ -1422,9 +1422,9 @@ const enPages: Record<string, PageContent> = {
       "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   privacidad: {
-    title: "PRIVACY POLICY - DEFTCODE",
+    title: "PRIVACY POLICY - DEFTCODE®",
     description:
-      "Deftcode privacy commitment: zero invasive 3rd-party trackers, anonymous analytics, and absolute respect for your personal data.",
+      "DEFTCODE® privacy commitment: zero invasive 3rd-party trackers, anonymous analytics, and absolute respect for your personal data.",
     eyebrow: "LEGAL & COMPLIANCE",
     h1: "TRANSPARENT PRIVACY.",
   },
@@ -1436,7 +1436,7 @@ const enHeroContent: HeroContent = {
   headlineSub: "YOUR SYSTEM IN PRODUCTION IN 4 TO 6 WEEKS. CUSTOM DEVELOPMENT.",
   subtitle:
     "We audit your operation for free and show you a working prototype with your data before you pay a cent. That's how a company in Rosario saves $2.8M ARS per month in payroll.",
-  kicker: "STARTUP SPEED. ENGINEERING ARCHITECTURE. ZERO RISK.",
+  kicker: "BUILT IN WEEKS. FIXED PRICE. YOUR CODE.",
   badge: "ROSARIO, ARGENTINA // FOR SMBS ACROSS THE COUNTRY",
   locationText: "ROSARIO, ARGENTINA // WE WORK WITH SMBS ACROSS THE COUNTRY",
   roleText: "CUSTOM ERP // CRM // AI AUTOMATION // LANDINGS THAT CONVERT",
@@ -1563,16 +1563,16 @@ const enServices: ServiceItem[] = [
     index: "03",
     title: "LANDING PAGES",
     description:
-      "High-velocity landing pages with instant load: zero blocking time, green performance scores and technical SEO as standard.",
+      "Fast landing pages with technical SEO and your own code.",
     kicker: "YOUR FIRST DIGITAL POINT OF SALE",
     intro:
-      "Your first digital point of sale: a page that loads instantly, ranks organically and turns visits into inquiries.",
+      "A page that loads fast, shows up in Google and brings in inquiries.",
     modules: [
       {
         heading: "VELOCITY",
         items: [
-          "Pre-rendered pages: instant load, zero blocking time.",
-          "Green performance scores, which also feed SEO rankings.",
+          "Pre-rendered pages: fast, no waiting.",
+          "Fast load times help SEO too.",
           "Custom editorial-brutalist design.",
         ],
       },
@@ -1592,7 +1592,7 @@ const enServices: ServiceItem[] = [
       "A page that loads before visitors think about going back.",
       "100% your own code, no generic platforms behind it.",
     ],
-    tags: ["INSTANT LOAD", "TECHNICAL SEO", "GREEN SCORES", "CONVERSION"],
+    tags: ["FAST LOAD", "TECHNICAL SEO", "GOOGLE", "INQUIRIES"],
   },
   {
     id: "automatizacion-ia",
@@ -1628,7 +1628,7 @@ const enServices: ServiceItem[] = [
     value: [
       "The manual work of moving data between systems disappears.",
       "Faster replies to clients, every day.",
-      "A sharp high-impact build, without lifting a new system.",
+      "One focused fix, no new system to maintain.",
     ],
     tags: ["INTEGRATIONS", "WHATSAPP", "AFIP / ARCA", "AI"],
   },
@@ -1668,14 +1668,14 @@ const enProjects: ProjectItem[] = [
         after: "Live interactive map displaying active shifts and absence alerts",
       },
     ],
-    solutionTitle: "Total operational traceability & instant automated payroll",
+    solutionTitle: "Attendance and payroll in one place.",
     solution:
       "Web platform where staff log shifts validated via on-device QR scanning and GPS coordinates, slashing payroll calculations to minutes and highlighting anomalies on a live supervisor map.",
     solutionFeatures: [
       {
         title: "GPS Geolocation & QR Attendance",
         description:
-          "Field staff clock in and out from their own phones, validated against geofenced coordinates and on-site QR codes. Paperless, frictionless, and tamper-proof.",
+          "Field staff clock in and out from their own phones, validated by GPS and on-site QR codes. No paper, no loose ends.",
       },
       {
         title: "Automated Payroll & Overtime Engine",
@@ -1732,7 +1732,7 @@ const enProjects: ProjectItem[] = [
     metrics: ["2 ACTIVE JURISDICTIONS", "-60% RESEARCH TIME", "ZERO MISSED DEADLINES"],
     tags: ["NEXT.JS", "REACT", "TYPESCRIPT", "POSTGRESQL", "PRISMA", "EMBEDDED AI"],
     fullOverview:
-      "Comprehensive cloud platform designed for cross-border law firms managing complex litigation and corporate clients.",
+      "Cloud system for a law firm working in Argentina and Paraguay.",
     challengeTitle: "Operating across two jurisdictions without generic software bloat",
     challenge:
       "Physical case files split across two countries with disparate legal frameworks, procedural deadlines tracked on personal notebooks, and hours wasted searching jurisprudence across disjointed official gazettes.",
@@ -1750,7 +1750,7 @@ const enProjects: ProjectItem[] = [
         after: "A single unified cloud platform powering the law firm's entire practice",
       },
     ],
-    solutionTitle: "Cross-border litigation suite with real-time statutory verification",
+    solutionTitle: "Case files, deadlines and current rules in one place.",
     solution:
       "Unified cloud repository with automatic procedural statute-of-limitations alerts, multi-currency billing, and a custom AI engine with strict official source citations.",
     solutionFeatures: [
@@ -1825,16 +1825,16 @@ const enProjects: ProjectItem[] = [
       },
       {
         before: "Appointments booked only via phone calls during narrow administrative hours",
-        after: "Parents book directly through the family portal with 1-click clinic confirmation",
+        after: "Parents book through the family portal; the clinic confirms in the panel.",
       },
       {
         before: "Clinic physical address and sensitive patient details publicly exposed",
         after: "Exact location and clinical records unlocked exclusively to authenticated families",
       },
     ],
-    solutionTitle: "Modular clinical suite with unified API & family web portal",
+    solutionTitle: "Records, bookings and a portal for families.",
     solution:
-      "Reactive clinical suite with instant patient lookup, automatic percentile growth curves, and digitally signed PDF prescriptions and lab requisitions.",
+      "System with fast patient lookup, growth charts and signed PDF orders.",
     solutionFeatures: [
       {
         title: "Statutory EHR Compliance",
@@ -1842,26 +1842,26 @@ const enProjects: ProjectItem[] = [
           "Immutable audit logs record every read and write. No medical entry is physically destroyed, ensuring rigorous clinical liability adherence.",
       },
       {
-        title: "Zero-Friction Online Booking",
+        title: "Online booking",
         description:
-          "Families browse genuine real-time physician openings and submit appointment requests; front desk confirms in one click, updating the master schedule instantly.",
+          "Families browse real openings and request appointments; reception confirms and the calendar updates right away.",
       },
       {
-        title: "Role-Tailored Digital Surfaces",
+        title: "Three portals, one system",
         description:
           "Three purpose-built interfaces powered by one API: physician examination room, reception desk management, and self-service family portal.",
       },
       {
         title: "Digital PDF Prescriptions & Orders",
         description:
-          "Instant issuance of tamper-proof PDF medical orders and prescriptions bearing physician license details, instantly shareable via email or messaging.",
+          "Prescriptions and orders generated as signed PDFs and sent by email or WhatsApp.",
       },
     ],
     resultsTitle: "Delivered Clinical Benchmark",
     resultsMetrics: [
       {
         value: "3",
-        unit: "surfaces",
+        unit: "portals",
         label: "physician dashboard, patient portal, and administrative desk on a unified API",
       },
       {
@@ -1897,7 +1897,7 @@ const enProjects: ProjectItem[] = [
     tags: ["REACT", "VITE", "PRIMEREACT", ".NET 9", "DAPPER", "POSTGRESQL", "DOCKER"],
     fullOverview:
       "Commercial sales pipeline developed for automotive dealerships processing hundreds of digital inquiries each week.",
-    challengeTitle: "A spreadsheet cannot scale across multiple channels and sales reps",
+    challengeTitle: "A spreadsheet can't keep up with four channels and several reps.",
     challenge:
       "Sales reps tracking leads on individual spreadsheets, prospects waiting days without replies, and zero visibility into which ad campaigns were generating closed deals.",
     contrastRows: [
@@ -1914,12 +1914,12 @@ const enProjects: ProjectItem[] = [
         after: "Instant indexed search by make/model, customer name, and phone number",
       },
     ],
-    solutionTitle: "High-velocity sales CRM with centralized capture & balanced routing",
+    solutionTitle: "CRM with all inquiries in one place and a rep for each one.",
     solution:
       "Custom CRM with real-time webhooks and APIs, make/model filtering, equitable round-robin lead distribution, and live pipeline analytics exportable in seconds.",
     solutionFeatures: [
       {
-        title: "Omnichannel Lead Centralization",
+        title: "All inquiries in one place",
         description:
           "Automatic webhook ingestion from WhatsApp, Meta ads (Instagram/Facebook), and Mercado Libre into a unified real-time pipeline.",
       },
@@ -1959,7 +1959,7 @@ const enProjects: ProjectItem[] = [
       {
         value: "0",
         unit: "lost leads",
-        label: "complete eradication of forgotten inquiries buried in personal chats",
+        label: "no more inquiries lost in personal chats",
       },
     ],
   },
@@ -1978,18 +1978,18 @@ const enProjects: ProjectItem[] = [
     category: "CORPORATE LANDING",
     year: "2026",
     description:
-      "Corporate web presence highlighting verified insured staff and GPS supervision, qualified lead capture, and seamless integration with the internal ERP under a single domain.",
+      "Corporate site with insured staff, GPS supervision, a quote form and a link to the internal ERP.",
     metrics: ["+120% QUALIFIED LEADS", "LOADS IN UNDER 0.6 S"],
     tags: ["ASTRO 7", "TYPESCRIPT", "TAILWIND CSS V4", "VERCEL EDGE", "STRUCTURED SEO"],
     fullOverview:
-      "Ultra-fast corporate platform with an interactive quoting engine that filters serious commercial leads into the sales funnel.",
-    challengeTitle: "A robust operation that deserved a high-impact digital presence",
+      "Fast site with a quote form that sends qualified inquiries to sales.",
+    challengeTitle: "Good operation, outdated website.",
     challenge:
       "Outdated legacy website failing to convey the formal corporate compliance and satellite supervision that set the company apart from informal competitors.",
     contrastRows: [
       {
         before: "Professional commercial operation with an outdated, uninformative website",
-        after: "High-impact corporate web platform clearly articulating institutional value",
+        after: "Clear corporate site: what they do and why clients choose them.",
       },
       {
         before: "Unqualified inbound messages lacking facility square footage or service scope",
@@ -2000,9 +2000,9 @@ const enProjects: ProjectItem[] = [
         after: "Single unified corporate domain with Edge proxy routing into internal ERP",
       },
     ],
-    solutionTitle: "Ultra-fast SSG architecture with multi-step commercial estimator",
+    solutionTitle: "Static site with a 4-step quote form.",
     solution:
-      "Static SSG architecture with Astro and Tailwind CSS v4, multi-step commercial quote calculator, and modern brutalist aesthetic signaling reliability and operational rigor.",
+      "Built in Astro and Tailwind v4, with a 4-step quote form and one domain for everything.",
     solutionFeatures: [
       {
         title: "Value Proposition-Driven Conversion",
@@ -2015,14 +2015,14 @@ const enProjects: ProjectItem[] = [
           "Prospects select facility type, estimated square meters, and shift frequency before submitting, pre-qualifying leads for sales follow-up.",
       },
       {
-        title: "Seamless ERP Edge Integration",
+        title: "One domain for site and system",
         description:
           "The apex domain hosts public marketing pages, while edge proxies route employee portals and internal API requests without subdomains.",
       },
       {
-        title: "Extreme Speed & Structured Local SEO",
+        title: "Fast loading and local SEO",
         description:
-          "0ms Total Blocking Time, complete Schema.org corporate organization markup, and sub-600ms Largest Contentful Paint worldwide.",
+          "TBT 0 ms, Google structured data and load times under 0.6 s.",
       },
     ],
     resultsTitle: "Live Speed & Conversion Results",
@@ -2035,17 +2035,17 @@ const enProjects: ProjectItem[] = [
       {
         value: "100/100",
         unit: "Lighthouse",
-        label: "perfect scores across Performance, Accessibility, Best Practices, and SEO",
+        label: "strong scores across Performance, Accessibility, Best Practices, and SEO",
       },
       {
         value: "< 0.6s",
         unit: "LCP",
-        label: "immutable global edge CDN delivery with instant mobile paint speed",
+        label: "static delivery on a CDN, so it loads fast on mobile.",
       },
       {
         value: "+120%",
         unit: "conversion",
-        label: "growth in commercial proposals ready for executive quotation",
+        label: "more quote requests ready to send",
       },
     ],
   },
@@ -2068,8 +2068,8 @@ const enProjects: ProjectItem[] = [
     metrics: ["+150% MOBILE APPOINTMENTS", "100% ACCESSIBLE"],
     tags: ["ASTRO", "REACT", "TAILWIND CSS", "VIEW TRANSITIONS", "A11Y"],
     fullOverview:
-      "Patient-first healthcare website providing direct access to medical specialties, physician bios, and seamless online booking.",
-    challengeTitle: "Clinic grand opening: immediate online footprint & patient privacy",
+      "Public portal with specialties, doctor bios and booking that works on mobile.",
+    challengeTitle: "New clinic: online from day one, address kept private.",
     challenge:
       "A brand new pediatric practice needing to channel patient appointments from day one without jamming reception lines, while protecting exact physical location for minor safety.",
     contrastRows: [
@@ -2088,7 +2088,7 @@ const enProjects: ProjectItem[] = [
     ],
     solutionTitle: "Static web presence with interactive milestones & booking bridge",
     solution:
-      "Patient-first healthcare website providing direct access to medical specialties, physician bios, and seamless online booking.",
+      "Public portal with specialties, doctor bios and booking that works on mobile.",
     solutionFeatures: [
       {
         title: "Medical Authority & Trust",
@@ -2098,12 +2098,12 @@ const enProjects: ProjectItem[] = [
       {
         title: "Interactive Developmental Milestones",
         description:
-          "Engaging dynamic visualization detailing the five childhood care phases, responsive across mobile touchscreens and desktop viewports.",
+          "Five care stages shown on a page that works on phones and desktops.",
       },
       {
-        title: "Seamless 3-Step Appointment Booking",
+        title: "3-step booking",
         description:
-          "Every section naturally funnels parents toward the appointment scheduler, confirming slots with instant messaging or email notifications.",
+          "Every page leads to the booking form; confirmation arrives by WhatsApp or email.",
       },
       {
         title: "Privacy by Design",
@@ -2116,7 +2116,7 @@ const enProjects: ProjectItem[] = [
       {
         value: "0ms",
         unit: "TBT",
-        label: "zero blocking time: instant loading with zero heavy JavaScript client hydration",
+        label: "no blocking scripts or heavy JavaScript.",
       },
       {
         value: "+150%",
@@ -2149,11 +2149,11 @@ const enManifesto: ManifestoItem[] = [
     number: "02",
     title: "REAL SPEED DEMANDS QUALITY AND SECURITY",
     description:
-      "Fast but insecure AI-generated code slows you down two months in with rework. We build fast on solid foundations: roles, audit trails and zero data gaps.",
+      "Fast but insecure AI-generated code slows you down two months in with rework. We build fast with role permissions and change history.",
   },
   {
     number: "03",
-    title: "ZERO BUREAUCRACY, ZERO BROKEN TELEPHONE",
+    title: "NO MIDDLEMEN, NO MISUNDERSTANDINGS.",
     description:
       "No salespeople or account managers in the middle. You interview and talk directly with the founders who write the code.",
   },
@@ -2161,7 +2161,7 @@ const enManifesto: ManifestoItem[] = [
     number: "04",
     title: "YOU SEE IT FIRST, THEN YOU SIGN",
     description:
-      "We kill the risk before you spend a cent: you see a working prototype with your business logic before closing the contract.",
+      "You see it running before you pay: a prototype with your business logic.",
   },
   {
     number: "05",
@@ -2185,7 +2185,7 @@ const enManifesto: ManifestoItem[] = [
 
 // EN home: why-def tcode comparison (mirror of the ES matrix).
 const enComparison: ComparisonContent = {
-  eyebrow: "// WHY DEFTCODE",
+  eyebrow: "// WHY DEFTCODE®",
   title: "NO MONTHS OF BUREAUCRACY, NO AI-GENERATED PATCHES.",
   intro:
     "Today you have two extremes that cost you money: consultancies that take 6 months and unsupervised AI-built apps that break with the first real client.",
@@ -2214,8 +2214,8 @@ const enComparison: ComparisonContent = {
     },
     {
       type: "deftcode",
-      title: "THE DEFTCODE METHOD",
-      subtitle: "Macro speed with production-grade security",
+      title: "THE DEFTCODE® METHOD",
+      subtitle: "Built fast, built to run safely.",
       points: [
         "Diagnosis in 48 h and a free working prototype before signing.",
         "We use AI to accelerate, but engineers design the architecture.",
@@ -2334,8 +2334,8 @@ const enTeam: TeamMember[] = [
   {
     name: "FRANCO CUSCIANNA",
     role: "FULL-STACK DEVELOPER",
-    bio: "Backend and systems architecture focus. I like software that is solid, secure, and scalable.",
-    tags: ["BACKEND", "SYSTEMS ARCHITECTURE", "SECURITY", "SCALABILITY"],
+    bio: "Backend and systems architecture focus. I like software that is clear, secure and easy to maintain.",
+    tags: ["BACKEND", "SYSTEMS ARCHITECTURE", "SECURITY", "CLEAN CODE"],
     github: "https://github.com/francocus",
     linkedin: "https://www.linkedin.com/in/francocus/",
   },
@@ -2398,7 +2398,7 @@ const enFaqList: FaqItem[] = [
 // Same real quote for both locales (see note above).
 const enClientQuote = {
   eyebrow: "TESTIMONIAL",
-  text: "Antes perdíamos horas llenando planillas a mano para saber quién había trabajado qué día en cada edificio, y encima las quejas por inasistencias eran un dolor de cabeza semana a semana. Con deftcode ahora todo se carga solo, y una tarea que antes le consumía gran parte de su jornada a un empleado, hoy se resuelve de forma automática. Para mí fue de las mejores decisiones que tomé en la empresa, ya que dejé de lidiar con problemas cotidianos y puse mi foco en hacer crecer el negocio.",
+  text: "Antes perdíamos horas llenando planillas a mano para saber quién había trabajado qué día en cada edificio, y encima las quejas por inasistencias eran un dolor de cabeza semana a semana. Con DEFTCODE® ahora todo se carga solo, y una tarea que antes le consumía gran parte de su jornada a un empleado, hoy se resuelve de forma automática. Para mí fue de las mejores decisiones que tomé en la empresa, ya que dejé de lidiar con problemas cotidianos y puse mi foco en hacer crecer el negocio.",
   author: "PAOLA ZORILA",
   source: "AZ SERVICIOS DE LIMPIEZA, ROSARIO",
   highlight: "se resuelve de forma automática",
@@ -2412,7 +2412,7 @@ const enCtaContent: CtaContent = {
   subheading: "1-hour interview, report in 48 h and a free prototype. No commitment.",
   buttonLabel: "GET MY FREE DIAGNOSIS",
   buttonHref: "/en/contact/",
-  emailLabel: "contacto@deftcode.dev",
+  emailLabel: "contacto@deftcode.com.ar",
 };
 
 const enForWho = {
@@ -2440,7 +2440,7 @@ const enForWho = {
 // ==========================================
 
 const enProblems: ProblemsContent = {
-  eyebrow: "// DOES ANY OF THIS SOUND LIKE YOU?",
+  eyebrow: "CHECK WHAT FITS",
   title: "DOES ANY OF THIS SOUND LIKE YOU?",
   intro: "If you check one, the diagnosis is for you.",
   cards: [
@@ -2486,7 +2486,7 @@ const enProblems: ProblemsContent = {
 // ==========================================
 
 const enFeaturedCase: FeaturedCaseContent = {
-  eyebrow: "// SOCIAL PROOF",
+  eyebrow: "A real case",
   title: "A CLEANING COMPANY IN ROSARIO DROPPED ITS SPREADSHEETS AND NOW SAVES $2.8M ARS PER MONTH.",
   description:
     "They asked for attendance control. We ended up unifying attendance, payroll, taxes and stock for 30+ buildings in one system. Zero absence complaints.",
@@ -2518,12 +2518,12 @@ const enMoreSoftware: MoreSoftwareContent = {
 const enServicesHome: ServicesHomeContent = {
   eyebrow: "// WHAT WE DO",
   title: "WHAT WE DO",
-  intro: "Everything starts with the diagnosis. What comes next is decided by what we find.",
+  intro: "Everything starts with the diagnosis. We decide what to build after the diagnosis.",
   items: [
     {
       index: "00",
       title: "START HERE: DEFT DIAGNOSIS",
-      line: "A 1-hour interview about your business, a 48 h report on what costs you money, and a free prototype. Free.",
+      line: "A 1-hour interview, a 48 h report and a free prototype.",
       buttonLabel: "Book the interview",
       buttonHref: "/en/contact/",
     },
@@ -2546,7 +2546,7 @@ const enServicesHome: ServicesHomeContent = {
     {
       index: "03",
       title: "LANDING + SEO + META ADS",
-      line: "Your website and clients every month. Landing from USD 200, ready in 1 to 2 weeks; SEO and ads on a monthly plan.",
+      line: "SEO and ads to bring in inquiries every month. Landing from USD 200, ready in 1 to 2 weeks; SEO and ads on a monthly plan.",
       buttonLabel: "Bring me more inquiries",
       buttonHref: "/en/contact/?problema=web",
       slug: "landing-pages",
@@ -2647,7 +2647,7 @@ const enDiagnosticoLanding: DiagnosticoLandingContent = {
   notItems: [
     "It's not a sales call.",
     "It has no cost and we don't ask for a card.",
-    "It doesn't oblige you to hire us.",
+    "You don't have to hire us.",
   ],
 };
 

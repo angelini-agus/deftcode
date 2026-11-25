@@ -11,23 +11,17 @@ const { manifesto } = getContent(lang);
 
 const eyebrow = lang === "en" ? "// NON-NEGOTIABLE PRINCIPLES" : "// PRINCIPIOS NO NEGOCIABLES";
 const title = lang === "en" ? "THE DEFT MANIFESTO" : "EL MANIFIESTO DEFT";
-const intro = lang === "en" ? "OUR TECHNICAL AND ETHICAL ENGINEERING STANDARD." : "NUESTRO ESTÁNDAR TÉCNICO Y ÉTICO DE DESARROLLO.";
 ---
 
 <section class="relative bg-black text-white py-20 px-4 md:px-12">
   <div class="max-w-7xl mx-auto">
-    <div class="border-b border-white/20 pb-8 mb-12 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
-      <div>
-        <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-          {eyebrow}
-        </span>
-        <h2 data-decode-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
-          {title}
-        </h2>
-      </div>
-      <p class="reveal reveal-late font-mono-meta text-xs text-white/60 max-w-xs sm:text-right">
-        {intro}
-      </p>
+    <div class="border-b border-white/20 pb-8 mb-12">
+      <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+        {eyebrow}
+      </span>
+      <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+        {title}
+      </h2>
     </div>
 
     <!-- Grid of Manifesto Principles -->
@@ -40,9 +34,7 @@ const intro = lang === "en" ? "OUR TECHNICAL AND ETHICAL ENGINEERING STANDARD." 
                 <span class="font-mono-meta text-2xl font-bold text-[#FF4D00]">
                   [{item.number}]
                 </span>
-                <span class="font-mono-meta text-[11px] uppercase tracking-wider text-white/40">
-                  {lang === "en" ? "STANDARD // RULE" : "ESTÁNDAR // REGLA"}
-                </span>
+                <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
               </div>
               <h3 class="font-display text-2xl sm:text-3xl text-white uppercase tracking-[-0.03em] leading-tight mb-4">
                 {item.title}

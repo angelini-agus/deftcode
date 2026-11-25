@@ -39,7 +39,7 @@ interface Props {
 const { project, prev, next, currentIndex, total } = Astro.props;
 const assets = projectAssets[project.imageKey];
 const lightboxGalleries = buildLightboxGalleries([project], "es");
-const seoTitle = `${project.title} // CASO DE ESTUDIO - DEFTCODE`;
+const seoTitle = `${project.title} // CASO DE ESTUDIO - DEFTCODE®`;
 const seoDescription = project.description;
 ---
 
@@ -49,45 +49,44 @@ const seoDescription = project.description;
   description={seoDescription}
 >
   <!-- Breadcrumb & Back Link Header -->
-  <header class="relative bg-[#FF4D00] text-black pt-28 pb-8 px-4 md:px-12">
+  <header class="relative bg-black text-white pt-28 pb-12 px-4 md:px-12">
     <div class="max-w-7xl mx-auto flex flex-col gap-6">
       
       <!-- Back Link -->
       <div class="flex items-center justify-between">
         <a
           href="/proyectos/"
-          class="inline-flex items-center gap-2 font-mono-meta text-xs uppercase font-bold text-black hover:opacity-75 transition-opacity py-1 border-b border-black"
+          class="group inline-flex items-center gap-2 font-mono-meta text-xs uppercase font-bold text-white/80 hover:text-[#FF4D00] transition-colors py-1 border-b border-white/30 hover:border-[#FF4D00]"
         >
-          <span>&larr;</span>
+          <span class="transition-transform duration-200 group-hover:-translate-x-1">&larr;</span>
           <span>TODOS LOS PROYECTOS</span>
         </a>
-
-              </div>
+      </div>
 
       <!-- Project Main Title in Archivo Black -->
-      <div class="space-y-4 max-w-5xl">
-        <span class="font-mono-meta text-xs uppercase tracking-widest text-black/80 font-bold block">
+      <div class="space-y-4">
+        <span class="reveal font-mono-meta text-xs uppercase tracking-widest text-[#FF4D00] font-bold block">
           // {project.client} {project.location ? `· ${project.location}` : ""}
         </span>
-        <h1 data-decode-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-[-0.04em] leading-[0.88] m-0 text-balance">
+        <h1 data-decode-title class="reveal font-display text-4xl sm:text-6xl md:text-[6.5vw] uppercase tracking-[-0.04em] leading-[0.88] m-0 text-white">
           {project.title}
         </h1>
-        <p class="font-sans text-base sm:text-xl font-medium text-black/90 max-w-3xl leading-relaxed">
+        <p class="reveal reveal-late font-sans text-base sm:text-xl font-medium text-white/80 leading-relaxed">
           {project.description}
         </p>
       </div>
 
       <!-- Metadata Strip: Category, Year, Tech Stack, Live URL -->
-      <div class="border-t-2 border-black pt-6 flex flex-wrap items-center justify-between gap-4 font-mono-meta text-xs">
+      <div class="border-t border-white/20 pt-6 flex flex-wrap items-center justify-between gap-4 font-mono-meta text-xs">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="bg-black text-[#FF4D00] px-3 py-1 font-bold uppercase tracking-wider">
+          <span class="bg-[#FF4D00] text-black px-3 py-1 font-bold uppercase tracking-wider">
             {project.category}
           </span>
-          <span class="bg-black/10 border border-black px-3 py-1 font-bold text-black uppercase">
+          <span class="border border-white/30 px-3 py-1 font-bold text-white uppercase">
             {project.year}
           </span>
           {project.tags.map((tag) => (
-            <span class="bg-white/80 border border-black/30 text-black px-2.5 py-1 uppercase">
+            <span class="border border-white/25 rounded-full text-white/75 px-2.5 py-1 uppercase">
               {tag}
             </span>
           ))}
@@ -98,10 +97,10 @@ const seoDescription = project.description;
             href={project.liveUrl.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 bg-black text-[#FF4D00] px-4 py-2 font-bold uppercase hover:bg-neutral-900 transition-colors shadow-md"
+            class="group inline-flex items-center gap-2 bg-[#FF4D00] text-black px-5 py-2.5 rounded-full border-2 border-black font-bold uppercase hover:scale-105 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
           >
             <span>VISITAR EN VIVO: {project.liveUrl.label}</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
               <path stroke-linecap="square" stroke-linejoin="miter" d="M7 17L17 7M17 7H7M17 7V17"></path>
             </svg>
           </a>
@@ -112,66 +111,57 @@ const seoDescription = project.description;
   </header>
 
   <!-- Main Hero Visual Frame (Production Screenshot) -->
-  <section class="relative bg-black py-16 md:py-24 px-4 md:px-12 text-white">
+  <section class="relative bg-[#FF4D00] py-16 md:py-20 px-4 md:px-12 text-black">
     <div class="max-w-7xl mx-auto">
-      <div class="border-2 border-white/20 bg-black overflow-hidden shadow-2xl">
-        <!-- Console Window Bar -->
-        <div class="flex justify-between items-center text-xs font-mono-meta text-white/70 px-4 py-2.5 bg-neutral-900 border-b border-white/20">
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
-            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
-            <span class="font-bold tracking-wider text-[#FF4D00] ml-2">CAPTURA // PRODUCCIÓN</span>
+      <div class="border-2 border-black bg-black text-white overflow-hidden shadow-[12px_12px_0_#000000]">
+        <!-- Brutalist Window Bar -->
+        <div class="flex justify-between items-center text-xs font-mono-meta text-white/70 px-4 py-2.5 bg-black border-b-2 border-white/20">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 bg-[#FF4D00]"></span>
+            <span class="font-bold tracking-wider text-[#FF4D00]">CAPTURA // PRODUCCIÓN</span>
           </div>
-          <span class="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            SISTEMA EN VIVO
+          <span class="text-[11px] font-bold text-[#FF4D00]">
+            EN VIVO
           </span>
         </div>
 
         {assets && (
-          <div class="relative bg-neutral-950 overflow-hidden">
+          <div class="relative bg-black overflow-hidden">
             <Image
               src={assets.main}
               alt={assets.altEs}
               width={1600}
               height={1000}
               quality={90}
-              class="w-full h-auto object-cover"
+              class="img-reveal w-full h-auto object-cover"
               loading="eager"
             />
           </div>
         )}
 
-        <div class="flex items-center justify-between border-t border-white/10 px-6 py-3 text-xs font-mono-meta text-white/60 bg-black">
-          <span>{project.client} · ROSARIO / REGIONAL</span>
-          <span class="text-[#FF4D00] font-bold">100% OPERATIVO EN PRODUCCIÓN</span>
+        <div class="flex items-center justify-between border-t border-white/20 px-6 py-3 text-xs font-mono-meta text-white/60 bg-black">
+          <span>{project.client}{project.location ? ` · ${project.location}` : ""}</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Problem / Challenge & Before-After Contrast Section -->
-  <section class="relative bg-black text-white py-20 px-4 md:px-12">
+  <section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
     <div class="max-w-7xl mx-auto space-y-12">
       
       <!-- Section Header -->
-      <div class="border-b border-white/20 pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
-        <div>
-          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-            // EL DESAFÍO
-          </span>
-          <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
-            {project.challengeTitle || "EL CONTROL MANUAL LLEGÓ A SU LÍMITE"}
-          </h2>
-        </div>
-        <p class="font-mono-meta text-xs text-white/60 max-w-xs md:text-right">
-          DIAGNÓSTICO TÉCNICO Y CUELLOS DE BOTELLA INICIALES.
-        </p>
+      <div class="border-b border-white/20 pb-8">
+        <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+          // EL DESAFÍO
+        </span>
+        <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
+          {project.challengeTitle || "EL CONTROL MANUAL LLEGÓ A SU LÍMITE"}
+        </h2>
       </div>
 
       <!-- Challenge Narrative -->
-      <div class="max-w-4xl">
+      <div>
         <p class="font-sans text-base sm:text-lg text-white/80 leading-relaxed">
           {project.challenge}
         </p>
@@ -179,24 +169,24 @@ const seoDescription = project.description;
 
       <!-- Before / After Contrast Table (Brutalist Rows) -->
       {project.contrastRows && project.contrastRows.length > 0 && (
-        <div class="border-2 border-white/20 bg-white/[0.01] overflow-hidden">
+        <div class="border-2 border-white/20 bg-white/[0.02] overflow-hidden">
           <div class="grid grid-cols-1 md:grid-cols-2 text-xs font-mono-meta uppercase font-bold tracking-wider border-b border-white/20">
-            <div class="bg-neutral-900/80 text-white/70 px-6 py-3 border-b md:border-b-0 md:border-r border-white/20 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-neutral-500"></span>
+            <div class="bg-white/[0.04] text-white/70 px-6 py-3 border-b md:border-b-0 md:border-r border-white/20 flex items-center gap-2">
+              <span class="w-2 h-2 bg-white/40"></span>
               PROCESO ANTERIOR (MANUAL)
             </div>
             <div class="bg-black text-[#FF4D00] px-6 py-3 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#FF4D00]"></span>
-              DESPUÉS (SOLUCIÓN DEFTCODE)
+              <span class="w-2 h-2 bg-[#FF4D00]"></span>
+              DESPUÉS (SOLUCIÓN DEFTCODE®)
             </div>
           </div>
 
-          <div class="divide-y divide-white/10">
+          <div class="divide-y divide-white/10" data-stagger="70">
             {project.contrastRows.map((row) => (
-              <div class="grid grid-cols-1 md:grid-cols-2 text-sm">
+              <div class="reveal grid grid-cols-1 md:grid-cols-2 text-sm">
                 <!-- Before Col -->
-                <div class="px-6 py-4 text-white/50 bg-neutral-950/40 md:border-r border-white/10 flex items-start gap-3">
-                  <span class="text-neutral-500 font-mono-meta font-bold">✕</span>
+                <div class="px-6 py-4 text-white/50 bg-white/[0.02] md:border-r border-white/10 flex items-start gap-3">
+                  <span class="text-white/40 font-mono-meta font-bold">✕</span>
                   <span>{row.before}</span>
                 </div>
                 <!-- After Col -->
@@ -214,37 +204,32 @@ const seoDescription = project.description;
   </section>
 
   <!-- Technical Solution & Architectural Features -->
-  <section class="relative bg-black text-white py-20 px-4 md:px-12">
+  <section class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
     <div class="max-w-7xl mx-auto space-y-12">
       
       <!-- Section Header -->
-      <div class="border-b border-white/20 pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
-        <div>
-          <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-            // LA SOLUCIÓN TÉCNICA
-          </span>
-          <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
-            {project.solutionTitle || "CÓMO LO RESOLVIMOS"}
-          </h2>
-        </div>
-        <p class="font-mono-meta text-xs text-white/60 max-w-xs md:text-right">
-          ARQUITECTURA DE SOFTWARE, APIS Y MODELOS DE DATOS.
-        </p>
+      <div class="border-b-2 border-black pb-8">
+        <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+          // LA SOLUCIÓN TÉCNICA
+        </span>
+        <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-tight">
+          {project.solutionTitle || "CÓMO LO RESOLVIMOS"}
+        </h2>
       </div>
 
-      <div class="max-w-4xl">
-        <p class="font-sans text-base sm:text-lg text-white/80 leading-relaxed">
+      <div>
+        <p class="font-sans text-base sm:text-lg text-black/90 font-medium leading-relaxed">
           {project.solution}
         </p>
       </div>
 
       <!-- 4 Solution Feature Cards -->
       {project.solutionFeatures && project.solutionFeatures.length > 0 && (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-stagger="90">
           {project.solutionFeatures.map((feature, idx) => (
-            <article class="border-2 border-white/20 p-8 bg-white/[0.02] flex flex-col justify-between hover:border-[#FF4D00] transition-colors">
+            <article class="reveal border-2 border-black p-8 bg-black text-white flex flex-col justify-between shadow-[8px_8px_0_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform">
               <div>
-                <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div class="flex items-center justify-between border-b border-white/20 pb-4 mb-6">
                   <span class="font-mono-meta text-2xl font-bold text-[#FF4D00]">
                     [{String(idx + 1).padStart(2, "0")}]
                   </span>
@@ -254,7 +239,7 @@ const seoDescription = project.description;
                   {feature.title}
                 </h3>
               </div>
-              <p class="font-sans text-sm sm:text-base text-white/70 leading-relaxed mt-2">
+              <p class="font-sans text-sm sm:text-base text-white/75 leading-relaxed mt-2">
                 {feature.description}
               </p>
             </article>
@@ -267,26 +252,21 @@ const seoDescription = project.description;
 
   <!-- Complete Multi-Screenshot Gallery -->
   {assets && assets.gallery && assets.gallery.length > 1 && (
-    <section class="relative bg-black text-white py-20 px-4 md:px-12">
+    <section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
       <div class="max-w-7xl mx-auto space-y-12">
-        <div class="border-b border-white/20 pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
-          <div>
-            <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-              // GALERÍA DE PANTALLAS
-            </span>
-            <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
-              INTERFACES EN PRODUCCIÓN
-            </h2>
-          </div>
-          <p class="font-mono-meta text-xs text-white/60 max-w-xs md:text-right">
-            VISTAS REALES DEL SISTEMA DESPLEGADO.
-          </p>
+        <div class="border-b border-white/20 pb-8">
+          <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+            // GALERÍA DE PANTALLAS
+          </span>
+          <h2 data-fit-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-tight">
+            INTERFACES EN PRODUCCIÓN
+          </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-stagger="90">
           {assets.gallery.map((imgItem, idx) => (
-            <div class="border-2 border-white/20 bg-black overflow-hidden flex flex-col group">
-              <div class="flex justify-between items-center text-[11px] font-mono-meta text-white/70 px-4 py-2 bg-neutral-900 border-b border-white/20">
+            <div class="reveal border-2 border-white/20 bg-black overflow-hidden flex flex-col group hover:border-[#FF4D00] transition-colors">
+              <div class="flex justify-between items-center text-[11px] font-mono-meta text-white/70 px-4 py-2 bg-black border-b border-white/20">
                 <span class="font-bold text-[#FF4D00]">VISTA [{String(idx + 1).padStart(2, "0")}]</span>
                 <span>{imgItem.captionEs || "SISTEMA ACTIVO"}</span>
               </div>
@@ -295,7 +275,7 @@ const seoDescription = project.description;
                 data-lightbox-open={project.imageKey}
                 data-lightbox-index={idx}
                 aria-label="Abrir galería de pantallas a pantalla completa"
-                class="relative block w-full text-left bg-neutral-950 overflow-hidden group cursor-zoom-in"
+                class="relative block w-full text-left bg-black overflow-hidden group cursor-zoom-in"
               >
                 <Image
                   src={imgItem.src}
@@ -303,7 +283,7 @@ const seoDescription = project.description;
                   width={1600}
                   height={1000}
                   quality={90}
-                  class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="img-reveal w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span
                   class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/70 border border-white/30 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
@@ -316,7 +296,7 @@ const seoDescription = project.description;
                 </span>
               </button>
               {imgItem.captionEs && (
-                <div class="p-4 bg-neutral-950 border-t border-white/10 text-xs font-mono-meta text-white/60">
+                <div class="p-4 bg-black border-t border-white/10 text-xs font-mono-meta text-white/60">
                   {imgItem.captionEs}
                 </div>
               )}
@@ -329,29 +309,24 @@ const seoDescription = project.description;
 
   <!-- Results & Key Metrics Section -->
   {project.resultsMetrics && project.resultsMetrics.length > 0 && (
-    <section class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12">
+    <section class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
       <div class="max-w-7xl mx-auto space-y-12">
-        <div class="border-b-2 border-black pb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
-          <div>
-            <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-              // RESULTADOS COMPROBADOS
-            </span>
-            <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-tight">
-              {project.resultsTitle || "NÚMEROS REALES, CERO ESTIMACIONES"}
-            </h2>
-          </div>
-          <p class="font-mono-meta text-xs text-black/80 max-w-xs md:text-right font-medium">
-            MÉTRICAS MEDIDAS DIRECTAMENTE EN OPERACIÓN.
-          </p>
+        <div class="border-b-2 border-black pb-8">
+          <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+            // RESULTADOS COMPROBADOS
+          </span>
+          <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-tight">
+            {project.resultsTitle || "NÚMEROS REALES, CERO ESTIMACIONES"}
+          </h2>
         </div>
 
         <!-- 4 Metric Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger="90">
           {project.resultsMetrics.map((metric) => (
-            <div class="bg-black text-white p-6 sm:p-8 border-2 border-black flex flex-col justify-between shadow-[8px_8px_0_#000000]">
+            <div class="reveal bg-black text-white p-6 sm:p-8 border-2 border-black flex flex-col justify-between shadow-[8px_8px_0_#000000]">
               <div>
                 <div class="flex items-baseline gap-2 mb-3">
-                  <span class="font-display text-4xl sm:text-5xl font-bold text-[#FF4D00] tracking-tight">
+                  <span data-count-up class="font-display text-4xl sm:text-5xl font-bold text-[#FF4D00] tracking-tight">
                     {metric.value}
                   </span>
                   <span class="font-mono-meta text-xs uppercase text-white/60 font-bold">
@@ -379,7 +354,7 @@ const seoDescription = project.description;
         class="group flex flex-col items-start gap-1 font-mono-meta text-xs text-white/70 hover:text-[#FF4D00] transition-colors"
       >
         <span class="flex items-center gap-1 uppercase font-bold text-[#FF4D00]">
-          <span>&larr;</span> CASO ANTERIOR
+          <span class="transition-transform duration-200 group-hover:-translate-x-1">&larr;</span> CASO ANTERIOR
         </span>
         <span class="font-display text-base sm:text-lg text-white group-hover:text-[#FF4D00] uppercase tracking-tight">
           {prev.title}
@@ -389,9 +364,10 @@ const seoDescription = project.description;
       <!-- Center Hub -->
       <a
         href="/proyectos/"
-        class="border border-white/20 px-4 py-2 font-mono-meta text-xs uppercase font-bold text-white/80 hover:bg-white/10 hover:text-[#FF4D00] hover:border-[#FF4D00] transition-all"
+        class="group inline-flex items-center gap-2 bg-[#FF4D00] text-black rounded-full border-2 border-black px-6 py-3 font-mono-meta text-xs uppercase font-bold hover:scale-105 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
       >
-        VER TODOS LOS PROYECTOS
+        <span>VER TODOS LOS PROYECTOS</span>
+        <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
       </a>
 
       <!-- Next -->
@@ -400,7 +376,7 @@ const seoDescription = project.description;
         class="group flex flex-col items-end gap-1 font-mono-meta text-xs text-white/70 hover:text-[#FF4D00] transition-colors text-right"
       >
         <span class="flex items-center gap-1 uppercase font-bold text-[#FF4D00]">
-          SIGUIENTE CASO <span>&rarr;</span>
+          SIGUIENTE CASO <span class="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
         </span>
         <span class="font-display text-base sm:text-lg text-white group-hover:text-[#FF4D00] uppercase tracking-tight">
           {next.title}

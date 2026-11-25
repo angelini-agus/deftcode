@@ -31,7 +31,7 @@ interface Props {
   lang?: "es" | "en";
 }
 const { lang = "es" } = Astro.props;
-const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando";
+const srLabel = lang === "en" ? "DEFTCODE® is loading" : "DEFTCODE® está cargando";
 ---
 
 <div
@@ -46,7 +46,7 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
 
   <!-- Orange word copy: screen-anchored, centered, emerges from darkness. -->
   <div class="absolute inset-0 flex items-center justify-center">
-    <span data-preloader-word-orange class="preloader-word text-[#FF4D00]">DEFTCODE</span>
+    <span data-preloader-word-orange class="preloader-word text-[#FF4D00]">DEFTCODE®</span>
   </div>
 
   <!-- Orange curtain: rises from the bottom carrying its own clipped BLACK
@@ -59,7 +59,7 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
       data-preloader-curtain-inner
       class="preloader-curtain-inner absolute inset-0 flex items-center justify-center"
     >
-      <span data-preloader-word-black class="preloader-word text-black">DEFTCODE</span>
+      <span data-preloader-word-black class="preloader-word text-black">DEFTCODE®</span>
     </div>
   </div>
 </div>
@@ -92,8 +92,8 @@ const srLabel = lang === "en" ? "Deftcode is loading" : "Deftcode está cargando
     line-height: 1;
     white-space: nowrap;
     /* Spec clamp; the min() fit cap keeps the word off the screen edges on
-       narrow viewports (DEFTCODE measures ~5.3em in Archivo Black). */
-    font-size: min(clamp(4.5rem, 11vw, 10rem), calc((100vw - 2rem) / 6.2));
+       narrow viewports (DEFTCODE® measures ~6em in Archivo Black). */
+    font-size: min(clamp(4.5rem, 11vw, 10rem), calc((100vw - 2rem) / 6.9));
     will-change: opacity, transform, filter;
   }
   /* Phase 1 initial state: the orange word waits in darkness. */

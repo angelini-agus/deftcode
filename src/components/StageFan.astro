@@ -89,19 +89,19 @@ const FAN = [
 
 <section
   id="acompanamiento"
-  class="stage-fan relative overflow-hidden bg-[#FF4D00] text-black py-20 lg:py-28 scroll-mt-16"
+  class="stage-fan relative overflow-hidden bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12 scroll-mt-16"
   aria-label={copy.aria}
   data-stage-fan
 >
-  <div class="relative z-10 mx-auto max-w-[1400px] px-6">
-    <!-- Header: title left, intro right -->
-    <div class="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-12">
+  <div class="relative z-10 mx-auto max-w-7xl">
+    <!-- Header: standard section header matching Inicio/Servicios -->
+    <div class="border-b-2 border-black pb-8 mb-12">
+      <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+        {copy.eyebrow}
+      </span>
       <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-[-0.04em] leading-[0.88] text-black m-0">
         {copy.title}
       </h2>
-      <p class="reveal font-sans text-sm lg:text-base leading-relaxed text-black/80 max-w-[460px] m-0" style="animation-delay: 90ms">
-        {copy.intro}
-      </p>
     </div>
 
     <!-- Card fan (≥1280px) -->
@@ -116,10 +116,6 @@ const FAN = [
             >
               <div class="stage-fan__pos">
                 <div class="stage-fan__pop flex h-full w-full flex-col items-center px-5 pb-7 pt-9 text-center bg-black text-white border-2 border-black shadow-[0_20px_50px_-20px_rgba(0,0,0,0.45)]">
-                  <svg aria-hidden="true" viewBox="0 0 60 18" class="pointer-events-none absolute right-6 top-6 w-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color: rgba(255,77,0,0.5)">
-                    <path d="M2 12c4-8 8 4 12-4s8 4 12-4 8 4 12-4" />
-                    <path d="M2 4c4-6 8 2 12-4" />
-                  </svg>
                   <span class="font-mono-meta text-[11px] uppercase font-bold tracking-widest text-[#FF4D00] border border-[#FF4D00] rounded-full px-4 py-1">
                     {stage.badge}
                   </span>
@@ -130,15 +126,13 @@ const FAN = [
                     {stage.description}
                   </p>
                   <a
-                    href="/contacto/"
-                    class="mt-auto inline-flex items-center gap-2.5 pt-5 font-mono-meta text-[11px] font-bold uppercase tracking-wider text-white hover:text-[#FF4D00] transition-colors"
+                    href={lang === "en" ? "/en/contact/" : "/contacto/"}
+                    class="group mt-auto inline-flex items-center gap-2 bg-[#FF4D00] text-black font-mono-meta text-[11px] font-bold uppercase tracking-wider px-5 py-2.5 rounded-full border-2 border-black hover:scale-105 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   >
-                    {copy.cta}
-                    <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#FF4D00] text-black transition-transform duration-200 hover:translate-x-0.5">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
-                        <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </span>
+                    <span>{copy.cta}</span>
+                    <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+                      <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </a>
                 </div>
               </div>
@@ -210,11 +204,6 @@ const FAN = [
 </section>
 
 <style>
-  .stage-fan {
-    /* Dot grid over the orange, echoing the analog instrument look. */
-    background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1.5px, transparent 1.5px);
-    background-size: 22px 22px;
-  }
   .stage-fan__card {
     position: absolute;
     left: 50%;
@@ -244,7 +233,11 @@ const FAN = [
   import gsap from "gsap";
 
   const section = document.querySelector<HTMLElement>("[data-stage-fan]");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const html = document.documentElement;
+  const reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    html.classList.contains("motion-static") ||
+    html.classList.contains("preload-skip");
 
   if (section) {
     const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-fan-card]"));

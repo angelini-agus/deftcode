@@ -20,9 +20,9 @@ const [quoteBefore, quoteAfter] = clientQuote.text.split(clientQuote.highlight);
      ported from misura-web: the vertical 2px rule acts as the quotation
      mark, the signature rides in the site's mono, and the highlighted
      phrase is the only orange mark on the black background. -->
-<section class="relative bg-black text-white py-16 md:py-24 px-4 md:px-12">
-  <div class="max-w-6xl mx-auto">
-    <figure class="reveal max-w-3xl border-l-2 border-[#FF4D00] pl-6 md:pl-10">
+<section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
+  <div class="max-w-7xl mx-auto">
+    <figure class="reveal border-l-2 border-[#FF4D00] pl-6 md:pl-10">
       <p class="font-mono-meta text-xs uppercase font-bold tracking-widest text-[#FF4D00] mb-4 m-0">
         {clientQuote.eyebrow}
       </p>
@@ -41,10 +41,10 @@ const [quoteBefore, quoteAfter] = clientQuote.text.split(clientQuote.highlight);
         <p class="mt-5 mb-0">
           <a
             href={caseHref}
-            class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+            class="group inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
           >
             <span>{caseLabel}</span>
-            <span>&rarr;</span>
+            <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
           </a>
         </p>
       </figcaption>

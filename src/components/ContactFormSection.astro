@@ -29,11 +29,11 @@ if (import.meta.env.PROD && !ACCESS_KEY) {
 const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, card.buttonLabel]));
 ---
 
-<section id="formulario" class={embedded ? "" : "relative px-4 md:px-12 py-16 md:py-20"}>
-  <div class="max-w-3xl mx-auto">
+<section id="formulario" class={embedded ? "" : "relative bg-black px-4 md:px-12 py-16 md:py-20"}>
+  <div class={embedded ? "max-w-3xl mx-auto" : "max-w-7xl mx-auto"}>
     <div
       id="form-card"
-      class="bg-black text-white p-8 sm:p-10 md:p-12 border-2 border-black shadow-[12px_12px_0_#000000]"
+      class={`reveal bg-black text-white p-8 sm:p-10 md:p-12 border-2 ${embedded ? "border-black shadow-[12px_12px_0_#000000]" : "border-white/20 max-w-3xl mx-auto"}`}
     >
       <form
         id="diagnostico-form"
@@ -116,10 +116,10 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
         <!-- Submit -->
         <button
           type="submit"
-          class="w-full bg-white text-black font-mono-meta text-sm sm:text-base font-bold uppercase p-5 rounded-full border-2 border-black hover:bg-white transition-all hover:scale-[1.02] shadow-lg flex items-center justify-center gap-3 cursor-pointer mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          class="group w-full bg-white text-black font-mono-meta text-sm sm:text-base font-bold uppercase p-5 rounded-full border-2 border-black hover:bg-white transition-all hover:scale-[1.02] shadow-lg flex items-center justify-center gap-3 cursor-pointer mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           <span>{contactForm.submitLabel}</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+          <svg class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
         </button>
@@ -142,10 +142,10 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
              the href is a placeholder by design (ESTRATEGIA-COPY.md §8). -->
         <a
           href={contactForm.successCalcHref}
-          class="mt-6 inline-flex items-center gap-2 font-mono-meta text-xs font-bold uppercase text-[#FF4D00] hover:text-white transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+          class="group mt-6 inline-flex items-center gap-2 font-mono-meta text-xs font-bold uppercase text-[#FF4D00] hover:text-white transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
         >
           <span>{contactForm.successCalcLabel}</span>
-          <span aria-hidden="true">&rarr;</span>
+          <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
         </a>
       </div>
     </div>

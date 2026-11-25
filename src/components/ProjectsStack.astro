@@ -15,34 +15,25 @@ const projectCount = projects.length;
 const sectionId = lang === "en" ? "projects" : "proyectos";
 const eyebrow = lang === "en" ? "// CASES & DELIVERABLES" : "// CASOS & ENTREGABLES";
 const title = lang === "en" ? "SOFTWARE IN PRODUCTION" : "SOFTWARE EN PRODUCCIÓN";
-const intro =
-  lang === "en"
-    ? "REAL DEPLOYMENTS. ROBUST ARCHITECTURES AND SUB-MILLISECOND RESPONSE TIMES."
-    : "DESPLIEGUES REALES. ARQUITECTURAS ROBUSTAS Y TIEMPOS DE RESPUESTA MEDIDOS AL MILISEGUNDO.";
 const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
 const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMPLETO";
 ---
 
 <section
   id={sectionId}
-  class="projects-stack relative bg-[#FF4D00] text-black border-b-2 border-black"
+  class="projects-stack relative bg-[#FF4D00] text-black"
   style={`--flip-count: ${projectCount}`}
 >
   <!-- Section Title -->
   <div class="px-4 md:px-12">
     <div class="max-w-7xl mx-auto pt-20 pb-10">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-black pb-8">
-        <div>
-          <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-            {eyebrow}
-          </span>
-          <h2 data-fit-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-black uppercase tracking-[-0.04em] leading-[0.88]">
-            {title}
-          </h2>
-        </div>
-        <p class="font-mono-meta text-xs sm:text-sm text-black/80 max-w-sm sm:text-right font-medium">
-          {intro}
-        </p>
+      <div class="border-b-2 border-black pb-8">
+        <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+          {eyebrow}
+        </span>
+        <h2 data-fit-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-black uppercase tracking-[-0.04em] leading-[0.88]">
+          {title}
+        </h2>
       </div>
     </div>
   </div>
@@ -50,7 +41,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
   <!-- Runway containing the sticky stage -->
   <div class="projects-stack__runway relative" data-flip-runway>
     <div class="projects-stack__sticky sticky top-24 min-h-[85vh] flex items-center justify-center px-4 md:px-12 py-8">
-      <div class="projects-stack__stage relative w-full max-w-5xl" data-flip-stage>
+      <div class="projects-stack__stage relative w-full max-w-7xl" data-flip-stage>
         <div class="projects-stack__deck relative w-full">
           {
             projects.map((item, index) => (
@@ -110,20 +101,19 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                     <div class="pt-2">
                       <a
                         href={lang === "en" ? `/en/projects/${item.slug}/` : `/proyectos/${item.slug}/`}
-                        class="inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5"
+                        class="group inline-flex items-center gap-2 font-mono-meta text-xs font-bold text-white hover:text-[#FF4D00] uppercase tracking-wider transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5"
                       >
                         <span>{viewCaseLabel}</span>
-                        <span>&rarr;</span>
+                        <span class="transition-transform duration-200 group-hover:translate-x-1.5">&rarr;</span>
                       </a>
                     </div>
                   </div>
 
                   <!-- Visual Graphic Frame with Real Screenshot -->
                   <div class="lg:col-span-5 bg-black border-2 border-white/20 overflow-hidden flex flex-col shadow-2xl">
-                    <div class="flex justify-between items-center text-xs font-mono-meta text-white/70 px-4 py-2 bg-neutral-900 border-b border-white/20">
+                    <div class="flex justify-between items-center text-xs font-mono-meta text-white/70 px-4 py-2 bg-black border-b border-white/20">
                       <span class="font-bold tracking-wider text-[#FF4D00]">{lang === "en" ? "SCREENSHOT // PROD" : "CAPTURA // PRODUCCIÓN"}</span>
-                      <span class="flex items-center gap-1.5 text-[10px]">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span class="text-[10px] font-bold text-white/60">
                         {lang === "en" ? "LIVE" : "EN VIVO"}
                       </span>
                     </div>
@@ -136,7 +126,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
                         aria-label={
                           lang === "en" ? "Open fullscreen screen gallery" : "Abrir galería de pantallas a pantalla completa"
                         }
-                        class="relative block w-full text-left bg-neutral-950 overflow-hidden group cursor-zoom-in"
+                        class="relative block w-full text-left bg-black overflow-hidden group cursor-zoom-in"
                       >
                         <Image
                           src={projectAssets[item.imageKey].main}
@@ -161,7 +151,6 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
 
                     <div class="flex items-center justify-between border-t border-white/10 px-4 py-2.5 text-[11px] font-mono-meta text-white/60 bg-black">
                       <span class="truncate max-w-[200px]">{item.client || (lang === "en" ? "ENTERPRISE CLIENT" : "CLIENTE CORPORATIVO")}</span>
-                      <span class="text-[#FF4D00] font-bold">{lang === "en" ? "100% OPERATIONAL" : "100% OPERATIVO"}</span>
                     </div>
                   </div>
                 </div>

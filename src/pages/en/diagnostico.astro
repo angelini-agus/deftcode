@@ -26,16 +26,16 @@ const waProof = diagnosticoLanding.proofLine;
 >
   <!-- Hero (§7): H1 + subtitle + CTA anchor + social proof -->
   <section id="top" class="relative bg-[#FF4D00] text-black pt-32 pb-16 md:pt-40 md:pb-20 px-4 md:px-12">
-    <div class="max-w-5xl mx-auto">
-      <div class="font-mono-meta text-xs uppercase font-bold tracking-widest mb-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="reveal font-mono-meta text-xs uppercase font-bold tracking-widest mb-6">
         {diagnosticoLanding.eyebrow}
       </div>
 
-      <h1 data-decode-title class="reveal font-display text-3xl sm:text-5xl md:text-6xl uppercase tracking-[-0.04em] leading-[0.9] max-w-4xl m-0">
+      <h1 data-decode-title class="reveal font-display text-4xl sm:text-6xl md:text-[6vw] uppercase tracking-[-0.04em] leading-[0.88] m-0">
         {diagnosticoLanding.h1}
       </h1>
 
-      <p class="reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold max-w-3xl mt-8 leading-relaxed text-black/90">
+      <p class="reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold mt-8 leading-relaxed text-black/90">
         {diagnosticoLanding.subtitle}
       </p>
 
@@ -66,12 +66,12 @@ const waProof = diagnosticoLanding.proofLine;
 
   <!-- What you get (§7): 5 bullets -->
   <section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-7xl mx-auto">
       <div class="border-b border-white/20 pb-8">
-        <span class="font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
+        <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
           {diagnosticoLanding.receiveEyebrow}
         </span>
-        <h2 class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
+        <h2 data-fit-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
           {diagnosticoLanding.receiveTitle}
         </h2>
       </div>
@@ -91,13 +91,13 @@ const waProof = diagnosticoLanding.proofLine;
   </section>
 
   <!-- What it is NOT (§7): 3 bullets -->
-  <section class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12 border-b-2 border-black">
-    <div class="max-w-5xl mx-auto">
+  <section class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
+    <div class="max-w-7xl mx-auto">
       <div class="border-b-2 border-black pb-8">
-        <span class="font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+        <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
           {diagnosticoLanding.notEyebrow}
         </span>
-        <h2 class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
+        <h2 data-fit-title class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
           {diagnosticoLanding.notTitle}
         </h2>
       </div>
@@ -124,15 +124,15 @@ const waProof = diagnosticoLanding.proofLine;
   </section>
 
   <!-- Repeated CTA + same 4-field form (§7) -->
-  <section class="relative bg-[#FF4D00] py-16 md:py-20 px-4 md:px-12">
-    <div class="max-w-3xl mx-auto flex justify-center mb-10">
+  <section class="relative bg-black py-16 md:py-20 px-4 md:px-12">
+    <div class="max-w-7xl mx-auto flex justify-center mb-10">
       <a
         href="#formulario"
-        class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase px-8 py-5 rounded-full border-2 border-black shadow-[0_12px_32px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black"
+        class="group inline-flex items-center gap-3 bg-[#FF4D00] text-black font-mono-meta text-xs sm:text-sm font-bold uppercase px-8 py-5 rounded-full border-2 border-black transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF4D00]"
       >
         <span>{diagnosticoLanding.ctaLabel}</span>
         <svg
-          class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+          class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

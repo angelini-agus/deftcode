@@ -29,8 +29,8 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     </div>
   </div>
 
-  <!-- Giant Typographic Headline (16vw) -->
-  <div class="flex flex-col items-center justify-center text-center pt-44 pb-0 hero-middle">
+  <!-- Giant Typographic Headline (16vw) + CTA centered cleanly -->
+  <div class="my-auto flex flex-col items-center justify-center text-center pt-6 md:pt-8 pb-0 hero-middle">
     <h1
       data-hero-h1
       data-hero-scramble
@@ -45,15 +45,8 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     >
       {heroContent.headlineSub}
     </p>
-  </div>
 
-  <!-- §7 conversion CTA: user request — the block sits at the exact
-       vertical midpoint of the gap between the subheadline and the 2px
-       divider. my-auto absorbs ALL leftover section space symmetrically
-       around this block, so its center lands exactly on the midpoint of
-       that gap regardless of viewport height. Microcopy on one line (sm+). -->
-  <div class="my-auto flex items-center justify-center">
-    <div data-hero-cta class="flex flex-col items-center gap-2">
+    <div data-hero-cta class="flex flex-col items-center gap-2.5 mt-8 md:mt-10">
       <a
         href={heroContent.ctaHref}
         class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border-2 border-black shadow-[0_10px_26px_rgba(0,0,0,0.35)] transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
