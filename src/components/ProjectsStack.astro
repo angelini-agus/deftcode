@@ -26,8 +26,8 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
 >
   <!-- Section Title -->
   <div class="px-4 md:px-12">
-    <div class="max-w-7xl mx-auto pt-20 pb-10">
-      <div class="border-b-2 border-black pb-8">
+    <div class="max-w-7xl mx-auto pt-14 pb-2 md:pt-16 md:pb-4">
+      <div class="border-b-2 border-black pb-4 md:pb-6">
         <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
           {eyebrow}
         </span>
@@ -40,7 +40,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
 
   <!-- Runway containing the sticky stage -->
   <div class="projects-stack__runway relative" data-flip-runway>
-    <div class="projects-stack__sticky sticky top-24 min-h-[85vh] flex items-center justify-center px-4 md:px-12 py-8">
+    <div class="projects-stack__sticky sticky top-16 md:top-20 min-h-[78vh] flex items-center justify-center px-4 md:px-12 py-3 md:py-6">
       <div class="projects-stack__stage relative w-full max-w-7xl" data-flip-stage>
         <div class="projects-stack__deck relative w-full">
           {
@@ -165,10 +165,12 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
 
 <style>
   .projects-stack__runway {
-    /* Height creates the scroll runway: 100vh base + 90vh per card
+    /* Height creates the scroll runway: 70vh lead-in + 90vh per card
      (each card rises during the first half of its own segment and
-     holds fully uncovered for the rest, before the next one rises) */
-    min-height: calc(100vh + (var(--flip-count, 6) * 90vh));
+     holds fully uncovered for the rest, before the next one rises).
+     Shorter lead-in so the first card starts rising soon after the title
+     instead of after a full viewport of empty orange. */
+    min-height: calc(70vh + (var(--flip-count, 6) * 90vh));
   }
 
   .folder {
@@ -222,7 +224,10 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
       const firstCard = folders[0];
       const cardHeight = firstCard ? firstCard.getBoundingClientRect().height : 400;
       step = Math.max(28, Math.min(48, window.innerHeight * 0.05));
-      entryOffset = Math.max(300, cardHeight + 48);
+      // Cards only need to travel enough to clear the stage, not a whole
+      // extra viewport: a shorter rise keeps the deck visually attached to
+      // the heading while the scroll-driven flip starts much earlier.
+      entryOffset = Math.max(240, cardHeight * 0.55);
       geometry = flipGeometry(total, step, entryOffset, 0.5);
     };
 
@@ -266,7 +271,12 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
     const onScroll = () => {
       const rect = runway.getBoundingClientRect();
       const scrollY = window.scrollY;
-      const runwayTop = rect.top + scrollY;
+      // Start the flip while the heading is still well inside the viewport.
+      // The 45vh lead plus a shorter rise distance put the first card right
+      // under the title instead of after a long empty orange stretch.
+      const stickyOffset = window.innerWidth >= 768 ? 80 : 64;
+      const lead = window.innerHeight * 0.45;
+      const runwayTop = rect.top + scrollY - stickyOffset - lead;
       const runwayHeight = rect.height;
       const stickyHeight = window.innerHeight;
 

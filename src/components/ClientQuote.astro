@@ -4,9 +4,11 @@ import type { Lang } from "../lib/types";
 
 interface Props {
   lang?: Lang;
+  /** Proyectos: lives inside the featured case's black section. */
+  compact?: boolean;
 }
 
-const { lang = "es" } = Astro.props;
+const { lang = "es", compact = false } = Astro.props;
 const { clientQuote } = getContent(lang);
 
 const caseHref = lang === "en" ? "/en/projects/empresa-limpieza-rosario/" : "/proyectos/empresa-limpieza-rosario/";
@@ -14,13 +16,17 @@ const caseLabel = lang === "en" ? "EXPLORE FULL CASE" : "VER CASO COMPLETO";
 
 // The real client quote highlights one phrase: split once for the mark.
 const [quoteBefore, quoteAfter] = clientQuote.text.split(clientQuote.highlight);
+const Wrapper = compact ? "div" : "section";
+const wrapperClass = compact
+  ? "mt-12 border-t border-white/20 pt-10"
+  : "relative bg-black text-white py-16 md:py-20 px-4 md:px-12";
 ---
 
 <!-- Real client testimonial (Paola Zorila, AZ Servicios de Limpieza),
      ported from misura-web: the vertical 2px rule acts as the quotation
      mark, the signature rides in the site's mono, and the highlighted
      phrase is the only orange mark on the black background. -->
-<section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
+<Wrapper class={wrapperClass}>
   <div class="max-w-7xl mx-auto">
     <figure class="reveal border-l-2 border-[#FF4D00] pl-6 md:pl-10">
       <p class="font-mono-meta text-xs uppercase font-bold tracking-widest text-[#FF4D00] mb-4 m-0">
@@ -50,4 +56,4 @@ const [quoteBefore, quoteAfter] = clientQuote.text.split(clientQuote.highlight);
       </figcaption>
     </figure>
   </div>
-</section>
+</Wrapper>

@@ -38,6 +38,8 @@ export interface ServiceItem {
   slug: string;
   index: string;
   title: string;
+  /** Short human-readable name used as "<metaTitle> // DEFTCODE®". */
+  metaTitle: string;
   description: string;
   kicker: string;
   intro: string;
@@ -86,6 +88,8 @@ export interface ProjectItem {
   imageKey: string;
   slug: string;
   title: string;
+  /** Short human-readable name used as "<metaTitle> // DEFTCODE®". */
+  metaTitle: string;
   client?: string;
   location?: string;
   category: string;

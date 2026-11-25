@@ -20,14 +20,15 @@ import ScreenLightbox from "../components/ScreenLightbox.astro";
     eyebrow={pages.proyectos.eyebrow}
     title={pages.proyectos.h1}
     intro={pages.proyectos.intro}
-    dark
     ctaLabel="Quiero mi diagnóstico gratis"
     ctaHref="/contacto/"
   />
 
-  <!-- Social proof (AZ case) + client testimonial, before the deck -->
-  <FeaturedCase lang="es" />
-  <ClientQuote lang="es" />
+  <!-- Social proof (AZ case) + client testimonial share one black block,
+       so the orange banner above and the deck below keep their contrast. -->
+  <FeaturedCase lang="es">
+    <ClientQuote lang="es" compact />
+  </FeaturedCase>
 
   <!-- Interactive Runway Deck -->
   <ProjectsStack lang="es" />

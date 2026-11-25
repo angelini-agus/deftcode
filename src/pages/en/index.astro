@@ -8,9 +8,12 @@ import ForWhoSection from "../../components/ForWhoSection.astro";
 import TeamTeaser from "../../components/TeamTeaser.astro";
 import FaqSection from "../../components/FaqSection.astro";
 import CtaSection from "../../components/CtaSection.astro";
+import { getContent } from "../../lib/content";
+
+const { pages } = getContent("en");
 ---
 
-<BaseLayout lang="en">
+<BaseLayout lang="en" title={pages.home.title} description={pages.home.description}>
   <Hero lang="en" />
   <SkewedMarquee lang="en" />
   <ServicesList lang="en" />

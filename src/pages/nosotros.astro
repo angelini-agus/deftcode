@@ -5,14 +5,13 @@ import HowWeWorkSection from "../components/HowWeWorkSection.astro";
 import StageFan from "../components/StageFan.astro";
 import ManifestoSection from "../components/ManifestoSection.astro";
 import TeamSection from "../components/TeamSection.astro";
-import ClientQuote from "../components/ClientQuote.astro";
 import CtaSection from "../components/CtaSection.astro";
 import { pages } from "../lib/content";
 ---
 
 <!-- /nosotros per ESTRATEGIA-COPY.md §6: banner, garantías por escrito,
      manifiesto en lenguaje de beneficio, cómo trabajamos en 4 pasos,
-     equipo, testimonio y CTA final. -->
+     equipo y CTA final. El testimonio vive solo en /proyectos. -->
 <BaseLayout
   lang="es"
   title={pages.nosotros.title}
@@ -30,6 +29,5 @@ import { pages } from "../lib/content";
   <ManifestoSection lang="es" />
   <StageFan lang="es" />
   <TeamSection lang="es" />
-  <ClientQuote lang="es" />
   <CtaSection lang="es" />
 </BaseLayout>

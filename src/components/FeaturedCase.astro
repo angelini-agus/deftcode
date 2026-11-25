@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { getContent } from "../lib/content";
+import { projectAssets } from "../lib/project-images";
 import type { Lang } from "../lib/types";
 
 interface Props {
@@ -24,38 +26,48 @@ const stackProjects = stackIds
 const caseHref = lang === "en" ? `/en/projects/${featured.slug}/` : `/proyectos/${featured.slug}/`;
 const plazoLabel = lang === "en" ? "TIMELINE" : "PLAZO";
 const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
+const featuredAssets = projectAssets[featured.imageKey];
+
+// The stats copy stays untouched: split the leading figure from its label
+// so the number can be big while the explanation stays readable. Only the
+// value carries data-count-up; animateCountUp rewrites textContent.
+function splitStat(stat: string) {
+  const match = stat.match(/^(-?\$?[\d.,]+[MKB]?\+?%?)\s+(.*)$/);
+  return match ? { value: match[1], label: match[2] } : { value: stat, label: "" };
+}
+const stats = featuredCase.stats.map(splitStat);
 ---
 
 {
   variant === "featured" ? (
-    <section id="proyectos" class="relative bg-[#FF4D00] text-black py-16 md:py-20 px-4 md:px-12">
+    <section class="relative bg-black text-white py-16 md:py-20 px-4 md:px-12">
       <div class="max-w-7xl mx-auto">
-        <div class="border-b-2 border-black pb-8">
-          <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
+        <div class="border-b-2 border-white/20 pb-8">
+          <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
             {featuredCase.eyebrow}
           </span>
-          <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
+          <h2 data-decode-title class="reveal font-display text-3xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9] max-w-4xl">
             {featuredCase.title}
           </h2>
         </div>
 
-        <!-- Four standout numbers (§3.3) -->
-        <div class="mt-8 border-y-2 border-black">
-          <div class="grid grid-cols-2 md:grid-cols-4" data-stagger="90">
-            {featuredCase.stats.map((stat, index) => (
-              <div
-                data-count-up class={`reveal font-mono-meta text-[10px] sm:text-xs font-bold uppercase tracking-tight py-3 text-center text-black border-black ${
-                  index % 2 === 1 ? "border-l-2" : ""
-                } ${index >= 2 ? "border-t-2 md:border-t-0" : ""} ${index > 0 ? "md:border-l-2" : ""}`}
-              >
-                {stat}
-              </div>
-            ))}
-          </div>
+        <!-- Four standout numbers: one legible card per metric. The copy is
+             unchanged; only the figure is split out for size and animation. -->
+        <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" data-stagger="90">
+          {stats.map((stat) => (
+            <div class="reveal bg-[#FF4D00] text-black border-2 border-black p-4 sm:p-5 flex flex-col gap-3 min-h-[7.5rem]">
+              <span data-count-up class="font-display text-3xl sm:text-4xl leading-none tracking-[-0.03em]">
+                {stat.value}
+              </span>
+              <span class="font-mono-meta text-[11px] sm:text-xs md:text-sm font-bold uppercase leading-snug tracking-tight text-black/80 mt-auto">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
 
         <!-- Folder card: ProjectsStack structure on the orange section -->
-        <article class="w-full bg-black text-white border-2 border-black shadow-[0_16px_40px_rgba(0,0,0,0.35)] mt-10 md:mt-12">
+        <article class="w-full bg-black text-white border-2 border-white/20 shadow-[0_16px_40px_rgba(0,0,0,0.5)] mt-10 md:mt-12">
           <!-- Folder Tab Header -->
           <div class="flex items-center justify-between border-b-2 border-white/20 bg-black px-6 py-3">
             <div class="flex items-center gap-3">
@@ -81,7 +93,7 @@ const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
               <h3 class="font-display text-2xl sm:text-4xl text-white uppercase tracking-[-0.03em] leading-tight m-0">
                 {featured.title}
               </h3>
-              <p class="text-white/80 font-sans text-sm sm:text-base leading-relaxed">
+              <p class="text-white/90 font-sans text-sm sm:text-base leading-relaxed">
                 {featured.description}
               </p>
 
@@ -104,21 +116,20 @@ const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
               </div>
             </div>
 
-            <!-- Metrics panel (replaces the screenshot frame) -->
-            <div class="lg:col-span-5 bg-black border-2 border-white/20 p-6">
-              <p data-count-up class="font-display text-3xl sm:text-4xl text-[#FF4D00] uppercase tracking-tight leading-tight m-0">
-                {featured.metrics[0]}
-              </p>
-              <div class="mt-4">
-                {featured.metrics.slice(1).map((metric) => (
-                  <p data-count-up class="font-mono-meta text-xs text-white/80 uppercase tracking-wide border-b border-white/10 py-2 m-0">
-                    {metric}
-                  </p>
-                ))}
-              </div>
+            <!-- Real product screenshot instead of a second, unreadable copy
+                 of the metrics already shown above. -->
+            <div class="lg:col-span-5 bg-black border-2 border-white/20 overflow-hidden">
+              <Image
+                src={featuredAssets.main}
+                alt={lang === "en" ? featuredAssets.altEn : featuredAssets.altEs}
+                class="w-full h-auto block"
+                loading="lazy"
+              />
             </div>
           </div>
         </article>
+
+        <slot />
       </div>
     </section>
   ) : (

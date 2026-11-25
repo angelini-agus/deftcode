@@ -30,7 +30,7 @@ import type {
 // ==========================================
 
 const esSiteMeta: SiteMeta = {
-  title: "Software a medida en Rosario | Diagnóstico gratis | DEFTCODE®",
+  title: "Inicio // DEFTCODE®",
   description:
     "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
   siteUrl: "https://deftcode.com.ar",
@@ -51,14 +51,14 @@ const esNavLinks: NavLink[] = [
 
 const esPages: Record<string, PageContent> = {
   home: {
-    title: "Software a medida en Rosario | Diagnóstico gratis | DEFTCODE®",
+    title: "Inicio // DEFTCODE®",
     description:
       "Sistemas, CRM y ERP a medida en 3 a 6 semanas y a precio cerrado. Pedí tu diagnóstico gratis y mirá tu prototipo antes de firmar.",
     eyebrow: "ROSARIO, ARGENTINA",
     h1: "TU SISTEMA A MEDIDA",
   },
   nosotros: {
-    title: "Quiénes somos: desarrolladores que entienden de negocios | DEFTCODE®",
+    title: "Nosotros // DEFTCODE®",
     description:
       "Conocé a Agustín y Franco, el método de diagnóstico gratis y las garantías por escrito con las que trabajamos.",
     eyebrow: "NOSOTROS",
@@ -67,7 +67,7 @@ const esPages: Record<string, PageContent> = {
       "Somos gente de sistemas que entiende de negocios. Primero entendemos cómo trabajás, después te mostramos un prototipo y recién ahí firmás. Entregamos en semanas, no en semestres.",
   },
   proyectos: {
-    title: "Casos reales: sistemas, CRM y landings en producción | DEFTCODE®",
+    title: "Proyectos // DEFTCODE®",
     description:
       "Mirá qué ahorró, ordenó y vendió cada sistema que construimos: ERP, CRM, landings y portales en producción.",
     eyebrow: "CASOS REALES",
@@ -76,7 +76,7 @@ const esPages: Record<string, PageContent> = {
       "Cada caso muestra qué problema tenía el cliente, cuánto tardamos y qué cambió. Los tuyos pueden empezar con un diagnóstico gratis.",
   },
   servicios: {
-    title: "Sistemas, CRM, ERP y landings a medida | DEFTCODE®",
+    title: "Servicios // DEFTCODE®",
     description:
       "Siempre empezamos con un diagnóstico gratis. Después elegís qué construir, con precio cerrado y fecha en el contrato.",
     eyebrow: "SERVICIOS",
@@ -85,7 +85,7 @@ const esPages: Record<string, PageContent> = {
       "Siempre empezamos con un diagnóstico gratis. Después elegís qué construir, con precio cerrado y fecha en el contrato.",
   },
   contacto: {
-    title: "Diagnóstico gratis para tu empresa | DEFTCODE®",
+    title: "Contacto // DEFTCODE®",
     description:
       "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
     eyebrow: "DIAGNÓSTICO GRATIS",
@@ -94,7 +94,7 @@ const esPages: Record<string, PageContent> = {
       "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   diagnostico: {
-    title: "Diagnóstico gratis para tu empresa | DEFTCODE®",
+    title: "Diagnóstico // DEFTCODE®",
     description:
       "Entrevista de 1 hora, informe en 48 h y prototipo gratis. Sin compromiso. Pedilo ahora.",
     eyebrow: "DIAGNÓSTICO GRATIS",
@@ -103,7 +103,7 @@ const esPages: Record<string, PageContent> = {
       "Una entrevista de 1 hora sobre tu negocio y un informe con qué procesos te hacen perder plata y cuánto ahorrarías. El informe es tuyo aunque no trabajemos juntos.",
   },
   privacidad: {
-    title: "POLÍTICA DE PRIVACIDAD - DEFTCODE®",
+    title: "Privacidad // DEFTCODE®",
     description:
       "Compromiso de privacidad de DEFTCODE®: sin cookies invasivas de terceros, analítica anónima y respeto total por tus datos personales.",
     eyebrow: "LEGAL & COMPLIANCE",
@@ -162,6 +162,7 @@ const esServices: ServiceItem[] = [
     slug: "sistemas-gestion-erp",
     index: "01",
     title: "SISTEMAS DE GESTIÓN ERP",
+    metaTitle: "Sistemas de gestión ERP",
     description:
       "Sistemas de gestión a medida: operación en campo con GPS y QR, stock, facturación y cuentas corrientes en un solo panel. ERP de nicho sin configuraciones eternas.",
     kicker: "OPERACIÓN → FACTURACIÓN, EN UNA PANTALLA",
@@ -208,6 +209,7 @@ const esServices: ServiceItem[] = [
     slug: "sistemas-gestion-ventas",
     index: "02",
     title: "SISTEMAS DE GESTIÓN DE VENTAS",
+    metaTitle: "Sistemas de gestión de ventas",
     description:
       "Turnos, agendas, cotizadores y portales B2B: la cadena comercial completa, de la primera consulta al pedido directo, sin trabajo manual de por medio.",
     kicker: "AGENDA Y COTIZACIÓN SIN BACHES",
@@ -246,6 +248,7 @@ const esServices: ServiceItem[] = [
     slug: "landing-pages",
     index: "03",
     title: "LANDING PAGES",
+    metaTitle: "Landings",
     description:
       "Landings que cargan rápido, con SEO técnico y código propio.",
     kicker: "TU PRIMER PUNTO DE VENTA DIGITAL",
@@ -283,6 +286,7 @@ const esServices: ServiceItem[] = [
     slug: "automatizacion-ia",
     index: "04",
     title: "AUTOMATIZACIÓN CON IA",
+    metaTitle: "Automatización con IA",
     description:
       "Integraciones a medida y automatizaciones con IA: que tu eCommerce, el ERP, el CRM y WhatsApp hablen entre sí, solos.",
     kicker: "SISTEMAS QUE HABLAN ENTRE SÍ",
@@ -324,6 +328,7 @@ const esProjects: ProjectItem[] = [
     imageKey: "empresa-limpieza",
     slug: "empresa-limpieza-rosario",
     title: "DE PLANILLAS A UN SISTEMA QUE AHORRA $2.8M ARS POR MES",
+    metaTitle: "Sistema de gestión para limpieza",
     client: "SERVICETRACK // AZ SERVICIOS DE LIMPIEZA",
     plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Santa Fe",
@@ -406,6 +411,7 @@ const esProjects: ProjectItem[] = [
     imageKey: "gestion-legal",
     slug: "gestion-legal-estudio",
     title: "DOS PAÍSES, UN SOLO SISTEMA, CERO PLAZOS VENCIDOS",
+    metaTitle: "Sistema de gestión legal",
     client: "LEGALDESK // ESTUDIO JURÍDICO INTERNACIONAL",
     plazo: "[COMPLETAR: semanas]",
     location: "Argentina y Paraguay",
@@ -488,6 +494,7 @@ const esProjects: ProjectItem[] = [
     imageKey: "sistema-pediatrico",
     slug: "sistema-clinica-pediatrica",
     title: "HISTORIA CLÍNICA Y TURNOS SIN PAPELES, CONFORME A LA LEY 26.529",
+    metaTitle: "Sistema para clínica pediátrica",
     client: "PEDIATRICCARE // CLÍNICA PEDIÁTRICA",
     plazo: "[COMPLETAR: semanas]",
     location: "Pueblo Esther, Santa Fe",
@@ -570,6 +577,7 @@ const esProjects: ProjectItem[] = [
     imageKey: "crm-concesionaria",
     slug: "crm-concesionaria-rosario",
     title: "CUATRO CANALES DE CONSULTAS EN UN SOLO CRM",
+    metaTitle: "CRM para concesionaria",
     client: "AUTOLEADS // CONCESIONARIA OFICIAL",
     plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Santa Fe",
@@ -652,6 +660,7 @@ const esProjects: ProjectItem[] = [
     imageKey: "landing-limpieza",
     slug: "landing-empresa-limpieza",
     title: "UNA WEB QUE TRAE CONSULTAS CALIFICADAS",
+    metaTitle: "Landing para empresa de limpieza",
     client: "SITIO DE AZ SERVICIOS",
     plazo: "1 a 2 semanas",
     location: "Rosario, Santa Fe",
@@ -738,6 +747,7 @@ const esProjects: ProjectItem[] = [
     imageKey: "landing-pediatrica",
     slug: "landing-clinica-pediatrica",
     title: "TURNOS DESDE EL CELULAR, SIN ESPERAS",
+    metaTitle: "Landing para clínica pediátrica",
     client: "PORTAL PEDIÁTRICO // CLÍNICA PEDIÁTRICA",
     plazo: "1 a 2 semanas",
     location: "Pueblo Esther, Santa Fe",
@@ -1349,7 +1359,7 @@ const esDiagnosticoLanding: DiagnosticoLandingContent = {
 // ==========================================
 
 const enSiteMeta: SiteMeta = {
-  title: "Custom software in Rosario | Free diagnosis | DEFTCODE®",
+  title: "Home // DEFTCODE®",
   description:
     "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
   siteUrl: "https://deftcode.com.ar",
@@ -1370,14 +1380,14 @@ const enNavLinks: NavLink[] = [
 
 const enPages: Record<string, PageContent> = {
   home: {
-    title: "Custom software in Rosario | Free diagnosis | DEFTCODE®",
+    title: "Home // DEFTCODE®",
     description:
       "Custom systems, CRM and ERP in 3 to 6 weeks at a closed price. Book your free diagnosis and see your prototype before you sign.",
     eyebrow: "ROSARIO, ARGENTINA",
     h1: "YOUR CUSTOM-BUILT SYSTEM",
   },
   nosotros: {
-    title: "Who we are: developers who understand business | DEFTCODE®",
+    title: "About // DEFTCODE®",
     description:
       "Meet Agustín and Franco, the free diagnosis method and the written guarantees we work with.",
     eyebrow: "ABOUT",
@@ -1386,7 +1396,7 @@ const enPages: Record<string, PageContent> = {
       "We are systems people who understand business. First we learn how you work, then we show you a prototype and only then do we sign. We deliver in weeks, not semesters.",
   },
   proyectos: {
-    title: "Real cases: systems, CRM and landings in production | DEFTCODE®",
+    title: "Projects // DEFTCODE®",
     description:
       "See what each system we built saved, organized and sold: ERP, CRM, landings and portals in production.",
     eyebrow: "REAL CASES",
@@ -1395,7 +1405,7 @@ const enPages: Record<string, PageContent> = {
       "Each case shows what problem the client had, how long it took and what changed. Yours can start with a free diagnosis.",
   },
   servicios: {
-    title: "Custom systems, CRM, ERP and landings | DEFTCODE®",
+    title: "Services // DEFTCODE®",
     description:
       "We always start with a free diagnosis. Then you choose what to build, with a closed price and the date in the contract.",
     eyebrow: "SERVICES",
@@ -1404,7 +1414,7 @@ const enPages: Record<string, PageContent> = {
       "We always start with a free diagnosis. Then you choose what to build, with a closed price and the date in the contract.",
   },
   contacto: {
-    title: "Free diagnosis for your company | DEFTCODE®",
+    title: "Contact // DEFTCODE®",
     description:
       "1-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
     eyebrow: "FREE DIAGNOSIS",
@@ -1413,7 +1423,7 @@ const enPages: Record<string, PageContent> = {
       "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   diagnostico: {
-    title: "Free diagnosis for your company | DEFTCODE®",
+    title: "Diagnosis // DEFTCODE®",
     description:
       "1-hour interview, report in 48 h and free prototype. No commitment. Book it now.",
     eyebrow: "FREE DIAGNOSIS",
@@ -1422,7 +1432,7 @@ const enPages: Record<string, PageContent> = {
       "A 1-hour interview about your business and a report on which processes lose you money and how much you would save. The report is yours even if we never work together.",
   },
   privacidad: {
-    title: "PRIVACY POLICY - DEFTCODE®",
+    title: "Privacy // DEFTCODE®",
     description:
       "DEFTCODE® privacy commitment: zero invasive 3rd-party trackers, anonymous analytics, and absolute respect for your personal data.",
     eyebrow: "LEGAL & COMPLIANCE",
@@ -1479,6 +1489,7 @@ const enServices: ServiceItem[] = [
     slug: "erp-systems",
     index: "01",
     title: "ERP SYSTEMS",
+    metaTitle: "ERP systems",
     description:
       "Custom management systems: field operation with GPS and QR check-ins, stock, invoicing and receivables in one lean panel. Niche ERP without the setup marathon.",
     kicker: "OPERATION → INVOICING, ONE SCREEN",
@@ -1524,6 +1535,7 @@ const enServices: ServiceItem[] = [
     slug: "sales-management-systems",
     index: "02",
     title: "SALES MANAGEMENT SYSTEMS",
+    metaTitle: "Sales management systems",
     description:
       "Bookings, scheduling, quote engines and B2B portals: the full commercial chain from the first inquiry to direct ordering, with no manual work in between.",
     kicker: "AGENDA AND QUOTES WITH NO DEAD TIME",
@@ -1562,6 +1574,7 @@ const enServices: ServiceItem[] = [
     slug: "landing-pages",
     index: "03",
     title: "LANDING PAGES",
+    metaTitle: "Landing pages",
     description:
       "Fast landing pages with technical SEO and your own code.",
     kicker: "YOUR FIRST DIGITAL POINT OF SALE",
@@ -1599,6 +1612,7 @@ const enServices: ServiceItem[] = [
     slug: "ai-automation",
     index: "04",
     title: "AI AUTOMATION",
+    metaTitle: "AI automation",
     description:
       "Custom integrations and AI automation: your storefront, ERP, CRM and WhatsApp talking to each other on their own.",
     kicker: "SYSTEMS THAT TALK TO EACH OTHER",
@@ -1640,6 +1654,7 @@ const enProjects: ProjectItem[] = [
     imageKey: "empresa-limpieza",
     slug: "empresa-limpieza-rosario",
     title: "FROM SPREADSHEETS TO A SYSTEM SAVING $2.8M ARS PER MONTH",
+    metaTitle: "Cleaning company management system",
     client: "SERVICETRACK // AZ CLEANING & FACILITY SERVICES",
     plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Argentina",
@@ -1722,6 +1737,7 @@ const enProjects: ProjectItem[] = [
     imageKey: "gestion-legal",
     slug: "gestion-legal-estudio",
     title: "TWO COUNTRIES, ONE SYSTEM, ZERO MISSED DEADLINES",
+    metaTitle: "Legal case management system",
     client: "LEGALDESK // INTERNATIONAL LAW FIRM",
     plazo: "[COMPLETAR: semanas]",
     location: "Argentina & Paraguay",
@@ -1804,6 +1820,7 @@ const enProjects: ProjectItem[] = [
     imageKey: "sistema-pediatrico",
     slug: "sistema-clinica-pediatrica",
     title: "PAPERLESS RECORDS AND BOOKINGS, HEALTHCARE-LAW COMPLIANT",
+    metaTitle: "Pediatric clinic management system",
     client: "PEDIATRICCARE // PEDIATRIC CLINIC",
     plazo: "[COMPLETAR: semanas]",
     location: "Pueblo Esther, Santa Fe",
@@ -1886,6 +1903,7 @@ const enProjects: ProjectItem[] = [
     imageKey: "crm-concesionaria",
     slug: "crm-concesionaria-rosario",
     title: "FOUR INQUIRY CHANNELS IN ONE CRM",
+    metaTitle: "Dealership CRM",
     client: "AUTOLEADS // OFFICIAL DEALERSHIP",
     plazo: "[COMPLETAR: semanas]",
     location: "Rosario, Santa Fe",
@@ -1968,6 +1986,7 @@ const enProjects: ProjectItem[] = [
     imageKey: "landing-limpieza",
     slug: "landing-empresa-limpieza",
     title: "A WEBSITE THAT BRINGS IN QUALIFIED INQUIRIES",
+    metaTitle: "Cleaning company landing page",
     client: "AZ SERVICIOS WEBSITE",
     plazo: "1 to 2 weeks",
     location: "Rosario, Santa Fe",
@@ -2054,6 +2073,7 @@ const enProjects: ProjectItem[] = [
     imageKey: "landing-pediatrica",
     slug: "landing-clinica-pediatrica",
     title: "BOOKINGS FROM THE PHONE, NO WAITING",
+    metaTitle: "Pediatric clinic landing page",
     client: "PEDIATRIC PORTAL // PEDIATRIC CLINIC",
     plazo: "1 to 2 weeks",
     location: "Pueblo Esther, Santa Fe",

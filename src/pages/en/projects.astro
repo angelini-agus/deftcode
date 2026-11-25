@@ -24,14 +24,15 @@ const { projects } = content;
     eyebrow={page.eyebrow}
     title={page.h1}
     intro={page.intro}
-    dark
     ctaLabel="Get my free audit"
     ctaHref="/en/contact/"
   />
 
-  <!-- Social proof + client testimonial, before the deck -->
-  <FeaturedCase lang="en" />
-  <ClientQuote lang="en" />
+  <!-- Social proof + client testimonial share one black block, so the
+       orange banner above and the deck below keep their contrast. -->
+  <FeaturedCase lang="en">
+    <ClientQuote lang="en" compact />
+  </FeaturedCase>
 
   <!-- Interactive Runway Deck -->
   <ProjectsStack lang="en" />

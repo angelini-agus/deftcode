@@ -2,11 +2,18 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CtaSection from "../../../components/CtaSection.astro";
 import ServicesList from "../../../components/ServicesList.astro";
+import { getContent } from "../../../lib/content";
 
 const lang = "en";
+const { pages } = getContent(lang);
 ---
 
-<BaseLayout lang={lang} canonical="/en/services/">
+<BaseLayout
+  lang={lang}
+  canonical="/en/services/"
+  title={pages.servicios.title}
+  description={pages.servicios.description}
+>
   <main>
     <ServicesList lang={lang} />
     <CtaSection lang={lang} />

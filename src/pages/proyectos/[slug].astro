@@ -39,7 +39,7 @@ interface Props {
 const { project, prev, next, currentIndex, total } = Astro.props;
 const assets = projectAssets[project.imageKey];
 const lightboxGalleries = buildLightboxGalleries([project], "es");
-const seoTitle = `${project.title} // CASO DE ESTUDIO - DEFTCODE®`;
+const seoTitle = `${project.metaTitle} // DEFTCODE®`;
 const seoDescription = project.description;
 ---
 
