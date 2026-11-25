@@ -447,10 +447,16 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       // starts: the cycling glyphs keep the exact box the settled letter
       // will occupy, so the paragraph wraps identically mid-glitch (the
       // sub never reflows past its final two lines) and the nowrap h1
-      // keeps a constant width.
+      // keeps a constant width. Widths are in em (relative to the current
+      // font size) so fitHeroH1 can rescale the heading and the boxes
+      // scale with it — the spans stay permanent, which is what kills the
+      // end-of-intro compaction: unwrapping re-enables GPOS kerning that
+      // inline blocks suppress, and the kerning shift was the jump users
+      // saw in the last half second.
+      const fsNow = parseFloat(getComputedStyle(el).fontSize) || 16;
       for (const { node } of spans) {
         const w = node.getBoundingClientRect().width;
-        node.style.width = `${w}px`;
+        node.style.width = `${w / fsNow}em`;
         node.style.textAlign = "center";
         node.dataset.final = node.textContent;
         node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
@@ -532,18 +538,13 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
       tl.to(cta, { y: 0, opacity: 1, duration: 0.4 }, 0.18);
     }
 
-    // Unwrap the char spans and leave the plain strings exactly as they
-    // were authored, so fitHeroH1/alignHeroLabel measure clean DOM.
-    tl.call(
-      () => {
-        for (const el of restored) {
-          const text = finalTexts.get(el);
-          if (text) el.textContent = text;
-        }
-      },
-      undefined,
-      0.95,
-    );
+    // The char spans stay permanently (widths in em, tracking-free):
+    // unwrapping them re-enabled GPOS kerning that inline blocks suppress
+    // and compacted the text in the last half second of the intro. With
+    // the spans kept, settled glyphs only swap textContent inside a fixed
+    // box, so the width never changes and the entrance stays fluid.
+    // fitHeroH1/alignHeroLabel measure the live DOM (spans included) and
+    // run in onComplete as before.
   };
 
   if (introRoot.dataset.introHandoff === "1") {
