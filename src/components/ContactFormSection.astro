@@ -6,9 +6,12 @@ interface Props {
   lang?: Lang;
   /** Embedded mode (home CTA final): tighter outer spacing. */
   embedded?: boolean;
+  /** Contact pages only: after landing at the top, auto-scroll until the
+      form card sits centered in the viewport (any window height). */
+  autoScroll?: boolean;
 }
 
-const { lang = "es", embedded = false } = Astro.props;
+const { lang = "es", embedded = false, autoScroll = false } = Astro.props;
 const { contactForm, problems } = getContent(lang);
 
 // Web3Forms access key (public by design: it ships in the rendered form).
@@ -29,11 +32,11 @@ if (import.meta.env.PROD && !ACCESS_KEY) {
 const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, card.buttonLabel]));
 ---
 
-<section id="formulario" class={embedded ? "" : "relative bg-black px-4 md:px-12 py-16 md:py-20"}>
-  <div class={embedded ? "max-w-3xl mx-auto" : "max-w-7xl mx-auto"}>
+<section id="formulario" class={embedded ? "" : "relative px-4 md:px-12 py-16 md:py-20"}>
+  <div class="max-w-3xl mx-auto">
     <div
       id="form-card"
-      class={`reveal bg-black text-white p-8 sm:p-10 md:p-12 border-2 ${embedded ? "border-black shadow-[12px_12px_0_#000000]" : "border-white/20 max-w-3xl mx-auto"}`}
+      class="bg-black text-white p-8 sm:p-10 md:p-12 border-2 border-black shadow-[12px_12px_0_#000000]"
     >
       <form
         id="diagnostico-form"
@@ -116,10 +119,10 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
         <!-- Submit -->
         <button
           type="submit"
-          class="group w-full bg-white text-black font-mono-meta text-sm sm:text-base font-bold uppercase p-5 rounded-full border-2 border-black hover:bg-white transition-all hover:scale-[1.02] shadow-lg flex items-center justify-center gap-3 cursor-pointer mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          class="w-full bg-white text-black font-mono-meta text-sm sm:text-base font-bold uppercase p-5 rounded-full border-2 border-black hover:bg-white transition-all hover:scale-[1.02] shadow-lg flex items-center justify-center gap-3 cursor-pointer mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           <span>{contactForm.submitLabel}</span>
-          <svg class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
         </button>
@@ -142,68 +145,75 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
              the href is a placeholder by design (ESTRATEGIA-COPY.md §8). -->
         <a
           href={contactForm.successCalcHref}
-          class="group mt-6 inline-flex items-center gap-2 font-mono-meta text-xs font-bold uppercase text-[#FF4D00] hover:text-white transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+          class="mt-6 inline-flex items-center gap-2 font-mono-meta text-xs font-bold uppercase text-[#FF4D00] hover:text-white transition-colors border-b border-white/30 hover:border-[#FF4D00] pb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
         >
           <span>{contactForm.successCalcLabel}</span>
-          <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
+          <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<script define:vars={{ problemMap, problemPrefix: contactForm.problemSelectedPrefix, embedded }}>
-  // --- Entry scroll: land on the form card, not the page banner. ---
-  // Runs only on the standalone contact pages; the embedded home form keeps
-  // its place in the page. Links to /contacto/ carry #formulario, and the
-  // card is centered here after fonts settle so the fixed navbar never
-  // covers the first field.
-  var formCard = document.getElementById("form-card");
+<script>
+  // --- Contact page auto-scroll (autoScroll prop): land at the top as
+  // always, then glide until the form card is vertically centered — at
+  // any window height (cards taller than the viewport rest at their top
+  // edge instead of being clipped). Waits for the entrance choreography
+  // to hand off; cancels if the user scrolls first. ---
+  (function () {
+    const cardEl = document.getElementById("form-card");
+    if (!cardEl) return;
+    var root = document.documentElement;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var started = false;
 
-  if (formCard && !embedded) {
-    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    var centerFormCard = () => {
-      if (!formCard) return;
-      // Absolute card top in the document. .reveal slides the card by 16px
-      // while it enters; subtract that transform so the target is the final
-      // resting position, not the mid-animation one.
-      var transform = window.getComputedStyle(formCard).transform;
-      var translateY = 0;
-      var matrix = transform.match(/matrix\(([^)]+)\)/);
-      if (matrix) {
-        translateY = parseFloat(matrix[1].split(",")[5]) || 0;
+    function scrollToForm() {
+      if (started || !cardEl) return;
+      started = true;
+      var r = cardEl.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var target;
+      if (r.height >= vh) {
+        target = r.top + window.scrollY - 24;
       } else {
-        var matrix3d = transform.match(/matrix3d\(([^)]+)\)/);
-        if (matrix3d) translateY = parseFloat(matrix3d[1].split(",")[13]) || 0;
+        target = r.top + window.scrollY + r.height / 2 - vh / 2;
       }
-      var cardTop = window.scrollY + formCard.getBoundingClientRect().top - translateY;
+      var max = document.documentElement.scrollHeight - vh;
+      window.scrollTo({ top: Math.max(0, Math.min(target, max)), behavior: reduced ? "auto" : "smooth" });
+    }
 
-      var viewportH = window.innerHeight;
-      var slack = viewportH - formCard.offsetHeight;
-      var h1 = document.querySelector("h1");
-      var nav = Array.from(document.querySelectorAll("header")).find(function (el) {
-        return !el.contains(h1);
-      });
-      var pinTop = Math.max(64, Math.round(nav ? nav.getBoundingClientRect().bottom : 0) + 24);
-      // Enough room: true vertical centering. Tight screens: pin the top
-      // below the fixed navbar with a little air.
-      var target = slack >= 90 ? cardTop - slack / 2 : cardTop - pinTop;
-      window.scrollTo({
-        top: Math.max(0, Math.round(target)),
-        behavior: reduceMotion ? "auto" : "smooth",
-      });
-    };
+    function afterBeat(delayMs: number) {
+      setTimeout(function () {
+        if (!started) scrollToForm();
+      }, delayMs);
+    }
 
-    document.fonts.ready.then(() => requestAnimationFrame(centerFormCard));
-    // The browser's own #hash jump can land after fonts.ready; re-center
-    // once it has settled so the final position is always the form card.
-    window.setTimeout(centerFormCard, 350);
-    window.addEventListener("hashchange", () => {
-      if (window.location.hash === "#formulario") centerFormCard();
+    if (root.classList.contains("preload-skip") || root.getAttribute("data-intro") === "off") {
+      // Internal navigation / minimal: a short beat at the top, then glide.
+      afterBeat(400);
+    } else {
+      // Fresh entry: wait for the preloader handoff (or its failsafe),
+      // then give the decoded banner a beat before gliding.
+      var fired = false;
+      var begin = function () {
+        if (fired) return;
+        fired = true;
+        afterBeat(700);
+      };
+      window.addEventListener("deft:intro:hero", begin, { once: true });
+      setTimeout(begin, 4800);
+    }
+
+    // Respect the user: if they scroll before the glide starts, stand down.
+    ["wheel", "touchstart", "keydown"].forEach(function (evt) {
+      window.addEventListener(evt, function () {
+        started = true;
+      }, { passive: true, once: true });
     });
-  }
-
+  })();
+</script>
+<script define:vars={{ problemMap, problemPrefix: contactForm.problemSelectedPrefix }}>
   // --- Problem preselection: ?problema=<key> from the home cards (§3.4) ---
   var params = new URLSearchParams(window.location.search);
   var problema = params.get("problema");
@@ -260,12 +270,3 @@ const problemMap = Object.fromEntries(problems.cards.map((card) => [card.key, ca
     });
   }
 </script>
-
-<style>
-  /* Native anchor landing (before the centering script runs) also clears
-     the fixed navbar instead of hiding the form header behind it. */
-  #formulario,
-  #form-card {
-    scroll-margin-top: 5.5rem;
-  }
-</style>

@@ -199,3 +199,20 @@ was an over-read of "salvo que se reinicie": a RELOAD restarts the show.
   keeps intro-run, skip=false, the preloader visible and the h1 settles
   45/45 after it; internal navigation stays static (skip, zero letter
   spans). astro check 0 errors, build 35 pages.
+
+## Round 5 (2026-11-25): contact auto-scroll centers the form
+
+User: clicking CONTACTO should land at the top as always, then glide
+until the form is centered — at every window height.
+- [x] R15 ContactFormSection gained an autoScroll prop (contact pages
+      only; the embedded diagnostic forms never scroll). The script
+      waits for the preloader handoff on fresh entries (short beat on
+      internal navigation), computes the card's centered target, clamps
+      to the card's top edge (+24px air) when the card is taller than
+      the viewport, cancels if the user scrolls first, and uses an
+      instant jump under reduced motion.
+- Verified by CDP on the preview port at five window heights:
+  1920x1080 (internal click), 1440x900 and 375x812 (fresh entries) all
+  center the card exactly (cardCenterOff = 0); 1280x600 and 375x540
+  (card 633px tall > viewport) rest the card at its top edge (24px).
+  astro check 0 errors, build 35 pages.
