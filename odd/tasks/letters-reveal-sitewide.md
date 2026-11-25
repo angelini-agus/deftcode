@@ -79,3 +79,35 @@ in 7 files + unpushed commit 9e20448).
 - CtaSection heading decode (bespoke composition; follow-up if user asks).
 - svc-module-title / h3 card titles (slide/fade reveals are their effect).
 - EN copy rewrites, pricing, WhatsApp placeholders (separate features).
+
+## Round 2 (2026-11-25, afternoon): every h1/h2/h3 + hero feel
+
+User: "a todos los h1, h2 y h3 deberían tener esta animación" + the decode
+must feel like the hero intro ("robótico medio bugueado"), not plain typing.
+
+- [x] R1 auto-target: the BaseLayout script now collects ALL h1/h2/h3
+      (skips [data-hero-scramble] = hero intro owner, [data-decode-skip]
+      opt-out, and headings with non-span nested elements). Span-only
+      children (the CTA heading) decode per line keeping their sizes
+      (data-decode-lines). Manual data-decode-title marks stay harmless.
+- [x] R2 hero feel ported: settle = opacity+scale with back-out curve
+      (transform .28s cubic-bezier(.34,1.56,.64,1) = robotic punch), the
+      glyph keeps flickering 110ms (FLICKER_MS) AFTER the letter becomes
+      visible, then the final letter lands; stagger min(.022, .3/n) like
+      the hero; letters centered in their final-glyph em boxes.
+- [x] R3 visibility gate: deck folders fade per scroll segment and the
+      process fan hides inactive panels — raw geometric IO decoded them
+      while invisible. Decode now waits (rAF poll) until effective
+      ancestor opacity >= 0.5; verified all 6 deck folder titles settle
+      when their folder activates.
+- [x] R4 preloader gate: above-the-fold titles decoded BEHIND the
+      preloader overlay (the /contacto h1 was settled before the overlay
+      lifted). The title observer now starts on the same signals as the
+      intro system: data-intro="off", .preload-skip, no .intro-run, the
+      "deft:intro:hero" handoff, or the 4.6s failsafe.
+- Verified: astro check 0/47, build 35 pages, programmatic settle across
+  9 routes (26 titles home incl. CTA lines, 10 case, 8 service, 18
+  proyectos, 35 nosotros incl. hidden fan panels, 3 diagnostico, 3
+  contacto, 9 privacidad, 10 EN case) + deck stepwise walk (6/6 folders
+  settled) + frames: glitch glyphs visible mid-decode at /contacto, CTA
+  bespoke composition intact after settle.

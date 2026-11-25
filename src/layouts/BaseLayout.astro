@@ -172,35 +172,61 @@ const organizationSchema = {
 
     <script>
       // Motion system (Misure rules, site-wide):
-      // 1. Display titles: robotic per-letter decode in place (fade in the
-      //    same spot, no slide), letters grow from a glitch set exactly
-      //    like the hero intro. Letter boxes are permanent with widths in
-      //    em, so titles never re-compact. Two modes:
-      //    - [data-fit-title]: canvas measureText with the REAL font fits
-      //      the title to one line (shaping exact, immune to line wrapping
-      //      — a Range rect only reports the widest wrapped line and
-      //      diverges). Single-phrase titles.
-      //    - [data-decode-title]: keeps the CSS font size and wrapping;
-      //      spaces stay plain text nodes so lines still break. Titles
-      //      that wrap (case/service/landing h1s) or have bespoke sizing.
-      // 2. Everything else with .reveal: slides in from its side (left /
-      //    right by position, center-biased elements from below).
-      // Both runs after document.fonts.ready so metrics use the real
+      // 1. EVERY h1/h2/h3 gets the hero's robotic per-letter decode:
+      //    letters appear small, flicker through the glitch set while
+      //    growing, and land on the final glyph with a back-out punch —
+      //    the exact feel of the hero intro after the preload. Letter
+      //    boxes are permanent with widths in em measured on the FINAL
+      //    glyph (centered), so titles never re-compact. Modes:
+      //    - [data-fit-title]: canvas measureText with the REAL font
+      //      fits the title to one line (single-phrase display titles).
+      //    - all other headings: keep the CSS font size and wrapping;
+      //      spaces stay plain text nodes so lines still break.
+      //    - headings whose content is a set of span lines (the CTA
+      //      heading) decode per line, keeping their sizes.
+      //    - headings with other nested elements (links, <br>) stay
+      //      static; [data-hero-scramble] belongs to the hero intro and
+      //      [data-decode-skip] opts a heading out.
+      // 2. Everything else with .reveal: slides in from its side
+      //    (left / right by position, center-biased elements from below).
+      // Both run after document.fonts.ready so metrics use the real
       // face, re-run debounced on resize.
       (function () {
         type LetterSpan = { node: HTMLElement; final: string };
         type Prepared = { el: HTMLElement; spans: LetterSpan[] | null; text: string };
         var GLYPHS = "X0O#";
+        var FLICKER_MS = 110;
         var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var hasIO = "IntersectionObserver" in window;
         var canvas = document.createElement("canvas");
         var ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
-        var titles = Array.prototype.slice.call(
-          document.querySelectorAll<HTMLElement>("[data-fit-title], [data-decode-title]"),
-        );
+
+        // --- 1. Collect every heading, tagging decode behavior ---
+        var titles = Array.prototype.slice
+          .call(document.querySelectorAll<HTMLElement>("h1, h2, h3"))
+          .filter(function (h) {
+            if (h.hasAttribute("data-hero-scramble")) return false;
+            if (h.hasAttribute("data-decode-skip")) return false;
+            if (h.hasAttribute("data-fit-title")) return true;
+            var kids = Array.prototype.slice.call(h.children);
+            if (kids.length === 0) return true;
+            // Span-only children = authored line groups (CTA heading):
+            // decode per line, keeping each line's own size.
+            var allSpans = kids.every(function (k) {
+              return k.tagName === "SPAN";
+            });
+            if (allSpans) {
+              h.setAttribute("data-decode-lines", "");
+              return true;
+            }
+            return false;
+          });
+        titles.forEach(function (h) {
+          if (!h.hasAttribute("data-fit-title")) h.setAttribute("data-decode-title", "");
+        });
         var prepared: Prepared[] = [];
 
-        // --- 1. Directional reveals (non-title elements) ---
+        // --- 2. Directional reveals (non-title elements) ---
         var revealables = Array.prototype.slice
           .call(document.querySelectorAll(".reveal"))
           .filter(function (el) {
@@ -233,20 +259,57 @@ const organizationSchema = {
           });
         }
 
-        // --- 2. Prep + fit + robotic decode ---
+        // --- 3. Letter building (hero recipe) ---
+        // Build letter spans inside `host` for one phrase. Words are
+        // wrapped in nowrap spans (when wrapping is possible) and spaces
+        // stay plain text nodes, so lines only break at spaces.
+        function buildPhrase(
+          host: HTMLElement,
+          text: string,
+          canWrap: boolean,
+          spans: LetterSpan[],
+        ) {
+          var words = text.split(" ");
+          for (var wi = 0; wi < words.length; wi++) {
+            if (wi > 0) {
+              if (canWrap) {
+                host.appendChild(document.createTextNode(" "));
+              } else {
+                var spSp = document.createElement("span");
+                spSp.textContent = " ";
+                spSp.style.display = "inline-block";
+                spSp.style.whiteSpace = "pre";
+                host.appendChild(spSp);
+                spans.push({ node: spSp, final: " " });
+              }
+            }
+            var word = words[wi];
+            var wrapEl: HTMLElement | null = null;
+            if (canWrap && word.length > 0) {
+              wrapEl = document.createElement("span");
+              wrapEl.style.whiteSpace = "nowrap";
+              host.appendChild(wrapEl);
+            }
+            for (var i = 0; i < word.length; i++) {
+              var s = document.createElement("span");
+              s.textContent = word.charAt(i);
+              s.style.display = "inline-block";
+              s.style.whiteSpace = "pre";
+              (wrapEl || host).appendChild(s);
+              spans.push({ node: s, final: word.charAt(i) });
+            }
+          }
+        }
+
+        // --- 4. Prep + fit + arm ---
         function prepAndFit() {
           prepared.length = 0;
-          titles.forEach(function (h2) {
-            var text = (h2.textContent || "").replace(/\s+/g, " ").trim();
+          titles.forEach(function (h) {
+            var text = (h.textContent || "").replace(/\s+/g, " ").trim();
             if (!text) return;
-            // Fit titles: scale so the whole text fills one line. Decode
-            // titles keep their CSS font size (wrapping is part of the
-            // approved layout). The heading box is revealed at prep (its
-            // letters are still hidden) so the decode never fights the
-            // .reveal fade.
-            if (h2.hasAttribute("data-fit-title")) {
+            if (h.hasAttribute("data-fit-title")) {
               if (!ctx) return;
-              var target = h2.parentElement.clientWidth - 4;
+              var target = h.parentElement.clientWidth - 4;
               if (target <= 0) return;
               ctx.font = '400 100px "Archivo Black", sans-serif';
               try {
@@ -254,88 +317,67 @@ const organizationSchema = {
               } catch (e) {}
               var w100 = ctx.measureText(text).width;
               var fs = target / (w100 / 100);
-              h2.style.fontSize = fs + "px";
+              h.style.fontSize = fs + "px";
               // One line guaranteed: inline-block letters create break
               // opportunities at every box, not only at spaces.
-              h2.style.whiteSpace = "nowrap";
+              h.style.whiteSpace = "nowrap";
             }
-            h2.classList.add("is-revealed");
-            if (!hasIO || reduced) {
-              h2.textContent = text;
-              prepared.push({ el: h2, spans: null, text: text });
+            h.classList.add("is-revealed");
+            if (!hasIO || reduced || h.dataset.decoded) {
+              h.textContent = text;
+              prepared.push({ el: h, spans: null, text: text });
               return;
             }
-            // Already decoded (resize re-prep): settle back to plain text
-            // instead of re-arming a decode that would never fire again.
-            if (h2.dataset.decoded) {
-              h2.textContent = text;
-              prepared.push({ el: h2, spans: null, text: text });
-              return;
-            }
-            h2.textContent = "";
+            var lineEls: HTMLElement[] | null = h.hasAttribute("data-decode-lines")
+              ? (Array.prototype.slice.call(h.children) as HTMLElement[])
+              : null;
+            h.textContent = "";
             var spans: LetterSpan[] = [];
-            // Decode titles wrap: letters are inline-blocks, which create
-            // break opportunities at EVERY box — so each word goes inside
-            // a nowrap wrapper and only the plain space text nodes between
-            // words allow a line break.
-            var words = text.split(" ");
-            for (var wi = 0; wi < words.length; wi++) {
-              if (wi > 0) {
-                if (h2.hasAttribute("data-decode-title")) {
-                  h2.appendChild(document.createTextNode(" "));
-                } else {
-                  var spSp = document.createElement("span");
-                  spSp.textContent = " ";
-                  spSp.style.display = "inline-block";
-                  spSp.style.whiteSpace = "pre";
-                  h2.appendChild(spSp);
-                  spans.push({ node: spSp, final: " " });
-                }
-              }
-              var word = words[wi];
-              var wrapEl: HTMLElement | null = null;
-              if (h2.hasAttribute("data-decode-title") && word.length > 0) {
-                wrapEl = document.createElement("span");
-                wrapEl.style.whiteSpace = "nowrap";
-                h2.appendChild(wrapEl);
-              }
-              for (var i = 0; i < word.length; i++) {
-                var ch = word.charAt(i);
-                var s = document.createElement("span");
-                s.textContent = ch;
-                s.style.display = "inline-block";
-                s.style.whiteSpace = "pre";
-                (wrapEl || h2).appendChild(s);
-                spans.push({ node: s, final: ch });
-              }
+            if (lineEls) {
+              // Keep each authored line span (it carries its own font
+              // size); rebuild its letters inside it.
+              lineEls.forEach(function (line) {
+                var lineText = (line.textContent || "").replace(/\s+/g, " ").trim();
+                line.textContent = "";
+                if (lineText) buildPhrase(line, lineText, false, spans);
+                h.appendChild(line);
+              });
+            } else {
+              buildPhrase(h, text, !h.hasAttribute("data-fit-title"), spans);
             }
-            // Measure the NATURAL glyph boxes: getBoundingClientRect
-            // returns the transformed box, so widths must be read before
-            // the scale(0.25) glitch state is applied.
-            var fsReal = parseFloat(getComputedStyle(h2).fontSize) || 16;
+            // Measure the NATURAL boxes of the FINAL glyphs:
+            // getBoundingClientRect returns the transformed box, so
+            // widths must be read before arming scale(0.25). Widths in
+            // the letter's own em (line groups carry per-line sizes).
             spans.forEach(function (sp) {
               var w = sp.node.getBoundingClientRect().width;
-              sp.node.style.width = w / fsReal + "em";
+              var ownFs = parseFloat(getComputedStyle(sp.node).fontSize) || 16;
+              sp.node.style.width = w / ownFs + "em";
+              sp.node.style.textAlign = "center";
             });
-            // Arm the glitch state instantly (no transition yet), force a
-            // reflow, then enable transitions so the decode animates.
+            // Arm the glitch state instantly (no transition yet), force
+            // a reflow, then enable transitions so the decode animates.
             spans.forEach(function (sp) {
               if (sp.final !== " ") {
                 sp.node.style.opacity = "0";
                 sp.node.style.transform = "scale(0.25)";
               }
             });
-            void h2.offsetWidth;
+            void h.offsetWidth;
             spans.forEach(function (sp) {
               if (sp.final !== " ") {
+                // Back-out on the transform = the hero's robotic punch
+                // (scale overshoots 1 and settles); opacity stays smooth.
                 sp.node.style.transition =
-                  "opacity .26s cubic-bezier(.23,1,.32,1), transform .26s cubic-bezier(.23,1,.32,1)";
+                  "opacity .28s cubic-bezier(.23,1,.32,1), transform .28s cubic-bezier(.34,1.56,.64,1)";
               }
             });
-            prepared.push({ el: h2, spans: spans, text: text });
+            prepared.push({ el: h, spans: spans, text: text });
           });
         }
 
+        // --- 5. Decode (hero pacing): letters grow while the glyph
+        // flickers; the final letter lands 110 ms in. ---
         function decode(p: Prepared) {
           const spans = p.spans;
           if (!spans) return;
@@ -345,7 +387,7 @@ const organizationSchema = {
               sp.node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
             });
           }, 42);
-          var each = Math.min(0.018, 0.5 / spans.length);
+          var each = Math.min(0.022, 0.3 / spans.length);
           var last = 0;
           spans.forEach(function (sp, i) {
             if (sp.final === " ") {
@@ -355,20 +397,45 @@ const organizationSchema = {
             var at = Math.round(i * each * 1000);
             last = at;
             setTimeout(function () {
-              sp.node.dataset.settled = "1";
-              sp.node.textContent = sp.final;
               sp.node.style.opacity = "1";
               sp.node.style.transform = "scale(1)";
             }, at);
+            setTimeout(function () {
+              sp.node.dataset.settled = "1";
+              sp.node.textContent = sp.final;
+            }, at + FLICKER_MS);
           });
           setTimeout(function () {
             clearInterval(cycle);
-          }, last + 700);
+          }, last + FLICKER_MS + 400);
         }
 
-        function boot() {
-          prepAndFit();
-          if (!hasIO || reduced) return;
+        // Effective opacity through ancestors (the project deck fades its
+        // folders per scroll segment and the process fan hides inactive
+        // panels): a heading only decodes once it is actually seen.
+        function effectiveVisibility(el: HTMLElement): number {
+          var o = 1;
+          var n: HTMLElement | null = el;
+          while (n && n !== document.documentElement) {
+            var cs = getComputedStyle(n);
+            if (cs.display === "none" || cs.visibility === "hidden") return 0;
+            o *= parseFloat(cs.opacity) || 0;
+            if (o === 0) return 0;
+            n = n.parentElement;
+          }
+          return o;
+        }
+
+        // Start observing titles only once the preloader hands off: a
+        // decode behind the preloader overlay would be wasted (the user
+        // would never see it). Same signals as the intro system:
+        // data-intro="off" pages, preload-skip (reduced / back-forward /
+        // internal navigation) start immediately; otherwise the handoff
+        // event or the 4s failsafe begins the observer.
+        var titleObserverStarted = false;
+        function startTitleObserver() {
+          if (titleObserverStarted) return;
+          titleObserverStarted = true;
           var titleIO = new IntersectionObserver(
             function (entries) {
               entries.forEach(function (entry) {
@@ -377,10 +444,28 @@ const organizationSchema = {
                 var p = prepared.find(function (x) {
                   return x.el === entry.target;
                 });
-                if (p && p.spans && !p.el.dataset.decoded) {
-                  p.el.dataset.decoded = "1";
-                  decode(p);
+                if (!p || !p.spans || p.el.dataset.decoded) return;
+                p.el.dataset.decoded = "1";
+                const target = p;
+                var fire = function () {
+                  decode(target);
+                };
+                // Deck folders / hidden panels: wait (rAF polling) until
+                // the heading is actually visible before decoding.
+                if (effectiveVisibility(target.el) >= 0.5) {
+                  fire();
+                  return;
                 }
+                var poll = function () {
+                  if (effectiveVisibility(target.el) >= 0.5) {
+                    fire();
+                    return;
+                  }
+                  requestAnimationFrame(function () {
+                    setTimeout(poll, 100);
+                  });
+                };
+                poll();
               });
             },
             { threshold: 0.2 },
@@ -388,6 +473,22 @@ const organizationSchema = {
           prepared.forEach(function (p) {
             titleIO.observe(p.el);
           });
+        }
+
+        function boot() {
+          prepAndFit();
+          if (!hasIO || reduced) return;
+          var root = document.documentElement;
+          var introDone =
+            root.getAttribute("data-intro") === "off" ||
+            root.classList.contains("preload-skip") ||
+            !root.classList.contains("intro-run");
+          if (introDone) {
+            startTitleObserver();
+            return;
+          }
+          window.addEventListener("deft:intro:hero", startTitleObserver, { once: true });
+          setTimeout(startTitleObserver, 4600);
         }
 
         if (document.fonts && document.fonts.ready) {
