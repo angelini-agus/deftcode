@@ -23,16 +23,17 @@ const { heroContent } = getContent(lang);
   } ${heroLike ? "page-banner--hero" : ""}`}
 >
   <div class="page-banner__inner mx-auto">
-    <!-- Hero-like kicker: the microcopy home shows under its CTA, lifted to
-         the top slot where the eyebrow used to live (user request). -->
+    <!-- Hero-like top tag: the home hero's "EST. 2026" utility tag, thrown
+         to the left edge of the text column (user request). Hidden below
+         sm like on home, where it collides with the fixed navbar. -->
     {
       heroLike && (
         <p
-      class={`page-banner__kicker reveal font-mono-meta text-[10px] sm:text-[11px] uppercase font-bold tracking-wider m-0 text-center ${
-        dark ? "text-white/75" : "text-black/75"
+      class={`page-banner__kicker reveal hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider m-0 ${
+        dark ? "text-white" : "text-black"
       }`}
         >
-          {heroContent.microcopy}
+          {lang === "en" ? "EST. 2026 // AGILE DEV" : "EST. 2026 // DESARROLLO ÁGIL"}
         </p>
       )
     }
@@ -90,6 +91,17 @@ const { heroContent } = getContent(lang);
               <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
           </a>
+          {
+            heroLike && (
+              <p
+            class={`page-banner__microcopy reveal font-mono-meta text-xs sm:text-sm uppercase font-bold tracking-wider m-0 text-center ${
+              dark ? "text-white/75" : "text-black/75"
+            }`}
+              >
+                {heroContent.microcopy}
+              </p>
+            )
+          }
         </div>
       )
     }
@@ -98,50 +110,9 @@ const { heroContent } = getContent(lang);
   {
     heroLike && (
       <div class="page-banner__bottom w-full max-w-7xl mx-auto reveal">
-        <!-- Horizontal Border Divider (2px solid #000000), like the home hero -->
-        <div class="w-full h-[2px] bg-black mb-6 page-banner__divider" />
-
-        <div class="flex justify-center items-center py-2 page-banner__badge-row">
-          <div
-            class="relative w-[112px] h-[112px] flex items-center justify-center page-banner__badge"
-            aria-hidden="true"
-          >
-            <!-- Rotating SVG Text Container (360deg over 16s), shrunken
-                 from the hero's 144px per user request -->
-            <svg
-              class="absolute inset-0 w-full h-full animate-spin-slow select-none pointer-events-none"
-              viewBox="0 0 112 112"
-            >
-              <defs>
-                <path
-                  id="bannerCirclePath"
-                  d="M 56, 56 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
-                />
-              </defs>
-              <text
-                class="font-mono-meta text-[8px] font-bold fill-black uppercase"
-                letter-spacing="0.16em"
-              >
-                <textPath href="#bannerCirclePath" startOffset="0%">
-                  {heroContent.scrollText} {heroContent.scrollText}
-                </textPath>
-              </text>
-            </svg>
-
-            <!-- Static Center Circle & Arrow -->
-            <div class="w-10 h-10 rounded-full bg-black text-[#FF4D00] flex items-center justify-center border-2 border-black shadow-md">
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                stroke-width="2.5"
-              >
-                <path stroke-linecap="square" stroke-linejoin="miter" d="M12 4v16m0 0l-6-6m6 6l6-6" />
-              </svg>
-            </div>
-          </div>
-        </div>
+        <!-- Horizontal Border Divider (2px solid #000000): the section ends
+             here, at the same viewport height as the home hero's divider. -->
+        <div class="w-full h-[2px] bg-black page-banner__divider" />
       </div>
     )
   }
@@ -154,19 +125,29 @@ const { heroContent } = getContent(lang);
     padding-block: clamp(4rem, 9svh, 6.5rem) clamp(2rem, 4svh, 3rem);
   }
 
-  /* Hero-like banners: shorter section — it ends at its own divider +
-     badge row, roughly at the height the home hero's divider sits at,
-     across resolutions (svh-based). */
+  /* Hero-like banners: the section ends at its own divider, and that
+     divider sits at the same viewport height as the home hero's divider
+     (measured: 100svh + 2.5vw - 234px normal; - 202px under the 776px
+     compact level; - 194px under 600px). */
   .page-banner--hero {
-    min-height: min(76svh, 52rem);
+    min-height: max(calc(100svh + 2.5vw - 234px), 27rem);
+    padding-bottom: 0;
   }
 
   .page-banner--hero .page-banner__inner {
     margin-block: auto;
   }
 
-  .page-banner__kicker {
-    margin-bottom: clamp(0.5rem, 1.5svh, 1rem);
+  /* The EST. 2026 tag is thrown to the left of the centered column. */
+  .page-banner--hero .page-banner__kicker {
+    text-align: left;
+  }
+
+  .page-banner__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
   }
 
   .page-banner__inner {
@@ -211,21 +192,18 @@ const { heroContent } = getContent(lang);
     margin-top: clamp(0.75rem, 2svh, 1.5rem);
   }
 
-  @media (max-height: 700px) {
-    /* Compact level for short windows: trim air only, never controls. */
+  @media (max-height: 776px) {
+    /* Compact level mirroring the home hero's: the divider keeps landing
+       at the home height; only air is cut. */
     .page-banner--hero {
-      padding-block: clamp(3rem, 7svh, 4.5rem) clamp(1rem, 2.5svh, 2rem);
-      min-height: min(72svh, 44rem);
+      padding-top: clamp(2.5rem, 6svh, 4rem);
+      min-height: max(calc(100svh + 2.5vw - 202px), 27rem);
     }
-    .page-banner--hero .page-banner__divider {
-      margin-bottom: 0.75rem;
-    }
-    .page-banner--hero .page-banner__badge-row {
-      padding-block: 0;
-    }
-    .page-banner--hero .page-banner__badge {
-      width: 88px;
-      height: 88px;
+  }
+
+  @media (max-height: 600px) {
+    .page-banner--hero {
+      min-height: max(calc(100svh + 2.5vw - 194px), 27rem);
     }
   }
 
