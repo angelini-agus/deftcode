@@ -60,6 +60,15 @@
   color: #FF4D00;
 }
 
+/* Dark surfaces: the default selection (black background) is invisible
+   on black sections — selected text looked unchanged, like an image.
+   Invert to white there so the highlight always pops. */
+.bg-black ::selection,
+.bg-black::selection {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
 /* Smooth scrolling and base typography */
 html {
   scroll-behavior: smooth;
