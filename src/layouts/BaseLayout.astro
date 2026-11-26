@@ -94,18 +94,31 @@ const organizationSchema = {
         try {
           var root = document.documentElement;
           // Entrance choreography: the preloader + robotic entrances play
-          // on fresh entries AND on reloads (a reload restarts the show).
-          // Internal navigation and back/forward land on fully static
-          // pages (preload-skip); reduced motion too.
+          // on fresh entries, on reloads (a reload restarts the show) and
+          // on the FIRST internal visit to each page in this tab session
+          // (tracked per path in sessionStorage). Pages already seen this
+          // session, back/forward and reduced motion land on fully static
+          // pages (preload-skip).
           var entry = performance.getEntriesByType("navigation")[0];
           var type = entry ? entry.type : "navigate";
           var internal =
             document.referrer.indexOf(location.origin + "/") === 0 ||
             document.referrer === location.origin;
+          var seen = {};
+          try {
+            seen = JSON.parse(sessionStorage.getItem("deft:seen-paths") || "{}") || {};
+          } catch (e) {}
+          var visited = !!seen[location.pathname];
+          // Mark the path for this session either way: the show plays only
+          // on the first arrival, revisits land static.
+          seen[location.pathname] = 1;
+          try {
+            sessionStorage.setItem("deft:seen-paths", JSON.stringify(seen));
+          } catch (e) {}
           if (
             window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
             type === "back_forward" ||
-            (type === "navigate" && internal)
+            (type === "navigate" && internal && visited)
           ) {
             root.classList.add("preload-skip");
             return;
