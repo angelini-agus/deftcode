@@ -1141,7 +1141,7 @@ const esForWho = {
 // ==========================================
 
 const esProblems: ProblemsContent = {
-  eyebrow: "MARCADÁ LO QUE TE SUENE FAMILIAR",
+  eyebrow: "MARCÁ LO QUE TE SUENE FAMILIAR",
   title: "¿TE PASA ALGO DE ESTO?",
   intro: "Si marcaste una, el diagnóstico es para vos.",
   cards: [
