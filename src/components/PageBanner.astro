@@ -1,6 +1,6 @@
 ---
 interface Props {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   intro?: string;
   dark?: boolean;
@@ -18,14 +18,19 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref } = Astro.props;
 >
   <div class="page-banner__inner mx-auto">
     <!-- Eyebrow: plain text, no chip box. Matches the bare section
-         eyebrows used across the site (no border, no dot). -->
-    <div
-      class={`page-banner__eyebrow reveal font-mono-meta text-xs uppercase font-bold tracking-widest ${
-        dark ? "text-[#FF4D00]" : "text-black"
-      }`}
-    >
-      // {eyebrow}
-    </div>
+         eyebrows used across the site (no border, no dot). Rendered
+         only when the page passes one. -->
+    {
+      eyebrow && (
+        <div
+          class={`page-banner__eyebrow reveal font-mono-meta text-xs uppercase font-bold tracking-widest ${
+            dark ? "text-[#FF4D00]" : "text-black"
+          }`}
+        >
+          // {eyebrow}
+        </div>
+      )
+    }
 
     <!-- Title in Archivo Black. Sized from the container width (not raw vw)
          so a 4K screen keeps the same line partition as a laptop, and capped
