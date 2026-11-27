@@ -130,9 +130,9 @@ const problems = content.problems;
         <div class="grid gap-4 md:grid-cols-2 mt-10 md:mt-12" data-stagger="90">
           <!-- NO card (first): black face, white copy, orange crosses -->
           <div class="reveal bg-black text-white border-2 border-white/20 p-8">
-            <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
+            <h3 class="font-display text-2xl sm:text-3xl uppercase tracking-[-0.03em] leading-tight text-[#FF4D00] border-b border-white/15 pb-4 mb-2 m-0">
               {forWho.noLabel}
-            </span>
+            </h3>
             <ul class="m-0 p-0 list-none">
               {forWho.noItems.map((item) => (
                 <li class="flex items-start gap-3 mt-5">
@@ -153,10 +153,10 @@ const problems = content.problems;
           </div>
 
           <!-- YES card: ghost white-on-black -->
-          <div class="border-2 border-white/20 p-8 bg-white/[0.02] text-white">
-            <span class="font-mono-meta text-xs uppercase font-bold text-[#FF4D00] tracking-widest">
+          <div class="reveal border-2 border-white/20 p-8 bg-white/[0.02] text-white">
+            <h3 class="font-display text-2xl sm:text-3xl uppercase tracking-[-0.03em] leading-tight text-[#FF4D00] border-b border-white/15 pb-4 mb-2 m-0">
               {forWho.yesLabel}
-            </span>
+            </h3>
             <ul class="m-0 p-0 list-none">
               {forWho.yesItems.map((item) => (
                 <li class="flex items-start gap-3 mt-5">

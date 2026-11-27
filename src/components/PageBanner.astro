@@ -17,144 +17,231 @@ const { eyebrow, title, intro, dark = false, ctaLabel, ctaHref, lang = "es", her
 const { heroContent } = getContent(lang);
 ---
 
-<header
-  class={`page-banner relative flex flex-col justify-center px-4 md:px-12 ${
-    dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"
-  } ${heroLike ? "page-banner--hero" : ""}`}
->
-  <div class="page-banner__inner mx-auto">
-    <!-- Hero-like top tag: the home hero's "EST. 2026" utility tag, thrown
-         to the left edge of the text column (user request). Hidden below
-         sm like on home, where it collides with the fixed navbar. -->
-    {
-      heroLike && (
-        <p
-      class={`page-banner__kicker reveal hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider m-0 ${
-        dark ? "text-white" : "text-black"
-      }`}
+{
+  heroLike ? (
+    <section
+      id="top"
+      data-page-banner-hero
+      class="page-banner-hero relative bg-[#FF4D00] text-black flex flex-col justify-between pt-20 md:pt-24 pb-0 px-4 md:px-12"
+    >
+      <!-- Top Utility Tag (mirrors Hero.astro, aligned to the shared max-w-7xl column) -->
+      <div class="w-full max-w-7xl mx-auto flex items-center justify-between pb-4">
+        <div
+          data-hero-label
+          data-hero-scramble
+          class="hidden sm:block font-mono-meta text-xs font-bold uppercase tracking-wider text-black"
         >
           {lang === "en" ? "EST. 2026 // AGILE DEV" : "EST. 2026 // DESARROLLO ÁGIL"}
-        </p>
-      )
-    }
-    <!-- Eyebrow: plain text, no chip box. Matches the bare section
-         eyebrows used across the site (no border, no dot). Rendered
-         only when the page passes one. -->
-    {
-      eyebrow && (
-        <div
-          class={`page-banner__eyebrow reveal font-mono-meta text-xs uppercase font-bold tracking-widest ${
-            dark ? "text-[#FF4D00]" : "text-black"
-          }`}
-        >
-          // {eyebrow}
         </div>
-      )
-    }
+      </div>
 
-    <!-- Title in Archivo Black. Sized from the container width (not raw vw)
-         so a 4K screen keeps the same line partition as a laptop, and capped
-         by viewport height so short screens never push the hero past one page. -->
-    <h1
-      class={`page-banner__title reveal font-display uppercase tracking-[-0.04em] m-0 ${
-        dark ? "text-white" : "text-black"
-      }`}
-    >
-      {title}
-    </h1>
-
-    {
-      intro && (
-        <p
-          class={`page-banner__intro reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold leading-relaxed ${
-            dark ? "text-white/80" : "text-black/90"
-          }`}
+      <!-- Display Headline + Intro + CTA centered cleanly (mirrors Hero.astro) -->
+      <div class="page-banner-hero__middle my-auto flex flex-col items-center justify-center text-center pt-6 md:pt-8 pb-8 md:pb-10 hero-middle mx-auto w-full">
+        <h1
+          data-hero-h1
+          data-hero-scramble
+          class="page-banner-hero__title font-display leading-[0.85] tracking-[-0.04em] text-black uppercase m-0 text-balance w-full"
         >
-          {intro}
-        </p>
-      )
-    }
+          {title}
+        </h1>
 
-    {
-      ctaLabel && ctaHref && (
-        <div class="page-banner__cta">
-          <a
-            href={ctaHref}
-            class={`group reveal inline-flex items-center gap-3 font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 py-4 rounded-full border-2 border-black transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 ${
-              dark
-                ? "bg-[#FF4D00] text-black focus-visible:ring-[#FF4D00]"
-                : "bg-black text-white shadow-[0_10px_28px_rgba(0,0,0,0.35)] focus-visible:ring-black"
-            }`}
-          >
-            <span>{ctaLabel}</span>
-            <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
-              <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </a>
-          {
-            heroLike && (
+        {
+          intro && (
+            <p
+              data-hero-sub
+              data-hero-scramble
+              class="page-banner-hero__intro font-sans text-base sm:text-xl md:text-2xl font-bold leading-relaxed text-black/90 max-w-3xl mx-auto mt-4 md:mt-5 text-balance"
+            >
+              {intro}
+            </p>
+          )
+        }
+
+        {
+          ctaLabel && ctaHref && (
+            <div data-hero-cta class="flex flex-col items-center gap-2.5 mt-8 md:mt-10">
+              <a
+                href={ctaHref}
+                class="group inline-flex items-center gap-3 bg-black text-white font-mono-meta text-xs sm:text-sm font-bold uppercase tracking-wider px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border-2 border-black shadow-[0_10px_26px_rgba(0,0,0,0.35)] transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <span>{ctaLabel}</span>
+                <svg
+                  class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
               <p
-            class={`page-banner__microcopy reveal font-mono-meta text-xs sm:text-sm uppercase font-bold tracking-wider m-0 text-center ${
-              dark ? "text-white/75" : "text-black/75"
-            }`}
+                class="font-mono-meta text-[10px] sm:text-[11px] uppercase font-bold tracking-wider text-black/75 m-0 text-center whitespace-normal sm:whitespace-nowrap leading-relaxed"
               >
                 {heroContent.microcopy}
               </p>
-            )
-          }
-        </div>
-      )
-    }
-  </div>
-
-  {
-    heroLike && (
-      <div class="page-banner__bottom w-full max-w-7xl mx-auto reveal">
-        <!-- Horizontal Border Divider (2px solid #000000): the section ends
-             here, at the same viewport height as the home hero's divider. -->
-        <div class="w-full h-[2px] bg-black page-banner__divider" />
+            </div>
+          )
+        }
       </div>
-    )
-  }
-</header>
+    </section>
+  ) : (
+    <header
+      class={`page-banner relative flex flex-col justify-center px-4 md:px-12 ${
+        dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"
+      }`}
+    >
+      <div class="page-banner__inner mx-auto">
+        <!-- Eyebrow: plain text, no chip box. Matches the bare section
+             eyebrows used across the site (no border, no dot). Rendered
+             only when the page passes one. -->
+        {
+          eyebrow && (
+            <div
+              class={`page-banner__eyebrow reveal font-mono-meta text-xs uppercase font-bold tracking-widest ${
+                dark ? "text-[#FF4D00]" : "text-black"
+              }`}
+            >
+              // {eyebrow}
+            </div>
+          )
+        }
+
+        <!-- Title in Archivo Black. Sized from the container width (not raw vw)
+             so a 4K screen keeps the same line partition as a laptop, and capped
+             by viewport height so short screens never push the hero past one page. -->
+        <h1
+          class={`page-banner__title reveal font-display uppercase tracking-[-0.04em] m-0 ${
+            dark ? "text-white" : "text-black"
+          }`}
+        >
+          {title}
+        </h1>
+
+        {
+          intro && (
+            <p
+              class={`page-banner__intro reveal reveal-late font-sans text-base sm:text-xl md:text-2xl font-bold leading-relaxed ${
+                dark ? "text-white/80" : "text-black/90"
+              }`}
+            >
+              {intro}
+            </p>
+          )
+        }
+
+        {
+          ctaLabel && ctaHref && (
+            <div class="page-banner__cta">
+              <a
+                href={ctaHref}
+                class={`group reveal inline-flex items-center gap-3 font-mono-meta text-xs sm:text-sm font-bold uppercase px-6 py-4 rounded-full border-2 border-black transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 ${
+                  dark
+                    ? "bg-[#FF4D00] text-black focus-visible:ring-[#FF4D00]"
+                    : "bg-black text-white shadow-[0_10px_28px_rgba(0,0,0,0.35)] focus-visible:ring-black"
+                }`}
+              >
+                <span>{ctaLabel}</span>
+                <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </header>
+  )
+}
 
 <style>
+  /* Hero-like banners (Proyectos, Nosotros, Contacto): replicate Hero.astro
+     identically up to (and excluding) the 2px black divider. The min-height
+     offsets match Hero.astro's omitted divider + bottom metadata row +
+     bottom padding (234px normal, 202px <=776px, 194px <=600px), so the
+     orange section ends at the exact viewport Y where Home's divider starts. */
+  .page-banner-hero {
+    min-height: max(calc(100vh + 2.5vw - 234px), 27rem);
+    min-height: max(calc(100svh + 2.5vw - 234px), 27rem);
+  }
+
+  .page-banner-hero__middle {
+    container-type: inline-size;
+    max-width: min(92vw, 1800px);
+  }
+
+  .page-banner-hero__title {
+    font-size: clamp(2rem, min(5.6cqw, 7.4svh), 5.25rem);
+    line-height: 0.88;
+  }
+
+  @media (min-width: 360px) {
+    .page-banner-hero__title {
+      font-size: clamp(2.1rem, min(5.6cqw, 7.4svh), 5.25rem);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .page-banner-hero__intro {
+      line-height: 1.45;
+    }
+  }
+
+  @media (max-height: 776px) {
+    .page-banner-hero {
+      padding-top: 3.5rem;
+      min-height: max(calc(100vh + 2.5vw - 202px), 27rem);
+      min-height: max(calc(100svh + 2.5vw - 202px), 27rem);
+    }
+    .page-banner-hero .hero-middle {
+      padding-top: 0.5rem;
+      padding-bottom: 1.25rem;
+    }
+    .page-banner-hero [data-hero-cta] {
+      gap: 0.3rem;
+      margin-top: 1.5rem;
+    }
+    .page-banner-hero [data-hero-cta] p {
+      font-size: 10px;
+    }
+    .page-banner-hero__title {
+      font-size: clamp(1.9rem, min(5.4cqw, 6.8svh), 4.5rem);
+    }
+    .page-banner-hero__intro {
+      margin-top: 0.75rem;
+    }
+  }
+
+  @media (max-height: 600px) {
+    .page-banner-hero {
+      padding-top: 2rem;
+      min-height: max(calc(100vh + 2.5vw - 194px), 27rem);
+      min-height: max(calc(100svh + 2.5vw - 194px), 27rem);
+    }
+    .page-banner-hero .hero-middle {
+      padding-top: 0;
+      padding-bottom: 1rem;
+    }
+    .page-banner-hero [data-hero-label] {
+      display: none;
+    }
+    .page-banner-hero [data-hero-cta] {
+      margin-top: 1rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  /* Plain banners (Privacidad / Privacy) */
   .page-banner {
     min-height: 90vh;
     min-height: 90svh;
     padding-block: clamp(4rem, 9svh, 6.5rem) clamp(2rem, 4svh, 3rem);
   }
 
-  /* Hero-like banners: the section ends at its own divider, and that
-     divider sits at the same viewport height as the home hero's divider
-     (measured: 100svh + 2.5vw - 234px normal; - 202px under the 776px
-     compact level; - 194px under 600px). */
-  .page-banner--hero {
-    min-height: max(calc(100svh + 2.5vw - 234px), 27rem);
-    padding-bottom: 0;
-  }
-
-  .page-banner--hero .page-banner__inner {
-    margin-block: auto;
-  }
-
-  /* The EST. 2026 tag is thrown to the left of the centered column. */
-  .page-banner--hero .page-banner__kicker {
-    text-align: left;
-  }
-
-  .page-banner__cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.625rem;
-  }
-
   .page-banner__inner {
     container-type: inline-size;
     width: 100%;
-    /* Wider than the rest of the site: the banner headline needs room to
-       hold its line count when the viewport itself is 4K. */
     max-width: min(92vw, 1800px);
     text-align: center;
   }
@@ -188,23 +275,11 @@ const { heroContent } = getContent(lang);
 
   .page-banner__cta {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 0.625rem;
     margin-top: clamp(0.75rem, 2svh, 1.5rem);
-  }
-
-  @media (max-height: 776px) {
-    /* Compact level mirroring the home hero's: the divider keeps landing
-       at the home height; only air is cut. */
-    .page-banner--hero {
-      padding-top: clamp(2.5rem, 6svh, 4rem);
-      min-height: max(calc(100svh + 2.5vw - 202px), 27rem);
-    }
-  }
-
-  @media (max-height: 600px) {
-    .page-banner--hero {
-      min-height: max(calc(100svh + 2.5vw - 194px), 27rem);
-    }
   }
 
   @media (max-width: 359px) {
@@ -213,3 +288,309 @@ const { heroContent } = getContent(lang);
     }
   }
 </style>
+
+<style is:global>
+  /* Intro entrance initial states mirroring Hero.astro, scoped to
+     [data-page-banner-hero] so plain banners stay untouched. Applied ONLY
+     while the preloader intro actually runs (html.intro-run). */
+  html.intro-run [data-page-banner-hero] [data-hero-h1] {
+    opacity: 0;
+    transform: translateX(-70px);
+  }
+  html.intro-run [data-page-banner-hero] [data-hero-sub] {
+    opacity: 0;
+    transform: translateX(70px);
+  }
+  html.intro-run [data-page-banner-hero] [data-hero-label] {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  html.intro-run [data-page-banner-hero] [data-hero-cta] {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  html.intro-run [data-page-banner-hero] {
+    overflow-x: clip;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+
+  const bannerSection = document.querySelector<HTMLElement>("[data-page-banner-hero]");
+
+  if (bannerSection) {
+    // --- Intro entrance mirroring Hero.astro (phase 4, 2.1s–3.3s) ---
+    const introRoot = document.documentElement;
+    const finalTexts = new Map<HTMLElement, string>();
+    for (const el of Array.from(bannerSection.querySelectorAll<HTMLElement>("[data-hero-scramble]"))) {
+      const original = (el.textContent ?? "").replace(/\s+/g, " ").trim();
+      if (original) {
+        finalTexts.set(el, original);
+        el.textContent = original;
+      }
+    }
+
+    let bannerIntroStarted = false;
+
+    const startBannerIntro = () => {
+      if (bannerIntroStarted) return;
+      if (!introRoot.classList.contains("intro-run")) return;
+      bannerIntroStarted = true;
+      introRoot.dataset.introStarted = "1";
+
+      let cleanupScramble = () => {};
+
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        onComplete: () => {
+          cleanupScramble();
+          introRoot.classList.remove("intro-run");
+        },
+      });
+
+      const h1 = bannerSection.querySelector<HTMLElement>("[data-hero-h1]");
+      const sub = bannerSection.querySelector<HTMLElement>("[data-hero-sub]");
+      const label = bannerSection.querySelector<HTMLElement>("[data-hero-label]");
+      const cta = bannerSection.querySelector<HTMLElement>("[data-hero-cta]");
+
+      const GLYPHS = "X0O#";
+
+      type DecodeItem = {
+        el: HTMLElement;
+        text: string;
+        at: number;
+        total: number;
+        flickerMs: number;
+      };
+      type BuiltItem = {
+        el: HTMLElement;
+        at: number;
+        total: number;
+        flickerMs: number;
+        wordWraps: HTMLSpanElement[];
+        spans: { node: HTMLSpanElement; final: string }[];
+      };
+      type ScrambleEntry = {
+        node: HTMLSpanElement;
+        final: string;
+        startSec: number;
+        endSec: number;
+        settled: boolean;
+      };
+
+      const decodeQueue: DecodeItem[] = [];
+      const enqueueDecode = (
+        el: HTMLElement | null,
+        at: number,
+        total = 0.6,
+        flickerMs = 160,
+      ) => {
+        const text = el ? finalTexts.get(el) : undefined;
+        if (!el || !text) return;
+        decodeQueue.push({ el, text, at, total, flickerMs });
+      };
+
+      if (h1) {
+        tl.to(h1, { x: 0, opacity: 1, duration: 0.45 }, 0);
+        enqueueDecode(h1, 0, 0.6, 160);
+      }
+      if (sub) {
+        tl.to(sub, { x: 0, opacity: 1, duration: 0.45 }, 0.1);
+        enqueueDecode(sub, 0.1, 0.65, 140);
+      }
+      if (label) {
+        tl.to(label, { y: 0, opacity: 1, duration: 0.4 }, 0.02);
+        enqueueDecode(label, 0.02, 0.36, 140);
+      }
+      if (cta) {
+        tl.to(cta, { y: 0, opacity: 1, duration: 0.4 }, 0.22);
+      }
+
+      // Phase A (DOM build): word-safe per-letter spans built off-DOM via
+      // DocumentFragment so multi-line headlines only break at spaces.
+      const built: BuiltItem[] = decodeQueue.map(({ el, text, at, total, flickerMs }) => {
+        const frag = document.createDocumentFragment();
+        const wordWraps: HTMLSpanElement[] = [];
+        const spans: { node: HTMLSpanElement; final: string }[] = [];
+        const words = text.split(" ");
+        for (let wi = 0; wi < words.length; wi++) {
+          if (wi > 0) frag.appendChild(document.createTextNode(" "));
+          const wrap = document.createElement("span");
+          wrap.style.whiteSpace = "nowrap";
+          for (const ch of words[wi]) {
+            const node = document.createElement("span");
+            node.style.display = "inline-block";
+            node.textContent = ch;
+            wrap.appendChild(node);
+            spans.push({ node, final: ch });
+          }
+          frag.appendChild(wrap);
+          wordWraps.push(wrap);
+        }
+        el.textContent = "";
+        el.appendChild(frag);
+        return { el, at, total, flickerMs, wordWraps, spans };
+      });
+
+      // Phase B (batched READ -> WRITE): guard against a single long word
+      // overflowing narrow screens before measuring final glyph boxes.
+      const vw = window.innerWidth;
+      const overflowingWords: HTMLSpanElement[] = [];
+      for (const item of built) {
+        const avail = item.el.getBoundingClientRect().width;
+        for (const w of item.wordWraps) {
+          const r = w.getBoundingClientRect();
+          if ((avail > 0 && r.width > avail + 1) || r.right > vw - 1) {
+            overflowingWords.push(w);
+          }
+        }
+      }
+      for (const w of overflowingWords) {
+        w.style.whiteSpace = "normal";
+        w.style.overflowWrap = "anywhere";
+      }
+
+      // Phase C (batched READ -> WRITE): measure fontSize once per element
+      // and natural glyph widths across all banner targets, then lock em
+      // widths and register one staggered GSAP tween per element.
+      const metrics = built.map(({ el, spans }) => ({
+        fsNow: parseFloat(getComputedStyle(el).fontSize) || 16,
+        widths: spans.map(({ node }) => node.getBoundingClientRect().width),
+      }));
+
+      const allEntries: ScrambleEntry[] = [];
+      for (let bi = 0; bi < built.length; bi++) {
+        const { at, total, flickerMs, spans } = built[bi];
+        if (spans.length === 0) continue;
+        const { fsNow, widths } = metrics[bi];
+        const each = Math.min(0.022, total / spans.length);
+        const flickerSec = flickerMs / 1000;
+        const nodes: HTMLSpanElement[] = [];
+
+        for (let i = 0; i < spans.length; i++) {
+          const { node, final } = spans[i];
+          node.style.width = `${widths[i] / fsNow}em`;
+          node.style.textAlign = "center";
+          node.dataset.final = final;
+          node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          nodes.push(node);
+          const startSec = at + i * each;
+          allEntries.push({
+            node,
+            final,
+            startSec,
+            endSec: startSec + flickerSec,
+            settled: false,
+          });
+        }
+
+        tl.fromTo(
+          nodes,
+          { scale: 0.25, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.8)", stagger: each },
+          at,
+        );
+      }
+
+      // Shared rAF loop cycling glyphs every ~42ms only for active spans and
+      // settling each span immediately once its flicker window ends.
+      let scrambleRaf = 0;
+      let lastCycleAt = 0;
+      let remaining = allEntries.length;
+
+      const settleAll = () => {
+        if (scrambleRaf) {
+          cancelAnimationFrame(scrambleRaf);
+          scrambleRaf = 0;
+        }
+        for (const entry of allEntries) {
+          if (!entry.settled) {
+            entry.settled = true;
+            entry.node.dataset.settled = "1";
+            entry.node.textContent = entry.final;
+          }
+        }
+        remaining = 0;
+      };
+      cleanupScramble = settleAll;
+
+      const tickScramble = (now: number) => {
+        const elapsed = tl.time();
+        const shouldCycle = now - lastCycleAt >= 42;
+        if (shouldCycle) lastCycleAt = now;
+
+        for (const entry of allEntries) {
+          if (entry.settled) continue;
+          if (elapsed >= entry.endSec) {
+            entry.settled = true;
+            entry.node.dataset.settled = "1";
+            entry.node.textContent = entry.final;
+            remaining--;
+          } else if (shouldCycle && elapsed >= entry.startSec) {
+            entry.node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+          }
+        }
+
+        if (remaining > 0) {
+          scrambleRaf = requestAnimationFrame(tickScramble);
+        } else {
+          scrambleRaf = 0;
+        }
+      };
+
+      if (remaining > 0) {
+        scrambleRaf = requestAnimationFrame(tickScramble);
+      }
+    };
+
+    // Only play the top hero entrance once the headline itself is in view.
+    // On normal landings (scrollY=0) it plays immediately; on hash jumps
+    // like /contacto/#formulario (where section#top's bottom strip still
+    // peeks under the navbar while h1 is above the viewport), wait until
+    // the user scrolls up so the robotic decode isn't wasted off-screen.
+    const scheduleBannerIntro = () => {
+      if (bannerIntroStarted || !introRoot.classList.contains("intro-run")) return;
+      const target = bannerSection.querySelector<HTMLElement>("[data-hero-h1]") ?? bannerSection;
+      const hashId = window.location.hash.slice(1);
+      const hashEl = hashId ? document.getElementById(hashId) : null;
+      const hashBelowHero = Boolean(hashEl && !bannerSection.contains(hashEl));
+      const rect = target.getBoundingClientRect();
+      const visible = !hashBelowHero && rect.bottom > 80 && rect.top < window.innerHeight - 40;
+      if (visible || !("IntersectionObserver" in window)) {
+        startBannerIntro();
+        return;
+      }
+      // Claim ownership so BaseLayout's 4s failsafe doesn't strip intro-run
+      // before the user scrolls up to section#top.
+      introRoot.dataset.introStarted = "1";
+      const attachObserver = () => {
+        if (bannerIntroStarted) return;
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io.disconnect();
+              startBannerIntro();
+            }
+          },
+          { threshold: 0.25 },
+        );
+        io.observe(target);
+      };
+      // If landing on a hash below the hero (e.g. /contacto/#formulario),
+      // let the browser + ContactFormSection finish scrolling to the target
+      // before arming the observer so a transient scrollY=0 frame can't fire it.
+      if (hashBelowHero) {
+        window.setTimeout(attachObserver, 450);
+      } else {
+        attachObserver();
+      }
+    };
+
+    if (introRoot.dataset.introHandoff === "1") {
+      scheduleBannerIntro();
+    } else {
+      window.addEventListener("deft:intro:hero", scheduleBannerIntro, { once: true });
+    }
+  }
+</script>

@@ -18,9 +18,9 @@ const process =
       ? content.howWeWorkNosotros
       : content.guarantees;
 
-const dark = variant === "guarantees";
+const dark = false;
 const colsClass =
-  variant === "home" ? "lg:grid-cols-3" : variant === "nosotros" ? "lg:grid-cols-4" : "lg:grid-cols-3";
+  variant === "nosotros" ? "lg:grid-cols-4" : "lg:grid-cols-3";
 ---
 
 <section class={`relative ${dark ? "bg-black text-white" : "bg-[#FF4D00] text-black"} py-20 px-4 md:px-12`}>

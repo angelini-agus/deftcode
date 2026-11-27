@@ -72,7 +72,7 @@ const socialAria: Record<string, string> =
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="font-mono-meta text-[12px] uppercase font-bold text-white px-3.5 py-1 rounded-full transition-all duration-200 hover:bg-white/10 hover:text-[#FF4D00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D00]"
+            class="font-mono-meta text-[12px] uppercase font-bold text-white px-3.5 py-1 rounded-full transition-all duration-200 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             {link.label}
           </a>
@@ -87,28 +87,38 @@ const socialAria: Record<string, string> =
     <div class="pointer-events-auto flex items-center gap-2 sm:gap-3">
       <!-- Language Switcher Pill -->
       <div class="flex items-center bg-black rounded-full border-2 border-black p-0.5 font-mono-meta text-[11px] font-bold shadow-md">
-        <a
-          href={esTargetHref}
-          class={`px-2.5 py-1 rounded-full transition-all ${
-            lang === "es"
-              ? "bg-[#FF4D00] text-black"
-              : "text-white/70 hover:text-white"
-          }`}
-          aria-label="Versión en Español"
-        >
-          ES
-        </a>
-        <a
-          href={enTargetHref}
-          class={`px-2.5 py-1 rounded-full transition-all ${
-            lang === "en"
-              ? "bg-[#FF4D00] text-black"
-              : "text-white/70 hover:text-white"
-          }`}
-          aria-label="English version"
-        >
-          EN
-        </a>
+        {lang === "es" ? (
+          <span
+            class="px-2.5 py-1 rounded-full bg-[#FF4D00] text-black cursor-default select-none"
+            aria-current="page"
+          >
+            ES
+          </span>
+        ) : (
+          <a
+            href={esTargetHref}
+            class="px-2.5 py-1 rounded-full transition-all text-white/70 hover:text-white"
+            aria-label="Versión en Español"
+          >
+            ES
+          </a>
+        )}
+        {lang === "en" ? (
+          <span
+            class="px-2.5 py-1 rounded-full bg-[#FF4D00] text-black cursor-default select-none"
+            aria-current="page"
+          >
+            EN
+          </span>
+        ) : (
+          <a
+            href={enTargetHref}
+            class="px-2.5 py-1 rounded-full transition-all text-white/70 hover:text-white"
+            aria-label="English version"
+          >
+            EN
+          </a>
+        )}
       </div>
 
       <!-- Below 360px the brand + language pill + menu already fill the
@@ -119,7 +129,7 @@ const socialAria: Record<string, string> =
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-black text-white p-1.5 rounded-full border-2 border-black shadow-md transition-all duration-200 hover:text-[#FF4D00] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+            class="bg-black text-white p-1.5 rounded-full border-2 border-black shadow-md transition-all duration-200 hover:bg-white hover:border-white hover:text-black hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             aria-label={socialAria[s.platform]}
           >
             {s.platform === "instagram" ? (

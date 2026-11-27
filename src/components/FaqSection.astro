@@ -23,7 +23,6 @@ const faqSchema = {
   })),
 };
 
-const faqEyebrow = lang === "en" ? "// DIRECT ANSWERS" : "// RESPUESTAS DIRECTAS";
 const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECUENTES";
 ---
 
@@ -34,9 +33,6 @@ const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECU
 <section id="precios" class="relative bg-[#FF4D00] text-black py-20 px-4 md:px-12">
   <div class="max-w-7xl mx-auto">
     <div class="border-b-2 border-black pb-8 mb-12">
-      <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-        {pricing.eyebrow}
-      </span>
       <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-black uppercase tracking-[-0.04em] leading-[0.9]">
         {pricing.title}
       </h2>
@@ -84,9 +80,6 @@ const faqTitle = lang === "en" ? "FREQUENTLY ASKED QUESTIONS" : "PREGUNTAS FRECU
   <div class="max-w-7xl mx-auto">
     <div class="border-b border-white/20 pb-8 mb-12">
       <div>
-        <span class="reveal font-mono-meta text-xs uppercase text-[#FF4D00] font-bold tracking-widest block mb-2">
-          {faqEyebrow}
-        </span>
         <h2 data-fit-title class="reveal font-display text-4xl sm:text-5xl text-white uppercase tracking-[-0.04em] leading-[0.9]">
           {faqTitle}
         </h2>

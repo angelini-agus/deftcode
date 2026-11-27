@@ -848,30 +848,24 @@ const esManifesto: ManifestoItem[] = [
   },
   {
     number: "03",
-    title: "CERO BUROCRACIA, CERO MALENTENDIDOS.",
-    description:
-      "No tenemos vendedores ni gerentes de cuenta en el medio. Entrevistás y hablás directo con los fundadores que escriben el código.",
-  },
-  {
-    number: "04",
     title: "PRIMERO LO VES, DESPUÉS FIRMÁS",
     description:
       "Te mostramos el sistema andando antes de cobrarte: prototipo con la lógica de tu negocio.",
   },
   {
-    number: "05",
+    number: "04",
     title: "ENTREGAS SEMANALES VISIBLES",
     description:
       "Nada de desaparecer hasta el día final. Todos los viernes ves el sistema avanzando en vivo y ajustamos el rumbo en 24 horas.",
   },
   {
-    number: "06",
+    number: "05",
     title: "FECHA DE ENTREGA Y GARANTÍA POR CONTRATO",
     description:
       "Precio cerrado desde el día uno y fecha de lanzamiento firmada. Si aparece un error después de salir a producción, lo arreglamos gratis.",
   },
   {
-    number: "07",
+    number: "06",
     title: "EL CÓDIGO Y TUS DATOS SON 100% TUYOS",
     description:
       "Sin licencias eternas ni secuestro tecnológico. Te entregamos el repositorio, la documentación y capacitamos a tu equipo si querés operarlo solo.",
@@ -882,7 +876,7 @@ const esManifesto: ManifestoItem[] = [
 // 2026 objections (slow agencies, unsupervised home-built AI) right before
 // the qualification filter and the pricing/FAQ block.
 const esComparison: ComparisonContent = {
-  eyebrow: "// POR QUÉ DEFTCODE®",
+  eyebrow: "// ¿POR QUÉ DEFTCODE®?",
   title: "NI MESES DE BUROCRACIA, NI PARCHES GENERADOS CON IA.",
   intro:
     "Hoy tenés dos extremos que te hacen perder plata: consultoras que tardan 6 meses y apps hechas con IA sin supervisión que se rompen con el primer cliente real.",
@@ -927,7 +921,7 @@ const esComparison: ComparisonContent = {
 
 // Home: 3-step diagnostic (§3.6).
 const esHowWeWork: ProcessContent = {
-  eyebrow: "// TU DIAGNÓSTICO GRATIS",
+  eyebrow: "// ¿CÓMO ARRANCAMOS?",
   title: "TU DIAGNÓSTICO GRATIS, PASO A PASO",
   intro: "Solo te pedimos 4 datos. Tres pasos, sin compromiso.",
   steps: [
@@ -1119,7 +1113,7 @@ const esCtaContent: CtaContent = {
 const esForWho = {
   eyebrow: "// ¿ES PARA VOS?",
   title: "NO TRABAJAMOS CON CUALQUIERA.",
-  yesLabel: "ES PARA VOS SI",
+  yesLabel: "SÍ ES PARA VOS SI",
   yesItems: [
     "Tus procesos están claros y hoy viven en planillas.",
     "Querés un sistema a medida o una landing que convierta, no una plantilla genérica.",
@@ -1187,7 +1181,7 @@ const esProblems: ProblemsContent = {
 // ==========================================
 
 const esFeaturedCase: FeaturedCaseContent = {
-  eyebrow: "CASO REAL",
+  eyebrow: "// CASO REAL",
   title: "UNA EMPRESA DE LIMPIEZA DE ROSARIO DEJÓ LAS PLANILLAS Y HOY AHORRA $2.8M ARS POR MES.",
   description:
     "Pidieron control de asistencia. Terminamos unificando asistencia, sueldos, impuestos y stock de más de 30 edificios en un solo sistema. Cero quejas por inasistencia.",
@@ -2152,7 +2146,7 @@ const enProjects: ProjectItem[] = [
   },
 ];
 
-// EN manifesto mirror: macro-speed philosophy in 7 principles.
+// EN manifesto mirror: macro-speed philosophy in 6 principles.
 const enManifesto: ManifestoItem[] = [
   {
     number: "01",
@@ -2168,30 +2162,24 @@ const enManifesto: ManifestoItem[] = [
   },
   {
     number: "03",
-    title: "NO MIDDLEMEN, NO MISUNDERSTANDINGS.",
-    description:
-      "No salespeople or account managers in the middle. You interview and talk directly with the founders who write the code.",
-  },
-  {
-    number: "04",
     title: "YOU SEE IT FIRST, THEN YOU SIGN",
     description:
       "You see it running before you pay: a prototype with your business logic.",
   },
   {
-    number: "05",
+    number: "04",
     title: "VISIBLE WEEKLY DELIVERIES",
     description:
       "No disappearing until the final day. Every Friday you see the system advancing live, and we adjust course within 24 hours.",
   },
   {
-    number: "06",
+    number: "05",
     title: "DELIVERY DATE AND GUARANTEE IN THE CONTRACT",
     description:
       "Closed price from day one and a signed launch date. If a bug appears after going to production, we fix it for free.",
   },
   {
-    number: "07",
+    number: "06",
     title: "THE CODE AND YOUR DATA ARE 100% YOURS",
     description:
       "No eternal licenses, no vendor lock-in. We hand over the repository and documentation, and we train your team if you want to run it yourself.",
@@ -2200,7 +2188,7 @@ const enManifesto: ManifestoItem[] = [
 
 // EN home: why-def tcode comparison (mirror of the ES matrix).
 const enComparison: ComparisonContent = {
-  eyebrow: "// WHY DEFTCODE®",
+  eyebrow: "// WHY DEFTCODE®?",
   title: "NO MONTHS OF BUREAUCRACY, NO AI-GENERATED PATCHES.",
   intro:
     "Today you have two extremes that cost you money: consultancies that take 6 months and unsupervised AI-built apps that break with the first real client.",
@@ -2245,7 +2233,7 @@ const enComparison: ComparisonContent = {
 
 // EN home: 3-step diagnostic (§3.6).
 const enHowWeWork: ProcessContent = {
-  eyebrow: "// YOUR FREE DIAGNOSIS",
+  eyebrow: "// HOW DO WE START?",
   title: "YOUR FREE DIAGNOSIS, STEP BY STEP",
   intro: "We only ask for 4 details. Three steps, no commitment.",
   steps: [
@@ -2433,7 +2421,7 @@ const enCtaContent: CtaContent = {
 const enForWho = {
   eyebrow: "// IS IT FOR YOU?",
   title: "WE DON'T WORK WITH JUST ANYONE.",
-  yesLabel: "IT'S FOR YOU IF",
+  yesLabel: "YES, IT'S FOR YOU IF",
   yesItems: [
     "Your processes are clear and today they live in spreadsheets.",
     "You want a custom system or a landing that converts, not a generic template.",
@@ -2501,7 +2489,7 @@ const enProblems: ProblemsContent = {
 // ==========================================
 
 const enFeaturedCase: FeaturedCaseContent = {
-  eyebrow: "A real case",
+  eyebrow: "// A REAL CASE",
   title: "A CLEANING COMPANY IN ROSARIO DROPPED ITS SPREADSHEETS AND NOW SAVES $2.8M ARS PER MONTH.",
   description:
     "They asked for attendance control. We ended up unifying attendance, payroll, taxes and stock for 30+ buildings in one system. Zero absence complaints.",

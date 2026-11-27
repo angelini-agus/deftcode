@@ -13,7 +13,6 @@ const { projects } = getContent(lang);
 const projectCount = projects.length;
 
 const sectionId = lang === "en" ? "projects" : "proyectos";
-const eyebrow = lang === "en" ? "// CASES & DELIVERABLES" : "// CASOS & ENTREGABLES";
 const title = lang === "en" ? "SOFTWARE IN PRODUCTION" : "SOFTWARE EN PRODUCCIÓN";
 const cardLabel = lang === "en" ? "PROJECT" : "PROYECTO";
 const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMPLETO";
@@ -28,9 +27,6 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
   <div class="px-4 md:px-12">
     <div class="max-w-7xl mx-auto pt-14 pb-2 md:pt-16 md:pb-4">
       <div class="border-b-2 border-black pb-4 md:pb-6">
-        <span class="reveal font-mono-meta text-xs uppercase text-black font-bold tracking-widest block mb-2">
-          {eyebrow}
-        </span>
         <h2 data-fit-title class="reveal font-display text-4xl sm:text-6xl md:text-7xl text-black uppercase tracking-[-0.04em] leading-[0.88]">
           {title}
         </h2>
@@ -198,7 +194,9 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
     defaultSpringConfig,
   } from "../lib/flip-stack";
 
+  let flipStackInit = false;
   const initFlipStack = () => {
+    if (flipStackInit) return;
     const section = document.querySelector<HTMLElement>(".projects-stack");
     const runway = document.querySelector<HTMLElement>("[data-flip-runway]");
     const stage = document.querySelector<HTMLElement>("[data-flip-stage]");
@@ -206,6 +204,7 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
     const folders = Array.from(document.querySelectorAll<HTMLElement>("[data-flip-card]"));
 
     if (!section || !runway || !stage || !deck || folders.length === 0) return;
+    flipStackInit = true;
 
     const total = folders.length;
     let step = 32;
@@ -298,6 +297,9 @@ const viewCaseLabel = lang === "en" ? "EXPLORE FULL CASE STUDY" : "VER CASO COMP
     }, { passive: true });
   };
 
-  document.addEventListener("DOMContentLoaded", initFlipStack);
-  initFlipStack();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFlipStack, { once: true });
+  } else {
+    initFlipStack();
+  }
 </script>

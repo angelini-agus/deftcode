@@ -251,15 +251,15 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
 
 <script>
   import gsap from "gsap";
-  import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 
-  gsap.registerPlugin(ScrambleTextPlugin);
-
+  let heroArrowInit = false;
   const initHeroArrowRotation = () => {
+    if (heroArrowInit) return;
     const arrow = document.querySelector<SVGElement>("[data-hero-arrow]");
     const link = document.querySelector<HTMLAnchorElement>("[data-hero-arrow-link]");
 
     if (!arrow) return;
+    heroArrowInit = true;
 
     let targetRotation = 0;
     let currentRotation = 0;
@@ -315,8 +315,11 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     onScroll();
   };
 
-  document.addEventListener("DOMContentLoaded", initHeroArrowRotation);
-  initHeroArrowRotation();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeroArrowRotation, { once: true });
+  } else {
+    initHeroArrowRotation();
+  }
 
   // Align the EST. 2026 label with the h1's left text edge: the giant
   // centered headline starts well inside the section padding, and the
@@ -393,9 +396,12 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     heroIntroStarted = true;
     introRoot.dataset.introStarted = "1";
 
+    let cleanupScramble = () => {};
+
     const tl = gsap.timeline({
       defaults: { ease: "power3.out" },
       onComplete: () => {
+        cleanupScramble();
         introRoot.classList.remove("intro-run");
         introScrambling = false;
         fitHeroH1();
@@ -423,76 +429,27 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     // glyphs (1, _, /) centered in a fixed letter box read as extra air
     // and made the settled text look like it contracted at the end.
     const GLYPHS = "X0O#";
-    const restored: HTMLElement[] = [];
+    const FLICKER_SEC = 0.11;
 
-    const buildCharSpans = (el: HTMLElement, text: string) => {
-      el.textContent = "";
-      const spans: { node: HTMLSpanElement; final: string }[] = [];
-      for (const ch of text) {
-        if (ch === " ") {
-          el.appendChild(document.createTextNode(" "));
-          continue;
-        }
-        const node = document.createElement("span");
-        node.style.display = "inline-block";
-        node.textContent = ch;
-        el.appendChild(node);
-        spans.push({ node, final: ch });
-      }
-      // Lock every letter box to its FINAL glyph width before the flicker
-      // starts: the cycling glyphs keep the exact box the settled letter
-      // will occupy, so the paragraph wraps identically mid-glitch (the
-      // sub never reflows past its final two lines) and the nowrap h1
-      // keeps a constant width. Widths are in em (relative to the current
-      // font size) so fitHeroH1 can rescale the heading and the boxes
-      // scale with it — the spans stay permanent, which is what kills the
-      // end-of-intro compaction: unwrapping re-enables GPOS kerning that
-      // inline blocks suppress, and the kerning shift was the jump users
-      // saw in the last half second.
-      const fsNow = parseFloat(getComputedStyle(el).fontSize) || 16;
-      for (const { node } of spans) {
-        const w = node.getBoundingClientRect().width;
-        node.style.width = `${w / fsNow}em`;
-        node.style.textAlign = "center";
-        node.dataset.final = node.textContent;
-        node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
-      }
-      return spans;
+    type DecodeItem = { el: HTMLElement; text: string; at: number };
+    type BuiltItem = {
+      el: HTMLElement;
+      at: number;
+      spans: { node: HTMLSpanElement; final: string }[];
+    };
+    type ScrambleEntry = {
+      node: HTMLSpanElement;
+      final: string;
+      startSec: number;
+      endSec: number;
+      settled: boolean;
     };
 
-    const decode = (el: HTMLElement | null, at: number, total = 0.42) => {
+    const decodeQueue: DecodeItem[] = [];
+    const enqueueDecode = (el: HTMLElement | null, at: number) => {
       const text = el ? finalTexts.get(el) : undefined;
       if (!el || !text) return;
-      restored.push(el);
-      const spans = buildCharSpans(el, text);
-      const each = Math.min(0.022, 0.3 / spans.length);
-      const flickerMs = 110;
-      spans.forEach(({ node, final }, i) => {
-        const startAt = at + i * each;
-        tl.fromTo(
-          node,
-          { scale: 0.25, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(1.8)" },
-          startAt,
-        );
-        tl.call(
-          () => {
-            node.dataset.settled = "1";
-            node.textContent = final;
-          },
-          undefined,
-          startAt + flickerMs / 1000,
-        );
-      });
-      // Random glyph cycling for every letter that has not settled yet.
-      const cycler = window.setInterval(() => {
-        for (const { node } of spans) {
-          if (!node.dataset.settled) {
-            node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
-          }
-        }
-      }, 42);
-      tl.call(() => window.clearInterval(cycler), undefined, at + total + 0.1);
+      decodeQueue.push({ el, text, at });
     };
 
     introScrambling = true;
@@ -501,25 +458,25 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     // slides while its letters grow from small and de-glitch.
     if (h1) {
       tl.to(h1, { x: 0, opacity: 1, duration: 0.45 }, 0);
-      decode(h1, 0, 0.42);
+      enqueueDecode(h1, 0);
     }
     if (sub) {
       tl.to(sub, { x: 0, opacity: 1, duration: 0.45 }, 0.06);
-      decode(sub, 0.06, 0.5);
+      enqueueDecode(sub, 0.06);
     }
     // Top label drops from above, origen from the left, role from the
     // right — letters growing while the flicker cycles.
     if (label) {
       tl.to(label, { y: 0, opacity: 1, duration: 0.4 }, 0.02);
-      decode(label, 0.02, 0.32);
+      enqueueDecode(label, 0.02);
     }
     if (origen) {
       tl.to(origen, { x: 0, opacity: 1, duration: 0.4 }, 0.08);
-      origenLines.forEach((line, i) => decode(line, 0.08 + i * 0.05, 0.28));
+      origenLines.forEach((line, i) => enqueueDecode(line, 0.08 + i * 0.05));
     }
     if (role) {
       tl.to(role, { x: 0, opacity: 1, duration: 0.4 }, 0.14);
-      decode(role, 0.14, 0.32);
+      enqueueDecode(role, 0.14);
     }
     // Divider: scaleX 0→1 from the center.
     if (divider) {
@@ -532,6 +489,122 @@ const originLabel = lang === "en" ? "ORIGIN // COVERAGE" : "ORIGEN // COBERTURA"
     // Conversion CTA rises from below, last: the eye reads headline → CTA.
     if (cta) {
       tl.to(cta, { y: 0, opacity: 1, duration: 0.4 }, 0.18);
+    }
+
+    // Phase A (DOM build): build all character spans off-DOM with
+    // DocumentFragment so each element mutates the live DOM once.
+    const built: BuiltItem[] = decodeQueue.map(({ el, text, at }) => {
+      const frag = document.createDocumentFragment();
+      const spans: { node: HTMLSpanElement; final: string }[] = [];
+      for (const ch of text) {
+        if (ch === " ") {
+          frag.appendChild(document.createTextNode(" "));
+          continue;
+        }
+        const node = document.createElement("span");
+        node.style.display = "inline-block";
+        node.textContent = ch;
+        frag.appendChild(node);
+        spans.push({ node, final: ch });
+      }
+      el.textContent = "";
+      el.appendChild(frag);
+      return { el, at, spans };
+    });
+
+    // Phase B (READ only): measure computed fontSize once per element and
+    // natural glyph widths across all hero targets in a single layout pass.
+    // Widths are locked in em so fitHeroH1 rescales cleanly and permanent
+    // spans avoid GPOS kerning compaction at the end of the intro.
+    const metrics = built.map(({ el, spans }) => ({
+      fsNow: parseFloat(getComputedStyle(el).fontSize) || 16,
+      widths: spans.map(({ node }) => node.getBoundingClientRect().width),
+    }));
+
+    // Phase C (WRITE only): lock em widths, seed glitch glyphs, and register
+    // one staggered GSAP tween per element.
+    const allEntries: ScrambleEntry[] = [];
+    for (let bi = 0; bi < built.length; bi++) {
+      const { at, spans } = built[bi];
+      if (spans.length === 0) continue;
+      const { fsNow, widths } = metrics[bi];
+      const each = Math.min(0.022, 0.3 / spans.length);
+      const nodes: HTMLSpanElement[] = [];
+
+      for (let i = 0; i < spans.length; i++) {
+        const { node, final } = spans[i];
+        node.style.width = `${widths[i] / fsNow}em`;
+        node.style.textAlign = "center";
+        node.dataset.final = final;
+        node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        nodes.push(node);
+        const startSec = at + i * each;
+        allEntries.push({
+          node,
+          final,
+          startSec,
+          endSec: startSec + FLICKER_SEC,
+          settled: false,
+        });
+      }
+
+      tl.fromTo(
+        nodes,
+        { scale: 0.25, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(1.8)", stagger: each },
+        at,
+      );
+    }
+
+    // Shared rAF loop driven by timeline elapsed time, cycling glyphs every
+    // ~42ms only for spans inside their active flicker window and settling
+    // each span as soon as its flicker window ends.
+    let scrambleRaf = 0;
+    let lastCycleAt = 0;
+    let remaining = allEntries.length;
+
+    const settleAll = () => {
+      if (scrambleRaf) {
+        cancelAnimationFrame(scrambleRaf);
+        scrambleRaf = 0;
+      }
+      for (const entry of allEntries) {
+        if (!entry.settled) {
+          entry.settled = true;
+          entry.node.dataset.settled = "1";
+          entry.node.textContent = entry.final;
+        }
+      }
+      remaining = 0;
+    };
+    cleanupScramble = settleAll;
+
+    const tickScramble = (now: number) => {
+      const elapsed = tl.time();
+      const shouldCycle = now - lastCycleAt >= 42;
+      if (shouldCycle) lastCycleAt = now;
+
+      for (const entry of allEntries) {
+        if (entry.settled) continue;
+        if (elapsed >= entry.endSec) {
+          entry.settled = true;
+          entry.node.dataset.settled = "1";
+          entry.node.textContent = entry.final;
+          remaining--;
+        } else if (shouldCycle && elapsed >= entry.startSec) {
+          entry.node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        }
+      }
+
+      if (remaining > 0) {
+        scrambleRaf = requestAnimationFrame(tickScramble);
+      } else {
+        scrambleRaf = 0;
+      }
+    };
+
+    if (remaining > 0) {
+      scrambleRaf = requestAnimationFrame(tickScramble);
     }
 
     // The char spans stay permanently (widths in em, tracking-free):

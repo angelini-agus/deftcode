@@ -17,27 +17,27 @@ const { lang = "es" } = Astro.props;
 
 const copy = {
   es: {
-    eyebrow: "// ACOMPAÑAMIENTO EN CADA ETAPA",
-    title: "TE ACOMPAÑAMOS ANTES, DURANTE Y DESPUÉS DEL LANZAMIENTO.",
+    eyebrow: "// GARANTÍAS Y ACOMPAÑAMIENTO",
+    title: "TE ACOMPAÑAMOS EN CADA ETAPA, CON GARANTÍAS POR ESCRITO.",
     intro:
-      "No desaparecemos después de la entrega: el mismo equipo que escribe el código te acompaña en cada etapa del sistema.",
+      "No desaparecemos después de la entrega: el mismo equipo que escribe el código te acompaña en cada etapa con cada garantía firmada en el contrato.",
     cta: "QUIERO MI DIAGNÓSTICO",
-    aria: "Acompañamiento en cada etapa del proyecto",
+    aria: "Garantías y acompañamiento en cada etapa del proyecto",
   },
   en: {
-    eyebrow: "// SUPPORT AT EVERY STAGE",
-    title: "WE'RE WITH YOU BEFORE, DURING AND AFTER LAUNCH.",
+    eyebrow: "// GUARANTEES & SUPPORT",
+    title: "WE'RE WITH YOU AT EVERY STAGE, WITH WRITTEN GUARANTEES.",
     intro:
-      "We don't disappear after delivery: the same team that writes the code walks your system through every stage.",
+      "We don't disappear after delivery: the same team that writes the code walks your system through every stage with every guarantee in the contract.",
     cta: "I WANT MY DIAGNOSIS",
-    aria: "Support at every stage of the project",
+    aria: "Guarantees and support at every stage of the project",
   },
 }[lang];
 
 const STAGES = [
   {
     badge: lang === "en" ? "STEP 01" : "PASO 01",
-    title: "DIAGNÓSTICO",
+    title: lang === "en" ? "DIAGNOSIS" : "DIAGNÓSTICO",
     description:
       lang === "en"
         ? "1-hour interview + 48 h report. We understand your business and tell you where money leaks."
@@ -45,15 +45,23 @@ const STAGES = [
   },
   {
     badge: lang === "en" ? "STEP 02" : "PASO 02",
-    title: "PROTOTIPO",
+    title: lang === "en" ? "FREE PROTOTYPE" : "PROTOTIPO GRATIS",
     description:
       lang === "en"
-        ? "You see a working mockup of your system before signing. If you don't like it, you don't pay."
-        : "Ves una maqueta funcional de tu sistema antes de firmar. Si no te convence, no pagás.",
+        ? "You see a working mockup with your data before signing. If you don't like it, you don't pay."
+        : "Ves una maqueta funcional con tus datos antes de firmar. Si no te convence, no pagás.",
+  },
+  {
+    badge: lang === "en" ? "GUARANTEE" : "GARANTÍA",
+    title: lang === "en" ? "CLOSED PRICE" : "PRECIO CERRADO",
+    description:
+      lang === "en"
+        ? "Fixed budget from day one: an upfront deposit to start and the balance on validated production delivery."
+        : "Presupuesto fijo desde el día uno: un anticipo al iniciar y el saldo contra entrega validada en producción.",
   },
   {
     badge: lang === "en" ? "STEP 03" : "PASO 03",
-    title: "DESARROLLO",
+    title: lang === "en" ? "DEVELOPMENT" : "DESARROLLO",
     description:
       lang === "en"
         ? "Weekly visible progress on a test environment. You weigh in while it gets built."
@@ -61,15 +69,23 @@ const STAGES = [
   },
   {
     badge: lang === "en" ? "STEP 04" : "PASO 04",
-    title: "LANZAMIENTO",
+    title: lang === "en" ? "LAUNCH" : "LANZAMIENTO",
     description:
       lang === "en"
-        ? "Production with documentation and training for your team, on the date written in the contract."
-        : "Salimos a producción con documentación y capacitación para tu equipo, en la fecha del contrato.",
+        ? "Production with documentation and training for your team, on the exact date written in the contract."
+        : "Salimos a producción en la fecha firmada por contrato, con documentación y capacitación para tu equipo.",
+  },
+  {
+    badge: lang === "en" ? "GUARANTEE" : "GARANTÍA",
+    title: lang === "en" ? "FREE BUG FIXES" : "ERRORES SIN CARGO",
+    description:
+      lang === "en"
+        ? "If a bug appears after launch, we fix it for free. Plus, the code is 100% yours."
+        : "Si encontrás un error después del lanzamiento, lo arreglamos gratis. Además el código es 100% tuyo.",
   },
   {
     badge: lang === "en" ? "STEP 05" : "PASO 05",
-    title: "SOPORTE",
+    title: lang === "en" ? "SUPPORT" : "SOPORTE",
     description:
       lang === "en"
         ? "Monthly maintenance with development hours for whatever comes after launch."
@@ -79,11 +95,13 @@ const STAGES = [
 
 /* Symmetric fan transforms (mirrors the React Bits BounceCards setup). */
 const FAN = [
-  { x: -400, rotate: -8 },
-  { x: -200, rotate: -4 },
+  { x: -450, rotate: -9 },
+  { x: -300, rotate: -6 },
+  { x: -150, rotate: -3 },
   { x: 0, rotate: 0 },
-  { x: 200, rotate: 4 },
-  { x: 400, rotate: 8 },
+  { x: 150, rotate: 3 },
+  { x: 300, rotate: 6 },
+  { x: 450, rotate: 9 },
 ];
 ---
 
@@ -106,7 +124,7 @@ const FAN = [
 
     <!-- Card fan (≥1280px) -->
     <div class="stage-fan__fan mt-14 hidden xl:flex justify-center">
-      <div class="stage-fan__stage relative" style="width: min(1100px, 100%); height: 470px;">
+      <div class="stage-fan__stage relative" style="width: min(1200px, 100%); height: 480px;">
         {
           STAGES.map((stage, i) => (
             <article
@@ -115,19 +133,24 @@ const FAN = [
               style={`z-index: ${i + 1};`}
             >
               <div class="stage-fan__pos">
-                <div class="stage-fan__pop flex h-full w-full flex-col items-center px-5 pb-7 pt-9 text-center bg-black text-white border-2 border-black shadow-[0_20px_50px_-20px_rgba(0,0,0,0.45)]">
-                  <span class="font-mono-meta text-[11px] uppercase font-bold tracking-widest text-[#FF4D00] border border-[#FF4D00] rounded-full px-4 py-1">
-                    {stage.badge}
-                  </span>
-                  <h3 class="font-display text-2xl sm:text-3xl uppercase tracking-[-0.03em] leading-[0.9] text-white mt-4 m-0">
-                    {stage.title}
-                  </h3>
-                  <p class="font-sans text-sm leading-relaxed text-white/75 mt-2.5 m-0">
-                    {stage.description}
-                  </p>
+                <div class="stage-fan__pop group/card flex h-full w-full flex-col justify-between p-6 text-left bg-black text-white border-2 border-black shadow-[8px_8px_0_#000000]">
+                  <div>
+                    <div class="flex items-center justify-between border-b border-white/20 pb-3 mb-6">
+                      <span class="font-mono-meta text-lg font-bold text-[#FF4D00]">
+                        [{stage.badge}]
+                      </span>
+                      <span class="w-2 h-2 bg-[#FF4D00] shrink-0"></span>
+                    </div>
+                    <h3 data-decode-skip class="font-display text-xl md:text-2xl uppercase tracking-[-0.03em] leading-tight mb-3 text-white m-0 origin-left transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100">
+                      {stage.title}
+                    </h3>
+                    <p class="font-sans text-xs sm:text-sm leading-relaxed text-white/70 mt-4 m-0">
+                      {stage.description}
+                    </p>
+                  </div>
                   <a
                     href={lang === "en" ? "/en/contact/#formulario" : "/contacto/#formulario"}
-                    class="group mt-auto inline-flex items-center gap-2 bg-[#FF4D00] text-black font-mono-meta text-[11px] font-bold uppercase tracking-wider px-5 py-2.5 rounded-full border-2 border-black hover:scale-105 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    class="group mt-6 self-center inline-flex items-center gap-2 bg-white text-black font-mono-meta text-[11px] font-bold uppercase tracking-wider px-5 py-2.5 rounded-full border-2 border-black hover:scale-105 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   >
                     <span>{copy.cta}</span>
                     <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
@@ -177,22 +200,27 @@ const FAN = [
 
       <div
         data-fan-track
-        class="grid grid-cols-1 gap-6 pb-2 sm:flex sm:gap-6 sm:overflow-x-auto sm:pt-3 sm:pb-12 sm:snap-x sm:snap-mandatory scroll-smooth"
+        class="grid grid-cols-1 gap-6 pr-2 pb-4 sm:flex sm:gap-6 sm:overflow-x-auto sm:pt-3 sm:pr-3 sm:pb-12 sm:snap-x sm:snap-mandatory scroll-smooth"
         style="scrollbar-width: none;"
       >
         {
           STAGES.map((stage) => (
             <article
               data-fan-slide
-              class="relative flex w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start flex-col items-center px-6 pb-8 pt-9 text-center bg-black text-white border-2 border-black shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1.5"
+              class="group/card relative flex w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start flex-col justify-between p-6 md:p-8 text-left bg-black text-white border-2 border-black shadow-[8px_8px_0_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform"
             >
-              <span class="font-mono-meta text-[11px] uppercase font-bold tracking-widest text-[#FF4D00] border border-[#FF4D00] rounded-full px-4 py-1">
-                {stage.badge}
-              </span>
-              <h3 class="font-display text-2xl uppercase tracking-[-0.03em] leading-[0.9] text-white mt-4 m-0">
-                {stage.title}
-              </h3>
-              <p class="font-sans text-sm leading-relaxed text-white/75 mt-2.5 mb-0">
+              <div>
+                <div class="flex items-center justify-between border-b border-white/20 pb-3 mb-6">
+                  <span class="font-mono-meta text-lg sm:text-xl font-bold text-[#FF4D00]">
+                    [{stage.badge}]
+                  </span>
+                  <span class="w-2 h-2 bg-[#FF4D00] shrink-0"></span>
+                </div>
+                <h3 data-decode-skip class="font-display text-xl md:text-2xl uppercase tracking-[-0.03em] leading-tight mb-3 text-white m-0 origin-left transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover/card:scale-100">
+                  {stage.title}
+                </h3>
+              </div>
+              <p class="font-sans text-xs sm:text-sm leading-relaxed mt-4 text-white/70 mb-0">
                 {stage.description}
               </p>
             </article>
@@ -215,9 +243,11 @@ const FAN = [
   .stage-fan__pos {
     width: 100%;
     height: 100%;
-    /* Hover push rides on this layer: JS only swaps --push. */
+    /* Hover push & lift ride on this layer: JS swaps --push and scale. */
     transform: translateX(var(--push, 0px));
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+      transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+      scale 0.32s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .stage-fan__pop {
     position: relative;
@@ -242,11 +272,13 @@ const FAN = [
   if (section) {
     const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-fan-card]"));
     const FAN = [
-      { x: -400, rotate: -8 },
-      { x: -200, rotate: -4 },
+      { x: -450, rotate: -9 },
+      { x: -300, rotate: -6 },
+      { x: -150, rotate: -3 },
       { x: 0, rotate: 0 },
-      { x: 200, rotate: 4 },
-      { x: 400, rotate: 8 },
+      { x: 150, rotate: 3 },
+      { x: 300, rotate: 6 },
+      { x: 450, rotate: 9 },
     ];
 
     // Hover push: the hovered card lifts, siblings are pushed away by an

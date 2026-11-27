@@ -203,6 +203,20 @@ const srLabel = lang === "en" ? "DEFTCODE® is loading" : "DEFTCODE® está carg
     teardown();
   } else if (skipped) {
     overlay?.remove();
+    // First internal visit skips the curtain + navbar drop (preload-skip)
+    // but keeps the robotic hero/heading entrance (intro-run). Wait for
+    // fonts AND two animation frames so the hidden initial state actually
+    // paints first; firing synchronously before first paint lets browser
+    // navigation commit consume the glitch/decode window off-screen.
+    if (!reduced && html.classList.contains("intro-run")) {
+      const fireAfterPaint = () =>
+        requestAnimationFrame(() => requestAnimationFrame(handoff));
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(fireAfterPaint);
+      } else {
+        fireAfterPaint();
+      }
+    }
   } else if (overlay) {
     html.style.overflow = "hidden";
     window.addEventListener("pageshow", onPageShow);

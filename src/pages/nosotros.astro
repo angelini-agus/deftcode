@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageBanner from "../components/PageBanner.astro";
-import HowWeWorkSection from "../components/HowWeWorkSection.astro";
 import StageFan from "../components/StageFan.astro";
 import ManifestoSection from "../components/ManifestoSection.astro";
 import TeamSection from "../components/TeamSection.astro";
@@ -9,9 +8,8 @@ import CtaSection from "../components/CtaSection.astro";
 import { pages } from "../lib/content";
 ---
 
-<!-- /nosotros per ESTRATEGIA-COPY.md §6: banner, garantías por escrito,
-     manifiesto en lenguaje de beneficio, cómo trabajamos en 4 pasos,
-     equipo y CTA final. El testimonio vive solo en /proyectos. -->
+<!-- /nosotros: banner (N), equipo (B), garantías y acompañamiento (N),
+     manifiesto (B), CTA final (N), footer (B). -->
 <BaseLayout
   lang="es"
   title={pages.nosotros.title}
@@ -23,10 +21,8 @@ import { pages } from "../lib/content";
     ctaLabel="Quiero mi diagnóstico gratis"
     ctaHref="/contacto/#formulario"
   />
-  <HowWeWorkSection lang="es" variant="guarantees" />
-  <HowWeWorkSection lang="es" variant="nosotros" />
-  <ManifestoSection lang="es" />
-  <StageFan lang="es" />
   <TeamSection lang="es" />
+  <StageFan lang="es" />
+  <ManifestoSection lang="es" />
   <CtaSection lang="es" />
 </BaseLayout>

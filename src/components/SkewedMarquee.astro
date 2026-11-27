@@ -109,17 +109,23 @@ const { marqueeItems } = getContent(lang);
     document.fonts?.ready.then(remeasure);
     window.addEventListener("resize", remeasure, { passive: true });
 
-    const observer = new IntersectionObserver((entries) => {
-      const inside = entries.some((e) => e.isIntersecting);
-      if (inside && !raf && !reduceMotion.matches) start();
-      if (!inside && raf) stop();
-    });
-    observer.observe(container);
-    if (!reduceMotion.matches) start();
+    let isVisible = false;
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        isVisible = entries.some((e) => e.isIntersecting);
+        if (isVisible && !raf && !reduceMotion.matches) start();
+        if (!isVisible && raf) stop();
+      });
+      observer.observe(container);
+    } else {
+      isVisible = true;
+      if (!reduceMotion.matches) start();
+    }
 
     reduceMotion.addEventListener("change", () => {
       if (reduceMotion.matches && raf) stop();
-      if (!reduceMotion.matches && !raf) start();
+      if (!reduceMotion.matches && isVisible && !raf) start();
     });
   }
 

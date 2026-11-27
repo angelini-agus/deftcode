@@ -93,43 +93,40 @@ const organizationSchema = {
       (function () {
         try {
           var root = document.documentElement;
-          // Entrance choreography: the preloader + robotic entrances play
-          // on fresh entries, on reloads (a reload restarts the show) and
-          // on the FIRST internal visit to each page in this tab session
-          // (tracked per path in sessionStorage). Pages already seen this
-          // session, back/forward and reduced motion land on fully static
-          // pages (preload-skip).
+          // Entrance choreography:
+          // - Fresh external entry or reload: full preloader curtain + navbar
+          //   drop + robotic hero/heading decode.
+          // - Internal navigation (any visit, first or revisit): NO preloader
+          //   curtain and NO navbar drop (preload-skip), but robotic hero +
+          //   h1/h2/h3 decode and reveals play immediately (intro-run +
+          //   motion-fresh).
+          // - Back/forward and reduced motion: fully static (preload-skip +
+          //   motion-static).
           var entry = performance.getEntriesByType("navigation")[0];
           var type = entry ? entry.type : "navigate";
           var internal =
             document.referrer.indexOf(location.origin + "/") === 0 ||
             document.referrer === location.origin;
-          var seen = {};
-          try {
-            seen = JSON.parse(sessionStorage.getItem("deft:seen-paths") || "{}") || {};
-          } catch (e) {}
-          var visited = !!seen[location.pathname];
-          // Mark the path for this session either way: the show plays only
-          // on the first arrival, revisits land static.
-          seen[location.pathname] = 1;
-          try {
-            sessionStorage.setItem("deft:seen-paths", JSON.stringify(seen));
-          } catch (e) {}
           if (
             window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-            type === "back_forward" ||
-            (type === "navigate" && internal && visited)
+            type === "back_forward"
           ) {
-            root.classList.add("preload-skip");
+            root.classList.add("preload-skip", "motion-static");
             return;
           }
           if (root.getAttribute("data-intro") === "off") {
             // Minimal pages have no preloader/handoff: fresh motion, but
             // the title observer starts immediately (no intro-run).
-            root.classList.add("motion-fresh");
+            root.classList.add("preload-skip", "motion-fresh");
             return;
           }
-          root.classList.add("intro-run", "intro-nav", "motion-fresh");
+          if (type === "navigate" && internal) {
+            // Internal navigation: skip the preloader curtain & navbar drop,
+            // run the robotic hero/title animations immediately on fonts.ready.
+            root.classList.add("preload-skip", "intro-run", "motion-fresh");
+          } else {
+            root.classList.add("intro-run", "intro-nav", "motion-fresh");
+          }
           window.setTimeout(function () {
             // The navbar entrance should be long done by now; the hero
             // entrance owns .intro-run once started (dataset.introStarted).
@@ -215,7 +212,22 @@ const organizationSchema = {
       // face, re-run debounced on resize.
       (function () {
         type LetterSpan = { node: HTMLElement; final: string };
-        type Prepared = { el: HTMLElement; spans: LetterSpan[] | null; text: string };
+        type DecodeSpan = {
+          node: HTMLElement;
+          final: string;
+          at: number;
+          endAt: number;
+          revealed: boolean;
+          settled: boolean;
+        };
+        type ActiveDecode = {
+          el: HTMLElement;
+          t0: number;
+          lastCycleAt: number;
+          items: DecodeSpan[];
+          remaining: number;
+        };
+        type PendingVisible = { el: HTMLElement; fire: (el: HTMLElement) => void };
         var GLYPHS = "X0O#";
         var FLICKER_MS = 110;
         var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -226,7 +238,7 @@ const organizationSchema = {
         // page renders fully static (no decode, no reveals, no count-up).
         var root = document.documentElement;
         var staticMode =
-          reduced || !hasIO || root.classList.contains("preload-skip");
+          reduced || !hasIO || root.classList.contains("motion-static");
 
         // --- 1. Collect every heading, tagging decode behavior ---
         var titles = Array.prototype.slice
@@ -248,8 +260,20 @@ const organizationSchema = {
             }
             return false;
           });
+        var titleTexts = new Map<HTMLElement, string>();
+        var titleLineTexts = new Map<HTMLElement, string[]>();
         titles.forEach(function (h) {
           if (!h.hasAttribute("data-fit-title")) h.setAttribute("data-decode-title", "");
+          var normalized = (h.textContent || "").replace(/\s+/g, " ").trim();
+          titleTexts.set(h, normalized);
+          if (h.hasAttribute("data-decode-lines")) {
+            var lineStrings = Array.prototype.slice
+              .call(h.children)
+              .map(function (line: Element) {
+                return (line.textContent || "").replace(/\s+/g, " ").trim();
+              });
+            titleLineTexts.set(h, lineStrings);
+          }
         });
         if (root.classList.contains("motion-fresh")) {
           // Headings the system will NOT decode must not stay hidden
@@ -261,7 +285,6 @@ const organizationSchema = {
               if (titles.indexOf(h) === -1) h.style.opacity = "1";
             });
         }
-        var prepared: Prepared[] = [];
 
         // --- 2. Directional reveals (non-title elements) ---
         var revealables = Array.prototype.slice
@@ -269,30 +292,10 @@ const organizationSchema = {
           .filter(function (el) {
             return !el.hasAttribute("data-fit-title") && !el.hasAttribute("data-decode-title");
           });
-        if (staticMode) {
-          root.classList.add("motion-static");
-          revealables.forEach(function (el) {
-            el.classList.add("is-revealed");
-          });
-        } else {
-          // Staggered groups (cards, numbered rows): every reveal child
-          // gets an incremental transition-delay instead of its own IO
-          // timing, and keeps the plain rise (no directional slide).
-          Array.prototype.slice.call(document.querySelectorAll("[data-stagger]")).forEach(function (group) {
-            var step = parseInt(group.getAttribute("data-stagger"), 10) || 70;
-            Array.prototype.slice.call(group.children).forEach(function (k, i) {
-              if (k.classList.contains("reveal") || k.classList.contains("img-reveal")) {
-                k.style.transitionDelay = i * step + "ms";
-              }
-            });
-          });
-          revealables.forEach(function (el) {
-            if (el.classList.contains("img-reveal") || el.closest("[data-stagger]")) return;
-            var r = el.getBoundingClientRect();
-            var mid = r.left + r.width / 2;
-            if (mid < window.innerWidth * 0.35) el.classList.add("reveal-left");
-            else if (mid > window.innerWidth * 0.65) el.classList.add("reveal-right");
-          });
+        var revealObserverStarted = false;
+        function startRevealObserver() {
+          if (revealObserverStarted || staticMode) return;
+          revealObserverStarted = true;
           var io = new IntersectionObserver(
             function (entries) {
               entries.forEach(function (entry) {
@@ -312,27 +315,61 @@ const organizationSchema = {
           });
         }
 
+        if (staticMode) {
+          root.classList.add("motion-static");
+          revealables.forEach(function (el) {
+            el.classList.add("is-revealed");
+          });
+        } else {
+          // Staggered groups (cards, numbered rows): every reveal child
+          // gets an incremental transition-delay instead of its own IO
+          // timing, and keeps the plain rise (no directional slide).
+          Array.prototype.slice.call(document.querySelectorAll("[data-stagger]")).forEach(function (group) {
+            var step = parseInt(group.getAttribute("data-stagger"), 10) || 70;
+            Array.prototype.slice.call(group.children).forEach(function (k, i) {
+              if (k.classList.contains("reveal") || k.classList.contains("img-reveal")) {
+                k.style.transitionDelay = i * step + "ms";
+              }
+            });
+          });
+          // Batched READ -> WRITE for directional reveal classes.
+          var vw = window.innerWidth;
+          var leftBound = vw * 0.35;
+          var rightBound = vw * 0.65;
+          var directional: { el: Element; mid: number }[] = [];
+          revealables.forEach(function (el) {
+            if (el.classList.contains("img-reveal") || el.closest("[data-stagger]")) return;
+            var r = el.getBoundingClientRect();
+            directional.push({ el: el, mid: r.left + r.width / 2 });
+          });
+          directional.forEach(function (item) {
+            if (item.mid < leftBound) item.el.classList.add("reveal-left");
+            else if (item.mid > rightBound) item.el.classList.add("reveal-right");
+          });
+        }
+
         // --- 3. Letter building (hero recipe) ---
-        // Build letter spans inside `host` for one phrase. Words are
-        // wrapped in nowrap spans (when wrapping is possible) and spaces
-        // stay plain text nodes, so lines only break at spaces.
+        // Build letter spans inside a DocumentFragment for one phrase.
+        // Words are wrapped in nowrap spans (when wrapping is possible)
+        // and spaces stay plain text nodes, so lines only break at spaces.
         function buildPhrase(
-          host: HTMLElement,
+          frag: DocumentFragment,
           text: string,
           canWrap: boolean,
           spans: LetterSpan[],
+          wordWraps: HTMLElement[],
         ) {
           var words = text.split(" ");
           for (var wi = 0; wi < words.length; wi++) {
             if (wi > 0) {
               if (canWrap) {
-                host.appendChild(document.createTextNode(" "));
+                frag.appendChild(document.createTextNode(" "));
               } else {
                 var spSp = document.createElement("span");
                 spSp.textContent = " ";
                 spSp.style.display = "inline-block";
                 spSp.style.whiteSpace = "pre";
-                host.appendChild(spSp);
+                frag.appendChild(spSp);
                 spans.push({ node: spSp, final: " " });
               }
             }
@@ -341,161 +378,276 @@ const organizationSchema = {
             if (canWrap && word.length > 0) {
               wrapEl = document.createElement("span");
               wrapEl.style.whiteSpace = "nowrap";
-              host.appendChild(wrapEl);
+              frag.appendChild(wrapEl);
+              wordWraps.push(wrapEl);
             }
             for (var i = 0; i < word.length; i++) {
               var s = document.createElement("span");
               s.textContent = word.charAt(i);
               s.style.display = "inline-block";
               s.style.whiteSpace = "pre";
-              (wrapEl || host).appendChild(s);
+              (wrapEl || frag).appendChild(s);
               spans.push({ node: s, final: word.charAt(i) });
             }
           }
         }
 
-        // --- 4. Prep + fit + arm ---
-        function prepAndFit() {
-          prepared.length = 0;
+        // --- 4. Fit single-line display titles & lazy heading prep ---
+        // Fit [data-fit-title] headings using batched clientWidth reads
+        // before fontSize writes. Also restores settled text on resize so
+        // previously decoded headings reflow cleanly at the new width.
+        function fitTitles(isResize: boolean) {
+          var fitTargets: { el: HTMLElement; text: string; width: number }[] = [];
+          // Pass 1 (READ): measure parent clientWidth for every fit title.
           titles.forEach(function (h) {
-            var text = (h.textContent || "").replace(/\s+/g, " ").trim();
-            if (!text) return;
-            if (h.hasAttribute("data-fit-title")) {
-              if (!ctx) return;
-              var target = h.parentElement.clientWidth - 4;
-              if (target <= 0) return;
-              ctx.font = '400 100px "Archivo Black", sans-serif';
-              try {
-                ctx.letterSpacing = "-4px";
-              } catch (e) {}
-              var w100 = ctx.measureText(text).width;
-              var fs = target / (w100 / 100);
-              h.style.fontSize = fs + "px";
+            if (!h.hasAttribute("data-fit-title")) return;
+            var text = titleTexts.get(h) || "";
+            if (!text || !h.parentElement) return;
+            fitTargets.push({ el: h, text: text, width: h.parentElement.clientWidth - 4 });
+          });
+
+          // Pass 2 (WRITE): apply computed one-line fontSize.
+          if (ctx && fitTargets.length > 0) {
+            ctx.font = '400 100px "Archivo Black", sans-serif';
+            try {
+              ctx.letterSpacing = "-4px";
+            } catch (e) {}
+            fitTargets.forEach(function (item) {
+              if (item.width <= 0) return;
+              var w100 = ctx!.measureText(item.text).width;
+              if (w100 <= 0) return;
+              var fs = item.width / (w100 / 100);
+              item.el.style.fontSize = fs + "px";
               // One line guaranteed: inline-block letters create break
               // opportunities at every box, not only at spaces.
-              h.style.whiteSpace = "nowrap";
-            }
-            h.classList.add("is-revealed");
-            // Session replays: keep the server text untouched (no letters
-            // are ever built) and release the first-paint blanket.
-            if (staticMode) {
+              item.el.style.whiteSpace = "nowrap";
+            });
+          }
+
+          if (staticMode) {
+            titles.forEach(function (h) {
+              h.classList.add("is-revealed");
               if (root.classList.contains("motion-fresh")) h.style.opacity = "1";
-              prepared.push({ el: h, spans: null, text: text });
-              return;
-            }
-            if (h.dataset.decoded) {
-              // Resize re-prep of a settled title. Line groups keep their
-              // authored line spans (flattening would destroy the CTA).
+            });
+            return;
+          }
+
+          if (isResize) {
+            // Only restore plain text on already-settled headings; offscreen
+            // headings have not been split yet and mid-decode headings keep
+            // their em-scaled spans.
+            titles.forEach(function (h) {
+              if (h.dataset.settled !== "1") return;
               if (h.hasAttribute("data-decode-lines")) {
-                Array.prototype.slice.call(h.children).forEach(function (line) {
-                  line.textContent = (line.textContent || "").replace(/\s+/g, " ").trim();
+                var savedLines = titleLineTexts.get(h);
+                if (!savedLines) return;
+                Array.prototype.slice.call(h.children).forEach(function (line: Element, idx: number) {
+                  if (idx < savedLines!.length) line.textContent = savedLines![idx];
                 });
               } else {
-                h.textContent = text;
-              }
-              prepared.push({ el: h, spans: null, text: text });
-              return;
-            }
-            var lineEls: HTMLElement[] | null = h.hasAttribute("data-decode-lines")
-              ? (Array.prototype.slice.call(h.children) as HTMLElement[])
-              : null;
-            h.textContent = "";
-            var spans: LetterSpan[] = [];
-            if (lineEls) {
-              // Keep each authored line span (it carries its own font
-              // size); rebuild its letters inside it.
-              lineEls.forEach(function (line) {
-                var lineText = (line.textContent || "").replace(/\s+/g, " ").trim();
-                line.textContent = "";
-                if (lineText) buildPhrase(line, lineText, false, spans);
-                h.appendChild(line);
-              });
-            } else {
-              buildPhrase(h, text, !h.hasAttribute("data-fit-title"), spans);
-            }
-            // A single long word (e.g. AUTOMATIZACIÓN on a 360px phone)
-            // must not push the page sideways. Only word wrappers that
-            // exceed their line box or the viewport lose nowrap and may
-            // break; every other word stays intact. Carousel slides sit
-            // offscreen by design and are excluded.
-            Array.prototype.slice.call(h.querySelectorAll("span")).forEach(function (w) {
-              if (w.style.whiteSpace !== "nowrap") return;
-              if (w.closest("[data-fan-track],[data-flip-runway],.marquee-container")) return;
-              var box = w.parentElement;
-              if (!box) return;
-              var avail = box.getBoundingClientRect().width;
-              var r = w.getBoundingClientRect();
-              if ((avail > 0 && r.width > avail + 1) || r.right > window.innerWidth - 1) {
-                w.style.whiteSpace = "normal";
-                w.style.overflowWrap = "anywhere";
+                var text = titleTexts.get(h);
+                if (text !== undefined) h.textContent = text;
               }
             });
-            // Measure the NATURAL boxes of the FINAL glyphs:
-            // getBoundingClientRect returns the transformed box, so
-            // widths must be read before arming scale(0.25). Widths in
-            // the letter's own em (line groups carry per-line sizes).
-            spans.forEach(function (sp) {
-              var w = sp.node.getBoundingClientRect().width;
-              var ownFs = parseFloat(getComputedStyle(sp.node).fontSize) || 16;
-              sp.node.style.width = w / ownFs + "em";
-              sp.node.style.textAlign = "center";
-            });
-            // Arm the glitch state instantly (no transition yet), force
-            // a reflow, then enable transitions so the decode animates.
-            spans.forEach(function (sp) {
-              if (sp.final !== " ") {
-                sp.node.style.opacity = "0";
-                sp.node.style.transform = "scale(0.25)";
-              }
-            });
-            void h.offsetWidth;
-            spans.forEach(function (sp) {
-              if (sp.final !== " ") {
-                // Back-out on the transform = the hero's robotic punch
-                // (scale overshoots 1 and settles); opacity stays smooth.
-                sp.node.style.transition =
-                  "opacity .28s cubic-bezier(.23,1,.32,1), transform .28s cubic-bezier(.34,1.56,.64,1)";
-              }
-            });
-            // Release the first-paint blanket: the box shows while the
-            // letters stay hidden until their decode window.
-            if (root.classList.contains("motion-fresh")) h.style.opacity = "1";
-            prepared.push({ el: h, spans: spans, text: text });
-          });
+          }
         }
 
-        // --- 5. Decode (hero pacing): letters grow while the glyph
-        // flickers; the final letter lands 110 ms in. ---
-        function decode(p: Prepared) {
-          const spans = p.spans;
-          if (!spans) return;
-          var cycle = setInterval(function () {
-            spans.forEach(function (sp) {
-              if (sp.node.dataset.settled) return;
-              sp.node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        // Lazily split, measure, and arm a single heading right when it is
+        // about to decode. Keeps offscreen headings untouched plain text.
+        function prepTitle(h: HTMLElement): LetterSpan[] | null {
+          var text = titleTexts.get(h) || "";
+          if (!text) {
+            h.classList.add("is-revealed");
+            if (root.classList.contains("motion-fresh")) h.style.opacity = "1";
+            return null;
+          }
+
+          var spans: LetterSpan[] = [];
+          var wordWraps: HTMLElement[] = [];
+          var groups: { container: HTMLElement; spans: LetterSpan[] }[] = [];
+
+          if (h.hasAttribute("data-decode-lines")) {
+            // Keep each authored line span (it carries its own font size)
+            // and build its letters off-DOM with DocumentFragment.
+            var lineEls = Array.prototype.slice.call(h.children) as HTMLElement[];
+            var savedLines = titleLineTexts.get(h) || [];
+            lineEls.forEach(function (line, idx) {
+              var lineText =
+                savedLines[idx] !== undefined
+                  ? savedLines[idx]
+                  : (line.textContent || "").replace(/\s+/g, " ").trim();
+              var lineSpans: LetterSpan[] = [];
+              var lineFrag = document.createDocumentFragment();
+              if (lineText) buildPhrase(lineFrag, lineText, false, lineSpans, wordWraps);
+              line.textContent = "";
+              line.appendChild(lineFrag);
+              groups.push({ container: line, spans: lineSpans });
+              for (var i = 0; i < lineSpans.length; i++) spans.push(lineSpans[i]);
             });
-          }, 42);
+          } else {
+            var frag = document.createDocumentFragment();
+            buildPhrase(frag, text, !h.hasAttribute("data-fit-title"), spans, wordWraps);
+            h.textContent = "";
+            h.appendChild(frag);
+            groups.push({ container: h, spans: spans });
+          }
+
+          // Batched READ -> WRITE word-overflow guard: a single long word
+          // (e.g. AUTOMATIZACION on a 360px phone) must not push the page
+          // sideways. Carousel slides sit offscreen by design and skip it.
+          if (
+            wordWraps.length > 0 &&
+            !h.closest("[data-fan-track],[data-flip-runway],.marquee-container")
+          ) {
+            var vw = window.innerWidth;
+            var avail = h.getBoundingClientRect().width;
+            var overflowing: HTMLElement[] = [];
+            for (var wi = 0; wi < wordWraps.length; wi++) {
+              var wEl = wordWraps[wi];
+              var r = wEl.getBoundingClientRect();
+              if ((avail > 0 && r.width > avail + 1) || r.right > vw - 1) {
+                overflowing.push(wEl);
+              }
+            }
+            for (var oi = 0; oi < overflowing.length; oi++) {
+              overflowing[oi].style.whiteSpace = "normal";
+              overflowing[oi].style.overflowWrap = "anywhere";
+            }
+          }
+
+          // Batched READ -> WRITE for natural glyph widths: read fontSize
+          // once per heading/line and all span widths before mutating styles.
+          var groupFs: number[] = [];
+          var spanWidths: number[] = new Array(spans.length);
+          var spanGroupIdx: number[] = new Array(spans.length);
+          var cursor = 0;
+          for (var gi = 0; gi < groups.length; gi++) {
+            var grp = groups[gi];
+            groupFs.push(parseFloat(getComputedStyle(grp.container).fontSize) || 16);
+            for (var si = 0; si < grp.spans.length; si++) {
+              spanWidths[cursor] = grp.spans[si].node.getBoundingClientRect().width;
+              spanGroupIdx[cursor] = gi;
+              cursor++;
+            }
+          }
+
+          for (var k = 0; k < spans.length; k++) {
+            var sp = spans[k];
+            var ownFs = groupFs[spanGroupIdx[k]];
+            sp.node.style.width = spanWidths[k] / ownFs + "em";
+            sp.node.style.textAlign = "center";
+            if (sp.final !== " ") {
+              sp.node.style.opacity = "0";
+              sp.node.style.transform = "scale(0.25)";
+            }
+          }
+
+          // Release the heading container instantaneously (without triggering
+          // .reveal's 400ms container transition) so only the letters animate.
+          h.style.transition = "none";
+          h.classList.add("is-revealed");
+          if (root.classList.contains("motion-fresh")) h.style.opacity = "1";
+
+          // Single reflow to commit initial opacity(0)/scale(0.25) and
+          // instant container visibility before enabling letter transitions.
+          void h.offsetWidth;
+          h.style.transition = "";
+
+          for (var t = 0; t < spans.length; t++) {
+            if (spans[t].final !== " ") {
+              // Back-out on the transform = the hero's robotic punch
+              // (scale overshoots 1 and settles); opacity stays smooth.
+              spans[t].node.style.transition =
+                "opacity .28s cubic-bezier(.23,1,.32,1), transform .28s cubic-bezier(.34,1.56,.64,1)";
+            }
+          }
+
+          return spans;
+        }
+
+        // --- 5. Decode (hero pacing): single shared rAF loop across active
+        // headings; letters grow while the glyph flickers and land 110ms in. ---
+        var activeDecodes: ActiveDecode[] = [];
+        var decodeRaf = 0;
+
+        function tickDecodes(now: number) {
+          for (var di = activeDecodes.length - 1; di >= 0; di--) {
+            var job = activeDecodes[di];
+            var elapsed = now - job.t0;
+            var shouldCycle = now - job.lastCycleAt >= 42;
+            if (shouldCycle) job.lastCycleAt = now;
+
+            for (var i = 0; i < job.items.length; i++) {
+              var item = job.items[i];
+              if (item.settled) continue;
+              if (!item.revealed && elapsed >= item.at) {
+                item.revealed = true;
+                item.node.style.opacity = "1";
+                item.node.style.transform = "scale(1)";
+                if (elapsed < item.endAt) {
+                  item.node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+                }
+              }
+              if (elapsed >= item.endAt) {
+                item.settled = true;
+                item.node.dataset.settled = "1";
+                item.node.textContent = item.final;
+                job.remaining--;
+              } else if (item.revealed && shouldCycle) {
+                item.node.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+              }
+            }
+
+            if (job.remaining <= 0) {
+              job.el.dataset.settled = "1";
+              activeDecodes.splice(di, 1);
+            }
+          }
+
+          if (activeDecodes.length > 0) {
+            decodeRaf = requestAnimationFrame(tickDecodes);
+          } else {
+            decodeRaf = 0;
+          }
+        }
+
+        function decode(el: HTMLElement, spans: LetterSpan[] | null) {
+          if (!spans || spans.length === 0) {
+            el.dataset.settled = "1";
+            return;
+          }
           var each = Math.min(0.022, 0.3 / spans.length);
-          var last = 0;
-          spans.forEach(function (sp, i) {
+          var items: DecodeSpan[] = [];
+          for (var i = 0; i < spans.length; i++) {
+            var sp = spans[i];
             if (sp.final === " ") {
               sp.node.dataset.settled = "1";
-              return;
+              continue;
             }
             var at = Math.round(i * each * 1000);
-            last = at;
-            setTimeout(function () {
-              sp.node.style.opacity = "1";
-              sp.node.style.transform = "scale(1)";
-            }, at);
-            setTimeout(function () {
-              sp.node.dataset.settled = "1";
-              sp.node.textContent = sp.final;
-            }, at + FLICKER_MS);
+            items.push({
+              node: sp.node,
+              final: sp.final,
+              at: at,
+              endAt: at + FLICKER_MS,
+              revealed: false,
+              settled: false,
+            });
+          }
+          if (items.length === 0) {
+            el.dataset.settled = "1";
+            return;
+          }
+          activeDecodes.push({
+            el: el,
+            t0: performance.now(),
+            lastCycleAt: 0,
+            items: items,
+            remaining: items.length,
           });
-          setTimeout(function () {
-            clearInterval(cycle);
-          }, last + FLICKER_MS + 400);
+          if (!decodeRaf) {
+            decodeRaf = requestAnimationFrame(tickDecodes);
+          }
         }
 
         // Effective opacity through ancestors (the project deck fades its
@@ -524,50 +676,64 @@ const organizationSchema = {
         // event or the 4s failsafe begins the observer.
         var titleObserverStarted = false;
         function startTitleObserver() {
-          if (titleObserverStarted) return;
+          if (titleObserverStarted || staticMode) return;
           titleObserverStarted = true;
           var titleIO = new IntersectionObserver(
             function (entries) {
               entries.forEach(function (entry) {
                 if (!entry.isIntersecting) return;
                 titleIO.unobserve(entry.target);
-                var p = prepared.find(function (x) {
-                  return x.el === entry.target;
-                });
-                if (!p || !p.spans || p.el.dataset.decoded) return;
-                p.el.dataset.decoded = "1";
-                const target = p;
-                whenActuallyVisible(target.el, function (el) {
-                  decode(target);
+                var h = entry.target as HTMLElement;
+                if (h.dataset.decoded) return;
+                h.dataset.decoded = "1";
+                whenActuallyVisible(h, function (el) {
+                  var spans = prepTitle(el);
+                  decode(el, spans);
                 });
               });
             },
             { threshold: 0.2 },
           );
-          prepared.forEach(function (p) {
-            titleIO.observe(p.el);
+          titles.forEach(function (h) {
+            titleIO.observe(h);
           });
         }
 
-        // Shared gate: run `fire` once the heading/element is really
-        // seen (geometric intersect + effective ancestor opacity >= 0.5),
-        // polling via rAF for scroll-faded containers (deck folders,
-        // process fan panels).
+        // Shared visibility watcher: runs `fire` once an element is really
+        // visible (geometric intersect + effective ancestor opacity >= 0.5).
+        // Consolidates all waiting elements into a single 120ms interval
+        // that pauses while hidden and clears itself once the queue empties.
+        var pendingVisible: PendingVisible[] = [];
+        var visibilityTimer: ReturnType<typeof setInterval> | null = null;
+
+        function pollVisibleQueue() {
+          if (document.hidden) return;
+          for (var i = pendingVisible.length - 1; i >= 0; i--) {
+            var entry = pendingVisible[i];
+            if (!entry.el.isConnected) {
+              pendingVisible.splice(i, 1);
+              continue;
+            }
+            if (effectiveVisibility(entry.el) >= 0.5) {
+              pendingVisible.splice(i, 1);
+              entry.fire(entry.el);
+            }
+          }
+          if (pendingVisible.length === 0 && visibilityTimer !== null) {
+            clearInterval(visibilityTimer);
+            visibilityTimer = null;
+          }
+        }
+
         function whenActuallyVisible(el: HTMLElement, fire: (el: HTMLElement) => void) {
           if (effectiveVisibility(el) >= 0.5) {
             fire(el);
             return;
           }
-          var poll = function () {
-            if (effectiveVisibility(el) >= 0.5) {
-              fire(el);
-              return;
-            }
-            requestAnimationFrame(function () {
-              setTimeout(poll, 100);
-            });
-          };
-          poll();
+          pendingVisible.push({ el: el, fire: fire });
+          if (visibilityTimer === null) {
+            visibilityTimer = setInterval(pollVisibleQueue, 120);
+          }
         }
 
         // --- Count-up (the standout numbers): numeric tokens inside
@@ -626,20 +792,26 @@ const organizationSchema = {
             });
         }
 
+        function startObservers() {
+          startRevealObserver();
+          startTitleObserver();
+        }
+
         function boot() {
-          prepAndFit();
+          fitTitles(false);
           if (staticMode) return;
           var root = document.documentElement;
           var introDone =
             root.getAttribute("data-intro") === "off" ||
-            root.classList.contains("preload-skip") ||
+            root.classList.contains("motion-static") ||
+            root.dataset.introHandoff === "1" ||
             !root.classList.contains("intro-run");
           if (introDone) {
-            startTitleObserver();
+            startObservers();
             return;
           }
-          window.addEventListener("deft:intro:hero", startTitleObserver, { once: true });
-          setTimeout(startTitleObserver, 4600);
+          window.addEventListener("deft:intro:hero", startObservers, { once: true });
+          setTimeout(startObservers, 4600);
         }
 
         if (document.fonts && document.fonts.ready) {
@@ -652,7 +824,9 @@ const organizationSchema = {
         var fitT: ReturnType<typeof setTimeout> | undefined;
         window.addEventListener("resize", function () {
           clearTimeout(fitT);
-          fitT = setTimeout(prepAndFit, 120);
+          fitT = setTimeout(function () {
+            fitTitles(true);
+          }, 120);
         });
       })();
     </script>
